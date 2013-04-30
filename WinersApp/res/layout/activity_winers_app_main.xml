@@ -2,15 +2,204 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/main_bg"
     tools:context=".WinersAppMainActivity" >
 
+    <!--  TODO: Change onClick to Browse screen.
+    		This is supposed to be the Browse Wines button, but at the moment
+    		it opens the Login window.  -->
+    <Button
+        android:id="@+id/guest_find_wines"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@color/winered"
+        android:fontFamily="sans-serif-condensed"
+        android:height="100dp"
+        android:text="@string/find_wines"
+        android:textColor="@color/white"
+        android:textSize="50sp"
+        android:textStyle="bold" 
+        android:gravity="center" />   
+        
+   <Button
+       android:id="@+id/guest_home_button"
+       android:layout_width="200dp"
+       android:layout_height="50dp"
+       android:layout_alignParentLeft="true"
+       android:layout_alignParentTop="true"
+       android:layout_marginTop="50dp"
+       android:background="@color/winered"
+       android:fontFamily="sans-serif-condensed"
+       android:gravity="center"
+       android:onClick="gotoHome"
+       android:text="@string/guest_goto_home"
+       android:textColor="@color/white"
+       android:textSize="20sp"
+       android:textStyle="bold" />
+   
+   <Button
+       android:id="@+id/guest_login_button"
+       android:layout_width="200dp"
+       android:layout_height="50dp"
+       android:layout_below="@+id/guest_home_button"
+       android:layout_marginTop="10dp"
+       android:background="@color/winered"
+       android:fontFamily="sans-serif-condensed"
+       android:gravity="center"
+       android:onClick="showLogin"
+       android:text="@string/login"
+       android:textColor="@color/white"
+       android:textSize="20sp"
+       android:textStyle="bold"/>   
+   
+
+   <!--  LOGIN WINDOW  -->
+   <RelativeLayout
+       android:id="@+id/loginWindow"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_alignParentLeft="true"
+       android:layout_alignParentTop="true"
+       android:layout_margin="10dp"
+       android:background="@color/black_trans"
+       android:orientation="vertical"
+       android:overScrollMode="never"
+       android:visibility="gone" >
+
+ 	<TextView
+       android:id="@+id/returning_users_text"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:background="@color/black"
+       android:gravity="center"
+       android:paddingBottom="10dp"
+       android:paddingTop="10dp"
+       android:text="@string/returning_users"
+       android:textColor="@color/white"
+       android:textSize="25sp" />
+ 	
+ 	
+ 	<Button
+        android:id="@+id/login_close"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:background="@color/black"
+        android:onClick="closeLogin"
+        android:paddingRight="10dp"
+        android:text="@string/close"
+        android:textColor="@color/white"
+        android:textSize="25sp" />	
+
+ 	<Button
+        android:id="@+id/login_create_account"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/returning_users_text"
+        android:gravity="center"
+        android:background="@color/winered"
+        android:text="@string/login_prompt_create"
+        android:textColor="@color/white"
+        android:textSize="12sp" /> 	
+         	
+
+
     <TextView
+        android:id="@+id/login_email_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_below="@+id/login_create_account"                
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/email" 
+        android:textSize="25sp"                
+    	android:textColor="@color/white" /> 
+    	
+    <EditText
+        android:id="@+id/form_email"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/login_email_text"
+        android:layout_margin="10dp"
+        android:background="@color/white_trans"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="10dp" />
+    	
+    <TextView
+        android:id="@+id/login_password_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/form_email"                  
+        android:paddingLeft="10dp"
+        android:text="@string/password" 
+        android:textSize="25sp"                
+    	android:textColor="@color/white" />    
+    	
+    <EditText
+        android:id="@+id/form_password"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/login_password_text"
+        android:layout_margin="10dp"
+        android:background="@color/white_trans"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp" />
+          
+    <Button
+        android:id="@+id/login_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/form_password"                   
+        android:gravity="right"   
+        android:fontFamily="sans-serif-condensed"        
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:text="@string/submit" />
+     
+    <TextView
+       	android:id="@+id/register_or_text"
+		android:layout_marginTop="30dp"               
+       	android:layout_width="match_parent"
+       	android:layout_height="wrap_content"
+       	android:layout_below="@+id/login_submit"                 
+       	android:background="@color/black"
+       	android:gravity="center"
+       	android:paddingBottom="10dp"
+       	android:paddingTop="10dp"
+       	android:text="@string/register_or"
+       	android:textColor="@color/white"
+       	android:textSize="25sp" />
+
+	<Button
+       	android:id="@+id/register_facebook_button"
+       	android:layout_width="140dp"
+       	android:layout_height="wrap_content"
+       	android:layout_margin="10dp"
+        android:layout_below="@+id/register_or_text"                 
+       	android:background="@color/facebookblue"
+       	android:text="@string/facebook"
+       	android:fontFamily="sans-serif-condensed"
+       	android:textColor="@color/white"
+       	android:textSize="20sp" />
+
+    <Button
+     	android:id="@+id/register_google_button"
+     	android:layout_width="140dp"
+     	android:layout_height="wrap_content"
+     	android:layout_margin="10dp"
+      	android:layout_toRightOf="@+id/register_facebook_button"    
+      	android:layout_below="@+id/register_or_text"                                
+     	android:background="@color/googlered"
+		android:fontFamily="sans-serif-condensed"                      
+     	android:text="@string/google"
+     	android:textColor="@color/white"
+     	android:textSize="20sp" />
+             
+    </RelativeLayout>
+
 
 </RelativeLayout>

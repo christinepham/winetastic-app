@@ -1,0 +1,120 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E8E399"
+    tools:context=".MainActivity" >
+    
+    <TextView
+	    android:id="@+id/winetastic"
+	    android:layout_width="match_parent"
+	    android:layout_height="40dp"
+	    android:layout_alignParentTop="true"
+	    android:layout_centerHorizontal="true"
+	    android:background="#AD0549"
+	    android:gravity="center"
+	    android:text="@string/logo"
+	    android:textColor="#F2EDEF"
+	    android:textIsSelectable="false"
+	    android:textSize="20sp" />
+
+	<Button
+	    android:id="@+id/wineOfDay"
+	    android:layout_width="500dp"
+	    android:layout_height="50dp"
+	    android:layout_alignParentBottom="true"
+	    android:layout_centerHorizontal="true"
+	    android:gravity="center"
+	    android:text="@string/wineOfDay" />
+	
+	<Button
+        android:id="@+id/search"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/winetastic"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="@string/search"
+        android:layout_marginBottom="20dp" />
+    
+	<Button
+	    android:id="@+id/calendar"
+	    android:layout_width="100dp"
+	    android:layout_height="100dp"
+	    android:layout_centerHorizontal="true"
+	    android:layout_below="@id/search"
+	    android:background="@drawable/calandarw"
+	    android:orientation="horizontal"
+	    android:layout_marginLeft="2dp"
+		android:layout_marginRight="2dp"
+		android:layout_marginBottom="2dp"
+		android:layout_marginTop="2dp" />
+	     
+	<Button
+		android:id="@+id/myWines"
+		android:layout_width="100dp"
+		android:layout_height="100dp"
+		android:layout_toLeftOf="@id/calendar"
+		android:layout_below="@id/search"
+		android:background="@drawable/mywines"
+		android:layout_marginLeft="3dp"
+		android:layout_marginRight="3dp"
+		android:layout_marginBottom="3dp"
+		android:layout_marginTop="3dp"/>
+	
+	 <Button
+	    android:id="@+id/map"
+	    android:layout_width="100dp"
+	    android:layout_height="100dp"
+	    android:layout_toRightOf="@id/calendar"
+	    android:layout_below="@id/search"
+	    android:layout_marginBottom="2dp"
+	    android:layout_marginLeft="2dp"
+	    android:layout_marginRight="2dp"
+	    android:layout_marginTop="2dp"
+	    android:background="@drawable/mapw" />	       
+	
+	 
+	 <Button
+	    android:id="@+id/addWine"
+	    android:layout_width="100dp"
+	    android:layout_height="100dp"
+	    android:layout_centerHorizontal="true"
+	    android:layout_below="@id/calendar"
+	    android:background="@drawable/addwine"
+	    android:orientation="horizontal"
+	    android:layout_marginLeft="2dp"
+		android:layout_marginRight="2dp"
+		android:layout_marginBottom="2dp"
+		android:layout_marginTop="2dp" />
+	     
+	<Button
+		android:id="@+id/toast"
+		android:layout_width="100dp"
+		android:layout_height="100dp"
+		android:layout_toLeftOf="@id/calendar"
+		android:layout_below="@id/calendar"
+		android:background="@drawable/toastw"
+		android:layout_marginLeft="3dp"
+		android:layout_marginRight="3dp"
+		android:layout_marginBottom="3dp"
+		android:layout_marginTop="3dp"/>
+	
+	 <Button
+	    android:id="@+id/settingsw"
+	    android:layout_width="100dp"
+	    android:layout_height="100dp"
+	    android:layout_toRightOf="@id/calendar"
+	    android:layout_below="@id/calendar"
+	    android:layout_marginBottom="2dp"
+	    android:layout_marginLeft="2dp"
+	    android:layout_marginRight="2dp"
+	    android:layout_marginTop="2dp"
+	    android:background="@drawable/settingsmall" />	 
+	       
+
+    	
+
+	
+
+</RelativeLayout>

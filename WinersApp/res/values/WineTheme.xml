@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="WineTheme" parent="android:Theme.Light">
+        <item name="android:background"> #F5F5B5 </item>
+        <item name="android:windowNoTitle">false</item>
+        <item name="android:windowTitleSize">50dp</item>
+        <item name="android:windowTitleBackgroundStyle"> @style/windowTitleBackgroundStyle</item>
+    </style>
+    
+    <style name="windowTitleBackgroundStyle">
+    	<item name="android:background"> #4C050B </item>
+    	
+    </style>
+</resources>
