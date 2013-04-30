@@ -11,7 +11,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AbstractActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,5 +45,12 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
+
+	@Override
+	protected int getTitleText() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
     
 }
