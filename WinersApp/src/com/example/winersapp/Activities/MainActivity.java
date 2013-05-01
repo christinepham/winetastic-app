@@ -1,6 +1,12 @@
 package com.example.winersapp.Activities;
 
+import com.example.winersapp.AddWine;
+import com.example.winersapp.EventCalendar;
+import com.example.winersapp.Map;
+import com.example.winersapp.MyWines;
 import com.example.winersapp.R;
+import com.example.winersapp.ToastToShare;
+import com.example.winersapp.WineAppSettings;
 import com.example.winersapp.WineOfDay;
 import com.example.winersapp.WineSearch;
 
@@ -17,8 +23,19 @@ public class MainActivity extends AbstractActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button myWine = (Button)findViewById(R.id.search);
-        myWine.setOnClickListener(new View.OnClickListener(){
+        
+        Button search_but = (Button)findViewById(R.id.search);
+        Button my_wines_but = (Button)findViewById(R.id.myWines);
+        Button cal_but = (Button)findViewById(R.id.calendar);
+        Button map_but = (Button)findViewById(R.id.map);
+        Button toast_but = (Button)findViewById(R.id.toast);
+        Button add_but = (Button)findViewById(R.id.addWine);
+        Button settings_but = (Button)findViewById(R.id.settingsw);
+        Button wineOfDay = (Button)findViewById(R.id.wineOfDay);
+        
+        
+        // search
+        search_but.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -27,7 +44,67 @@ public class MainActivity extends AbstractActivity {
 			}
         });
         
-        Button wineOfDay = (Button)findViewById(R.id.wineOfDay);
+        // my wines
+        my_wines_but.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(MainActivity.this, MyWines.class);
+				startActivity(i);
+			}
+        });
+
+        // event calendar 
+        cal_but.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(MainActivity.this, EventCalendar.class);
+				startActivity(i);
+			}
+        });
+        
+        // map
+        map_but.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(MainActivity.this, Map.class);
+				startActivity(i);
+			}
+        });
+        
+        // toast to share
+        toast_but.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(MainActivity.this, ToastToShare.class);
+				startActivity(i);
+			}
+        });
+       
+        // add a wine
+        add_but.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(MainActivity.this, AddWine.class);
+				startActivity(i);
+			}
+        });
+        
+        // settings
+        settings_but.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(MainActivity.this, WineAppSettings.class);
+				startActivity(i);
+			}
+        });
+        
+        // wine of the day
         wineOfDay.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -50,7 +127,7 @@ public class MainActivity extends AbstractActivity {
 	@Override
 	protected int getTitleText() {
 		// TODO Auto-generated method stub
-		return 0;
+		return R.string.app_name;
 	}
     
 }

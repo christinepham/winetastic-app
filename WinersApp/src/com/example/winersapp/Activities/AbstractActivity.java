@@ -20,6 +20,11 @@ public abstract class AbstractActivity extends Activity {
 	        	// if customTitlebar is supports, set the titlebar layout for it.
 	            getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.mycustomtitle);
 	        }
+	        final TextView myTitleText = (TextView) findViewById(R.id.myTitle);
+	        if ( myTitleText != null ) {
+	            myTitleText.setText(getText(getTitleText()));
+	       
+	        }
 	 }
 	 
 	 /**

@@ -29,7 +29,7 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.winersapp.Activity.WinersAppMainActivity" />
-        </activity>          
+        </activity>
         <activity
             android:name="com.example.winersapp.WineOfDay"
             android:label="@string/title_activity_wine_of_day"
@@ -37,7 +37,7 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.winersapp.Activity.WinersAppMainActivity" />
-        </activity> 
+        </activity>
         <activity
             android:name="com.example.winersapp.WineSearch"
             android:label="@string/find_wines"
@@ -45,7 +45,70 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.winersapp.Activity.WinersAppMainActivity" />
-        </activity>         
+        </activity>
+        <activity
+            android:name=".EventCalendar"
+            android:label="@string/title_activity_event_calendar" >
+          <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> --> 
+        </activity>
+        <activity
+            android:name=".MyWines"
+            android:label="@string/title_activity_my_wines" >
+           <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> --> 
+        </activity>
+        <activity
+            android:name=".Map"
+            android:label="@string/title_activity_map" >
+           <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> --> 
+        </activity>
+        <activity
+            android:name=".ToastToShare"
+            android:label="@string/title_activity_toast_to_share" >
+           <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> --> 
+        </activity>
+        <activity
+            android:name=".AddWine"
+            android:label="@string/title_activity_add_wine" >
+          <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> -->  
+        </activity>
+        <activity
+            android:name=".Settings"
+            android:label="@string/title_activity_settings" >
+          <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> -->  
+        </activity>
+        <activity
+            android:name=".WineAppSettings"
+            android:label="@string/title_activity_wine_app_settings" >
+           <!--  <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> -->
+        </activity>
     </application>
 
 </manifest>
