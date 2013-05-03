@@ -1,5 +1,13 @@
 package com.example.winersapp.Activities;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+
 import com.example.winersapp.AddWine;
 import com.example.winersapp.EventCalendar;
 import com.example.winersapp.Map;
@@ -7,15 +15,7 @@ import com.example.winersapp.MyWines;
 import com.example.winersapp.R;
 import com.example.winersapp.ToastToShare;
 import com.example.winersapp.WineAppSettings;
-import com.example.winersapp.WineOfDay;
 import com.example.winersapp.WineSearch;
-
-import android.os.Bundle;
-import android.app.Activity;
-import android.content.Intent;
-import android.view.Menu;
-import android.view.View;
-import android.widget.Button;
 
 public class MainActivity extends AbstractActivity {
 
@@ -31,8 +31,8 @@ public class MainActivity extends AbstractActivity {
         Button toast_but = (Button)findViewById(R.id.toast);
         Button add_but = (Button)findViewById(R.id.addWine);
         Button settings_but = (Button)findViewById(R.id.settingsw);
-        Button wineOfDay = (Button)findViewById(R.id.wineOfDay);
-        
+        //Button wineOfDay = (Button)findViewById(R.id.wineOfDay);
+        ImageButton wineOfDay = (ImageButton)findViewById(R.id.wineOfDay);
         
         // search
         search_but.setOnClickListener(new View.OnClickListener(){
@@ -105,13 +105,22 @@ public class MainActivity extends AbstractActivity {
         });
         
         // wine of the day
-        wineOfDay.setOnClickListener(new View.OnClickListener(){
+   /*     wineOfDay.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent i = new Intent(MainActivity.this, WineOfDay.class);
 				startActivity(i);
 			}  	
+        });*/
+        
+        wineOfDay.setOnClickListener(new View.OnClickListener() {
+        	@Override
+        	public void onClick(View v) {
+        		Intent myWebLink = new Intent(android.content.Intent.ACTION_VIEW);
+                myWebLink.setData(Uri.parse("http://www.heartsmartwine.com/wine/5/2008_Napa_Valley_Cabernet_Sauvignon_Great_Dane.html"));
+                    startActivity(myWebLink);
+        	}
         });
     }
 

@@ -5,7 +5,7 @@
     <string name="action_settings">Settings</string>
 
     <!-- Wine of the Day -->
-    <string name="wineOfDay">Wine of the Day!</string>
+    <string name="wineOfDay">View the wine of the day</string>
     <string name="logo">Winetastic</string>
     <string name="title_activity_wine_of_day">WineOfDay</string>
 
@@ -47,7 +47,10 @@
     <string name="add_wine_title"> Add Wine </string>
     
     <!-- Wine App Settings -->
-  	<string name="wine_app_settings_title"> Settings </string>  
+  	<string name="wine_app_settings_title"> Settings </string>
+  	
+  	<!-- Wine of the Day -->
+  	<string name="img_none"></string>
 
     <!-- Colors -->
     <color name="white">#FFFFFF</color>
@@ -70,5 +73,6 @@
     <string name="title_activity_add_wine">AddWine</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_wine_app_settings">WineAppSettings</string>
+    <string name="none"/>
 
 </resources>
