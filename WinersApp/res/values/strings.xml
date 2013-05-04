@@ -17,7 +17,7 @@
     <string name="find_wines">Find a Wine</string>
     <string name="guest_goto_home">Go to Home Screen</string>
     <string name="close">X</string>
-    <string name="submit">Submit ></string>
+    <string name="submit">Submit</string>
     <string name="login">Login</string>
     <string name="facebook">Facebook</string>
     <string name="google">Google</string>
@@ -59,7 +59,7 @@
     <color name="black">#000000</color>
     <color name="gray">#666666</color>
     <color name="white_trans">#aaffffff</color>
-    <color name="black_trans">#aa000000</color>
+    <color name="black_trans">#dd000000</color>
     <color name="facebookblue">#3B5998</color>
     <color name="googlered">#d31b1b</color>
     <color name="transparent">#00000000</color>

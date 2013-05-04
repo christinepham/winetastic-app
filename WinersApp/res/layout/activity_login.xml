@@ -1,0 +1,141 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginWindow"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:background="@drawable/login_background"
+    android:orientation="vertical"
+    android:minHeight="430dp"
+    android:visibility="visible" >
+
+	<!-- TITLE BAR -->
+ 	<TextView
+ 	    android:id="@+id/login_title"
+ 	    style="@style/LoginTitles"
+
+ 	    android:text="@string/returning_users"
+ 	     />
+ 	
+ 	<Button
+        android:id="@+id/login_close"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:background="@color/black"
+        android:onClick="closeLogin"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"        
+        android:text="@string/close"
+        android:textColor="@color/white"
+        android:textSize="25sp" />	
+
+ 	<!-- Redirect to CREATE AN ACCOUNT page -->
+ 	<Button
+        android:id="@+id/login_create_account"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/login_title"
+        android:gravity="center"
+        android:background="@color/winered"
+        android:text="@string/login_prompt_create"
+        android:textColor="@color/white"
+        android:textSize="12sp" /> 	
+         	
+	<!-- LOGIN THROUGH EMAIL -->
+    <TextView
+        android:id="@+id/login_email_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_create_account"  
+        android:background="@color/transparent"              
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/email" 
+        android:textSize="25sp"                
+    	android:textColor="@color/white" /> 
+    	
+    <EditText
+        android:id="@+id/login_email"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/login_email_text"
+        android:layout_margin="10dp"
+        android:background="@color/white_trans"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="10dp" />
+    	
+
+    <TextView
+        android:id="@+id/login_password_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_email"     
+        android:background="@color/transparent"                       
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp"
+        android:text="@string/password" 
+        android:textSize="25sp"                
+    	android:textColor="@color/white" />    
+    	
+    <EditText
+        android:id="@+id/login_password"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/login_password_text"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" 
+        android:background="@color/white_trans"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp" />
+         
+    <Button
+        android:id="@+id/login_submit"
+        style="@style/ButtonText"               
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:background="@drawable/btn_winered"
+        
+        android:layout_below="@+id/login_password"                   
+        android:fontFamily="sans-serif" 
+        android:text="@string/submit" />
+     
+	<!-- ONE-CLICK LOGIN -->    
+	
+    <TextView
+       	android:id="@+id/register_or_text"
+ 	    style="@style/LoginTitles"
+ 	    android:layout_below="@+id/login_submit"
+ 	    
+       	android:text="@string/register_or" />
+
+	<Button
+       	android:id="@+id/register_facebook_button"
+       	android:layout_width="140dp"
+       	android:layout_height="wrap_content"
+       	android:layout_margin="10dp"
+        android:layout_below="@+id/register_or_text"   
+        android:padding="5dp"
+       	android:fontFamily="sans-serif-condensed"       
+       	android:textSize="20sp"       	           
+            
+       	android:background="@color/facebookblue"
+       	android:text="@string/facebook"
+       	android:textColor="@color/white" />
+
+    <Button
+     	android:id="@+id/register_google_button"
+     	android:layout_width="140dp"
+     	android:layout_height="wrap_content"
+     	android:layout_margin="10dp"
+      	android:layout_toRightOf="@+id/register_facebook_button"    
+      	android:layout_below="@+id/register_or_text"
+        android:padding="5dp"         	                                
+     	android:background="@color/googlered"
+		android:fontFamily="sans-serif-condensed"                      
+     	android:text="@string/google"
+     	android:textColor="@color/white"
+     	android:textSize="20sp" />    
+             
+ </RelativeLayout>

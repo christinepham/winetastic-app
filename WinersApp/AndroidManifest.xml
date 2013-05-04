@@ -47,67 +47,97 @@
                 android:value="com.example.winersapp.Activity.WinersAppMainActivity" />
         </activity>
         <activity
-            android:name=".EventCalendar"
+            android:name="com.example.winersapp.EventCalendar"
             android:label="@string/title_activity_event_calendar" >
-          <!-- <intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> --> 
+            </intent-filter>
+            -->
         </activity>
         <activity
-            android:name=".MyWines"
+            android:name="com.example.winersapp.MyWines"
             android:label="@string/title_activity_my_wines" >
-           <!-- <intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> --> 
+            </intent-filter>
+            -->
         </activity>
         <activity
-            android:name=".Map"
+            android:name="com.example.winersapp.Map"
             android:label="@string/title_activity_map" >
-           <!-- <intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> --> 
+            </intent-filter>
+            -->
         </activity>
         <activity
-            android:name=".ToastToShare"
+            android:name="com.example.winersapp.ToastToShare"
             android:label="@string/title_activity_toast_to_share" >
-           <!-- <intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> --> 
+            </intent-filter>
+            -->
         </activity>
         <activity
-            android:name=".AddWine"
+            android:name="com.example.winersapp.AddWine"
             android:label="@string/title_activity_add_wine" >
-          <!-- <intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> -->  
+            </intent-filter>
+            -->
         </activity>
         <activity
-            android:name=".Settings"
+            android:name="com.example.winersapp.Settings"
             android:label="@string/title_activity_settings" >
-          <!-- <intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> -->  
+            </intent-filter>
+            -->
         </activity>
         <activity
-            android:name=".WineAppSettings"
+            android:name="com.example.winersapp.WineAppSettings"
             android:label="@string/title_activity_wine_app_settings" >
-           <!--  <intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> -->
+            </intent-filter>
+            -->
+        </activity>
+        <activity
+            android:name="com.example.winersapp.Login"
+            android:label="@string/title_activity_login"
+            android:parentActivityName="com.example.winersapp.Activities.AbstractActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.winersapp.Activities.AbstractActivity" />
         </activity>
     </application>
 

@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_bg"
@@ -22,7 +23,7 @@
         
         android:text="@string/find_wines"        />   
         
-    <!-- These buttons are currently for the convenience of developers -->
+    <!-- Convenient buttons -->
    <Button
        android:id="@+id/guest_home_button"
        android:layout_width="200dp"
@@ -56,146 +57,5 @@
        android:text="@string/login"       
        android:onClick="showLogin"       />   
    
-
-   <!--  LOGIN WINDOW  -->
-   <RelativeLayout
-       android:id="@+id/loginWindow"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:layout_alignParentLeft="true"
-       android:layout_alignParentTop="true"
-       android:layout_margin="10dp"
-       android:background="@color/black_trans"
-       android:orientation="vertical"
-       android:overScrollMode="never"
-       android:visibility="visible" >
-
- 	<TextView
- 	    android:id="@+id/login_title"
- 	    style="@style/LoginTitles"
-
- 	    android:text="@string/returning_users"
- 	     />
- 	
- 	<Button
-        android:id="@+id/login_close"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:background="@color/black"
-        android:onClick="closeLogin"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"        
-        android:text="@string/close"
-        android:textColor="@color/white"
-        android:textSize="25sp" />	
-
- 	<Button
-        android:id="@+id/login_create_account"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_below="@+id/login_title"
-        android:gravity="center"
-        android:background="@color/winered"
-        android:text="@string/login_prompt_create"
-        android:textColor="@color/white"
-        android:textSize="12sp" /> 	
-         	
-
-
-    <TextView
-        android:id="@+id/login_email_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/login_create_account"  
-        android:background="@color/transparent"              
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:text="@string/email" 
-        android:textSize="25sp"                
-    	android:textColor="@color/white" /> 
-    	
-    <EditText
-        android:id="@+id/form_email"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_below="@+id/login_email_text"
-        android:layout_margin="10dp"
-        android:background="@color/white_trans"
-        android:inputType="textEmailAddress"
-        android:paddingLeft="10dp" />
-    	
-    <TextView
-        android:id="@+id/login_password_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/form_email"     
-        android:background="@color/transparent"                       
-        android:paddingLeft="10dp"
-        android:text="@string/password" 
-        android:textSize="25sp"                
-    	android:textColor="@color/white" />    
-    	
-    <EditText
-        android:id="@+id/form_password"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_below="@+id/login_password_text"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" 
-        android:background="@color/white_trans"
-        android:inputType="textPassword"
-        android:paddingLeft="10dp" />
-          
-    <Button
-        android:id="@+id/login_submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/transparent"
-        android:layout_margin="15dp"
-        android:layout_below="@+id/form_password"                   
-        android:gravity="right"   
-        android:fontFamily="sans-serif-condensed"        
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        android:text="@string/submit" />
-     
-    <TextView
-       	android:id="@+id/register_or_text"
- 	    style="@style/LoginTitles"
- 	    android:layout_below="@+id/login_submit"
- 	    
-       	android:text="@string/register_or" />
-
-	<Button
-       	android:id="@+id/register_facebook_button"
-       	android:layout_width="140dp"
-       	android:layout_height="wrap_content"
-       	android:layout_margin="10dp"
-        android:layout_below="@+id/register_or_text"   
-        android:padding="5dp"
-       	android:fontFamily="sans-serif-condensed"       
-       	android:textSize="20sp"       	           
-            
-       	android:background="@color/facebookblue"
-       	android:text="@string/facebook"
-       	android:textColor="@color/white" />
-
-    <Button
-     	android:id="@+id/register_google_button"
-     	android:layout_width="140dp"
-     	android:layout_height="wrap_content"
-     	android:layout_margin="10dp"
-      	android:layout_toRightOf="@+id/register_facebook_button"    
-      	android:layout_below="@+id/register_or_text"
-        android:padding="5dp"         	                                
-     	android:background="@color/googlered"
-		android:fontFamily="sans-serif-condensed"                      
-     	android:text="@string/google"
-     	android:textColor="@color/white"
-     	android:textSize="20sp" />
-             
-    </RelativeLayout>
-
 
 </RelativeLayout>
