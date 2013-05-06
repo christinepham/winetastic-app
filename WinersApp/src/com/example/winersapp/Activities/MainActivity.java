@@ -21,6 +21,7 @@ public class MainActivity extends AbstractActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+    	System.out.println("hello");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
