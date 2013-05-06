@@ -1,4 +1,6 @@
-package com.example.winersapp;
+package com.winers.winetastic;
+
+import com.example.winersapp.R;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

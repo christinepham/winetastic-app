@@ -1,7 +1,6 @@
-package com.example.winersapp;
+package com.winers.winetastic;
 
-import com.example.winersapp.Activities.AbstractActivity;
-import com.example.winersapp.Activities.MainActivity;
+import com.example.winersapp.R;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -22,7 +21,7 @@ public class Map extends AbstractActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(Map.this, MainActivity.class);
+				Intent i = new Intent(Map.this, Home.class);
 				startActivity(i);
 			}
         });

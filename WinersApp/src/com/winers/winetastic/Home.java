@@ -1,4 +1,4 @@
-package com.example.winersapp.Activities;
+package com.winers.winetastic;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -8,16 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.example.winersapp.AddWine;
-import com.example.winersapp.EventCalendar;
-import com.example.winersapp.Map;
-import com.example.winersapp.MyWines;
 import com.example.winersapp.R;
-import com.example.winersapp.ToastToShare;
-import com.example.winersapp.WineAppSettings;
-import com.example.winersapp.WineSearch;
 
-public class MainActivity extends AbstractActivity {
+public class Home extends AbstractActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +32,7 @@ public class MainActivity extends AbstractActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(MainActivity.this, WineSearch.class);
+				Intent i = new Intent(Home.this, WineSearch.class);
 				startActivity(i);
 			}
         });
@@ -49,7 +42,7 @@ public class MainActivity extends AbstractActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(MainActivity.this, MyWines.class);
+				Intent i = new Intent(Home.this, MyWines.class);
 				startActivity(i);
 			}
         });
@@ -59,7 +52,7 @@ public class MainActivity extends AbstractActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(MainActivity.this, EventCalendar.class);
+				Intent i = new Intent(Home.this, EventCalendar.class);
 				startActivity(i);
 			}
         });
@@ -69,7 +62,7 @@ public class MainActivity extends AbstractActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(MainActivity.this, Map.class);
+				Intent i = new Intent(Home.this, Map.class);
 				startActivity(i);
 			}
         });
@@ -79,7 +72,7 @@ public class MainActivity extends AbstractActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(MainActivity.this, ToastToShare.class);
+				Intent i = new Intent(Home.this, ToastToShare.class);
 				startActivity(i);
 			}
         });
@@ -89,7 +82,7 @@ public class MainActivity extends AbstractActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(MainActivity.this, AddWine.class);
+				Intent i = new Intent(Home.this, AddWine.class);
 				startActivity(i);
 			}
         });
@@ -99,7 +92,7 @@ public class MainActivity extends AbstractActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(MainActivity.this, WineAppSettings.class);
+				Intent i = new Intent(Home.this, WineAppSettings.class);
 				startActivity(i);
 			}
         });

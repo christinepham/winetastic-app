@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_bg"
-    tools:context=".WinersAppMainActivity" >
+    tools:context=".Intro" >
  
     <!-- Goes directly to the browse/search page -->
     <Button

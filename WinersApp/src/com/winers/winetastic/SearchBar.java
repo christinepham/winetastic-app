@@ -1,16 +1,13 @@
-package com.example.winersapp;
+package com.winers.winetastic;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.widget.TextView;
 
-import com.example.winersapp.*;
-import com.example.winersapp.*;
-import com.example.winersapp.*;
-import com.example.winersapp.*;
 import com.example.winersapp.R.layout;
 import com.example.winersapp.R.menu;
+import com.winers.winetastic.*;
 
 public class SearchBar extends Activity {
 	
