@@ -1,8 +1,8 @@
 <resources>
 
-    <string name="title_activity_login">Returning Users</string>
+<!--     <string name="title_activity_login">Returning Users</string>
 
-    <!-- Strings related to login -->
+    Strings related to login
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in_register"><b>Sign in</b> or register</string>
@@ -12,6 +12,6 @@
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
+    <string name="error_field_required">This field is required</string> -->
 
 </resources>

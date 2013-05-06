@@ -1,23 +1,18 @@
 package com.winers.winetastic;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 
 import com.example.winersapp.R;
-import com.example.winersapp.R.layout;
-import com.example.winersapp.R.menu;
 
 public class Intro extends Activity {
 	
