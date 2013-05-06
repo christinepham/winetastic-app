@@ -1,7 +1,6 @@
-package com.example.winersapp;
+package com.winers.winetastic;
 
-import com.example.winersapp.Activities.AbstractActivity;
-import com.example.winersapp.Activities.MainActivity;
+import com.example.winersapp.R;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -10,19 +9,19 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
-public class MyWines extends AbstractActivity {
+public class EventCalendar extends AbstractActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_wines);
+        setContentView(R.layout.activity_event_calendar);
         
         Button retHome = (Button)findViewById(R.id.e_cal_home);
         retHome.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(MyWines.this, MainActivity.class);
+				Intent i = new Intent(EventCalendar.this, Home.class);
 				startActivity(i);
 			}
         });
@@ -30,13 +29,13 @@ public class MyWines extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_my_wines, menu);
+        getMenuInflater().inflate(R.menu.activity_event_calendar, menu);
         return true;
     }
 
 	@Override
 	protected int getTitleText() {
 		// TODO Auto-generated method stub
-		return R.string.my_wines_title;
+		return R.string.event_calendar_title;
 	}
 }

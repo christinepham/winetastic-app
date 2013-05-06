@@ -1,4 +1,4 @@
-package com.example.winersapp.Activities;
+package com.winers.winetastic;
 
 import com.example.winersapp.R;
 

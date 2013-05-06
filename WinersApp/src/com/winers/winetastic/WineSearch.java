@@ -1,8 +1,6 @@
-package com.example.winersapp;
+package com.winers.winetastic;
 
 import com.example.winersapp.R;
-import com.example.winersapp.Activities.AbstractActivity;
-import com.example.winersapp.Activities.MainActivity;
 
 import android.app.Activity;
 import android.app.ExpandableListActivity;
@@ -11,7 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class WineSearch extends ExpandableListActivity {
+public class WineSearch extends AbstractActivity {
 	
 	private String[] categories 	= {"Color", "Season", "Type", "Accent"};
 	private String[] colors 		= {"Red", "White", "Rose", "Sparkling"};
@@ -30,7 +28,7 @@ public class WineSearch extends ExpandableListActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(WineSearch.this, MainActivity.class);
+				Intent i = new Intent(WineSearch.this, Home.class);
 				startActivity(i);
 			}
         });

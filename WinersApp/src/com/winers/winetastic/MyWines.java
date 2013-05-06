@@ -1,7 +1,6 @@
-package com.example.winersapp;
+package com.winers.winetastic;
 
-import com.example.winersapp.Activities.AbstractActivity;
-import com.example.winersapp.Activities.MainActivity;
+import com.example.winersapp.R;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -10,19 +9,19 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
-public class WineAppSettings extends AbstractActivity {
+public class MyWines extends AbstractActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wine_app_settings);
+        setContentView(R.layout.activity_my_wines);
         
         Button retHome = (Button)findViewById(R.id.e_cal_home);
         retHome.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(WineAppSettings.this, MainActivity.class);
+				Intent i = new Intent(MyWines.this, Home.class);
 				startActivity(i);
 			}
         });
@@ -30,13 +29,13 @@ public class WineAppSettings extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_wine_app_settings, menu);
+        getMenuInflater().inflate(R.menu.activity_my_wines, menu);
         return true;
     }
 
 	@Override
 	protected int getTitleText() {
 		// TODO Auto-generated method stub
-		return R.string.wine_app_settings_title;
+		return R.string.my_wines_title;
 	}
 }

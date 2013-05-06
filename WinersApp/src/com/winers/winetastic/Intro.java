@@ -1,4 +1,4 @@
-package com.example.winersapp.Activities;
+package com.winers.winetastic;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -16,12 +16,10 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.winersapp.R;
-import com.example.winersapp.WineOfDay;
-import com.example.winersapp.WineSearch;
 import com.example.winersapp.R.layout;
 import com.example.winersapp.R.menu;
 
-public class WinersAppMainActivity extends Activity {
+public class Intro extends Activity {
 	
 	PopupWindow loginWindow;
 	
@@ -35,7 +33,7 @@ public class WinersAppMainActivity extends Activity {
         browse.setOnClickListener(new View.OnClickListener(){
     		@Override
     		public void onClick(View v) {
-    			Intent i = new Intent(WinersAppMainActivity.this, WineSearch.class);
+    			Intent i = new Intent(Intro.this, WineSearch.class);
     			startActivity(i);
     		}
         });   
@@ -45,7 +43,7 @@ public class WinersAppMainActivity extends Activity {
         home.setOnClickListener(new View.OnClickListener(){
     		@Override
     		public void onClick(View v) {
-    			Intent i = new Intent(WinersAppMainActivity.this, MainActivity.class);
+    			Intent i = new Intent(Intro.this, Home.class);
     			startActivity(i);
     		}
         });           
