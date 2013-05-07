@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-    </ListView>
+    </ListView>
 -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/search_bar_location"
-        android:text="@string/hello_world" />
+        android:text="@string/hello_world" />
     -->
 
     <LinearLayout
@@ -41,8 +41,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/search_bar_location"
-        android:visibility="visible"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:visibility="visible" >
 
         <ExpandableListView
             android:id="@android:id/list"
@@ -52,6 +52,31 @@
         </ExpandableListView>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/buttons_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/advanced_search_list_layout"
+        android:orientation="horizontal"
+        android:visibility="visible" >
+
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/reset" >
+        </Button>
+
+        <Button
+            android:id="@+id/search"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/wine_search" >
+        </Button>
+    </LinearLayout>
+
     <!--
       <TextView
         android:layout_width="wrap_content"
@@ -59,7 +84,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="@string/hello_world"
-        tools:context=".MyWines" />
+        tools:context=".MyWines" />
     -->
 
 </RelativeLayout>
