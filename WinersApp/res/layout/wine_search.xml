@@ -1,11 +1,9 @@
-
-
-    <!--  
+<!--
     <ListView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-    </ListView>
+    </ListView>
 -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,20 +11,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/search_bar_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <SearchView
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:iconifiedByDefault="false"
+            android:queryHint="@string/search_hint"
+            android:visibility="visible" >
+        </SearchView>
+    </LinearLayout>
+
+    <!--
+    <Button
+        android:id="@+id/e_cal_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_bar_location"
+        android:text="@string/hello_world" />
+    -->
+
+    <LinearLayout
+        android:id="@+id/advanced_search_list_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_bar_location"
+        android:visibility="visible"
+        android:orientation="vertical" >
+
+        <ExpandableListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" >
+        </ExpandableListView>
+    </LinearLayout>
+
+    <!--
+      <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="@string/hello_world"
-        tools:context=".MyWines" />
+        tools:context=".MyWines" />
+    -->
 
-     
-    <Button 
-	    android:id="@+id/e_cal_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" 
-        />
-    
 </RelativeLayout>

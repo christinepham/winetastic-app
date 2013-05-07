@@ -5,8 +5,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="16" />
+        android:minSdkVersion="11"
+        android:targetSdkVersion="17" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.winers.winetastic.Home"   
+            android:name="com.winers.winetastic.Home"
             android:label="@string/find_wines"
             android:parentActivityName="com.winers.winetastic.Intro" >
             <meta-data
@@ -56,6 +56,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             -->
         </activity>
         <activity
@@ -68,6 +69,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             -->
         </activity>
         <activity
@@ -80,6 +82,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             -->
         </activity>
         <activity
@@ -92,6 +95,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             -->
         </activity>
         <activity
@@ -104,6 +108,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             -->
         </activity>
         <activity
@@ -116,6 +121,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             -->
         </activity>
         <activity
@@ -128,6 +134,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             -->
         </activity>
         <activity
@@ -139,6 +146,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.winersapp.Activities.AbstractActivity" />
         </activity>
+
+        <activity android:name="com.winers.winetastic.SearchActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        
     </application>
 
 </manifest>
