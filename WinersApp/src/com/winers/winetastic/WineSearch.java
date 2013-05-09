@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ExpandableListView;
@@ -50,6 +51,18 @@ implements OnChildClickListener {
 				this);
 		getExpandableListView().setAdapter(searchAdapter);
 		searchOptions.setOnChildClickListener(this);
+		
+		
+		Button search = (Button) findViewById(R.id.search);
+		search.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				searchAdapter.search();
+			}
+			
+		});
 		
 	}
 

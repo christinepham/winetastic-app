@@ -48,6 +48,8 @@
     <string name="search_hint">Search wine name</string>
     <string name="reset">Reset</string>
     <string name="wine_search">Search</string>
+    <string name="quick_search">Quick Search</string>
+    <string name="advanced_search">Advanced Search</string>
     
     <!-- My Wines -->
     <string name="my_wines_title"> My Wines </string>
