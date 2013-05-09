@@ -1,10 +1,13 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E8E399"
-    tools:context=".Home" >
-
+    tools:context=".Home" 
+    android:id="@+id/searchAndName"
+    android:orientation="vertical" >
+	<RelativeLayout 
+	    android:layout_width="match_parent" 
+	    android:layout_height="wrap_content" >"
     <TextView
         android:id="@+id/winetastic"
         android:layout_width="match_parent"
@@ -17,7 +20,7 @@
         android:textColor="#F2EDEF"
         android:textIsSelectable="false"
         android:textSize="20sp" />
-
+    
     <Button
         android:id="@+id/search"
         android:layout_width="300dp"
@@ -27,13 +30,16 @@
         android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="@string/search" />
-
+    </RelativeLayout>
+    
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" 
+	    		  android:orientation="horizontal" android:weightSum="3" android:id="@+id/LinearLayout1">
     <Button
         android:id="@+id/calendar"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="100dp"
-        android:layout_below="@id/search"
-        android:layout_centerHorizontal="true"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_marginBottom="2dp"
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
@@ -43,81 +49,77 @@
 
     <Button
         android:id="@+id/myWines"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_below="@id/search"
-        android:layout_marginBottom="3dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp"
-        android:layout_marginTop="3dp"
-        android:layout_toLeftOf="@id/calendar"
-        android:background="@drawable/mywines" />
+        android:layout_weight="1"
+    	style="?android:attr/borderlessButtonStyle"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="2dp"
+    
+        android:background="@drawable/mywines" 
+    	android:orientation="horizontal" />
 
     <Button
         android:id="@+id/map"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="100dp"
-        android:layout_below="@id/search"
+   		style="?android:attr/borderlessButtonStyle"
         android:layout_marginBottom="2dp"
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
         android:layout_marginTop="2dp"
-        android:layout_toRightOf="@id/calendar"
-        android:background="@drawable/mapw" />
-
-    <Button
-        android:id="@+id/addWine"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_below="@id/calendar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="2dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginTop="2dp"
-        android:background="@drawable/addwine"
-        android:orientation="horizontal" />
-
+        android:background="@drawable/mapw" 
+        android:orientation="horizontal"/>
+	</LinearLayout>
+	
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" 
+	    		  android:orientation="horizontal" android:weightSum="3" android:id="@+id/LinearLayout2">
     <Button
         android:id="@+id/toast"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_below="@id/calendar"
-        android:layout_marginBottom="3dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp"
-        android:layout_marginTop="3dp"
-        android:layout_toLeftOf="@id/calendar"
+        android:layout_weight="1"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="2dp"
+        style="?android:attr/borderlessButtonStyle"
         android:background="@drawable/toastw" />
 
     <Button
         android:id="@+id/settingsw"
-        android:layout_width="100dp"
+        android:layout_width="1dp"
         android:layout_height="100dp"
-        android:layout_below="@id/calendar"
+        android:layout_weight="1"
         android:layout_marginBottom="2dp"
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
         android:layout_marginTop="2dp"
-        android:layout_toRightOf="@id/calendar"
+        style="?android:attr/borderlessButtonStyle"
         android:background="@drawable/settingsmall" />
-
-    <!--
-             <Button
-   	 		android:id="@+id/wineOfDay"
-    		android:layout_width="500dp"
-    		android:layout_height="50dp"
-   			android:layout_alignParentBottom="true"
-   			android:layout_centerHorizontal="true"
-   			android:gravity="center"
-   			android:text="@string/wineOfDay" />
-    -->
-
+    
+	    <Button
+	        android:id="@+id/addWine"
+	        android:layout_width="0dp"
+	        android:layout_height="100dp"
+	        android:layout_weight="1"
+	        android:layout_marginBottom="2dp"
+	        android:layout_marginLeft="2dp"
+	        android:layout_marginRight="2dp"
+	        android:layout_marginTop="2dp"
+	        android:background="@drawable/addwine"
+	        android:orientation="horizontal" 
+    	style="?android:attr/borderlessButtonStyle"/>
+	</LinearLayout>
+	
     <SlidingDrawer
         android:id="@+id/slidingDrawer1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toast"
+       
         android:content="@+id/content"
         android:handle="@+id/handle" >
 
@@ -150,7 +152,9 @@
              android:text="@string/wineOfDay" />
             -->
 
+            
+
         </LinearLayout>
     </SlidingDrawer>
-
-</RelativeLayout>
+	
+</LinearLayout>
