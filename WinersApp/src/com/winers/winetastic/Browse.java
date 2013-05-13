@@ -1,16 +1,12 @@
 package com.winers.winetastic;
 
-import com.example.winersapp.R;
-import com.example.winersapp.R.id;
-import com.example.winersapp.R.layout;
-import com.example.winersapp.R.menu;
-import com.example.winersapp.R.string;
-import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.winersapp.R;
 
 public class Browse extends AbstractActivity {
 

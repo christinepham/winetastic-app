@@ -100,7 +100,7 @@
         android:fontFamily="sans-serif"
         android:text="@string/submit" />
 
-    <!-- ONE-CLICK LOGIN -->
+    <!-- ONE-CLICK LOGIN (GOOGLE/FB) -->
 
     <TextView
         android:id="@+id/register_or_text"

@@ -27,6 +27,8 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="register_or">Or login with:</string>
+    
+    <string name="guest_login">Already a user? <u>Click to login.</u></string>
    
 
     <!-- Strings related to login -->

@@ -2,17 +2,17 @@ package com.winers.winetastic;
 
 import java.util.ArrayList;
 
-import com.example.winersapp.R;
-
 import android.app.Activity;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckedTextView;
 import android.widget.Toast;
-import android.view.View.OnClickListener;
+
+import com.example.winersapp.R;
 
 public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 
