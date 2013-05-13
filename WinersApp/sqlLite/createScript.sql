@@ -1,14 +1,15 @@
 .mode columns
 .headers on
-
 CREATE TABLE users (
   Email_Address TEXT PRIMARY KEY,
   Password_Hash TEXT,
-  Date_Created TEXT
+  Date_Created TEXT,
+  Contributor NUMERIC
 );
 
 CREATE TABLE wines (
   Wine_ID NUMERIC PRIMARY KEY,
+  Winery_ID NUMERIC,
   Color TEXT,
   Country TEXT,
   Grape_Variety TEXT,
@@ -16,8 +17,7 @@ CREATE TABLE wines (
   Vineyard TEXT,
   Year TEXT,
   Wine_Name TEXT,
-  Price TEXT,
-  List_of_Descriptors TEXT,
+  Price NUMERIC,
   URL_of_Photo TEXT,
   User_Entered TEXT
 );
@@ -33,8 +33,7 @@ CREATE TABLE events (
   Title TEXT,
   Description TEXT,
   Duration_Days NUMERIC,
-  Event_Occurance_Count NUMERIC,
-  Category TEXT
+  Event_Occurance_Count NUMERIC
 );
 
 CREATE TABLE my_wines (
@@ -49,15 +48,8 @@ CREATE TABLE user_calendar (
 
 CREATE TABLE wine_descriptors (
   Wine_ID NUMERIC,
-  Season_Winter NUMERIC,
-  Season_Spring NUMERIC,
-  Season_Summer NUMERIC,
-  Season_Fall NUMERIC,
-  Light_Bodied NUMERIC,
-  Medium_Bodied NUMERIC,
-  Full_Bodied NUMERIC,
-  Young NUMERIC,
-  Old NUMERIC,
+  Season NUMERIC,
+  Body NUMERIC,
   Acidic NUMERIC,
   Acrid NUMERIC,
   Ageworthy NUMERIC,
@@ -67,19 +59,28 @@ CREATE TABLE wine_descriptors (
   Astringent NUMERIC,
   Austere NUMERIC,
   Awkward NUMERIC,
-  Winery TEXT,
-  Brand TEXT
+  Full_description TEXT
 );
 
 CREATE TABLE wineries (
   Winery_ID NUMERIC PRIMARY KEY,
-  Wine_ID NUMERIC,
   Name TEXT,
+  Address TEXT,
+  City TEXT,
+  Zip NUMERIC,
+  URL_of_Photo TEXT,
   Open_Mondays NUMERIC,
   Open_Tuesdays NUMERIC,
   Open_Wednesdays NUMERIC,
   Open_Thursdays NUMERIC,
   Open_Fridays NUMERIC,
   Open_Saturdays NUMERIC,
-  Open_Sundays NUMERIC
+  Open_Sundays NUMERIC,
+  Close_Mondays NUMERIC,
+  Close_Tuesdays NUMERIC,
+  Close_Wednesdays NUMERIC,
+  Close_Thursdays NUMERIC,
+  Close_Fridays NUMERIC,
+  Close_Saturdays NUMERIC,
+  Close_Sundays NUMERIC
 );
