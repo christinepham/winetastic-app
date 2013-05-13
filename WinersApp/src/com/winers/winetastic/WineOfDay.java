@@ -1,15 +1,10 @@
 package com.winers.winetastic;
 
-import com.example.winersapp.R;
-
-import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
-import android.os.Build;
+import android.app.Activity;
+import android.os.Bundle;
+
+import com.example.winersapp.R;
 
 public class WineOfDay extends Activity {
 	@SuppressLint("NewApi")

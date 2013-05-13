@@ -2,14 +2,9 @@ package com.winers.winetastic;
 
 import java.util.ArrayList;
 
-import com.example.winersapp.R;
-
-import android.app.Activity;
 import android.app.ExpandableListActivity;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,6 +16,8 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.SearchView;
 import android.widget.Toast;
+
+import com.example.winersapp.R;
 
 public class WineSearch extends ExpandableListActivity 
 implements OnChildClickListener {
@@ -40,8 +37,6 @@ implements OnChildClickListener {
 		searchOptions.setGroupIndicator(null);
 		searchOptions.setClickable(true);
 
-		
-		
 		setGroups();
 		setChildren();
 

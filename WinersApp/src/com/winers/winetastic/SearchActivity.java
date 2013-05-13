@@ -1,11 +1,7 @@
 package com.winers.winetastic;
 
-import com.example.winersapp.R;
-import com.example.winersapp.R.layout;
-import com.example.winersapp.R.menu;
-
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
 
 public class SearchActivity extends Activity {

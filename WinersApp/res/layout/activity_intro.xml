@@ -1,0 +1,56 @@
+<!-- Layout for the intro (guest) screen. --> 
+<!-- Prompts login/register, or allows fast pass to browse page -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/intro_layout" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/guest_transition1"  
+    tools:context=".Intro" >
+ 	<FrameLayout
+	    android:layout_width="match_parent" 
+		android:layout_height="wrap_content" 	    	    
+ 	    android:layout_alignParentBottom="true" >
+	    <!-- Goes directly to the browse/search page -->
+	    <Button
+	        android:id="@+id/guest_find_wines"
+	        android:background="@drawable/winelabel"
+		    style="@style/ButtonText.guest"       
+		    android:layout_marginTop="0dp"
+		    android:layout_marginLeft="0dp" 
+			android:layout_width="match_parent"		         
+	        android:layout_height="160dp"
+	        android:height="100dp"
+	        android:textSize="50sp"            
+	                />   
+
+	    <Button	        
+	        android:id="@+id/guest_login_textlink"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="105dp"
+	        android:background="@color/transparent"
+	        android:gravity="center"
+	        android:fontFamily="sans-serif-light"
+	        android:text="@string/guest_login"
+	        android:textColor="@color/gray"
+	        android:textSize="12sp" 
+	        android:onClick="showLogin"
+	       > 
+	        
+	    </Button>
+	</FrameLayout>	                
+
+	<!-- TODO: Remove home button on launch -->
+	<Button
+		android:id="@+id/guest_home_button"
+		android:background="@drawable/btn_winered"      
+	    style="@style/ButtonText.guest"         
+		android:fontFamily="sans-serif-condensed"
+		android:text="@string/guest_goto_home"
+		
+		android:visibility="visible" />	
+  
+
+</RelativeLayout>

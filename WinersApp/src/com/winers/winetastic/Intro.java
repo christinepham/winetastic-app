@@ -3,7 +3,9 @@ package com.winers.winetastic;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,17 +13,23 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 
 import com.example.winersapp.R;
 
 public class Intro extends Activity {
 	
-	PopupWindow loginWindow;
+	private PopupWindow loginWindow;		 	// Holds the login window layout
+	private Handler mHandler = new Handler();	// Handles background rotation 
+	
+	// Background information
+	private int currentFrame = 0;
+	private static final int TRANSITION_TIME = 5000;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_winers_app_main);
+        setContentView(R.layout.activity_intro);
         
         // Click event: Go to the Browse Wines module
         Button browse = (Button)findViewById(R.id.guest_find_wines);
@@ -31,7 +39,7 @@ public class Intro extends Activity {
     			Intent i = new Intent(Intro.this, WineSearch.class);
     			startActivity(i);
     		}
-        });   
+        });  
         
         // Click event: Go to the Home Screen
         Button home = (Button)findViewById(R.id.guest_home_button);
@@ -41,7 +49,27 @@ public class Intro extends Activity {
     			Intent i = new Intent(Intro.this, Home.class);
     			startActivity(i);
     		}
-        });           
+        });       
+        
+        // Rotates background every x seconds 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(8000);
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                changeBackground();
+                            }
+                        });
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                    }
+                }
+            }
+        }).start();        
     }
 
     @Override
@@ -52,6 +80,7 @@ public class Intro extends Activity {
     }
     
     /* Use Case: Login Window
+     * Author: Victoria Do
      * Controls opening and closing the Login window.
      */
     public void showLogin(View view) {
@@ -63,13 +92,27 @@ public class Intro extends Activity {
     			LayoutParams.WRAP_CONTENT,
     			LayoutParams.WRAP_CONTENT,
     			true);
-    	loginWindow.showAtLocation(this.findViewById(R.id.main), Gravity.CENTER, 0, 0); 
+    	loginWindow.showAtLocation(this.findViewById(R.id.intro_layout), Gravity.CENTER, 0, 0); 
     }
     
     public void closeLogin(View view) {
     	loginWindow.dismiss();
     }
     
+    /* Controls background rotation. 
+     * Author: Victoria Do
+     */
+    private void changeBackground() { 	
+    	RelativeLayout layout = (RelativeLayout) findViewById(R.id.intro_layout);
+    	TransitionDrawable td = (TransitionDrawable) layout.getBackground().getCurrent();
+    	if(currentFrame == 0) {
+    		td.startTransition(TRANSITION_TIME);    	
+    		currentFrame++;
+    	} else {
+    		td.reverseTransition(TRANSITION_TIME);
+    		currentFrame--;
+    	}
+    }
    
 }
 
