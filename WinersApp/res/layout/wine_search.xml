@@ -58,7 +58,7 @@
             android:id="@+id/advanced_search_list_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            
+            android:clickable = "true"
             android:orientation="vertical"
             android:visibility="visible" >
 
@@ -75,7 +75,10 @@
                 android:id="@android:id/list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="visible" >
+                android:visibility="visible" 
+                android:listSelector="@drawable/item_selector"
+                android:clickable="true"
+                >
             </ExpandableListView>
         </LinearLayout>
 

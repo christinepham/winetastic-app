@@ -24,6 +24,11 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 	private LayoutInflater 		minInflater;
 	private Activity 			activity;
 	
+	// selected items
+	private String 				selectedColor;
+	private String 				selectedSeason;
+	private String 				selectedType;
+	private ArrayList<String> 	selectedAccents;
 
 	// -- Constructors -- //
 
@@ -33,6 +38,11 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 		groupViews = new ArrayList<Object>();
 		for (int i=0; i<groupItem.size();i++) 
 			groupViews.add(new ArrayList<View>());
+		
+		selectedColor = "";
+		selectedSeason = "";
+		selectedType = "";		
+		selectedAccents = new ArrayList<String>();
 	}
 
 
@@ -74,33 +84,44 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 				// toast caused an index out of bounds error
 				// there is an error on which position certain items are getting added
 				// children are going to wrong group position in children item
+				// need to figure out why other optins are being selected when they arent
 				tempChild = (ArrayList<String>) childrenItem.get(groupPosition);
-				Toast.makeText(activity, ""+ groupPosition+"  "+tempChild.get(0)+"  " + tempChild.get(childPosition),
-						Toast.LENGTH_SHORT).show();
+				CheckedTextView theItem = (CheckedTextView) v.findViewById(R.id.row_name);
+//				Toast.makeText(activity, ""+ groupPosition+"  "+tempChild.get(0)+"  " + tempChild.get(childPosition),
+//						Toast.LENGTH_SHORT).show();
+				
 						String group = groupItem.get(groupPosition);
 						
 						// Color group
 						if (group.equals("Color")) {
-							selectOne(text, groupPosition);
+							//Toast.makeText(activity, tempChild.get(childPosition), Toast.LENGTH_SHORT).show();
+							
+							selectColor(theItem, groupPosition);
 						}
 						// Season group
 						else if (group.equals("Season")) {
-							selectOne(text, groupPosition);
+							//Toast.makeText(activity, tempChild.get(childPosition), Toast.LENGTH_SHORT).show();
+							selectSeason(theItem, groupPosition);
 						}
 						// Type group
 						else if(group.equals("Type")) {
-							selectOne(text, groupPosition);
+							//Toast.makeText(activity, tempChild.get(childPosition), Toast.LENGTH_SHORT).show();
+							selectType(theItem, groupPosition);
 						}
 						// Accent group
 						else if (group.equals("Accent")) {
-							selectMultiple(text);
+							//Toast.makeText(activity, tempChild.get(childPosition), Toast.LENGTH_SHORT).show();
+							//selectMultiple(text);
+							selectAccent(theItem);
 						}
 						
+				Toast.makeText(activity, "the selected: " + getSelectedItems(), Toast.LENGTH_SHORT).show();
 			}
 		});
 		return convertView;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public int getChildrenCount(int groupPosition) {
 		// TODO Auto-generated method stub
@@ -148,41 +169,82 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 		// TODO Auto-generated method stub
 		return true;
 	}
+	
+	public void makeSelection() {
+		
+	}
 		
 	@SuppressWarnings("unchecked")
-	public void selectOne (CheckedTextView text, int groupPosition) {
+	public String selectOne (CheckedTextView text, int groupPosition) {
 		// deselect
 		if (text.isSelected()) {
 			text.setSelected(false);
 			text.setBackgroundColor(text.getResources().getColor(R.color.cream));
-			return;
+			return "";
 		}
 		// clear the rest of selection
 		ArrayList<View> views = ((ArrayList<View>)groupViews.get(groupPosition));
 		for(View cv : views) {
 			cv.setSelected(false);
 			cv.setBackgroundColor(cv.getResources().getColor(R.color.cream));
-			
 		}
+		
 		text.setSelected(true);
 		text.setBackgroundColor(Color.GREEN);
+		return (String) text.getText();
 
 	}
 	
-	public void selectMultiple(CheckedTextView text) {
+	public String selectMultiple(CheckedTextView text) {
 		if (text.isSelected()) {
 			text.setSelected(false);
 			text.setBackgroundColor(text.getResources().getColor(R.color.cream));
-			return;
+			return "";
 		}
 		
 		text.setSelected(true);
 		text.setBackgroundColor(Color.GREEN);
+		return (String) text.getText();
+	}
+	
+	
+	public void selectColor(CheckedTextView text, int groupPosition) {
+		selectedColor = selectOne(text, groupPosition);
+	}
+	
+	public void selectSeason(CheckedTextView text, int groupPosition) {
+		selectedSeason = selectOne(text, groupPosition);
+	}
+	
+	public void selectType(CheckedTextView text, int groupPosition) {
+		selectedType = selectOne(text, groupPosition);
+	}
+	
+	public void selectAccent(CheckedTextView text) {
+		String acc = selectMultiple(text);
+		if(acc.equals(""))  selectedAccents.remove((String)text.getText());
+		else selectedAccents.add(acc);
 		
+	}
+	
+		
+	public String getSelectedItems () {
+		String s = "";
+		s += " Color " + selectedColor + "\n";
+		s += " Season " + selectedSeason + "\n";
+		s += " Type " + selectedType + "\n";
+		s += " Accents ";
+		for (String acc: selectedAccents) {
+			s += acc + "\n";
+		}
+		
+		return s;
 	}
 	
 	public void search() {
 
 	}
 
+	
+	
 }

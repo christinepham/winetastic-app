@@ -14,7 +14,9 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
         android:textStyle="normal" 
-        android:background="@color/cream"
         />
 
 </LinearLayout>
+
+
+        <!-- android:background="@color/cream" -->
