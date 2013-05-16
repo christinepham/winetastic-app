@@ -15,8 +15,6 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
-import com.example.winersapp.R;
-
 public class Intro extends Activity {
 	
 	private PopupWindow loginWindow;		 	// Holds the login window layout
@@ -46,10 +44,21 @@ public class Intro extends Activity {
         home.setOnClickListener(new View.OnClickListener(){
     		@Override
     		public void onClick(View v) {
+        		System.err.println("Detected click for HOME.");    			
     			Intent i = new Intent(Intro.this, Home.class);
     			startActivity(i);
     		}
         });       
+        
+        // Go to maps
+//        Button map = (Button)findViewById(R.id.guest_map);
+//        map.setOnClickListener(new View.OnClickListener() {
+//        	@Override
+//        	public void onClick(View v) {
+//        		Intent i = new Intent(Intro.this, Map.class);
+//        		startActivity(i);
+//        	}
+//        });
         
         // Rotates background every x seconds 
         new Thread(new Runnable() {
@@ -97,6 +106,11 @@ public class Intro extends Activity {
     
     public void closeLogin(View view) {
     	loginWindow.dismiss();
+    }
+    
+    public void gotoMap(View view) {
+    	Intent i = new Intent(Intro.this, Map.class);
+		startActivity(i);    	
     }
     
     /* Controls background rotation. 

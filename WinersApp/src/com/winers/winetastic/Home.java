@@ -8,15 +8,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.example.winersapp.R;
-
 public class Home extends AbstractActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-    	System.out.println("hello");
+    	System.err.println("Attempting to create");
         super.onCreate(savedInstanceState);
+    	System.err.println("Created. Getting layout...");          
         setContentView(R.layout.activity_main);
+    	System.err.println("Got layout.");        
         
         Button search_but = (Button)findViewById(R.id.search);
         Button my_wines_but = (Button)findViewById(R.id.myWines);
