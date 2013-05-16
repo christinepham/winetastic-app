@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.ExpandableListActivity;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -56,6 +57,8 @@ implements OnChildClickListener {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				searchAdapter.search();
+				Intent i = new Intent(WineSearch.this, SearchResults.class);
+				startActivity(i);
 			}
 			
 		});
