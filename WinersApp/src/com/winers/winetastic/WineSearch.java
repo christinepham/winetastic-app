@@ -36,6 +36,7 @@ implements OnChildClickListener {
 		searchOptions.setDividerHeight(2);
 		searchOptions.setGroupIndicator(null);
 		searchOptions.setClickable(true);
+		
 
 		setGroups();
 		setChildren();
@@ -55,6 +56,18 @@ implements OnChildClickListener {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				searchAdapter.search();
+			}
+			
+		});
+		
+		
+		Button reset = (Button) findViewById(R.id.reset);
+		reset.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				searchAdapter.clear();
 			}
 			
 		});

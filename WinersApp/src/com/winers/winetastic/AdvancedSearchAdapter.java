@@ -20,7 +20,7 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 	// -- Fields -- //
 	private ArrayList<String> 	groupItem, tempChild;
 	private ArrayList<Object> 	childrenItem;
-	private ArrayList<Object> 	groupViews;
+	private ArrayList<ArrayList<View>> 	groupViews;
 	private LayoutInflater 		minInflater;
 	private Activity 			activity;
 	
@@ -35,7 +35,7 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 	public AdvancedSearchAdapter (ArrayList<String> group, ArrayList<Object> children ) {
 		groupItem = group;
 		childrenItem = children;
-		groupViews = new ArrayList<Object>();
+		groupViews = new ArrayList<ArrayList<View>>();
 		for (int i=0; i<groupItem.size();i++) 
 			groupViews.add(new ArrayList<View>());
 		
@@ -243,6 +243,23 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 	
 	public void search() {
 
+	}
+	
+	public void clear () {
+		Toast.makeText(activity, "CLEAR", Toast.LENGTH_SHORT).show();
+		// change all the backgrounds back to deselect color
+		for (ArrayList<View> children : groupViews) {
+			for(View view : children) {
+				((CheckedTextView) view).setSelected(false);
+				((CheckedTextView) view).setBackgroundColor(view.getResources().getColor(R.color.cream));
+			}
+		}
+		
+		// clear all the selections
+		selectedColor = "";
+		selectedSeason = "";
+		selectedType = "";
+		selectedAccents.clear();
 	}
 
 	
