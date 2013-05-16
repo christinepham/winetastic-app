@@ -1,9 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/searchAndName"    
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Home" 
-    android:id="@+id/searchAndName"
     android:orientation="vertical" >
     
 	<RelativeLayout 
@@ -32,6 +32,7 @@
         android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="@string/search" />
+    
     </RelativeLayout>
     
 	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" 
@@ -153,8 +154,6 @@
              android:gravity="center"
              android:text="@string/wineOfDay" />
             -->
-
-            
 
         </LinearLayout>
     </SlidingDrawer>

@@ -60,7 +60,7 @@
     <string name="event_calendar_title"> Event Calendar </string>
 
     <!-- Map -->
-    <string name="map_title"> Map </string>
+    <string name="map_title">Map (testing)</string>
 
     <!-- Toast to Share -->
     <string name="toast_to_share_title"> Toast to Share </string>
@@ -73,8 +73,6 @@
 
     <!-- Wine of the Day -->
     <string name="img_none"></string>
-
-
 
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>

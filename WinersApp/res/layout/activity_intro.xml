@@ -42,7 +42,7 @@
 	    </Button>
 	</FrameLayout>	                
 
-	<!-- TODO: Remove home button on launch -->
+	<!-- TODO: Remove these buttons on launch -->
 	<Button
 		android:id="@+id/guest_home_button"
 		android:background="@drawable/btn_winered"      
@@ -51,6 +51,17 @@
 		android:text="@string/guest_goto_home"
 		
 		android:visibility="visible" />	
+		
+	<Button
+		android:id="@+id/guest_map"
+		android:background="@drawable/btn_winered"   
+		android:layout_below="@+id/guest_home_button"   
+	    style="@style/ButtonText.guest"         
+		android:fontFamily="sans-serif-condensed"
+		android:text="@string/map_title"
+		android:onClick="gotoMap"
+		
+		android:visibility="visible" />		
   
 
 </RelativeLayout>
