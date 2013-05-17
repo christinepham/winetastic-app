@@ -1,10 +1,10 @@
 package com.winers.winetastic;
 
-import com.example.winersapp.R;
-import com.example.winersapp.R.id;
-import com.example.winersapp.R.layout;
-import com.example.winersapp.R.menu;
-import com.example.winersapp.R.string;
+import com.winers.winetastic.R;
+import com.winers.winetastic.R.id;
+import com.winers.winetastic.R.layout;
+import com.winers.winetastic.R.menu;
+import com.winers.winetastic.R.string;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;

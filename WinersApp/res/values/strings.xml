@@ -57,7 +57,7 @@
     <string name="event_calendar_title"> Event Calendar </string>
 
     <!-- Map -->
-    <string name="map_title"> Map </string>
+    <string name="map_title">Map (testing)</string>
 
     <!-- Toast to Share -->
     <string name="toast_to_share_title"> Toast to Share </string>

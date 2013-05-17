@@ -18,8 +18,6 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.example.winersapp.R;
-
 public class WineSearch extends ExpandableListActivity 
 implements OnChildClickListener {
 

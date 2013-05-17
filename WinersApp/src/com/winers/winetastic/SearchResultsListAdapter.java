@@ -3,7 +3,7 @@ package com.winers.winetastic;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.example.winersapp.R;
+import com.winers.winetastic.R;
 
 import android.app.Activity;
 import android.content.Context;

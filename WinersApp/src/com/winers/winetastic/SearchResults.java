@@ -3,9 +3,9 @@ package com.winers.winetastic;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.example.winersapp.R;
-import com.example.winersapp.R.layout;
-import com.example.winersapp.R.menu;
+import com.winers.winetastic.R;
+import com.winers.winetastic.R.layout;
+import com.winers.winetastic.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;

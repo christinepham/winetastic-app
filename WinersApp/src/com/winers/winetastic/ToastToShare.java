@@ -3,8 +3,6 @@ package com.winers.winetastic;
 import android.os.Bundle;
 import android.view.Menu;
 
-import com.example.winersapp.R;
-
 public class ToastToShare extends AbstractActivity {
 
     @Override

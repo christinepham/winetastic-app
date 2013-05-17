@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.example.winersapp.R;
-
 public class WineOfDay extends Activity {
 	@SuppressLint("NewApi")
 	@Override

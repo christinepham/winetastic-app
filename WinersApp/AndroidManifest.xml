@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.winersapp"
+    package="com.winers.winetastic"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -29,7 +29,7 @@
             android:parentActivityName="com.winers.winetastic.Intro" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.winersapp.Activity.WinersAppMainActivity" />
+                android:value="com.winers.winetastic.Activity.winetasticMainActivity" />
         </activity>
         <activity
             android:name="com.winers.winetastic.WineOfDay"
@@ -37,7 +37,7 @@
             android:parentActivityName="com.winers.winetastic.Intro" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.winersapp.Activity.WinersAppMainActivity" />
+                android:value="com.winers.winetastic.Activity.winetasticMainActivity" />
         </activity>
         <activity
             android:name="com.winers.winetastic.WineSearch"
@@ -45,7 +45,7 @@
             android:parentActivityName="com.winers.winetastic.Intro" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.winersapp.Activity.WinersAppMainActivity" />
+                android:value="com.winers.winetastic.Activity.winetasticMainActivity" />
         </activity>
         <activity
             android:name="com.winers.winetastic.EventCalendar"
@@ -138,7 +138,7 @@
             android:windowSoftInputMode="adjustResize|stateVisible" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.winersapp.Activities.AbstractActivity" />
+                android:value="com.winers.winetastic.Activities.AbstractActivity" />
         </activity>
         <activity android:name="com.winers.winetastic.SearchActivity" >
             <intent-filter>

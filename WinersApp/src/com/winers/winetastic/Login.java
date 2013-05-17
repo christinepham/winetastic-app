@@ -19,8 +19,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.winersapp.R;
-
 /**
  * Activity which displays a login screen to the user, offering registration as
  * well.
