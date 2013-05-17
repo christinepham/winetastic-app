@@ -7,13 +7,14 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
+import com.winers.winetastic.R;
+
 public class AddWine extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_wine);
-        
         
         Button retHome = (Button)findViewById(R.id.e_cal_home);
         retHome.setOnClickListener(new View.OnClickListener(){

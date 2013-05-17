@@ -1,5 +1,7 @@
 package com.winers.winetastic;
 
+import com.winers.winetastic.R;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Window;

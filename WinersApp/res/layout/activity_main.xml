@@ -1,16 +1,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/searchAndName"    
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Home" 
+    android:id="@+id/searchAndName"
     android:orientation="vertical" >
-    
 	<RelativeLayout 
 	    android:layout_width="match_parent" 
 	    android:layout_height="wrap_content" >
-
-<!--     <TextView
+    <TextView
         android:id="@+id/winetastic"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -21,8 +19,8 @@
         android:text="@string/logo"
         android:textColor="#F2EDEF"
         android:textIsSelectable="false"
-        android:textSize="20sp" />	 -->    
-	    
+        android:textSize="20sp" />
+    
     <Button
         android:id="@+id/search"
         android:layout_width="300dp"
@@ -32,7 +30,6 @@
         android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="@string/search" />
-    
     </RelativeLayout>
     
 	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" 
@@ -77,7 +74,7 @@
         android:background="@drawable/mapw" 
         android:orientation="horizontal"/>
 	</LinearLayout>
-	
+
 	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" 
 	    		  android:orientation="horizontal" android:weightSum="3" android:id="@+id/LinearLayout2">
     <Button
@@ -117,7 +114,7 @@
 	        android:orientation="horizontal" 
     	style="?android:attr/borderlessButtonStyle"/>
 	</LinearLayout>
-	
+
     <SlidingDrawer
         android:id="@+id/slidingDrawer1"
         android:layout_width="wrap_content"
@@ -155,7 +152,9 @@
              android:text="@string/wineOfDay" />
             -->
 
+            
+
         </LinearLayout>
     </SlidingDrawer>
-	
+
 </LinearLayout>
