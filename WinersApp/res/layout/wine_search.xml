@@ -1,3 +1,12 @@
+
+<!--
+    <ListView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </ListView>
+    -->
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -32,6 +41,16 @@
     </LinearLayout>
 
     <!-- Divider -->
+
+    <!--
+    <Button
+        android:id="@+id/e_cal_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_bar_location"
+        android:text="@string/hello_world" >
+    </Button>
+    -->
 
     <LinearLayout
         android:id="@+id/advanced_search_list_layout"
