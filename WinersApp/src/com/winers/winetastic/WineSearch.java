@@ -56,6 +56,7 @@ implements OnChildClickListener {
 				// TODO Auto-generated method stub
 				searchAdapter.search();
 				Intent i = new Intent(WineSearch.this, SearchResults.class);
+				i.putExtra("Search Query", searchAdapter.getSelectedItems());
 				startActivity(i);
 			}
 			
