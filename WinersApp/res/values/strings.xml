@@ -83,8 +83,8 @@
     <string name="title_activity_search">SearchActivity</string>
     <string name="title_activity_search_results">SearchResults</string>
 
+    
     <!-- Wine Search Results -->
     <string name="wine_results">Wine Results</string>
-    <string name="title_activity_wine_info_page">WineInfoPage</string>
-
+    
 </resources>

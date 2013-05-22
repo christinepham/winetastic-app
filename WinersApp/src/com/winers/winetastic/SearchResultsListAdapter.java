@@ -59,21 +59,14 @@ public class SearchResultsListAdapter extends BaseAdapter{
 		TextView name = (TextView) vi.findViewById(R.id.name);
 		TextView location = (TextView) vi.findViewById(R.id.location);
 		TextView price = (TextView) vi.findViewById(R.id.price);
-		int i = 0;
-		String currWine = null;
+
 		//ArrayList<String> wine_names = (ArrayList<String>)wines.keySet();
 		for (String wine : wines.keySet()) {
-			if (i == position) {
-				currWine = wine;
-				break;
-			}
-			++i;
-
+			ArrayList<String> descriptions = wines.get(wine);
+			name.setText(descriptions.get(0));
+			location.setText(descriptions.get(1));
+			price.setText(descriptions.get(2));
 		}
-		ArrayList<String> descriptions = wines.get(currWine);
-		name.setText(descriptions.get(0));
-		location.setText(descriptions.get(1));
-		price.setText(descriptions.get(2));
 
 		return vi;
 	}
