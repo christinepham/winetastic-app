@@ -12,6 +12,7 @@
     <!-- Home Screen -->
     <string name="search">Browse to search</string>
     <string name="gohome"> Go Home </string>
+    <string name="empty"> </string>
 
     <!-- Intro Guest Screen -->
     <string name="find_wines">Find a Wine</string>

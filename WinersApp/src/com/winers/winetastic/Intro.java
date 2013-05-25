@@ -109,8 +109,8 @@ public class Intro extends Activity {
     }
     
     public void gotoMap(View view) {
-    	Intent i = new Intent(Intro.this, Map.class);
-		startActivity(i);    	
+    //	Intent i = new Intent(Intro.this, Map.class);
+	//	startActivity(i);    	
     }
     
     /* Controls background rotation. 
