@@ -71,6 +71,7 @@ implements OnChildClickListener {
 		searchAdapter.setInflater(
 				(LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE),
 				this);
+		searchAdapter.initializeSelections();
 		getExpandableListView().setAdapter(searchAdapter);
 		searchOptions.setOnChildClickListener(this);
 		

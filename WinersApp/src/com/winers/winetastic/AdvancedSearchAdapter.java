@@ -21,9 +21,10 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 	// -- Fields -- //
 	private ArrayList<String> 	groupItem, tempChild;
 	private ArrayList<Object> 	childrenItem;
-	private ArrayList<ArrayList<View>> 	groupViews;
+	private ArrayList<ArrayList<View>> 	groupedViews;
 	private LayoutInflater 		minInflater;
 	private Activity 			activity;
+	private ArrayList<boolean[]> isSelected;
 	
 	//*********Entered by Jack************//
 	private WineSearchObject searchParameters;
@@ -33,9 +34,13 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 	public AdvancedSearchAdapter (ArrayList<String> group, ArrayList<Object> children ) {
 		groupItem = group;
 		childrenItem = children;
-		groupViews = new ArrayList<ArrayList<View>>();
-		for (int i=0; i<groupItem.size();i++) 
-			groupViews.add(new ArrayList<View>());
+		groupedViews = new ArrayList<ArrayList<View>>();
+		isSelected = new ArrayList<boolean[]>();
+		for (int i=0; i<groupItem.size();i++) {
+			groupedViews.add(new ArrayList<View>());
+			isSelected.add(new boolean[((ArrayList<String>) children.get(i)).size()]);
+		}
+		//setSelectionsFalse();
 		
 		searchParameters = new WineSearchObject();
 	}
@@ -48,6 +53,10 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 		return searchParameters;
 	}
 
+	public void initializeSelections () {
+		setSelectionsFalse();
+	}
+	
 	public void setInflater (LayoutInflater inflater, Activity act) {
 		minInflater = inflater;
 		activity = act;
@@ -75,9 +84,20 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 		if (convertView == null) {
 			convertView = minInflater.inflate(R.layout.child_row, null);
 		}
-		final CheckedTextView text = (CheckedTextView) convertView.findViewById(R.id.row_name);
-		text.setText(tempChild.get(childPosition));
-		((ArrayList<View>)groupViews.get(groupPosition)).add(text);
+		CheckedTextView rowItem = (CheckedTextView) convertView.findViewById(R.id.row_name);
+		rowItem.setText(tempChild.get(childPosition));
+		((ArrayList<View>)groupedViews.get(groupPosition)).add(rowItem);
+
+		
+
+		if ((isSelected.get(groupPosition))[childPosition]) {
+			rowItem.setBackgroundColor(Color.GREEN);
+		}
+		else {
+			rowItem.setBackgroundColor(convertView.getResources().getColor(R.color.cream));
+		}
+		
+		
 		convertView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -89,6 +109,8 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 				CheckedTextView theItem = (CheckedTextView) v.findViewById(R.id.row_name);
 //				Toast.makeText(activity, ""+ groupPosition+"  "+tempChild.get(0)+"  " + tempChild.get(childPosition),
 //						Toast.LENGTH_SHORT).show();
+//				Toast.makeText(activity, "click  "+ groupPosition+"  "+ childPosition,
+//				Toast.LENGTH_SHORT).show();
 				
 						String group = groupItem.get(groupPosition);
 						
@@ -96,27 +118,32 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 						if (group.equals("Color")) {
 							//Toast.makeText(activity, tempChild.get(childPosition), Toast.LENGTH_SHORT).show();
 							
-							selectColor(theItem, groupPosition);
+							selectColor(theItem, groupPosition, childPosition);
 						}
 						// Price group
 						else if (group.equals("Price")) {
 							//Toast.makeText(activity, tempChild.get(childPosition), Toast.LENGTH_SHORT).show();
-							selectPrice(theItem, groupPosition);
+							selectPrice(theItem, groupPosition, childPosition);
 						}
 						// Type group
 						else if(group.equals("Type")) {
 							//Toast.makeText(activity, tempChild.get(childPosition), Toast.LENGTH_SHORT).show();
-							selectType(theItem, groupPosition);
+							selectType(theItem, groupPosition, childPosition);
 						}
 						// Accent group
 						else if (group.equals("Accent")) {
 							//Toast.makeText(activity, tempChild.get(childPosition), Toast.LENGTH_SHORT).show();
 							//selectMultiple(text);
-							selectAccent(theItem);
+							selectAccent(theItem, groupPosition, childPosition);
 						}
 						
+						String colorss = "";
+						for(boolean colorSelect: isSelected.get(0)) {
+							colorss += colorSelect + "   ";
+						}
+						Toast.makeText(activity, colorss, Toast.LENGTH_SHORT).show();
 				//For debugging purposes
-				//Toast.makeText(activity, "the selected: " + getSelectedItems(), Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity, "the selected: " + getSelectedItems(), Toast.LENGTH_SHORT).show();
 			}
 		});
 		return convertView;
@@ -132,7 +159,7 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 	@Override
 	public Object getGroup(int groupPosition) {
 		// TODO Auto-generated method stub
-		return null;
+		return groupItem.get(groupPosition);
 	}
 
 	@Override
@@ -177,23 +204,31 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 		
 	@SuppressWarnings("unchecked")
 	// Which warning are we suppressing here?
-	public String selectOne (CheckedTextView text, int groupPosition) {
+	public String selectOne (CheckedTextView item, int groupPosition, int childPosition) {
 		// deselect
-		if (text.isSelected()) {
-			text.setSelected(false);
-			text.setBackgroundColor(text.getResources().getColor(R.color.cream));
+		if ((isSelected.get(groupPosition))[childPosition]) {
+			item.setSelected(false);
+			(isSelected.get(groupPosition))[childPosition] = false;
+			item.setBackgroundColor(item.getResources().getColor(R.color.cream));
 			return "";
 		}
 		// clear the rest of selection
-		ArrayList<View> views = ((ArrayList<View>)groupViews.get(groupPosition));
+		ArrayList<View> views = ((ArrayList<View>)groupedViews.get(groupPosition));
 		for(View cv : views) {
 			cv.setSelected(false);
 			cv.setBackgroundColor(cv.getResources().getColor(R.color.cream));
 		}
 		
-		text.setSelected(true);
-		text.setBackgroundColor(Color.GREEN);
-		return (String) text.getText();
+		boolean [] tempSel =isSelected.get(groupPosition); 
+		for (int i=0; i<tempSel.length; i++) {
+			tempSel[i] = false;
+		}
+		
+		
+		item.setSelected(true);
+		(isSelected.get(groupPosition))[childPosition] = true;
+		item.setBackgroundColor(Color.GREEN);
+		return (String) item.getText();
 
 	}
 	
@@ -210,22 +245,28 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 	}
 	
 	
-	public void selectColor(CheckedTextView text, int groupPosition) {
-		searchParameters.setColor(selectOne(text, groupPosition));
+	public void selectColor(CheckedTextView text, int groupPosition, int childPosition) {
+		searchParameters.setColor(selectOne(text, groupPosition, childPosition));
 	}
 	
-	public void selectPrice(CheckedTextView text, int groupPosition) {
-		searchParameters.setPrice(selectOne(text, groupPosition));
+	public void selectPrice(CheckedTextView text, int groupPosition, int childPosition) {
+		searchParameters.setPrice(selectOne(text, groupPosition, childPosition));
 	}
 	
-	public void selectType(CheckedTextView text, int groupPosition) {
-		searchParameters.setType(selectOne(text, groupPosition));
+	public void selectType(CheckedTextView text, int groupPosition, int childPosition) {
+		searchParameters.setType(selectOne(text, groupPosition, childPosition));
 	}
 	
-	public void selectAccent(CheckedTextView text) {
+	public void selectAccent(CheckedTextView text, int groupPosition, int childPosition) {
 		String acc = selectMultiple(text);
-		if(acc.equals(""))  searchParameters.removeAccent((String)text.getText());
-		else searchParameters.addAccent(acc);
+		if(acc.equals(""))  {
+			searchParameters.removeAccent((String)text.getText());
+			(isSelected.get(groupPosition))[childPosition] = false;
+		}
+		else {
+			searchParameters.addAccent(acc);
+			(isSelected.get(groupPosition))[childPosition] = true;
+		}
 		
 	}
 	
@@ -263,15 +304,42 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 	public void clear () {
 		Toast.makeText(activity, "CLEAR", Toast.LENGTH_SHORT).show();
 		// change all the backgrounds back to deselect color
-		for (ArrayList<View> children : groupViews) {
+		for (ArrayList<View> children : groupedViews) {
 			for(View view : children) {
 				((CheckedTextView) view).setSelected(false);
 				((CheckedTextView) view).setBackgroundColor(view.getResources().getColor(R.color.cream));
 			}
 		}
-		
+		setSelectionsFalse();
 		// clear all the selections
 		searchParameters.clear();
+	}
+	
+	public void tempClear () {
+		Toast.makeText(activity, "TEMP CLEAR", Toast.LENGTH_SHORT).show();
+		for (ArrayList<View> children : groupedViews) {
+			for(View view : children) {
+				((CheckedTextView) view).setBackgroundColor(view.getResources().getColor(R.color.cream));
+			}
+		}		
+	}
+	
+	private void setSelectionsFalse () {
+		
+		
+		
+		for (boolean[] grps : isSelected) {
+			for (int i=0; i< grps.length; i++) {
+				grps[i] = false;
+			}
+		}
+		
+		String colorss = "";
+		for(boolean colorSelect: isSelected.get(0)) {
+			colorss += colorSelect + "   ";
+		}
+		Toast.makeText(activity, "CLear " + colorss, Toast.LENGTH_SHORT).show();
+
 	}
 
 	
