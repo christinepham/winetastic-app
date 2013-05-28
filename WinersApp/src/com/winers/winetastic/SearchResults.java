@@ -11,12 +11,14 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 public class SearchResults extends ListActivity {
 
-	private HashMap<String, ArrayList<String>> wines;
+
+	private ArrayList<ArrayList<String>> wines;
 	private String searchQuery;
 	
     @Override
@@ -30,10 +32,10 @@ public class SearchResults extends ListActivity {
         //Convert back to POJO
         final Gson gson = new Gson();
         final APISnoothResponse snoothResponse = gson.fromJson(searchQuery, APISnoothResponse.class);
+        final List<APISnoothResponseWineArray> wineAPIResponse = snoothResponse.wineResults;
         
-        
-        wines = new HashMap<String, ArrayList<String>>();
-        insertWines(snoothResponse);
+        wines = new ArrayList<ArrayList<String>>();
+        insertWines(wineAPIResponse);
         final SearchResultsListAdapter adapter = new SearchResultsListAdapter(this, wines);
 //        ListView list = (ListView) findViewById(R.id.list)
         getListView().setAdapter(adapter);
@@ -42,11 +44,13 @@ public class SearchResults extends ListActivity {
 			@Override
 			public void onItemClick(AdapterView<?> av, View v, int pos,
 					long id) {			
+
+				
 				Intent i = new Intent(SearchResults.this, WineInfoPage.class);
 				
-		    	List<APISnoothResponseWineArray> wineAPIResponse = snoothResponse.wineResults;		
+		    	List<APISnoothResponseWineArray> wineAPIResponse = snoothResponse.wineResults;	
 		    	String wineArraySerialized = gson.toJson(wineAPIResponse.get(pos));
-		    	
+
 				i.putExtra("wine_data", wineArraySerialized);
 				startActivity(i);
 			}
@@ -85,9 +89,11 @@ public class SearchResults extends ListActivity {
         return true;
     }
     
-    public void insertWines (APISnoothResponse sR) {
-    	
-    	List<APISnoothResponseWineArray> wineAPIResponse = sR.wineResults;
+    /*
+     * I changed insertWines to use an integer for the mapping instead of a string
+     * to make sure it kept the same order as the wineAPIResponse array. T
+     */
+    public void insertWines (List<APISnoothResponseWineArray> wineAPIResponse) {
     	
     	ArrayList<String> temp;
     	
@@ -96,7 +102,7 @@ public class SearchResults extends ListActivity {
     		temp.add(snoothWine.name);
     		temp.add(snoothWine.region);
     		temp.add(snoothWine.price);
-    		wines.put(snoothWine.name, temp);
+    		wines.add(temp);
     	}
     }
     
