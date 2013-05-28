@@ -18,11 +18,11 @@
 	   <Button
 	        android:id="@+id/guest_find_wines"
 	        android:background="@drawable/winelabel"
-		    style="@style/ButtonText.guest"       
+		    style="@style/ButtonText.guest"  
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"     
 		    android:layout_marginTop="0dp"
 		    android:layout_marginLeft="0dp" 
-			android:layout_width="match_parent"		         
-	        android:layout_height="wrap_content"
 	        android:textSize="50sp"            
 	                />   
 
@@ -53,7 +53,7 @@
 		
 		android:visibility="visible" />	
 		
-	<Button
+<!-- 	<Button
 		android:id="@+id/guest_map"
 		android:background="@drawable/btn_winered"   
 		android:layout_below="@+id/guest_home_button"   
@@ -62,7 +62,17 @@
 		android:text="@string/map_title"
 		android:onClick="gotoMap"
 		
-		android:visibility="visible" />		
+		android:visibility="visible" />	 -->
+			
+	<Button
+		android:id="@+id/guest_info_button"
+		android:layout_below="@+id/guest_home_button"
+		android:background="@drawable/btn_winered"      
+	    style="@style/ButtonText.guest"         
+		android:fontFamily="sans-serif-condensed"
+		android:text="@string/info_information"
+		
+		android:visibility="visible" />			
   
 
 </RelativeLayout>

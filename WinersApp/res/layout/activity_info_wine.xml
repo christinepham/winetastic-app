@@ -1,0 +1,120 @@
+<!-- == WINE INFO PAGE =========== -->
+<!-- == This is the  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/almostwhite"
+    tools:context=".Home" >
+
+	<RelativeLayout android:id="@+id/info_header"
+	    android:layout_width="match_parent" 
+	    android:layout_height="wrap_content" 
+	    android:paddingLeft="@dimen/default_padding"
+	    android:paddingRight="@dimen/default_padding"
+	    android:paddingBottom="@dimen/default_padding"
+	    android:background="@color/black" >
+
+	    <!-- Rating -->
+	    <RatingBar 
+	        android:id="@+id/info_rating"
+			style="?android:attr/ratingBarStyleSmall"              
+	        android:layout_width="60dp"
+	        android:layout_height="wrap_content"
+	        android:paddingTop="5dp"
+	        android:layout_below="@+id/info_wine_region"
+	        android:layout_marginRight="@dimen/default_padding" /> 	 	    
+	    
+	    <ImageView
+	        android:id="@+id/info_pic"
+	        android:layout_width="100dp"
+	        android:layout_height="100dp"
+	        android:layout_toRightOf="@+id/info_wine_name"
+	        android:contentDescription="@string/info_color"
+	        android:paddingBottom="@dimen/default_padding"
+	        android:paddingTop="@dimen/default_padding"
+	        android:scaleType="centerCrop"
+	        android:src="@drawable/poke" />
+	    
+	    <!-- Name -->
+	    <TextView style="@style/InfoTitle"
+	        android:id="@+id/info_wine_name"
+	        android:paddingTop="@dimen/default_padding"
+	        android:layout_width="200dp"
+	        android:layout_height="wrap_content"
+	        android:text="@string/info_name" />
+	    
+	    <!-- Wine Region -->
+ 	    <TextView 
+	        android:id="@+id/info_wine_region"
+	        android:textSize="12sp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/info_wine_name"
+	        android:text="@string/info_color" /> 
+	    
+ 	    <!-- Add to collection -->
+	    <Button
+	        android:id="@+id/info_button_add"
+	        style="@style/ButtonTextInfo"
+	        android:layout_below="@+id/info_pic"
+	        android:layout_width="140dp"
+	        android:layout_height="35dp"
+	        android:background="@drawable/btn_winered"
+	        android:text="@string/info_add" />
+	    
+	    <Button
+	        android:id="@+id/info_button_winery"
+	        style="@style/ButtonTextInfo"
+	        android:layout_below="@+id/info_pic"
+	        android:layout_alignParentRight="true"
+	        android:layout_width="140dp"
+	        android:layout_height="35dp"	        
+	        android:background="@drawable/btn_winered"
+	        android:text="@string/info_gotoWinery" />	    
+ 
+	</RelativeLayout>    
+	
+	<TableLayout
+	    android:id="@+id/info_module_statistics"
+	    android:layout_below="@+id/info_header"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:paddingTop="@dimen/default_padding"
+	    android:paddingLeft="18dp"
+		android:paddingRight="18dp"		    	    
+	    android:orientation="vertical" >
+	    
+	    <TextView
+	        android:id="@+id/info_module_statistics_title"
+	        android:background="@drawable/module_titlebar"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+	    	android:textColor="@color/white"				    
+		    android:orientation="vertical"
+	    	android:text="@string/info_information" />
+
+	</TableLayout>
+	
+	<TableLayout
+	    android:id="@+id/info_module_descriptors"
+	    android:layout_below="@+id/info_module_statistics"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:paddingTop="@dimen/default_padding"	    
+	    android:paddingLeft="18dp"
+		android:paddingRight="18dp"		    
+	    android:orientation="vertical" >
+	    <TextView
+	        android:id="@+id/info_module_descriptors_title"
+	        android:background="@drawable/module_titlebar"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+	    	android:textColor="@color/white"				    
+		    android:orientation="vertical"
+	    	android:text="@string/info_descriptors" />	 
+	    
+	</TableLayout>	
+
+</RelativeLayout>

@@ -35,29 +35,29 @@ public class SearchResults extends ListActivity {
         //Toast.makeText(this, searchQuery, Toast.LENGTH_SHORT).show();
         
         //Convert back to POJO
-        Gson gson = new Gson();
-        APISnoothResponse snoothResponse = gson.fromJson(searchQuery, APISnoothResponse.class);
+        final Gson gson = new Gson();
+        final APISnoothResponse snoothResponse = gson.fromJson(searchQuery, APISnoothResponse.class);
         
         
         wines = new HashMap<String, ArrayList<String>>();
         insertWines(snoothResponse);
-        SearchResultsListAdapter adapter = new SearchResultsListAdapter(this, wines);
+        final SearchResultsListAdapter adapter = new SearchResultsListAdapter(this, wines);
 //        ListView list = (ListView) findViewById(R.id.list)
         getListView().setAdapter(adapter);
         getListView().setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> av, View v, int pos,
-					long id) {
-				// TODO Auto-generated method stub
+					long id) {			
 				Intent i = new Intent(SearchResults.this, WineInfoPage.class);
+				
+		    	List<APISnoothResponseWineArray> wineAPIResponse = snoothResponse.wineResults;		
+		    	String wineArraySerialized = gson.toJson(wineAPIResponse.get(pos));
+		    	
+				i.putExtra("wine_data", wineArraySerialized);
 				startActivity(i);
 			}
-        	
         });
-        
-        
-        
     }
 
     @Override
@@ -79,7 +79,6 @@ public class SearchResults extends ListActivity {
     		temp.add(snoothWine.price);
     		wines.put(snoothWine.name, temp);
     	}
-    	
     }
     
     public String parseQuery (String s) {

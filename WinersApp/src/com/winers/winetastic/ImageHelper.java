@@ -1,48 +1,68 @@
 /**
  * Wrapper for image manipulation methods. 
+ * @author Victoria Do
  */
 
 package com.winers.winetastic;
 
 import android.content.Context;
-import android.graphics.Point;
+import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
-import android.view.View.MeasureSpec;
+import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 
 public class ImageHelper {
-	public final Point displaySize;
+	/* Set by call to setDisplaySize */
+	public static DisplayMetrics DISPLAY_METRICS = null;  
 	
-	private ImageHelper() {	 // inaccessible constructor	
-		displaySize = new Point();
-	}
+	/* No instantiation */
+	private ImageHelper() { }  
 	
 	/** 
 	 * Resizes a view based on the android screen size.
 	 * It keeps the aspect ratio of the image's default dimensions.
-	 * @author Victoria Do
-	 * @param rootv  The element to be resized
 	 * 
+	 * @param rootv  The element to be resized
 	 */
 	public static void scaleToScreenWidth(View view) {
-		// Get display information
-		
-		int width = view.getMeasuredWidth();
-		int height = view.getMeasuredHeight();		
-		double ratio = width/height;
-		
-		
+		try {
+			int width = view.getWidth();
+			int height = view.getHeight();		
+			double ratio = DISPLAY_METRICS.widthPixels/width;
+			
+			LayoutParams vparams = view.getLayoutParams();
+			vparams.width = (int) DISPLAY_METRICS.widthPixels;
+			vparams.height = (int) (height * ratio);
+			view.setLayoutParams(vparams);
+		} catch(NullPointerException e) {
+			System.err.println("NullPointerException: DISPLAY_METRICS has not been set.");
+		}
 	}
-	
+
+	/** 
+	 * Gets the display metrics of the device and sets it to the globally 
+	 * accessible variable DISPLAY_METRICS.
+	 * 
+	 * @param c  the calling context
+	 */	
 	protected static void setDisplaySize(Context c) {
-		WindowManager windowManager = (WindowManager)c.getSystemService(Context.WINDOW_SERVICE);
-		int width = windowManager.getDefaultDisplay().getWidth();
-		int height = windowManager.getDefaultDisplay().getHeight();
+		if(DISPLAY_METRICS == null) {
+			DISPLAY_METRICS = new DisplayMetrics();
+			
+			WindowManager w = (WindowManager) c.getSystemService(Context.WINDOW_SERVICE);
+			Display display = w.getDefaultDisplay();
+			display.getMetrics(DISPLAY_METRICS);
+		}
 	}
 	
-//	protected static Point getDisplaySize() {
-//		if(displaySize == null)
-//			return null;
-//	}
+	/** 
+	 * Returns DISPLAY_METRICS, an object containing screen size information.
+	 * 
+	 * @return the DisplayMetrics object
+	 */	
+	
+	public static DisplayMetrics getDisplayMetrics() {
+		return ImageHelper.DISPLAY_METRICS;
+	}
 }

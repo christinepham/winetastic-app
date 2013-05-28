@@ -17,20 +17,24 @@ import android.widget.RelativeLayout;
 
 public class Intro extends Activity {
 	
-	private PopupWindow loginWindow;		 	// Holds the login window layout
-	private Handler mHandler = new Handler();	// Handles background rotation 
+	private PopupWindow loginWindow;		 	// Holds the login window layout 
 	
-	// Background information
-	private int currentFrame = 0;
-	private static final int TRANSITION_TIME = 5000;
+	private Handler mHandler = new Handler();	// Handles background rotation	
+	private int currentFrame = 0;				// The current background image
+	private static final int TRANSITION_TIME = 5000; // Milliseconds b/w bgs
+
+    Button browse; 	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
         
+        // Views   
+        Button home = (Button)findViewById(R.id.guest_home_button);        
+        browse = (Button)findViewById(R.id.guest_find_wines); 	        
+        
         // Click event: Go to the Browse Wines module
-        Button browse = (Button)findViewById(R.id.guest_find_wines);
         browse.setOnClickListener(new View.OnClickListener(){
     		@Override
     		public void onClick(View v) {
@@ -40,7 +44,6 @@ public class Intro extends Activity {
         });  
         
         // Click event: Go to the Home Screen
-        Button home = (Button)findViewById(R.id.guest_home_button);
         home.setOnClickListener(new View.OnClickListener(){
     		@Override
     		public void onClick(View v) {
@@ -50,7 +53,17 @@ public class Intro extends Activity {
     		}
         });       
         
-        // Go to maps
+        // Click event: Go to info screen layout
+        Button info = (Button)findViewById(R.id.guest_info_button);         
+        info.setOnClickListener(new View.OnClickListener(){
+    		@Override
+    		public void onClick(View v) { 			
+    			Intent i = new Intent(Intro.this, InfoPage.class);
+    			startActivity(i);
+    		}
+        });         
+        
+//        // Go to maps
 //        Button map = (Button)findViewById(R.id.guest_map);
 //        map.setOnClickListener(new View.OnClickListener() {
 //        	@Override
@@ -80,6 +93,16 @@ public class Intro extends Activity {
             }
         }).start();        
     }
+    
+    @Override
+    public void onWindowFocusChanged (boolean hasFocus) {
+    	super.onWindowFocusChanged(hasFocus);
+    	
+        // Set display size
+        ImageHelper.setDisplaySize(this);
+        System.out.println("Scaling... " + browse.getWidth());        
+        ImageHelper.scaleToScreenWidth(browse);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -88,9 +111,10 @@ public class Intro extends Activity {
         return true;
     }
     
-    /* Use Case: Login Window
+    /** Use Case: Login Window
      * Author: Victoria Do
      * Controls opening and closing the Login window.
+     * @param view  The view to be filled with the login layout
      */
     public void showLogin(View view) {
     	// Instantiate PopupWindow containing the login layout.
@@ -126,8 +150,6 @@ public class Intro extends Activity {
     		td.reverseTransition(TRANSITION_TIME);
     		currentFrame--;
     	}
-    }
-   
+    }  
 }
-
 

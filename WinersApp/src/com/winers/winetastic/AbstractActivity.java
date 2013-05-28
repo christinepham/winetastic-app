@@ -15,10 +15,7 @@ public abstract class AbstractActivity extends Activity {
 	  super.onCreate(savedInstanceState);
 	  System.err.println("AbstractActivity: super.onCreate successful.");	  
 	  //check if customTitlebar is supported.
-	  final boolean customTitleSupported = requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-	  System.err.println("AbstractActivity: Getting layout...");	        
-//	  		setContentView(R.layout.activity_main);
-	        System.err.println("AbstractActivity: Got layout.");
+	  final boolean customTitleSupported = requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);        
 	        if ( customTitleSupported ) {
 	        	// if customTitlebar is supports, set the titlebar layout for it.
 	            getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.mycustomtitle);
@@ -26,7 +23,6 @@ public abstract class AbstractActivity extends Activity {
 	        final TextView myTitleText = (TextView) findViewById(R.id.myTitle);
 	        if ( myTitleText != null ) {
 	            myTitleText.setText(getText(getTitleText()));
-	       
 	        }
 	  System.err.println("Exiting AbstractActivity onCreate method");
 	 }

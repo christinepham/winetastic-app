@@ -36,10 +36,23 @@ public class SearchResultsListAdapter extends BaseAdapter{
 		return wines.size();
 	}
 
+	/**
+	 * need access to the wine info, guessing this is it
+	 * - Victoria
+	 * @see android.widget.Adapter#getItem(int)
+	 */
 	@Override
 	public Object getItem(int position) {
-		// TODO Auto-generated method stub
-		return position;
+		String currWine = null;
+		int i = 0;
+		for (String wine : wines.keySet()) {
+			if (i == position) {
+				currWine = wine;
+				break;
+			}
+			++i;
+		}	
+		return (ArrayList<String>) wines.get(currWine);
 	}
 
 	@Override
@@ -68,7 +81,6 @@ public class SearchResultsListAdapter extends BaseAdapter{
 				break;
 			}
 			++i;
-
 		}
 		ArrayList<String> descriptions = wines.get(currWine);
 		name.setText(descriptions.get(0));
