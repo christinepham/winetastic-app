@@ -4,21 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.winers.winetastic.R;
-import com.winers.winetastic.R.layout;
-import com.winers.winetastic.R.menu;
-
-import android.os.Bundle;
-import android.app.Activity;
 import android.app.ListActivity;
-import android.content.Context;
 import android.content.Intent;
-import android.view.LayoutInflater;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -30,6 +22,7 @@ public class SearchResults extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_search_results);
         searchQuery = (String) getIntent().getExtras().get("Search Query");
         //Toast.makeText(this, searchQuery, Toast.LENGTH_SHORT).show();
@@ -60,9 +53,35 @@ public class SearchResults extends ListActivity {
         });
     }
 
+//        setContentView(R.layout.activity_search_results);
+//        searchQuery = (String) getIntent().getExtras().get("Search Query");
+//        Toast.makeText(this, searchQuery, Toast.LENGTH_SHORT).show();
+//        
+//        wines = new HashMap<String, ArrayList<String>>();
+//        insertWines();
+//        SearchResultsListAdapter adapter = new SearchResultsListAdapter(this, wines);
+////        ListView list = (ListView) findViewById(R.id.list)
+//        getListView().setAdapter(adapter);
+//        getListView().setOnItemClickListener(new OnItemClickListener() {
+
+			
+//			public void onItemClick(AdapterView<?> av, View v, int pos,
+//					long id) {
+//				// TODO Auto-generated method stub
+//				Intent i = new Intent(SearchResults.this, WineInfoPage.class);
+//				startActivity(i);
+//			}
+        	
+       
+        
+        
+        
+   
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_search_results, menu);
+    //    getMenuInflater().inflate(R.menu.activity_search_results, menu);
         return true;
     }
     

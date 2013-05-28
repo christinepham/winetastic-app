@@ -1,5 +1,6 @@
 package com.winers.winetastic;
 
+
 //import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,6 +8,9 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 //import java.net.URL;
 //import java.nio.charset.Charset;
+
+
+
 import java.util.ArrayList;
 
 import org.apache.http.HttpEntity;
@@ -35,14 +39,17 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.SearchView;
+
 //import android.widget.TextView;
 import android.widget.Toast;
+
+import android.widget.Toast;
+
 
 import com.google.gson.Gson;
 
 public class WineSearch extends ExpandableListActivity
 implements OnChildClickListener {
-
 
 	private ArrayList<String> groups = new ArrayList<String>();
 	private ArrayList<Object> children = new ArrayList<Object>();

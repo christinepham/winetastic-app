@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
+import com.winers.winetastic.R;
 public class Intro extends Activity {
 	
 	private PopupWindow loginWindow;		 	// Holds the login window layout 
@@ -38,6 +39,7 @@ public class Intro extends Activity {
         browse.setOnClickListener(new View.OnClickListener(){
     		@Override
     		public void onClick(View v) {
+    			System.out.println("baaahhh");
     			Intent i = new Intent(Intro.this, WineSearch.class);
     			startActivity(i);
     		}
@@ -52,16 +54,17 @@ public class Intro extends Activity {
     			startActivity(i);
     		}
         });       
-        
+    /*    
         // Click event: Go to info screen layout
-//        Button info = (Button)findViewById(R.id.guest_info_button);         
-//        info.setOnClickListener(new View.OnClickListener(){
-//    		@Override
-//    		public void onClick(View v) { 			
-//    			Intent i = new Intent(Intro.this, InfoPage.class);
-//    			startActivity(i);
-//    		}
-//        });         
+        Button info = (Button)findViewById(R.id.guest_info_button);         
+        info.setOnClickListener(new View.OnClickListener(){
+    		@Override
+    		public void onClick(View v) { 			
+    			Intent i = new Intent(Intro.this, InfoPage.class);
+    			startActivity(i);
+    		}
+        });     
+        */    
         
 //        // Go to maps
 //        Button map = (Button)findViewById(R.id.guest_map);
@@ -116,26 +119,33 @@ public class Intro extends Activity {
      * Controls opening and closing the Login window.
      * @param view  The view to be filled with the login layout
      */
+    
+    
     public void showLogin(View view) {
+    	
+    	System.out.println("SHOW LOGIN");
     	// Instantiate PopupWindow containing the login layout.
-    	LayoutInflater inflater = (LayoutInflater)
-    		       this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);    	
-    	loginWindow = new PopupWindow(
-    			inflater.inflate(R.layout.activity_login, null, false), 
-    			LayoutParams.WRAP_CONTENT,
-    			LayoutParams.WRAP_CONTENT,
-    			true);
-    	loginWindow.showAtLocation(this.findViewById(R.id.intro_layout), Gravity.CENTER, 0, 0); 
+    	Intent intent = new Intent();
+    	intent.setClass(this, Login.class);
+    	startActivity(intent);
     }
     
     public void closeLogin(View view) {
+    	System.out.println("CLOSE LOGIN");
     	loginWindow.dismiss();
     }
     
+
     public void gotoMap(View view) {
     //	Intent i = new Intent(Intro.this, Map.class);
 	//	startActivity(i);    	
     }
+
+//    public void gotoMap(View view) {
+//    	Intent i = new Intent(Intro.this, Map.class);
+//		startActivity(i);    	
+//    }
+
     
     /* Controls background rotation. 
      * Author: Victoria Do

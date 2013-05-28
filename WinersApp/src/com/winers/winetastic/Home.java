@@ -13,6 +13,7 @@ public class Home extends AbstractActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	System.err.println("Attempting to create");
+    	System.out.println("hello");
         super.onCreate(savedInstanceState);
     	System.err.println("Created. Getting layout...");          
         setContentView(R.layout.activity_main);
@@ -59,6 +60,7 @@ public class Home extends AbstractActivity {
         });
         
         // map
+
         map_but.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -68,6 +70,17 @@ public class Home extends AbstractActivity {
 			}
         });
         
+
+//        map_but.setOnClickListener(new View.OnClickListener(){
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				Intent i = new Intent(Home.this, Map.class);
+//				startActivity(i);
+//			}
+//        });
+//        
+
         // toast to share
         /*
         toast_but.setOnClickListener(new View.OnClickListener(){

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_id">189778661175815</string>
+    
     <string name="app_name">Winetastic</string>
     <string name="action_settings">Settings</string>
 
@@ -43,6 +45,7 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
 
+    
     <!-- Wine Search -->
     <string name="wine_search_title"> Wine Search</string>
     <string name="search_hint">Search wine name</string>
@@ -83,10 +86,12 @@
     <string name="title_activity_wine_app_settings">WineAppSettings</string>
     <string name="none" />
     <string name="title_activity_search">SearchActivity</string>
+
     <string name="title_activity_search_results">SearchResults</string>
 
     <!-- Wine Search Results -->
     <string name="wine_results">Wine Results</string>
+
     <string name="title_activity_wine_info_page">WineInfoPage</string>
 
     <!-- Wine Info Page-->
@@ -98,5 +103,10 @@
     <string name="info_gotoWinery">Go to Winery</string>
     <string name="info_information">Information</string>
 	<string name="info_descriptors">Descriptors</string>        
+
+
+    <string name="title_activity_wine_info_page">WineInfoPage</string>
+    <string name="title_activity_login_activity_fb">LoginActivityFB</string>
+
 
 </resources>
