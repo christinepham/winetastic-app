@@ -54,14 +54,14 @@ public class Intro extends Activity {
         });       
         
         // Click event: Go to info screen layout
-        Button info = (Button)findViewById(R.id.guest_info_button);         
-        info.setOnClickListener(new View.OnClickListener(){
-    		@Override
-    		public void onClick(View v) { 			
-    			Intent i = new Intent(Intro.this, InfoPage.class);
-    			startActivity(i);
-    		}
-        });         
+//        Button info = (Button)findViewById(R.id.guest_info_button);         
+//        info.setOnClickListener(new View.OnClickListener(){
+//    		@Override
+//    		public void onClick(View v) { 			
+//    			Intent i = new Intent(Intro.this, InfoPage.class);
+//    			startActivity(i);
+//    		}
+//        });         
         
 //        // Go to maps
 //        Button map = (Button)findViewById(R.id.guest_map);

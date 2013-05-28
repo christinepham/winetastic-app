@@ -63,16 +63,5 @@
 		android:onClick="gotoMap"
 		
 		android:visibility="visible" />	 -->
-			
-	<Button
-		android:id="@+id/guest_info_button"
-		android:layout_below="@+id/guest_home_button"
-		android:background="@drawable/btn_winered"      
-	    style="@style/ButtonText.guest"         
-		android:fontFamily="sans-serif-condensed"
-		android:text="@string/info_information"
-		
-		android:visibility="visible" />			
-  
 
 </RelativeLayout>
