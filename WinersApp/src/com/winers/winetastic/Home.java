@@ -22,11 +22,11 @@ public class Home extends AbstractActivity {
         Button my_wines_but = (Button)findViewById(R.id.myWines);
         Button cal_but = (Button)findViewById(R.id.calendar);
         Button map_but = (Button)findViewById(R.id.map);
-        Button toast_but = (Button)findViewById(R.id.toast);
+ //       Button toast_but = (Button)findViewById(R.id.toast);
         Button add_but = (Button)findViewById(R.id.addWine);
-        Button settings_but = (Button)findViewById(R.id.settingsw);
+ //       Button settings_but = (Button)findViewById(R.id.settingsw);
         //Button wineOfDay = (Button)findViewById(R.id.wineOfDay);
-        ImageButton wineOfDay = (ImageButton)findViewById(R.id.wineOfDay);
+ //       ImageButton wineOfDay = (ImageButton)findViewById(R.id.wineOfDay);
         
         // search
         search_but.setOnClickListener(new View.OnClickListener(){
@@ -63,12 +63,13 @@ public class Home extends AbstractActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(Home.this, Map.class);
-				startActivity(i);
+			//	Intent i = new Intent(Home.this, Map.class);
+			//	startActivity(i);
 			}
         });
         
         // toast to share
+        /*
         toast_but.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -76,7 +77,7 @@ public class Home extends AbstractActivity {
 				Intent i = new Intent(Home.this, ToastToShare.class);
 				startActivity(i);
 			}
-        });
+        });*/
        
         // add a wine
         add_but.setOnClickListener(new View.OnClickListener(){
@@ -89,6 +90,7 @@ public class Home extends AbstractActivity {
         });
         
         // settings
+        /*
         settings_but.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -96,7 +98,7 @@ public class Home extends AbstractActivity {
 				Intent i = new Intent(Home.this, WineAppSettings.class);
 				startActivity(i);
 			}
-        });
+        });*/
         
         // wine of the day
    /*     wineOfDay.setOnClickListener(new View.OnClickListener(){
@@ -108,6 +110,7 @@ public class Home extends AbstractActivity {
 			}  	
         });*/
         
+        /*
         wineOfDay.setOnClickListener(new View.OnClickListener() {
         	@Override
         	public void onClick(View v) {
@@ -115,7 +118,7 @@ public class Home extends AbstractActivity {
                 myWebLink.setData(Uri.parse("http://www.heartsmartwine.com/wine/5/2008_Napa_Valley_Cabernet_Sauvignon_Great_Dane.html"));
                     startActivity(myWebLink);
         	}
-        });
+        });*/
     }
 
 

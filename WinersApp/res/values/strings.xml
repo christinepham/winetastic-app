@@ -12,6 +12,7 @@
     <!-- Home Screen -->
     <string name="search">Browse to search</string>
     <string name="gohome"> Go Home </string>
+    <string name="empty"> </string>
 
     <!-- Intro Guest Screen -->
     <string name="find_wines">Find a Wine</string>
@@ -49,6 +50,7 @@
     <string name="wine_search">Search</string>
     <string name="quick_search">Quick Search</string>
     <string name="advanced_search">Advanced Search</string>
+	<string name="searching">One moment while we find the best matches for your query..</string>
 
     <!-- My Wines -->
     <string name="my_wines_title"> My Wines </string>
@@ -86,5 +88,12 @@
     
     <!-- Wine Search Results -->
     <string name="wine_results">Wine Results</string>
+<<<<<<< HEAD
     
+=======
+    <string name="title_activity_wine_info_page">WineInfoPage</string>
+    
+    
+
+>>>>>>> ab49d7f5551fc0bb07b4308d41c599513b97299f
 </resources>

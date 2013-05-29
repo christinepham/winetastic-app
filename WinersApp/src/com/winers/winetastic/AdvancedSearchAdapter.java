@@ -1,6 +1,9 @@
 package com.winers.winetastic;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import org.json.JSONException;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -22,11 +25,8 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 	private LayoutInflater 		minInflater;
 	private Activity 			activity;
 	
-	// selected items
-	private String 				selectedColor;
-	private String 				selectedSeason;
-	private String 				selectedType;
-	private ArrayList<String> 	selectedAccents;
+	//*********Entered by Jack************//
+	private WineSearchObject searchParameters;
 
 	// -- Constructors -- //
 
@@ -37,14 +37,16 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 		for (int i=0; i<groupItem.size();i++) 
 			groupViews.add(new ArrayList<View>());
 		
-		selectedColor = "";
-		selectedSeason = "";
-		selectedType = "";		
-		selectedAccents = new ArrayList<String>();
+		searchParameters = new WineSearchObject();
 	}
 
 
 	// -- Methods -- //
+	
+	
+	public WineSearchObject getSearchParameters() {
+		return searchParameters;
+	}
 
 	public void setInflater (LayoutInflater inflater, Activity act) {
 		minInflater = inflater;
@@ -96,10 +98,10 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 							
 							selectColor(theItem, groupPosition);
 						}
-						// Season group
-						else if (group.equals("Season")) {
+						// Price group
+						else if (group.equals("Price")) {
 							//Toast.makeText(activity, tempChild.get(childPosition), Toast.LENGTH_SHORT).show();
-							selectSeason(theItem, groupPosition);
+							selectPrice(theItem, groupPosition);
 						}
 						// Type group
 						else if(group.equals("Type")) {
@@ -113,7 +115,8 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 							selectAccent(theItem);
 						}
 						
-				Toast.makeText(activity, "the selected: " + getSelectedItems(), Toast.LENGTH_SHORT).show();
+				//For debugging purposes
+				//Toast.makeText(activity, "the selected: " + getSelectedItems(), Toast.LENGTH_SHORT).show();
 			}
 		});
 		return convertView;
@@ -173,6 +176,7 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 	}
 		
 	@SuppressWarnings("unchecked")
+	// Which warning are we suppressing here?
 	public String selectOne (CheckedTextView text, int groupPosition) {
 		// deselect
 		if (text.isSelected()) {
@@ -207,40 +211,53 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 	
 	
 	public void selectColor(CheckedTextView text, int groupPosition) {
-		selectedColor = selectOne(text, groupPosition);
+		searchParameters.setColor(selectOne(text, groupPosition));
 	}
 	
-	public void selectSeason(CheckedTextView text, int groupPosition) {
-		selectedSeason = selectOne(text, groupPosition);
+	public void selectPrice(CheckedTextView text, int groupPosition) {
+		searchParameters.setPrice(selectOne(text, groupPosition));
 	}
 	
 	public void selectType(CheckedTextView text, int groupPosition) {
-		selectedType = selectOne(text, groupPosition);
+		searchParameters.setType(selectOne(text, groupPosition));
 	}
 	
 	public void selectAccent(CheckedTextView text) {
 		String acc = selectMultiple(text);
-		if(acc.equals(""))  selectedAccents.remove((String)text.getText());
-		else selectedAccents.add(acc);
+		if(acc.equals(""))  searchParameters.removeAccent((String)text.getText());
+		else searchParameters.addAccent(acc);
 		
 	}
 	
 		
 	public String getSelectedItems () {
 		String s = "";
-		s += " Color " + selectedColor + "\n";
-		s += " Season " + selectedSeason + "\n";
-		s += " Type " + selectedType + "\n";
+		s += " Color " + searchParameters.getColor() + "\n";
+		s += " Price " + searchParameters.getPrice() + "\n";
+		s += " Type " + searchParameters.getType() + "\n";
 		s += " Accents ";
-		for (String acc: selectedAccents) {
+		for (String acc: searchParameters.getAccents()) {
 			s += acc + "\n";
 		}
 		
 		return s;
 	}
 	
+	//Call Snooth API and return results
 	public void search() {
-
+		APISnoothResponse snoothResponse;
+		try {
+			snoothResponse = searchParameters.performSearch();
+			APISnoothResponseMetaData metaResults = (APISnoothResponseMetaData) snoothResponse.metaResults;
+			Toast.makeText(activity, "# of Results: " + metaResults.results, Toast.LENGTH_SHORT).show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void clear () {
@@ -254,10 +271,7 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 		}
 		
 		// clear all the selections
-		selectedColor = "";
-		selectedSeason = "";
-		selectedType = "";
-		selectedAccents.clear();
+		searchParameters.clear();
 	}
 
 	

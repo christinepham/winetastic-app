@@ -7,6 +7,8 @@
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="17" />
+    
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -47,6 +49,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.winers.winetastic.Activity.winetasticMainActivity" />
         </activity>
+
         <activity
             android:name="com.winers.winetastic.EventCalendar"
             android:label="@string/title_activity_event_calendar" >
@@ -159,5 +162,5 @@
             </intent-filter>
         </activity>
     </application>
-
+	
 </manifest>
