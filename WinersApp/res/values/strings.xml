@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_id">189778661175815</string>
+    
     <string name="app_name">Winetastic</string>
     <string name="action_settings">Settings</string>
 
-    <!-- Wine of the Day -->
-    <string name="wineOfDay">View the wine of the day</string>
+    <!-- Daily Vine -->
+    <string name="fromTheVine">From the Vine</string>
+    <string name="toTheCellar">To the Cellar</string>
     <string name="logo">Winetastic</string>
-    <string name="title_activity_wine_of_day">WineOfDay</string>
+    <string name="title_activity_daily_vine">Daily Vine</string>
+    
+    <!-- Winery of the Day -->
+    <string name="wineryOfDay">Winery of the Day</string>
+    <string name="info_vineyard">Vineyard</string>
+    <string name="info_visit">Visit</string>
+    
+    <!-- Wine of the Day -->
+    <string name="wineOfDay">Wine of the Day</string>
 
     <!-- Home Screen -->
     <string name="search">Browse to search</string>
-    <string name="gohome"> Go Home </string>
+    <string name="gohome">Home </string>
     <string name="empty"> </string>
 
     <!-- Intro Guest Screen -->
@@ -43,6 +54,7 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
 
+    
     <!-- Wine Search -->
     <string name="wine_search_title"> Wine Search</string>
     <string name="search_hint">Search wine name</string>
@@ -83,17 +95,32 @@
     <string name="title_activity_wine_app_settings">WineAppSettings</string>
     <string name="none" />
     <string name="title_activity_search">SearchActivity</string>
+
     <string name="title_activity_search_results">SearchResults</string>
 
     
     <!-- Wine Search Results -->
     <string name="wine_results">Wine Results</string>
-<<<<<<< HEAD
-    
-=======
+
     <string name="title_activity_wine_info_page">WineInfoPage</string>
     
     
 
->>>>>>> ab49d7f5551fc0bb07b4308d41c599513b97299f
+    <!-- Wine Search Results -->
+    <string name="wine_results">Wine Results</string>
+
+    <string name="title_activity_wine_info_page">WineInfoPage</string>
+
+    <!-- Wine Info Page-->
+    <string name="info_title">Information</string>
+    <string name="info_name">Wine name</string>
+    <string name="info_region">Wine region</string>    
+    <string name="info_color">Color</string>
+    <string name="info_add">Add to My Wines</string>
+    <string name="info_gotoWinery">Go to Winery</string>
+    <string name="info_information">Information</string>
+	<string name="info_descriptors">Descriptors</string>        
+	
+    <string name="title_activity_login_activity_fb">LoginActivityFB</string>
+
 </resources>

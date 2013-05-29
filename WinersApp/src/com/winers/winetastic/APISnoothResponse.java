@@ -46,4 +46,6 @@ class APISnoothResponseWineArray {
 	public String wineryID;
 	public String winery;
 	
+	
+	
 }

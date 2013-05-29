@@ -5,10 +5,10 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="13"
         android:targetSdkVersion="17" />
     
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -27,19 +27,15 @@
         </activity>
         <activity
             android:name="com.winers.winetastic.Home"
-            android:label="@string/find_wines"
+            android:label="@string/gohome"
             android:parentActivityName="com.winers.winetastic.Intro" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.winers.winetastic.Activity.winetasticMainActivity" />
         </activity>
         <activity
-            android:name="com.winers.winetastic.WineOfDay"
-            android:label="@string/title_activity_wine_of_day"
-            android:parentActivityName="com.winers.winetastic.Intro" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.winers.winetastic.Activity.winetasticMainActivity" />
+            android:name="com.winers.winetastic.DailyVine"
+            android:label="@string/title_activity_daily_vine" >
         </activity>
         <activity
             android:name="com.winers.winetastic.WineSearch"
@@ -59,7 +55,11 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+<<<<<<< HEAD
             </intent-filter>
+=======
+            </intent-filter>
+>>>>>>> 17c451d69f4814ccbdf586f740f99583fab97c79
             -->
         </activity>
         <activity
@@ -155,12 +155,146 @@
         <activity
             android:name="com.winers.winetastic.SearchResults"
             android:label="@string/title_activity_search_results" >
+        </activity>
+<<<<<<< HEAD
+=======
+        <activity
+            android:name="com.winers.winetastic.WineInfoPage"
+            android:label="@string/title_activity_wine_info_page" >
+        </activity>
+>>>>>>> 17c451d69f4814ccbdf586f740f99583fab97c79
+    </application>
+	
+
+    
+   <!--  
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.winers.winetastic"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="17" />
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/WineTheme" >
+        <activity
+            android:name="com.winers.winetastic.Intro"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.winers.winetastic.Home"
+            android:label="@string/find_wines"
+            android:parentActivityName="com.winers.winetastic.Intro" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.winers.winetastic.Activity.winetasticMainActivity" />
+        </activity>
+        <activity
+            android:name="com.winers.winetastic.WineOfDay"
+            android:label="@string/title_activity_wine_of_day"
+            android:parentActivityName="com.winers.winetastic.Intro" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.winers.winetastic.Activity.winetasticMainActivity" />
+        </activity>
+        <activity
+            android:name="com.winers.winetastic.WineSearch"
+            android:label="@string/find_wines"
+            android:parentActivityName="com.winers.winetastic.Intro" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.winers.winetastic.Activity.winetasticMainActivity" />
+        </activity>
+        <activity
+            android:name="com.winers.winetastic.EventCalendar"
+            android:label="@string/title_activity_event_calendar" >
+
+        </activity>
+        <activity
+            android:name="com.winers.winetastic.MyWines"
+            android:label="@string/title_activity_my_wines" >
+
+        </activity>
+        <activity
+            android:name="com.winers.winetastic.Map"
+            android:label="@string/title_activity_map" >
+
+        </activity>
+        <activity
+            android:name="com.winers.winetastic.ToastToShare"
+            android:label="@string/title_activity_toast_to_share" >
+
+        </activity>
+        <activity
+            android:name="com.winers.winetastic.AddWine"
+            android:label="@string/title_activity_add_wine" >
+
+        </activity>
+        <activity
+            android:name="com.winers.winetastic.Settings"
+            android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name="com.winers.winetastic.WineAppSettings"
+            android:label="@string/title_activity_wine_app_settings" >
+        </activity>
+        <activity
+            android:name="com.winers.winetastic.Login"
+            android:label="@string/title_activity_login"
+            android:parentActivityName="com.winers.winetastic.AbstractActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.winers.winetastic.Activities.AbstractActivity" />
+        </activity>
+            
+        
+        <activity android:name="com.winers.winetastic.SearchActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity
+            android:name="com.winers.winetastic.SearchResults"
+            android:label="@string/title_activity_search_results" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="com.winers.winetastic.WineInfoPage"
+            android:label="@string/title_activity_wine_info_page" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        
+        <meta-data android:value="@string/app_id" android:name="com.facebook.sdk.ApplicationId"/>
     </application>
-	
+    
+    <uses-permission android:name="android.permission.INTERNET"/>
+ -->   
+
 </manifest>

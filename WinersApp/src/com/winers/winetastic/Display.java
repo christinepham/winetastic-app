@@ -1,12 +1,7 @@
 package com.winers.winetastic;
 
 import com.winers.winetastic.R;
-import com.winers.winetastic.R.id;
-import com.winers.winetastic.R.layout;
-import com.winers.winetastic.R.menu;
-import com.winers.winetastic.R.string;
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;

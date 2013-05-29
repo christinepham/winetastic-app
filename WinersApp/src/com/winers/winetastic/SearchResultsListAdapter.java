@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SearchResultsListAdapter extends BaseAdapter{
 
@@ -19,13 +20,13 @@ public class SearchResultsListAdapter extends BaseAdapter{
 	private Activity activity;
 	private static LayoutInflater inflater=null;
 	public ImageLoader imageLoader; 
-	private HashMap<String, ArrayList<String>> wines;
+	private ArrayList<ArrayList<String>> wines;
 	
 
 	// -- Constructors --//
-	public SearchResultsListAdapter (Activity a, HashMap<String, ArrayList<String>> w) {
+	public SearchResultsListAdapter (Activity a, ArrayList<ArrayList<String>> wines2) {
 		activity = a;
-		wines = w;	
+		wines = wines2;	
 		inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
 	}
@@ -36,15 +37,25 @@ public class SearchResultsListAdapter extends BaseAdapter{
 		return wines.size();
 	}
 
+	/**
+	 * need access to the wine info, guessing this is it
+	 * - Victoria
+	 * @see android.widget.Adapter#getItem(int)
+	 * 
+	 * I changed this because I changed "wines" from 
+	 * HashMap<String, ArrayList<String>> to
+	 * ArrayList<ArrayList<String>>
+	 * 
+	 * - Jack (5/28)
+	 */
 	@Override
 	public Object getItem(int position) {
-		// TODO Auto-generated method stub
-		return position;
+		return wines.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
+		//Toast.makeText(activity, position, Toast.LENGTH_SHORT).show();
 		return position;
 	}
 
@@ -60,6 +71,7 @@ public class SearchResultsListAdapter extends BaseAdapter{
 		TextView location = (TextView) vi.findViewById(R.id.location);
 		TextView price = (TextView) vi.findViewById(R.id.price);
 
+
 		//ArrayList<String> wine_names = (ArrayList<String>)wines.keySet();
 		for (String wine : wines.keySet()) {
 			ArrayList<String> descriptions = wines.get(wine);
@@ -67,6 +79,13 @@ public class SearchResultsListAdapter extends BaseAdapter{
 			location.setText(descriptions.get(1));
 			price.setText(descriptions.get(2));
 		}
+
+		//ArrayList<String> wine_names = (ArrayList<String>)wines.keySet();
+		ArrayList<String> descriptions = wines.get(position);
+		name.setText(descriptions.get(0));
+		location.setText(descriptions.get(1));
+		price.setText(descriptions.get(2));
+
 
 		return vi;
 	}

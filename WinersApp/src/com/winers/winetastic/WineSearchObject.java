@@ -50,7 +50,7 @@ public class WineSearchObject {
 	}
 	
 	public void addAccent(String accent) {
-		accents.add(accent);
+		if(!accents.contains(accent)) accents.add(accent);
 	}
 	
 	public String getColor() {
