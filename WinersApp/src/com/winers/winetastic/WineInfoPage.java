@@ -62,7 +62,7 @@ public class WineInfoPage extends InfoPage {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_wine_info_page, menu);
+//        getMenuInflater().inflate(R.menu.activity_wine_info_page, menu);
         return true;
     }
 }

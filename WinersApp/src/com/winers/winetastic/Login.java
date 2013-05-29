@@ -111,7 +111,6 @@ public class Login extends Activity implements OnClickListener{
 		//login_title???
 		//fbButton = (Button)findViewById(R.id.register_facebook_button);
 		fbButton = (ImageView)findViewById(R.id.login_fb_icon);
-		pic = (ImageView)findViewById(R.id.picture_pic);
 		fbButton.setOnClickListener(this);
 
 

@@ -26,8 +26,7 @@ public class Home extends AbstractActivity {
  //       Button toast_but = (Button)findViewById(R.id.toast);
         Button add_but = (Button)findViewById(R.id.addWine);
  //       Button settings_but = (Button)findViewById(R.id.settingsw);
-        //Button wineOfDay = (Button)findViewById(R.id.wineOfDay);
- //       ImageButton wineOfDay = (ImageButton)findViewById(R.id.wineOfDay);
+        ImageButton daily_vine_but = (ImageButton)findViewById(R.id.dailyVineButton);
         
         // search
         search_but.setOnClickListener(new View.OnClickListener(){
@@ -113,25 +112,15 @@ public class Home extends AbstractActivity {
 			}
         });*/
         
-        // wine of the day
-   /*     wineOfDay.setOnClickListener(new View.OnClickListener(){
+        // daily vine
+        daily_vine_but.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(MainActivity.this, WineOfDay.class);
+				Intent i = new Intent(Home.this, DailyVine.class);
 				startActivity(i);
 			}  	
-        });*/
-        
-        /*
-        wineOfDay.setOnClickListener(new View.OnClickListener() {
-        	@Override
-        	public void onClick(View v) {
-        		Intent myWebLink = new Intent(android.content.Intent.ACTION_VIEW);
-                myWebLink.setData(Uri.parse("http://www.heartsmartwine.com/wine/5/2008_Napa_Valley_Cabernet_Sauvignon_Great_Dane.html"));
-                    startActivity(myWebLink);
-        	}
-        });*/
+        });
     }
 
 

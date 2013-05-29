@@ -25,8 +25,6 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 	private LayoutInflater 		minInflater;
 	private Activity 			activity;
 	private ArrayList<boolean[]> isSelected;
-
-	//*********Entered by Jack************//
 	private WineSearchObject searchParameters;
 
 	// -- Constructors -- //
@@ -137,13 +135,17 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 							selectAccent(theItem, groupPosition, childPosition);
 						}
 
+						/*
+						 * UNCOMMENT THE FOLLOWING FOR DEBUGGING PURPOSES
+						 *
 						String colorss = "";
 						for(boolean colorSelect: isSelected.get(0)) {
 							colorss += colorSelect + "   ";
 						}
 						Toast.makeText(activity, colorss, Toast.LENGTH_SHORT).show();
-				//For debugging purposes
-				Toast.makeText(activity, "the selected: " + getSelectedItems(), Toast.LENGTH_SHORT).show();
+						*/
+				// UNCOMMENT THE FOLLOWING FOR DEBUGGING PURPOSES
+				//Toast.makeText(activity, "the selected: " + getSelectedItems(), Toast.LENGTH_SHORT).show();
 			}
 		});
 		return convertView;
@@ -284,25 +286,9 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 		return s;
 	}
 
-	//Call Snooth API and return results
-	public void search() {
-		APISnoothResponse snoothResponse;
-		try {
-			snoothResponse = searchParameters.performSearch();
-			APISnoothResponseMetaData metaResults = (APISnoothResponseMetaData) snoothResponse.metaResults;
-			Toast.makeText(activity, "# of Results: " + metaResults.results, Toast.LENGTH_SHORT).show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
 	public void clear () {
-		Toast.makeText(activity, "CLEAR", Toast.LENGTH_SHORT).show();
+		// UNCOMMENT THE FOLLOWING FOR DEBUGGING PURPOSES
+		// Toast.makeText(activity, "CLEAR", Toast.LENGTH_SHORT).show();
 		// change all the backgrounds back to deselect color
 		for (ArrayList<View> children : groupedViews) {
 			for(View view : children) {
@@ -316,7 +302,8 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 	}
 
 	public void tempClear () {
-		Toast.makeText(activity, "TEMP CLEAR", Toast.LENGTH_SHORT).show();
+		// UNCOMMENT THE FOLLOWING FOR DEBUGGING PURPOSES
+		//Toast.makeText(activity, "TEMP CLEAR", Toast.LENGTH_SHORT).show();
 		for (ArrayList<View> children : groupedViews) {
 			for(View view : children) {
 				((CheckedTextView) view).setBackgroundColor(view.getResources().getColor(R.color.cream));
@@ -334,12 +321,16 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 			}
 		}
 
+		/* 
+		 * UNCOMMENT THE FOLLOWING FOR DEBUGGING PURPOSES
+		 * 
 		String colorss = "";
 		for(boolean colorSelect: isSelected.get(0)) {
 			colorss += colorSelect + "   ";
 		}
+		
 		Toast.makeText(activity, "CLear " + colorss, Toast.LENGTH_SHORT).show();
-
+		*/
 	}
 
 
