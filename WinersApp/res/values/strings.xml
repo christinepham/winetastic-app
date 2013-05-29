@@ -92,8 +92,6 @@
     <!-- Wine Search Results -->
     <string name="wine_results">Wine Results</string>
 
-    <string name="title_activity_wine_info_page">WineInfoPage</string>
-
     <!-- Wine Info Page-->
     <string name="info_title">Information</string>
     <string name="info_name">Wine name</string>
