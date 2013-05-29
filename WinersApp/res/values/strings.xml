@@ -6,10 +6,19 @@
     <string name="app_name">Winetastic</string>
     <string name="action_settings">Settings</string>
 
-    <!-- Wine of the Day -->
-    <string name="wineOfDay">View the wine of the day</string>
+    <!-- Daily Vine -->
+    <string name="fromTheVine">From the Vine</string>
+    <string name="toTheCellar">To the Cellar</string>
     <string name="logo">Winetastic</string>
-    <string name="title_activity_wine_of_day">WineOfDay</string>
+    <string name="title_activity_daily_vine">Daily Vine</string>
+    
+    <!-- Winery of the Day -->
+    <string name="wineryOfDay">Winery of the Day</string>
+    <string name="info_vineyard">Vineyard</string>
+    <string name="info_visit">Visit</string>
+    
+    <!-- Wine of the Day -->
+    <string name="wineOfDay">Wine of the Day</string>
 
     <!-- Home Screen -->
     <string name="search">Browse to search</string>
@@ -103,9 +112,7 @@
     <string name="info_gotoWinery">Go to Winery</string>
     <string name="info_information">Information</string>
 	<string name="info_descriptors">Descriptors</string>        
-
-
-    <string name="title_activity_wine_info_page">WineInfoPage</string>
+	
     <string name="title_activity_login_activity_fb">LoginActivityFB</string>
 
 

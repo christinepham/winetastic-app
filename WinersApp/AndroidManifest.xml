@@ -34,12 +34,8 @@
                 android:value="com.winers.winetastic.Activity.winetasticMainActivity" />
         </activity>
         <activity
-            android:name="com.winers.winetastic.WineOfDay"
-            android:label="@string/title_activity_wine_of_day"
-            android:parentActivityName="com.winers.winetastic.Intro" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.winers.winetastic.Activity.winetasticMainActivity" />
+            android:name="com.winers.winetastic.DailyVine"
+            android:label="@string/title_activity_daily_vine" >
         </activity>
         <activity
             android:name="com.winers.winetastic.WineSearch"
