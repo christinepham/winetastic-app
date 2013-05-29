@@ -56,7 +56,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
 <<<<<<< HEAD
-            </intent-filter>
+            </intent-filter>
+
+
 =======
             </intent-filter>
 >>>>>>> 17c451d69f4814ccbdf586f740f99583fab97c79
@@ -71,7 +73,9 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
+
+
             -->
         </activity>
         <activity
@@ -83,7 +87,9 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
+
+
             -->
         </activity>
         <activity
@@ -95,7 +101,9 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
+
+
             -->
         </activity>
         <activity
@@ -107,7 +115,9 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
+
+
             -->
         </activity>
         <activity
@@ -119,7 +129,9 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
+
+
             -->
         </activity>
         <activity
@@ -131,7 +143,9 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
+
+
             -->
         </activity>
         <activity
@@ -156,13 +170,12 @@
             android:name="com.winers.winetastic.SearchResults"
             android:label="@string/title_activity_search_results" >
         </activity>
-<<<<<<< HEAD
-=======
+
         <activity
             android:name="com.winers.winetastic.WineInfoPage"
             android:label="@string/title_activity_wine_info_page" >
         </activity>
->>>>>>> 17c451d69f4814ccbdf586f740f99583fab97c79
+
     </application>
 	
 

@@ -19,7 +19,7 @@ import com.google.gson.Gson;
 
 public class SearchResults extends ListActivity {
 
-	private HashMap<String, ArrayList<String>> wines;
+	//private HashMap<String, ArrayList<String>> wines;
 
 
 	private ArrayList<ArrayList<String>> wines;
