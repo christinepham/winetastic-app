@@ -1,14 +1,12 @@
 package com.winers.winetastic;
 
-import java.util.ArrayList;
-
-import com.google.gson.Gson;
-
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.RatingBar;
 import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 /**
  * Displays statistics and descriptors for a specific wine. 
@@ -48,6 +46,10 @@ public class WineInfoPage extends InfoPage {
         regionv.setText(info.region, TextView.BufferType.NORMAL);
         
         // TODO: Set image
+        
+        // Set rating
+        RatingBar rating = (RatingBar) findViewById(R.id.info_rating);
+        rating.setRating(Float.parseFloat(info.snoothRank));
         
         
         // Populate table
