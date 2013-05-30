@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Random;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -19,6 +20,7 @@ public class WinetasticDAO {
 	private final String API_KEY = "7sft6abh56pjc52byts04mq9vpok18ufzksn5r4g92amybdy";
 	private final String SNOOTH_URL = "http://api.snooth.com";
 	private final String WINE_RESOURCE_ID = "/wines/";
+	private final String WINERY_RESOURCE_ID = "/winery/";
 	private final int API_RETVAL_LENGTH_FOR_ERROR = 120;
 	
 	
@@ -28,7 +30,7 @@ public class WinetasticDAO {
 	 * @param searchArgs: An ArrayList of strings of search arguments
 	 * @param numResults: The maximum number of results to return
 	 */
-	public String performSearch(ArrayList<String> searchArgs,
+	public String performQuickSearch(ArrayList<String> searchArgs,
 								int numResults) {
 		
 		String url = SNOOTH_URL + WINE_RESOURCE_ID + "?akey=" + API_KEY;
@@ -58,23 +60,60 @@ public class WinetasticDAO {
 		
 		String url = SNOOTH_URL + WINE_RESOURCE_ID + "?akey=" + API_KEY;
 	
-		if (searchParameters.getType() != "") url += "&q=" + searchParameters.getType();
+		if (searchParameters.getType() != "") {
+			url += "&q=" + searchParameters.getType();
+			if (searchParameters.getAccent() != "")
+				url += "+" + searchParameters.getAccent();
+		}
+		else if (searchParameters.getAccent() != "")
+			url += "&q=" + searchParameters.getAccent();
+		
 		url += "&n=" + numResults;
 		if (searchParameters.getColor() != "") 
 			url += "&color=" + searchParameters.getColor();
 		if (searchParameters.getPrice() != "") {
 			url += searchParameters.parsePriceString();
 			url += "&s=price+desc";
+			
 		}
+		url += "&a=0";
 		url += "&t=wine";
+
 		
 		return callSnoothAPI(url);
 	}
 	
+	/**
+	 * getRandomWine returns a JSON string containing a single random wine
+	 */
+	public String getRandomWine() {
+		Random rng = new Random();
+		final int MAX_INT = 1000;
+		int randomInt = rng.nextInt(MAX_INT);
+		
+		String url = SNOOTH_URL + WINE_RESOURCE_ID + "?akey=" + API_KEY;
+		url += "&n=1";
+		url += "&f=" + randomInt;
+		
+		return callSnoothAPI(url);
+	}
 	
 	/**
+	 * getWineryDetails returns a JSON string containing the details of the
+	 * winery specified by wineryID.
+	 * The wineryID here is the same as the winery_id returned by a wine search
+	 * API call which gets stored in an APISnoothResponse object.
+	 */
+	public String getWineryDetails(String wineryID) {
+		String url = SNOOTH_URL + WINERY_RESOURCE_ID + "?akey=" + API_KEY;
+		url += "&id=" + wineryID;
+		return callSnoothAPI(url);
+	}
+
+	/**
 	 * hasSearchResults returns true if the JSON response string has more
-	 * than 80 characters, meaning that the search had at least one result.
+	 * than API_RETVAL_LENGTH_FOR_ERROR characters, meaning that the search 
+	 * had at least one result.
 	 * @param searchResultString: the resulting string of the API call
 	 */
 	public Boolean hasSearchResults(String searchResultString) {

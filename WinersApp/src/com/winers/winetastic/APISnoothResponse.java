@@ -1,9 +1,17 @@
 package com.winers.winetastic;
 
 import java.util.List;
+
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
-
+/**
+ * Class to store a list of wines returned by a search
+ * 
+ * Remember you have to do the API call from the doInBackground() method of
+ * a class that extends AsyncTask. Look at WineSearch.java for an example.
+ * 
+ */
 public class APISnoothResponse {
 	
 	@SerializedName("wines")
@@ -14,12 +22,7 @@ public class APISnoothResponse {
 	
 }
 
-class APISnoothResponseMetaData {
-	public String results;
-	public String status;
-	public String errmsg;
-	public String returned;
-}
+
 
 class APISnoothResponseWineArray {
 	public String region;
@@ -46,6 +49,5 @@ class APISnoothResponseWineArray {
 	public String wineryID;
 	public String winery;
 	
-	
-	
 }
+

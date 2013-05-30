@@ -28,13 +28,13 @@ public class WineSearchObject {
 	private String 				color;
 	private String 				price;
 	private String 				type;
-	private ArrayList<String> 	accents;
+	private String 				accent;
 	
 	public WineSearchObject () {
 		color = "";
 		price = "";
 		type = "";		
-		accents = new ArrayList<String>();
+		accent = "";
 	}
 	
 	public void setColor(String color) {
@@ -49,8 +49,8 @@ public class WineSearchObject {
 		this.type = type;
 	}
 	
-	public void addAccent(String accent) {
-		if(!accents.contains(accent)) accents.add(accent);
+	public void setAccent(String accent) {
+		this.accent = accent;
 	}
 	
 	public String getColor() {
@@ -80,19 +80,16 @@ public class WineSearchObject {
 		return this.type;
 	}
 	
-	public ArrayList<String> getAccents() {
-		return this.accents;
+	public String getAccent() {
+		return this.accent;
 	}
 	
-	public void removeAccent(String accent) {
-		accents.remove(accent);
-	}
 	
 	public void clear() {
 		color = "";
 		price = "";
 		type = "";		
-		accents.clear();
+		accent = "";
 	}
 	
 	private static String readAll(Reader rd) throws IOException {

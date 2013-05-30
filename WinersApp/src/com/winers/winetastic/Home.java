@@ -1,7 +1,6 @@
 package com.winers.winetastic;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -116,7 +115,6 @@ public class Home extends AbstractActivity {
         daily_vine_but.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Intent i = new Intent(Home.this, DailyVine.class);
 				startActivity(i);
 			}  	

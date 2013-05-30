@@ -12,19 +12,18 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
 import com.winers.winetastic.R;
 public class Intro extends Activity {
 	
-	private PopupWindow loginWindow;		 	// Holds the login window layout 
-	
 	private Handler mHandler = new Handler();	// Handles background rotation	
 	private int currentFrame = 0;				// The current background image
 	private static final int TRANSITION_TIME = 5000; // Milliseconds b/w bgs
 
-    Button browse; 	
+    ImageView browse; 	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,7 @@ public class Intro extends Activity {
         
         // Views   
         Button home = (Button)findViewById(R.id.guest_home_button);        
-        browse = (Button)findViewById(R.id.guest_find_wines); 	        
+        browse = (ImageView)findViewById(R.id.guest_find_wines); 	        
         
         // Click event: Go to the Browse Wines module
         browse.setOnClickListener(new View.OnClickListener(){
@@ -102,9 +101,9 @@ public class Intro extends Activity {
     	super.onWindowFocusChanged(hasFocus);
     	
         // Set display size
-        ImageHelper.setDisplaySize(this);
-        System.out.println("Scaling... " + browse.getWidth());        
-        ImageHelper.scaleToScreenWidth(browse);
+//        ImageHelper.setDisplaySize(this);
+//        System.out.println("Scaling... " + browse.getWidth());        
+//        ImageHelper.scaleToScreenWidth(browse);
     }
 
     @Override
@@ -121,18 +120,12 @@ public class Intro extends Activity {
      */
     
     
-    public void showLogin(View view) {
-    	
+    public void showLogin(View view) { 	
     	System.out.println("SHOW LOGIN");
     	// Instantiate PopupWindow containing the login layout.
     	Intent intent = new Intent();
     	intent.setClass(this, Login.class);
     	startActivity(intent);
-    }
-    
-    public void closeLogin(View view) {
-    	System.out.println("CLOSE LOGIN");
-    	loginWindow.dismiss();
     }
     
 

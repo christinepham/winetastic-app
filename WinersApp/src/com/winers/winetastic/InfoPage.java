@@ -41,9 +41,6 @@ public class InfoPage extends AbstractActivity {
      * @param cols    text to be added to the row
      */
     protected void addRow(View parent, String ... cols) {
-    	// Get width of parent view
-    	int width = parent.getLayoutParams().width;
-    	
     	// Create a table row
     	TableRow r = (TableRow) getLayoutInflater().inflate(R.layout.info_row, null);
     	
@@ -55,7 +52,7 @@ public class InfoPage extends AbstractActivity {
     		// Bold the first string
     		if(i == 0 && cols.length > 1) {
     			text.setTypeface(Typeface.DEFAULT_BOLD, Typeface.BOLD);
-    			text.setWidth(100);
+    			text.setWidth(120);
     		}
     		
     		// Set contents of text, make black, change width

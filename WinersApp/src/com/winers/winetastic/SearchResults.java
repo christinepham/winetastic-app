@@ -1,7 +1,6 @@
 package com.winers.winetastic;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import android.app.ListActivity;
@@ -16,8 +15,6 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 public class SearchResults extends ListActivity {
-
-
 	private ArrayList<ArrayList<String>> wines;
 	private String searchQuery;
 	
@@ -76,12 +73,6 @@ public class SearchResults extends ListActivity {
 //				startActivity(i);
 //			}
         	
-       
-        
-        
-        
-   
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -109,5 +100,4 @@ public class SearchResults extends ListActivity {
     public String parseQuery (String s) {
     	return "";
     }
-    
 }

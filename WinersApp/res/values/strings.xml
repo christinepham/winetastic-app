@@ -34,11 +34,11 @@
     <string name="facebook">Facebook</string>
     <string name="google">Google</string>
     <string name="returning_users">Returning Users</string>
-    <string name="login_prompt_create">Don\'t have an account? <u>Create one today.</u></string>
+    <string name="login_with_email">Login with email</string>   
     <string name="create_account">Create an Account</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="register_or">Or login with:</string>
+    <string name="register_or">Or connect with</string>
     <string name="guest_login">Already a user? <u>Click to login.</u></string>
 
     <!-- Strings related to login -->
@@ -53,6 +53,7 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+    <string name="create_account_button">Create Account</string>
 
     
     <!-- Wine Search -->
@@ -97,12 +98,9 @@
     <string name="title_activity_search">SearchActivity</string>
 
     <string name="title_activity_search_results">SearchResults</string>
-
-    
     <!-- Wine Search Results -->
     <string name="wine_results">Wine Results</string>
-
-    <string name="title_activity_wine_info_page">WineInfoPage</string>
+    <string name="title_activity_wine_info_page">Wine Info</string>
     
     <!-- Wine Info Page-->
     <string name="info_title">Information</string>
@@ -115,5 +113,6 @@
 	<string name="info_descriptors">Descriptors</string>        
 	
     <string name="title_activity_login_activity_fb">LoginActivityFB</string>
+
 
 </resources>

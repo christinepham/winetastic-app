@@ -31,7 +31,6 @@ public class WineInfoPage extends InfoPage {
         	Gson gson = new Gson();
         	this.info = gson.fromJson(extras.getString("wine_data"), APISnoothResponseWineArray.class);        	
         }
-        System.out.println("info is " + info);
         
         // Set layout
         setContentView(R.layout.activity_info_wine);

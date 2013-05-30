@@ -3,7 +3,7 @@
  * @author Victoria Do
  */
 
-package com.winers.winetastic;
+package com.winers.winetastic.defunct;
 
 import android.content.Context;
 
@@ -16,6 +16,7 @@ import android.graphics.Point;
 import android.view.View;
 
 import android.view.WindowManager;
+import android.widget.Toast;
 
 public class ImageHelper {
 	/* Set by call to setDisplaySize */
@@ -39,7 +40,7 @@ public class ImageHelper {
 			LayoutParams vparams = view.getLayoutParams();
 			vparams.width = (int) DISPLAY_METRICS.widthPixels;
 			vparams.height = (int) (height * ratio);
-			view.setLayoutParams(vparams);
+			view.setLayoutParams(vparams);			
 		} catch(NullPointerException e) {
 			System.err.println("NullPointerException: DISPLAY_METRICS has not been set.");
 		}

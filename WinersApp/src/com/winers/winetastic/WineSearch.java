@@ -104,8 +104,8 @@ implements OnChildClickListener {
 
 		// Color group
 		tempChild.add("Red");
-		tempChild.add("White");
 		tempChild.add("Rose");
+		tempChild.add("White");
 		children.add(tempChild);
 
 		// Price group
@@ -118,28 +118,38 @@ implements OnChildClickListener {
 
 		// Type group
 		tempChild = new ArrayList<String>();
-		tempChild.add("Chardonnay");
-		tempChild.add("Sauvignon Blanc");
-		tempChild.add("Champagne");
-		tempChild.add("Pinot Gris");
-		tempChild.add("Reisling");
-		tempChild.add("White Zinfandel");
-		tempChild.add("Muscatto");
-		tempChild.add("Port");
-		tempChild.add("Sweet Sherry");
-		tempChild.add("Pinot Noir");
-		tempChild.add("Merlot");
-		tempChild.add("Shiraz");
-		tempChild.add("Sangiovese");
 		tempChild.add("Cabernet Sauvignon");
+		tempChild.add("Champagne");
+		tempChild.add("Chardonnay");
+		tempChild.add("Merlot");
+		tempChild.add("Muscatto");
+		tempChild.add("Pinot Gris");
+		tempChild.add("Pinot Noir");
+		tempChild.add("Port");
+		tempChild.add("Reisling");
+		tempChild.add("Sangiovese");	
+		tempChild.add("Sauvignon Blanc");
+		tempChild.add("Shiraz");
+		tempChild.add("Sweet Sherry");
+		tempChild.add("White Zinfandel");
 		tempChild.add("Zinfandel");
 		children.add(tempChild);
 
 		// Accent group
 		tempChild = new ArrayList<String>();
-		tempChild.add("Acidic");
-		tempChild.add("AgeWorthy");
-		tempChild.add("Aggressive");
+		tempChild.add("Clear");
+		tempChild.add("Dry");
+		tempChild.add("Elegant");
+		tempChild.add("Flat");
+		tempChild.add("Fruit");
+		tempChild.add("Full");
+		tempChild.add("Hard");
+		tempChild.add("Mature");
+		tempChild.add("Peachy");
+		tempChild.add("Rich");
+		tempChild.add("Soft");
+		tempChild.add("Sweet");
+		tempChild.add("Tart");
 		children.add(tempChild);
 
 	}

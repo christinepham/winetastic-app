@@ -1,4 +1,8 @@
-package com.winers.winetastic;
+package com.winers.winetastic.defunct;
+
+import com.winers.winetastic.R;
+import com.winers.winetastic.R.layout;
+import com.winers.winetastic.R.menu;
 
 import android.app.Activity;
 import android.os.Bundle;

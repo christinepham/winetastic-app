@@ -1,6 +1,13 @@
-package com.winers.winetastic;
+package com.winers.winetastic.defunct;
 
+import com.winers.winetastic.AbstractActivity;
+import com.winers.winetastic.Home;
 import com.winers.winetastic.R;
+import com.winers.winetastic.R.id;
+import com.winers.winetastic.R.layout;
+import com.winers.winetastic.R.menu;
+import com.winers.winetastic.R.string;
+
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.Menu;

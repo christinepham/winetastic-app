@@ -56,6 +56,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            -->
         </activity>
         <activity
             android:name="com.winers.winetastic.MyWines"
@@ -65,9 +66,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -79,13 +78,11 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-
+            </intent-filter>
             -->
         </activity>
         <activity
-            android:name="com.winers.winetastic.ToastToShare"
+            android:name="com.winers.winetastic.defunct.ToastToShare"
             android:label="@string/title_activity_toast_to_share" >
 
             <!--
@@ -93,9 +90,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -107,13 +102,11 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-
+            </intent-filter>
             -->
         </activity>
         <activity
-            android:name="com.winers.winetastic.Settings"
+            android:name="com.winers.winetastic.defunct.Settings"
             android:label="@string/title_activity_settings" >
 
             <!--
@@ -121,13 +114,11 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-
+            </intent-filter>
             -->
         </activity>
         <activity
-            android:name="com.winers.winetastic.WineAppSettings"
+            android:name="com.winers.winetastic.defunct.WineAppSettings"
             android:label="@string/title_activity_wine_app_settings" >
 
             <!--
@@ -135,9 +126,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -162,11 +151,10 @@
             android:name="com.winers.winetastic.SearchResults"
             android:label="@string/title_activity_search_results" >
         </activity>
-
         <activity
             android:name="com.winers.winetastic.WineInfoPage"
             android:label="@string/title_activity_wine_info_page" >
         </activity>
-
     </application>
 </manifest>	
+	
