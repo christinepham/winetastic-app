@@ -95,3 +95,21 @@ Commenting - Classes
 
 Description: 
 @author Your Name, Jessica Rabbit, Frank Ocean
+
+Common problems and fixes
+==========================
+
+All bugs
+--------
+Go to Window > Show View > Problems for hints.
+
+Error only on the last file / "page contains invalid characters"
+----------------------------------------------------------------
+1. See whether your project.properties file exists.
+2. If it doesn't, create one (in the top level directory) and add the line "target=android-17"
+3. Go to ADT Preferences > Android
+4. Set your SDK location (even if it's already set). 
+5. Right click the winetastic project > build config > Android and check Android 4.2 and add the Facebook SDK at the bottom.  
+6. Clean and refresh your project. Your project.properties file should have the target and sdk location.
+7. The project should display normally now. Clear up any other errors. 
+8. If still not working, check your Problems panel and repeat steps as needed. 
