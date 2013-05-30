@@ -217,7 +217,7 @@ public class Login extends Activity implements OnClickListener{
 			 fbButton.setImageResource(R.drawable.logout_temp);
 		 }
 		 else{
-			 fbButton.setImageResource(R.drawable.log_in);
+			 fbButton.setImageResource(R.drawable.log_in2);
 		 }
 		
 	}
