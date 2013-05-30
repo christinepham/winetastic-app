@@ -53,6 +53,7 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+    <string name="create_account_button">Create Account</string>
 
     
     <!-- Wine Search -->
@@ -98,14 +99,6 @@
 
     <string name="title_activity_search_results">SearchResults</string>
 
-    
-    <!-- Wine Search Results -->
-    <string name="wine_results">Wine Results</string>
-
-    <string name="title_activity_wine_info_page">WineInfoPage</string>
-    
-    
-
     <!-- Wine Search Results -->
     <string name="wine_results">Wine Results</string>
 
@@ -122,5 +115,6 @@
 	<string name="info_descriptors">Descriptors</string>        
 	
     <string name="title_activity_login_activity_fb">LoginActivityFB</string>
+
 
 </resources>

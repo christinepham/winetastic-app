@@ -260,6 +260,8 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 	}
 
 	public void selectAccent(CheckedTextView text, int groupPosition, int childPosition) {
+		
+		/* When we had multiple accents
 		String acc = selectMultiple(text);
 		if(acc.equals(""))  {
 			searchParameters.removeAccent((String)text.getText());
@@ -269,6 +271,8 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 			searchParameters.addAccent(acc);
 			(isSelected.get(groupPosition))[childPosition] = true;
 		}
+		*/
+		searchParameters.setAccent(selectOne(text, groupPosition, childPosition));
 
 	}
 
@@ -278,10 +282,7 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 		s += " Color " + searchParameters.getColor() + "\n";
 		s += " Price " + searchParameters.getPrice() + "\n";
 		s += " Type " + searchParameters.getType() + "\n";
-		s += " Accents ";
-		for (String acc: searchParameters.getAccents()) {
-			s += acc + "\n";
-		}
+		s += " Accents " + searchParameters.getAccent();
 
 		return s;
 	}

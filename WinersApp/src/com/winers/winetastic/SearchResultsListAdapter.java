@@ -70,22 +70,11 @@ public class SearchResultsListAdapter extends BaseAdapter{
 		TextView name = (TextView) vi.findViewById(R.id.name);
 		TextView location = (TextView) vi.findViewById(R.id.location);
 		TextView price = (TextView) vi.findViewById(R.id.price);
-
-
-		//ArrayList<String> wine_names = (ArrayList<String>)wines.keySet();
-		for (String wine : wines.keySet()) {
-			ArrayList<String> descriptions = wines.get(wine);
-			name.setText(descriptions.get(0));
-			location.setText(descriptions.get(1));
-			price.setText(descriptions.get(2));
-		}
-
 		//ArrayList<String> wine_names = (ArrayList<String>)wines.keySet();
 		ArrayList<String> descriptions = wines.get(position);
 		name.setText(descriptions.get(0));
 		location.setText(descriptions.get(1));
 		price.setText(descriptions.get(2));
-
 
 		return vi;
 	}

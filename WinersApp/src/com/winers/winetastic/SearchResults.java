@@ -1,55 +1,43 @@
 package com.winers.winetastic;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import android.app.ListActivity;
-
-import android.content.Context;
-import android.view.LayoutInflater;
-
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.view.Menu;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+//import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 public class SearchResults extends ListActivity {
 
-	//private HashMap<String, ArrayList<String>> wines;
-
 
 	private ArrayList<ArrayList<String>> wines;
 	private String searchQuery;
-
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_search_results);
-
         searchQuery = (String) getIntent().getExtras().get("Search Query");
         //Toast.makeText(this, searchQuery, Toast.LENGTH_SHORT).show();
         
         //Convert back to POJO
-        Gson gson = new Gson();
-        APISnoothResponse snoothResponse = gson.fromJson(searchQuery, APISnoothResponse.class);
-
         final Gson gson = new Gson();
         final APISnoothResponse snoothResponse = gson.fromJson(searchQuery, APISnoothResponse.class);
         final List<APISnoothResponseWineArray> wineAPIResponse = snoothResponse.wineResults;
-
         
         wines = new ArrayList<ArrayList<String>>();
         insertWines(wineAPIResponse);
         final SearchResultsListAdapter adapter = new SearchResultsListAdapter(this, wines);
 //        ListView list = (ListView) findViewById(R.id.list)
         getListView().setAdapter(adapter);
-
         getListView().setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -88,6 +76,10 @@ public class SearchResults extends ListActivity {
 //			}
         	
        
+        
+        
+        
+   
 
 
     @Override
@@ -112,4 +104,9 @@ public class SearchResults extends ListActivity {
     		wines.add(temp);
     	}
     }
+    
+    public String parseQuery (String s) {
+    	return "";
+    }
+    
 }

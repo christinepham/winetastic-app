@@ -56,24 +56,10 @@ implements OnChildClickListener {
 
 			@Override
 			public void onClick(View v) {
-				searchAdapter.search();
-				Intent i = new Intent(WineSearch.this, SearchResults.class);
-				startActivity(i);
-				//searchAdapter.search();
-				//Intent i = new Intent(WineSearch.this, APISnoothCallActivity.class);
-				//i.putExtra("Search Query", searchAdapter.getSelectedItems());
-				//startActivity(i);
-				
-				apiCall = new APISnoothCall();
-				apiCall.execute();
-
-			}
-
 				// Start AsyncTask to perform network operation (API call)
 				advancedSearchAPICall = new AdvancedSearchAPICall();
 				advancedSearchAPICall.execute();
 			}	
-
 		});
 		
 		
@@ -151,9 +137,14 @@ implements OnChildClickListener {
 
 		// Accent group
 		tempChild = new ArrayList<String>();
-		tempChild.add("Acidic");
-		tempChild.add("AgeWorthy");
-		tempChild.add("Aggressive");
+		tempChild.add("Elegant");
+		tempChild.add("Flat");
+		tempChild.add("Fruit");
+		tempChild.add("Full");
+		tempChild.add("Hard");
+		tempChild.add("Mature");
+		tempChild.add("Peachy");
+		tempChild.add("Rich");
 		children.add(tempChild);
 
 	}
