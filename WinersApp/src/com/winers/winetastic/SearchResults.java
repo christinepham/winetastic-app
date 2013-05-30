@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
+//import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -72,7 +74,6 @@ public class SearchResults extends ListActivity {
 //				Intent i = new Intent(SearchResults.this, WineInfoPage.class);
 //				startActivity(i);
 //			}
-        	
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -100,4 +101,5 @@ public class SearchResults extends ListActivity {
     public String parseQuery (String s) {
     	return "";
     }
+    
 }
