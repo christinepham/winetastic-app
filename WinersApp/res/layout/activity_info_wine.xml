@@ -11,6 +11,7 @@
 	<RelativeLayout android:id="@+id/info_header"
 	    android:layout_width="match_parent" 
 	    android:layout_height="wrap_content" 
+	    android:gravity="right"
 	    android:paddingLeft="@dimen/default_padding"
 	    android:paddingRight="@dimen/default_padding"
 	    android:paddingBottom="@dimen/default_padding"
@@ -30,18 +31,20 @@
 	        android:id="@+id/info_pic"
 	        android:layout_width="100dp"
 	        android:layout_height="100dp"
+	        android:layout_gravity="right"
+	        android:layout_marginBottom="@dimen/default_padding"
+	        android:layout_marginLeft="@dimen/default_padding"
+	        android:layout_marginTop="@dimen/default_padding"
 	        android:layout_toRightOf="@+id/info_wine_name"
 	        android:contentDescription="@string/info_color"
-	        android:paddingBottom="@dimen/default_padding"
-	        android:paddingTop="@dimen/default_padding"
-	        android:scaleType="centerCrop"
-	        android:src="@drawable/poke" />
+	        android:cropToPadding="false"
+	        android:scaleType="centerCrop" />
 	    
 	    <!-- Name -->
 	    <TextView style="@style/InfoTitle"
 	        android:id="@+id/info_wine_name"
 	        android:paddingTop="@dimen/default_padding"
-	        android:layout_width="200dp"
+	        android:layout_width="165dp"
 	        android:layout_height="wrap_content"
 	        android:text="@string/info_name" />
 	    
@@ -49,7 +52,7 @@
  	    <TextView 
 	        android:id="@+id/info_wine_region"
 	        android:textSize="12sp"
-	        android:layout_width="wrap_content"
+	        android:layout_width="165dp"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@+id/info_wine_name"
 	        android:text="@string/info_color" /> 

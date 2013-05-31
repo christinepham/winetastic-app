@@ -94,6 +94,7 @@ public class SearchResults extends ListActivity {
     		temp.add(snoothWine.name);
     		temp.add(snoothWine.region);
     		temp.add(snoothWine.price);
+    		temp.add(snoothWine.image);
     		wines.add(temp);
     	}
     }
