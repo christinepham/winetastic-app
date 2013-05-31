@@ -6,6 +6,8 @@ public class WinetasticManager {
 	
 	private static WinetasticDAO dao = new WinetasticDAO();
 	
+	private WinetasticManager() { }
+	
 	// Call DAO layer's performSearch
 	public static String performQuickSearch(ArrayList<String> searchArgs,
 			int numResults) {
@@ -19,17 +21,17 @@ public class WinetasticManager {
 	}
 	
 	// Call DAO layer's getRandomWine
-	public String getRandomWine() {
+	public static String getRandomWine() {
 		return WinetasticManager.dao.getRandomWine();
 	}
 	
 	// Call DAO layer's getWineryDetails
-	public String getWineryDetails(String wineryID) {
+	public static String getWineryDetails(String wineryID) {
 		return WinetasticManager.dao.getWineryDetails(wineryID);
 	}
 	
 	// Call DAO layer's hasSearchResults
-	public Boolean hasSearchResults(String searchResultString) {
+	public static Boolean hasSearchResults(String searchResultString) {
 		return WinetasticManager.dao.hasSearchResults(searchResultString);
 	}
 	

@@ -28,7 +28,7 @@ implements OnChildClickListener {
 	private ArrayList<Object> children = new ArrayList<Object>();
 	private AdvancedSearchAdapter searchAdapter;
 	private AdvancedSearchAPICall advancedSearchAPICall;
-	private WinetasticManager manager = new WinetasticManager();
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -179,13 +179,13 @@ implements OnChildClickListener {
 		@Override
 		protected String doInBackground(Void... arg0) {
 			WineSearchObject sP = searchAdapter.getSearchParameters();
-			return manager.performAdvancedSearch(sP, 20);
+			return WinetasticManager.performAdvancedSearch(sP, 20);
 
 		}
 		
 		// This gets executed after doInBackground()
 		protected void onPostExecute(String result) {
-			if (manager.hasSearchResults(result)) {
+			if (WinetasticManager.hasSearchResults(result)) {
 				// Search has results. Send to SearchResult page
 				Intent i = new Intent(WineSearch.this, SearchResults.class);
 				i.putExtra("Search Query", result);
