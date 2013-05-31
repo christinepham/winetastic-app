@@ -16,7 +16,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
+//import android.support.v4.app.NavUtils;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -282,7 +282,7 @@ public class Login extends Activity implements OnClickListener{
 			//
 			// TODO: If Settings has multiple levels, Up should navigate up
 			// that hierarchy.
-			NavUtils.navigateUpFromSameTask(this);
+	//		NavUtils.navigateUpFromSameTask(this);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

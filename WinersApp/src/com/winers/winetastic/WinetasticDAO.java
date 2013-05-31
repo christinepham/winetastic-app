@@ -36,13 +36,13 @@ public class WinetasticDAO {
 		String url = SNOOTH_URL + WINE_RESOURCE_ID + "?akey=" + API_KEY;
 		url += "&n=" + numResults;
 		url += "&t=wine";
-		url += "q=";
+		url += "&q=";
 		for (String arg : searchArgs) {
 			url += arg + "+";
 		}
+		
 		// take off last "+"
 		url = url.substring(0, (url.length()-1));
-		
         return callSnoothAPI(url);
 	}
 	
