@@ -7,10 +7,12 @@ import com.winers.winetastic.R;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,11 +72,17 @@ public class SearchResultsListAdapter extends BaseAdapter{
 		TextView name = (TextView) vi.findViewById(R.id.name);
 		TextView location = (TextView) vi.findViewById(R.id.location);
 		TextView price = (TextView) vi.findViewById(R.id.price);
+        ImageView img = (ImageView) vi.findViewById(R.id.list_image);		
+		
 		//ArrayList<String> wine_names = (ArrayList<String>)wines.keySet();
 		ArrayList<String> descriptions = wines.get(position);
 		name.setText(descriptions.get(0));
 		location.setText(descriptions.get(1));
 		price.setText(descriptions.get(2));
+		
+        // Set image
+        Drawable d = ImageHelper.loadImageFromWeb(descriptions.get(3));
+        img.setImageDrawable(d);						
 
 		return vi;
 	}

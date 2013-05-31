@@ -3,24 +3,59 @@
  * @author Victoria Do
  */
 
-package com.winers.winetastic.defunct;
+package com.winers.winetastic;
+
+import java.io.InputStream;
+import java.net.URL;
+import java.util.concurrent.ExecutionException;
 
 import android.content.Context;
-
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-
-import android.graphics.Point;
-import android.view.View;
-
 import android.view.WindowManager;
-import android.widget.Toast;
 
 public class ImageHelper {
 	/* Set by call to setDisplaySize */
 	public static DisplayMetrics DISPLAY_METRICS = null;  
+	
+	/* oh my jesus!
+	 * Inner class to store drawable variables from URLToDrawable.
+	 */
+	private static class DrawableVariable {
+		static Drawable d;
+	}
+	
+	private class URLToDrawable extends AsyncTask<String, Void, Drawable> {
+		protected Drawable doInBackground(String ... url) {
+		    try {
+		        InputStream is = (InputStream) new URL(url[0]).getContent();
+		        Drawable d = Drawable.createFromStream(is, "image");
+		        return d;
+		    } catch (Exception e) {
+		        return null;
+		    }
+		}
+		
+		@Override
+		protected void onPostExecute(Drawable result) {
+			ImageHelper.DrawableVariable.d = result;
+		}
+		
+	}
+	
+	/**
+	 * Creates Drawable from a url
+	 * @param url 
+	 * @return Drawable
+	 */
+	public static Drawable loadImageFromWeb(String url) {
+		new ImageHelper().new URLToDrawable().execute(url);
+		return ImageHelper.DrawableVariable.d;
+	}	
 	
 	/* No instantiation */
 	private ImageHelper() { }  
@@ -71,4 +106,5 @@ public class ImageHelper {
 	public static DisplayMetrics getDisplayMetrics() {
 		return ImageHelper.DISPLAY_METRICS;
 	}
+
 }

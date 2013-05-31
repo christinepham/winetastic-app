@@ -1,14 +1,15 @@
 package com.winers.winetastic;
 
-import java.util.ArrayList;
-
-import com.google.gson.Gson;
-
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 /**
  * Displays statistics and descriptors for a specific wine. 
@@ -47,16 +48,26 @@ public class WineInfoPage extends InfoPage {
         TextView regionv = (TextView) findViewById(R.id.info_wine_region);
         regionv.setText(info.region, TextView.BufferType.NORMAL);
         
-        // TODO: Set image
+        // Set image
+        Drawable d = ImageHelper.loadImageFromWeb(info.image);
+        Toast.makeText(WineInfoPage.this, "" + d, Toast.LENGTH_SHORT).show();
+        ImageView img = (ImageView) findViewById(R.id.info_pic);
+        img.setImageDrawable(d);
         
+        // Set rating
+        try {
+        	float theRating = Float.parseFloat(info.snoothRank);
+            RatingBar rating = (RatingBar) findViewById(R.id.info_rating);
+            rating.setRating(theRating);        	
+        } catch(NumberFormatException e) {
+        	// no rating available
+        }
         
         // Populate table
-        if(info.varietal != null) addRow(statsTable, "Varietal", info.varietal);        
-        if(info.price != null) addRow(statsTable, "Price", info.price);  
-        if(info.vintage != null) addRow(statsTable, "Vintage", info.vintage);    
-        if(info.winery != null) addRow(statsTable, "Winery", info.winery);
-        
-        // TODO: Get descriptors
+        if(info.varietal != null) 	addRow(statsTable, "Varietal", info.varietal);        
+        if(info.price != null) 		addRow(statsTable, "Price", "$" + info.price);  
+        if(info.vintage != null) 	addRow(statsTable, "Vintage", info.vintage);    
+        if(info.winery != null) 	addRow(statsTable, "Winery", info.winery);
     }
 
     @Override
@@ -65,29 +76,4 @@ public class WineInfoPage extends InfoPage {
         return true;
     }
 }
-
-//package com.winers.winetastic;
-//
-//import com.example.winersapp.R;
-//import com.example.winersapp.R.layout;
-//import com.example.winersapp.R.menu;
-//
-//import android.os.Bundle;
-//import android.app.Activity;
-//import android.view.Menu;
-//
-//public class WineInfoPage extends Activity {
-//
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_wine_info_page);
-//    }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.activity_wine_info_page, menu);
-//        return true;
-//    }
-//}
 
