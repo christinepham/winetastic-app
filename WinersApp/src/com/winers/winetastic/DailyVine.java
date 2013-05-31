@@ -27,7 +27,6 @@ public class DailyVine extends FragmentActivity {
 	 */
 	ViewPager mViewPager;
 
-	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_daily_vine);

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -28,6 +29,11 @@ implements OnChildClickListener {
 	private ArrayList<Object> children = new ArrayList<Object>();
 	private AdvancedSearchAdapter searchAdapter;
 	private AdvancedSearchAPICall advancedSearchAPICall;
+
+	private QuickSearchAPICall quickSearchAPICall;
+	private ArrayList<String> stringArgs = new ArrayList<String>();
+	
+	private String quickSearchResults;
 
 
 	@Override
@@ -62,7 +68,6 @@ implements OnChildClickListener {
 			}	
 		});
 		
-		
 		Button reset = (Button) findViewById(R.id.reset);
 		reset.setOnClickListener(new OnClickListener() {
 
@@ -71,6 +76,36 @@ implements OnChildClickListener {
 				searchAdapter.clear();
 			}
 		});	
+		
+		SearchView quickSearch = (SearchView) findViewById(R.id.search_bar);
+		final SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() { 
+		    @Override 
+		    public boolean onQueryTextChange(String newText) { 
+		        // Do something 
+		        return true; 
+		    } 
+
+		    @Override 
+		    public boolean onQueryTextSubmit(String query) { 
+		    	//Toast.makeText(getApplicationContext(), "Hitting enter", 0).show(); 
+		    	SearchView searchVal = (SearchView) findViewById(R.id.search_bar);
+		    	//  make sure to clear arrayList 
+		    	stringArgs.clear();
+		    	String name = searchVal.getQuery().toString();
+		    	Toast.makeText(getApplicationContext(), "searching for "+ name, 0).show();
+		    	String[] splitted = name.split(" ");
+		    	for(String split : splitted){
+		    		stringArgs.add(split); // fill array list 
+		    	}
+		    	//Toast.makeText(getApplicationContext(), "filled array list", 0).show();
+		        quickSearchAPICall = new QuickSearchAPICall();
+				quickSearchAPICall.execute();
+		        return true; 
+		    } 
+		};
+		
+		quickSearch.setOnQueryTextListener(queryTextListener); 
+		
 	}
 
 
@@ -181,6 +216,38 @@ implements OnChildClickListener {
 			WineSearchObject sP = searchAdapter.getSearchParameters();
 			return WinetasticManager.performAdvancedSearch(sP, 20);
 
+		}
+		
+		// This gets executed after doInBackground()
+		protected void onPostExecute(String result) {
+			if (WinetasticManager.hasSearchResults(result)) {
+				// Search has results. Send to SearchResult page
+				Intent i = new Intent(WineSearch.this, SearchResults.class);
+				i.putExtra("Search Query", result);
+				startActivity(i);
+			} else {
+				// No search results. Notify user to search again.
+				Toast.makeText(WineSearch.this, "No matches were found. Please try your search again.", Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+	
+	/**
+	 * Network operations must be performed in an AsyncTask, so that's
+	 * what this class is for.
+	 * Postcondition: upon successful search of at least one result, user
+	 *                is redirected to the search results page.
+	 */
+	class QuickSearchAPICall extends AsyncTask<Void, Void, String> {
+		
+		@Override
+		protected void onPreExecute() {
+			// This is where the "searching" overlay will go
+		}
+		
+		// This gets executed after onPreExecute()
+		protected String doInBackground(Void... arg0) {
+			return WinetasticManager.performQuickSearch(stringArgs, 10);
 		}
 		
 		// This gets executed after doInBackground()
