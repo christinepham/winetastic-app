@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.winers.winetastic.R;
+import com.winers.winetastic.defunct.ImageHelper;
 
 import android.app.Activity;
 import android.content.Context;
@@ -81,16 +82,9 @@ public class SearchResultsListAdapter extends BaseAdapter{
 		price.setText(descriptions.get(2));
 		
         // Set image
-        Drawable d = ImageHelper.loadImageFromWeb(descriptions.get(3));
-        img.setImageDrawable(d);						
+        ImageLoader.loadFromWeb(descriptions.get(3), img);					
 
 		return vi;
-	}
-
-	private class ImageLoader {
-		public ImageLoader() {
-
-		}
 	}
 
 }

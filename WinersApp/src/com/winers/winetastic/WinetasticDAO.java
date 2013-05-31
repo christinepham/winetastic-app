@@ -95,6 +95,7 @@ public class WinetasticDAO {
 		url += "&n=1";
 		url += "&f=" + randomInt;
 		
+		System.err.println("getRandomWine: " + url);
 		return callSnoothAPI(url);
 	}
 	
@@ -127,6 +128,7 @@ public class WinetasticDAO {
 		Gson gson = new Gson();
 		// Make API call
 		InputStream source = retrieveStream(url);  
+		System.err.println("callSnoothAPI: " + url);
         Reader reader = new InputStreamReader(source);
 	    
         // Convert JSON object to Java object

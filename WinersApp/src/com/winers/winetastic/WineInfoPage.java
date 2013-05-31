@@ -1,8 +1,12 @@
 package com.winers.winetastic;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TableLayout;
@@ -10,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.winers.winetastic.defunct.ImageHelper;
 
 /**
  * Displays statistics and descriptors for a specific wine. 
@@ -19,8 +24,8 @@ import com.google.gson.Gson;
 
 public class WineInfoPage extends InfoPage {
 	
-	private TableLayout					descTable;
 	private	APISnoothResponseWineArray 	info;
+	private WineSearchObject			searchObject;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,8 +43,7 @@ public class WineInfoPage extends InfoPage {
         
         // Get wine detail and descriptor table elements
         this.statsTable = (TableLayout) findViewById(R.id.info_module_statistics);
-        this.descTable = (TableLayout) findViewById(R.id.info_module_descriptors);
-        
+       
         // Set name
         TextView namev = (TextView) findViewById(R.id.info_wine_name);
         namev.setText(info.name, TextView.BufferType.NORMAL);
@@ -49,10 +53,8 @@ public class WineInfoPage extends InfoPage {
         regionv.setText(info.region, TextView.BufferType.NORMAL);
         
         // Set image
-        Drawable d = ImageHelper.loadImageFromWeb(info.image);
-        Toast.makeText(WineInfoPage.this, "" + d, Toast.LENGTH_SHORT).show();
-        ImageView img = (ImageView) findViewById(R.id.info_pic);
-        img.setImageDrawable(d);
+        ImageView img = (ImageView) findViewById(R.id.info_pic);        
+        ImageLoader.loadFromWeb(info.image, img);
         
         // Set rating
         try {
@@ -64,16 +66,28 @@ public class WineInfoPage extends InfoPage {
         }
         
         // Populate table
-        if(info.varietal != null) 	addRow(statsTable, "Varietal", info.varietal);        
-        if(info.price != null) 		addRow(statsTable, "Price", "$" + info.price);  
-        if(info.vintage != null) 	addRow(statsTable, "Vintage", info.vintage);    
-        if(info.winery != null) 	addRow(statsTable, "Winery", info.winery);
+        if(!(info.type.equals("")))	 	addRow(statsTable, "Type", info.type);        
+        if(!(info.varietal.equals(""))) addRow(statsTable, "Varietal", info.varietal);        
+        if(!(info.price.equals(""))) 	addRow(statsTable, "Price", "$" + info.price);  
+        if(!(info.vintage.equals(""))) 	addRow(statsTable, "Vintage", info.vintage);    
+        if(info.winery != null)		 	addRow(statsTable, "Winery", info.winery);
+        
+        
+        // TODO: Search similar wines
+        searchObject = new WineSearchObject();
+        searchObject.setColor(info.type);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 //        getMenuInflater().inflate(R.menu.activity_wine_info_page, menu);
         return true;
+    }
+    
+    public void openInBrowser(View v) {
+    	Intent i = new Intent(Intent.ACTION_VIEW);
+    	i.setData(Uri.parse(info.link + "/#aprices"));
+    	startActivity(i);    	
     }
 }
 

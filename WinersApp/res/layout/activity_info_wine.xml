@@ -1,11 +1,11 @@
 <!-- == WINE INFO PAGE =========== -->
 <!-- == This is the  -->
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/almostwhite"
+    android:scrollbarAlwaysDrawVerticalTrack="false"
     tools:context=".Home" >
 
 	<RelativeLayout android:id="@+id/info_header"
@@ -55,69 +55,82 @@
 	        android:layout_width="165dp"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@+id/info_wine_name"
-	        android:text="@string/info_color" /> 
+	        android:text="@string/info_region" /> 
 	    
  	    <!-- Add to collection -->
-	    <Button
-	        android:id="@+id/info_button_add"
-	        style="@style/ButtonTextInfo"
-	        android:layout_below="@+id/info_pic"
-	        android:layout_width="140dp"
-	        android:layout_height="35dp"
-	        android:background="@drawable/btn_winered"
-	        android:text="@string/info_add" />
-	    
-	    <Button
-	        android:id="@+id/info_button_winery"
-	        style="@style/ButtonTextInfo"
-	        android:layout_below="@+id/info_pic"
-	        android:layout_alignParentRight="true"
-	        android:layout_width="140dp"
-	        android:layout_height="35dp"	        
-	        android:background="@drawable/btn_winered"
-	        android:text="@string/info_gotoWinery" />	    
- 
-	</RelativeLayout>    
-	
-	<TableLayout
-	    android:id="@+id/info_module_statistics"
-	    android:layout_below="@+id/info_header"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:paddingTop="@dimen/default_padding"
-	    android:paddingLeft="18dp"
-		android:paddingRight="18dp"		    	    
-	    android:orientation="vertical" >
-	    
-	    <TextView
-	        android:id="@+id/info_module_statistics_title"
-	        android:background="@drawable/module_titlebar"
-		    android:layout_width="match_parent"
+		<LinearLayout	
+		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-	    	android:textColor="@color/white"				    
-		    android:orientation="vertical"
-	    	android:text="@string/info_information" />
+	        android:layout_below="@+id/info_pic"		    
+		    android:background="@drawable/bg_winered_rounded"
+		    android:orientation="horizontal" >
+		    <Button
+		        android:id="@+id/info_button_add_wishlist"
+		        style="@style/ButtonTextInfo"
+		        android:background="@color/transparent"		        
+		        android:layout_width="70dp"
+		        android:layout_height="40dp"
+		        android:gravity="center"
+		        android:text="@string/info_add_wishlist" />
+	 	    
+		    <Button
+		        android:id="@+id/info_button_add_cellar"
+		        android:background="@drawable/info_nav_border"		        
+		        style="@style/ButtonTextInfo"
+		        android:layout_width="70dp"
+		        android:layout_height="40dp"	        
+		        android:text="@string/info_add_cellar" />
+		    
+		    <Button
+		        android:id="@+id/info_button_winery"
+		        style="@style/ButtonTextInfo"	        
+		        android:background="@drawable/info_nav_border"	
+		        android:layout_width="72dp"
+		        android:layout_height="40dp"                        
+		        android:text="@string/info_gotoWinery" />	 
+		        
+		    <Button
+		        android:id="@+id/info_button_purchase"
+		        android:background="@color/transparent"		        
+		        style="@style/ButtonTextInfo"	      
+		        android:layout_width="72dp"
+		        android:layout_height="40dp"
+		        android:text="@string/info_buy"
+		        android:onClick="openInBrowser" />
+	    </LinearLayout>
+	        
 
-	</TableLayout>
-	
-	<TableLayout
-	    android:id="@+id/info_module_descriptors"
-	    android:layout_below="@+id/info_module_statistics"
+	</RelativeLayout>    
+	<ScrollView 
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:paddingTop="@dimen/default_padding"	    
-	    android:paddingLeft="18dp"
-		android:paddingRight="18dp"		    
-	    android:orientation="vertical" >
-	    <TextView
-	        android:id="@+id/info_module_descriptors_title"
-	        android:background="@drawable/module_titlebar"
+		android:layout_below="@+id/info_header"	    
+	    >
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical"
+	        >
+		<TableLayout
+		    android:id="@+id/info_module_statistics"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
-	    	android:textColor="@color/white"				    
-		    android:orientation="vertical"
-	    	android:text="@string/info_descriptors" />	 
-	    
-	</TableLayout>	
+		    android:paddingTop="@dimen/default_padding"
+		    android:paddingLeft="18dp"
+			android:paddingRight="18dp"		    	    
+		    android:orientation="vertical" >
+		    
+		    <TextView
+		        android:id="@+id/info_module_statistics_title"
+		        android:background="@drawable/module_titlebar"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+		    	android:textColor="@color/white"				    
+			    android:orientation="vertical"
+		    	android:text="@string/info_information" />
+	
+		</TableLayout>
+		</LinearLayout>
+	</ScrollView>
 
 </RelativeLayout>

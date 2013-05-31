@@ -106,10 +106,12 @@
     <!-- Wine Info Page-->
     <string name="info_title">Information</string>
     <string name="info_name">Wine name</string>
+    <string name="info_buy">Buy Wine</string>
     <string name="info_region">Wine region</string>    
     <string name="info_color">Color</string>
-    <string name="info_add">Add to My Wines</string>
-    <string name="info_gotoWinery">Go to Winery</string>
+    <string name="info_add_cellar">+Cellar</string>
+    <string name="info_add_wishlist">+Wishlist</string>    
+    <string name="info_gotoWinery">Winery</string>
     <string name="info_information">Information</string>
 	<string name="info_descriptors">Descriptors</string>        
 	

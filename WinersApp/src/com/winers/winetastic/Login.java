@@ -265,7 +265,7 @@ public class Login extends Activity implements OnClickListener{
 			// Show the Up button in the action bar.
 			getActionBar().setDisplayHomeAsUpEnabled(true);
 		}else{
-			fbButton.setBackgroundResource(R.drawable.log_in);
+			fbButton.setBackgroundResource(R.drawable.log_in2);
 		}
 	}
 

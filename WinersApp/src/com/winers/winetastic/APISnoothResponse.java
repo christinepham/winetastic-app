@@ -2,6 +2,8 @@ package com.winers.winetastic;
 
 import java.util.List;
 
+import android.graphics.drawable.Drawable;
+
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
@@ -48,6 +50,5 @@ class APISnoothResponseWineArray {
 	@SerializedName("winery_id")
 	public String wineryID;
 	public String winery;
-	
 }
 
