@@ -4,33 +4,33 @@ import java.util.ArrayList;
 
 public class WinetasticManager {
 	
-	WinetasticDAO dao = new WinetasticDAO();
+	private static WinetasticDAO dao = new WinetasticDAO();
 	
 	// Call DAO layer's performSearch
-	public String performQuickSearch(ArrayList<String> searchArgs,
+	public static String performQuickSearch(ArrayList<String> searchArgs,
 			int numResults) {
-		return dao.performQuickSearch(searchArgs, numResults);
+		return WinetasticManager.dao.performQuickSearch(searchArgs, numResults);
 	}
 	
 	// Call DAO layer's performAdvancedSearch
-	public String performAdvancedSearch(WineSearchObject searchParameters,
+	public static String performAdvancedSearch(WineSearchObject searchParameters,
 			int numResults) {
-		return dao.performAdvancedSearch(searchParameters, numResults);
+		return WinetasticManager.dao.performAdvancedSearch(searchParameters, numResults);
 	}
 	
 	// Call DAO layer's getRandomWine
 	public String getRandomWine() {
-		return dao.getRandomWine();
+		return WinetasticManager.dao.getRandomWine();
 	}
 	
 	// Call DAO layer's getWineryDetails
 	public String getWineryDetails(String wineryID) {
-		return dao.getWineryDetails(wineryID);
+		return WinetasticManager.dao.getWineryDetails(wineryID);
 	}
 	
 	// Call DAO layer's hasSearchResults
 	public Boolean hasSearchResults(String searchResultString) {
-		return dao.hasSearchResults(searchResultString);
+		return WinetasticManager.dao.hasSearchResults(searchResultString);
 	}
 	
 	
