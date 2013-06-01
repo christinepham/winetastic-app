@@ -36,7 +36,6 @@ public class SearchResults extends ListActivity {
         wines = new ArrayList<ArrayList<String>>();
         insertWines(wineAPIResponse);
         final SearchResultsListAdapter adapter = new SearchResultsListAdapter(this, wines);
-//        ListView list = (ListView) findViewById(R.id.list)
         getListView().setAdapter(adapter);
         getListView().setOnItemClickListener(new OnItemClickListener() {
 

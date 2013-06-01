@@ -14,7 +14,7 @@
         <item name="android:textColor">@color/white</item> 
     </style>
      <style name="windowTitleBackgroundStyle">
-    	<item name="android:background"> @drawable/btn_winered </item>
+    	<item name="android:background"> @color/burgandy </item>
     </style>
     <style name="windowTitleStyle">
         <!-- BROKEN -->

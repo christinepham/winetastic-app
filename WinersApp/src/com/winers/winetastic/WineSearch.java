@@ -4,6 +4,7 @@ package com.winers.winetastic;
 import java.util.ArrayList;
 
 import android.app.ExpandableListActivity;
+import android.app.LocalActivityManager;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -22,7 +23,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 
-public class WineSearch extends ExpandableListActivity
+public class WineSearch extends AbstractActivity
 implements OnChildClickListener {
 
 	private ArrayList<String> groups = new ArrayList<String>();
@@ -41,7 +42,12 @@ implements OnChildClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.wine_search);
 
-		ExpandableListView searchOptions = getExpandableListView();
+		
+		ExpandableListView searchOptions = (ExpandableListView) findViewById(android.R.id.list);
+//		LocalActivityManager mLocalActivityManager = new LocalActivityManager(this, false);
+//        mLocalActivityManager.dispatchCreate(savedInstanceState);
+//        searchOptions.setup();
+		//ExpandableListView searchOptions = getExpandableListView();
 		searchOptions.setDividerHeight(2);
 		searchOptions.setGroupIndicator(null);
 		searchOptions.setClickable(true);
@@ -54,7 +60,7 @@ implements OnChildClickListener {
 				(LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE),
 				this);
 		searchAdapter.initializeSelections();
-		getExpandableListView().setAdapter(searchAdapter);
+		searchOptions.setAdapter(searchAdapter);
 		searchOptions.setOnChildClickListener(this);
 		
 		Button search = (Button) findViewById(R.id.search);

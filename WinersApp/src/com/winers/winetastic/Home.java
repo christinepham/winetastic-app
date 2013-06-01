@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class Home extends AbstractActivity {
 
@@ -16,7 +17,10 @@ public class Home extends AbstractActivity {
         super.onCreate(savedInstanceState);
     	System.err.println("Created. Getting layout...");          
         setContentView(R.layout.activity_main);
-    	System.err.println("Got layout.");        
+    	System.err.println("Got layout.");   
+    	
+    	Button homeButton = (Button) findViewById(R.id.home_button);
+    	homeButton.setVisibility(View.GONE);
         
         Button search_but = (Button)findViewById(R.id.search);
         Button my_wines_but = (Button)findViewById(R.id.myWines);
@@ -42,7 +46,7 @@ public class Home extends AbstractActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(Home.this, MyWines.class);
+				Intent i = new Intent(Home.this, WineCellTabLayout.class);
 				startActivity(i);
 			}
         });

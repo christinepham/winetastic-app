@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_id">189778661175815</string>
-    
     <string name="app_name">Winetastic</string>
     <string name="action_settings">Settings</string>
 
@@ -22,8 +21,8 @@
 
     <!-- Home Screen -->
     <string name="search">Browse to search</string>
-    <string name="gohome">Home </string>
-    <string name="empty"> </string>
+    <string name="go_home">Home </string>
+    <string name="empty"></string>
 
     <!-- Intro Guest Screen -->
     <string name="find_wines">Find a Wine</string>
@@ -55,7 +54,6 @@
     <string name="error_field_required">This field is required</string>
     <string name="create_account_button">Create Account</string>
 
-    
     <!-- Wine Search -->
     <string name="wine_search_title"> Wine Search</string>
     <string name="search_hint">Search wine name</string>
@@ -63,10 +61,12 @@
     <string name="wine_search">Search</string>
     <string name="quick_search">Quick Search</string>
     <string name="advanced_search">Advanced Search</string>
-	<string name="searching">One moment while we find the best matches for your query..</string>
+    <string name="searching">One moment while we find the best matches for your query..</string>
 
     <!-- My Wines -->
     <string name="my_wines_title"> My Wines </string>
+    <string name="wish_list_title"> Wish List </string>
+    
 
     <!-- Event Calendar -->
     <string name="event_calendar_title"> Event Calendar </string>
@@ -96,8 +96,8 @@
     <string name="title_activity_wine_app_settings">WineAppSettings</string>
     <string name="none" />
     <string name="title_activity_search">SearchActivity</string>
-
     <string name="title_activity_search_results">SearchResults</string>
+<<<<<<< Updated upstream
     
     <!-- Wine Search Results -->
     <string name="wine_results">Wine Results</string>
@@ -108,14 +108,32 @@
     <string name="info_name">Wine name</string>
     <string name="info_buy">Buy Wine</string>
     <string name="info_region">Wine region</string>    
+=======
+
+    <!-- Wine Search Results -->
+    <string name="wine_results">Wine Results</string>
+    <string name="title_activity_wine_info_page">WineInfoPage</string>
+
+    <!-- Wine Info Page -->
+    <string name="info_title">Information</string>
+    <string name="info_name">Wine name</string>
+    <string name="info_region">Wine region</string>
+>>>>>>> Stashed changes
     <string name="info_color">Color</string>
     <string name="info_add_cellar">+Cellar</string>
     <string name="info_add_wishlist">+Wishlist</string>    
     <string name="info_gotoWinery">Winery</string>
     <string name="info_information">Information</string>
+<<<<<<< Updated upstream
 	<string name="info_descriptors">Descriptors</string>        
 	
     <string name="title_activity_login_activity_fb">LoginActivityFB</string>
 
 
+=======
+    <string name="info_descriptors">Descriptors</string>
+    <string name="title_activity_login_activity_fb">LoginActivityFB</string>
+    <string name="title_activity_wine_wish_list">Wine Wish List</string>
+
+>>>>>>> Stashed changes
 </resources>

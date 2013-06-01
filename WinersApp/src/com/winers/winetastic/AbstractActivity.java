@@ -3,8 +3,12 @@ package com.winers.winetastic;
 import com.winers.winetastic.R;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 
 public abstract class AbstractActivity extends Activity {
@@ -16,15 +20,32 @@ public abstract class AbstractActivity extends Activity {
 	  System.err.println("AbstractActivity: super.onCreate successful.");	  
 	  //check if customTitlebar is supported.
 	  final boolean customTitleSupported = requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);        
-	        if ( customTitleSupported ) {
+	  setContentView(R.layout.mycustomtitle);
+	  		if ( customTitleSupported ) {
 	        	// if customTitlebar is supports, set the titlebar layout for it.
 	            getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.mycustomtitle);
 	        }
-	        final TextView myTitleText = (TextView) findViewById(R.id.myTitle);
+	        
+	        final TextView myTitleText = (TextView) findViewById(R.id.my_title);
+	        Button homeButton = (Button)findViewById(R.id.home_button);
+	        homeButton.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(AbstractActivity.this, Home.class);
+					startActivity(i);
+					
+				}
+	        	
+	        });
+	        System.err.println("Before" + getTitleText() + "===========");
 	        if ( myTitleText != null ) {
-	            myTitleText.setText(getText(getTitleText()));
+	        	System.err.println("Makes it here" + getTitleText() + "===========");
+	        	myTitleText.setText(getText(getTitleText()));
 	        }
-	  System.err.println("Exiting AbstractActivity onCreate method");
+	       
+	        
+	  System.err.println("Exiting AbstractActivity onCreate method" + getTitleText() + "<-----");
 	 }
 	 
 	 /**
