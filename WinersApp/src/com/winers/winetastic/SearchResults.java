@@ -12,8 +12,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-//import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -27,7 +27,6 @@ public class SearchResults extends AbstractActivity {
 
         setContentView(R.layout.activity_search_results);
         searchQuery = (String) getIntent().getExtras().get("Search Query");
-        //Toast.makeText(this, searchQuery, Toast.LENGTH_SHORT).show();
         
         //Convert back to POJO
         final Gson gson = new Gson();
@@ -78,7 +77,7 @@ public class SearchResults extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-    //    getMenuInflater().inflate(R.menu.activity_search_results, menu);
+        getMenuInflater().inflate(R.menu.activity_search_results, menu);
         return true;
     }
     
