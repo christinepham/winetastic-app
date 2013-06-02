@@ -18,6 +18,7 @@
     
     <!-- Wine of the Day -->
     <string name="wineOfDay">Wine of the Day</string>
+    <string name="more_info">More Info</string>
 
     <!-- Home Screen -->
     <string name="search">Browse to search</string>
@@ -97,7 +98,6 @@
     <string name="none" />
     <string name="title_activity_search">SearchActivity</string>
     <string name="title_activity_search_results">SearchResults</string>
-<<<<<<< Updated upstream
     
     <!-- Wine Search Results -->
     <string name="wine_results">Wine Results</string>
@@ -108,32 +108,12 @@
     <string name="info_name">Wine name</string>
     <string name="info_buy">Buy Wine</string>
     <string name="info_region">Wine region</string>    
-=======
-
-    <!-- Wine Search Results -->
-    <string name="wine_results">Wine Results</string>
-    <string name="title_activity_wine_info_page">WineInfoPage</string>
-
-    <!-- Wine Info Page -->
-    <string name="info_title">Information</string>
-    <string name="info_name">Wine name</string>
-    <string name="info_region">Wine region</string>
->>>>>>> Stashed changes
     <string name="info_color">Color</string>
     <string name="info_add_cellar">+Cellar</string>
     <string name="info_add_wishlist">+Wishlist</string>    
     <string name="info_gotoWinery">Winery</string>
     <string name="info_information">Information</string>
-<<<<<<< Updated upstream
-	<string name="info_descriptors">Descriptors</string>        
-	
-    <string name="title_activity_login_activity_fb">LoginActivityFB</string>
-
-
-=======
     <string name="info_descriptors">Descriptors</string>
     <string name="title_activity_login_activity_fb">LoginActivityFB</string>
     <string name="title_activity_wine_wish_list">Wine Wish List</string>
-
->>>>>>> Stashed changes
 </resources>

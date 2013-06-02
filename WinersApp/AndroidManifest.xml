@@ -192,8 +192,13 @@
             android:name="com.winers.winetastic.WineWishList"
             android:label="@string/wish_list_title" >
         </activity>
+        
+        <activity
+            android:name="com.winers.winetastic.WineInfoPage"
+            android:label="@string/title_activity_wine_info_page" >
+        </activity>
+        
     </application>
-
     <!--
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
