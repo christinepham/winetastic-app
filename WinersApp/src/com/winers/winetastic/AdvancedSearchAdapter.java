@@ -100,7 +100,7 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 
 
 		if ((isSelected.get(groupPosition))[childPosition]) {
-			rowItem.setBackgroundColor(Color.GREEN);
+			rowItem.setBackgroundColor(Color.rgb(255, 216, 0));
 		}
 		else {
 			rowItem.setBackgroundColor(convertView.getResources().getColor(R.color.cream));
@@ -273,7 +273,7 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 		// set child view to selected state 
 		item.setSelected(true);
 		(isSelected.get(groupPosition))[childPosition] = true;
-		item.setBackgroundColor(Color.GREEN);
+		item.setBackgroundColor(Color.rgb(255, 216, 0));
 		
 		// set group view to selected state
 		if(text.indexOf("(") > 0) { 
@@ -300,7 +300,7 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 		}
 
 		text.setSelected(true);
-		text.setBackgroundColor(Color.GREEN);
+		text.setBackgroundColor(Color.rgb(255, 216, 0));
 		return (String) text.getText();
 	}
 

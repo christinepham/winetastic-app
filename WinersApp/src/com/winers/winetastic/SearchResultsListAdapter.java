@@ -79,7 +79,7 @@ public class SearchResultsListAdapter extends BaseAdapter{
 		ArrayList<String> descriptions = wines.get(position);
 		name.setText(descriptions.get(0));
 		location.setText(descriptions.get(1));
-		price.setText(descriptions.get(2));
+		price.setText("$" + descriptions.get(2));
 		
         // Set image
         //ImageLoader.loadFromWeb(descriptions.get(3), img);					
