@@ -20,61 +20,60 @@
             android:layout_height="50dip"
             android:src="@drawable/bottle" />
     </LinearLayout>
-    
 
     <!-- Wine Name -->
+
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
+        android:layout_height="wrap_content"
         android:layout_alignTop="@+id/thumbnail"
         android:layout_toRightOf="@+id/thumbnail"
         android:text="Chardonnay"
         android:textColor="#040404"
-        android:typeface="sans"
         android:textSize="15dip"
         android:textStyle="bold"
-        android:singleLine="true"
-        android:scrollHorizontally="true"/>
- 
+        android:typeface="sans" />
+
     <!-- Location -->
+
     <TextView
         android:id="@+id/location"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/name"
-        android:textColor="#343434"
-        android:textSize="10dip"
         android:layout_marginTop="1dip"
         android:layout_toRightOf="@+id/thumbnail"
         android:text="Napa"
-        android:singleLine="true"
-        android:scrollHorizontally="true"/>
- 	
-   
- 
-     <!-- Rightend Arrow -->
-     <ImageView android:layout_width="wrap_content"
-        android:id="@+id/right_arrow"
-        android:layout_height="wrap_content"
-        android:src="@drawable/right_arrow"
+        android:textColor="#343434"
+        android:textSize="10dip" />
+
+
+    <!-- Rightend Arrow -->
+
+    <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="20dip"
+        android:layout_height="20dip"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"/>
-     
-     
-    <!-- Rightend Price -->
+        android:layout_centerVertical="true"
+        android:src="@drawable/right_arrow" />
+
+    
+        <!-- Rightend Price -->
+
     <TextView
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/right_arrow"
-        android:layout_alignBottom ="@id/location"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="5dip"
         android:gravity="right"
         android:text="5.50"
-        android:layout_marginRight="10dip"
-        android:textSize="10dip"
         android:textColor="#10bcc9"
-        android:textStyle="bold"/>
+        android:textSize="10dip"
+        android:textStyle="bold" />
     
-
+    
 </RelativeLayout>
