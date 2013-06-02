@@ -15,24 +15,27 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:gravity="center" >
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="100dp"
             android:layout_height="270dp"
             android:contentDescription="@string/img_none"
-            android:scaleType="fitStart"
-            android:src="@drawable/fume_blanc" />
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:scaleType="centerCrop" />
 
         <LinearLayout
+            android:id="@+id/info_section"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical" 
             android:layout_toRightOf="@id/imageView2" >
             
 			<TableLayout
-			    android:id="@+id/info_module_statistics"
+			    android:id="@+id/info_module_wod_statistics"
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:paddingTop="@dimen/default_padding"
@@ -41,7 +44,7 @@
 			    android:orientation="vertical" >
 			    
 			    <TextView
-			        android:id="@+id/info_module_statistics_title"
+			        android:id="@+id/info_module_wod_statistics_title"
 			        android:background="@drawable/module_titlebar"
 				    android:layout_width="match_parent"
 				    android:layout_height="wrap_content"
@@ -50,29 +53,51 @@
 			    	android:text="@string/info_information" />
 		
 			</TableLayout>
-			
-			<TableLayout
-			    android:id="@+id/info_module_descriptors"
-			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content"
-			    android:paddingTop="@dimen/default_padding"	    
-			    android:paddingLeft="18dp"
-				android:paddingRight="18dp"		    
-			    android:orientation="vertical" >
-			    
-			    <TextView
-			        android:id="@+id/info_module_descriptors_title"
-			        android:background="@drawable/module_titlebar"
-				    android:layout_width="match_parent"
-				    android:layout_height="wrap_content"
-			    	android:textColor="@color/white"				    
-				    android:orientation="vertical"
-			    	android:text="@string/info_descriptors" />	 
-				
-			</TableLayout>
 					
         </LinearLayout>
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_winered_rounded"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/info_button_add_wishlist"
+            style="@style/ButtonTextInfo"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:text="@string/info_add_wishlist" />
+
+        <Button
+            android:id="@+id/info_button_add_cellar"
+            style="@style/ButtonTextInfo"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:background="@drawable/info_nav_border"
+            android:text="@string/info_add_cellar" />
+
+        <Button
+            android:id="@+id/info_button_more_info"
+            style="@style/ButtonTextInfo"
+            android:layout_width="72dp"
+            android:layout_height="40dp"
+            android:background="@drawable/info_nav_border"
+            android:text="@string/more_info" />
+
+        <Button
+            android:id="@+id/info_button_purchase"
+            style="@style/ButtonTextInfo"
+            android:layout_width="72dp"
+            android:layout_height="40dp"
+            android:background="@color/transparent"
+            android:onClick="openInBrowser"
+            android:text="@string/info_buy" />
+    </LinearLayout>
 
 </LinearLayout>

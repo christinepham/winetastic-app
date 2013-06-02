@@ -10,13 +10,14 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 //import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-public class SearchResults extends ListActivity {
+public class SearchResults extends AbstractActivity {
 	private ArrayList<ArrayList<String>> wines;
 	private String searchQuery;
 	
@@ -36,9 +37,9 @@ public class SearchResults extends ListActivity {
         wines = new ArrayList<ArrayList<String>>();
         insertWines(wineAPIResponse);
         final SearchResultsListAdapter adapter = new SearchResultsListAdapter(this, wines);
-//        ListView list = (ListView) findViewById(R.id.list)
-        getListView().setAdapter(adapter);
-        getListView().setOnItemClickListener(new OnItemClickListener() {
+        ListView lv = (ListView) findViewById(android.R.id.list);
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> av, View v, int pos,
@@ -102,5 +103,11 @@ public class SearchResults extends ListActivity {
     public String parseQuery (String s) {
     	return "";
     }
+
+	@Override
+	protected int getTitleText() {
+		// TODO Auto-generated method stub
+		return R.string.title_activity_search_results;
+	}
     
 }

@@ -14,20 +14,20 @@
         android:textSize="20px"
         android:textStyle="normal" />
 
-</LinearLayout>
+</LinearLayout>
+
 -->
 <!-- android:drawableRight="@android:drawable/plusminus" -->
 
-      <CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/row_name"
     android:layout_width="wrap_content"
     android:layout_height="40dp"
     android:layout_marginLeft="5dp"
+    android:background="@color/burgandy"
     android:gravity="center_vertical"
     android:padding="10dp"
     android:textColor="#FFFFFF"
     android:textSize="14sp"
-    android:textStyle="bold"
-    android:background="@color/burgandy"
-     />
+    android:textStyle="bold" />

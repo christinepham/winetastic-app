@@ -28,8 +28,9 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.Session;
-import com.facebook.SessionState;
+
+//import com.facebook.Session;
+//import com.facebook.SessionState;
 import com.facebook.android.DialogError;
 import com.facebook.android.Facebook;
 import com.facebook.android.Facebook.DialogListener;
@@ -37,7 +38,7 @@ import com.facebook.android.FacebookError;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
- * well.
+ * well.z
  */
 public class Login extends Activity implements OnClickListener{
 	
@@ -282,7 +283,9 @@ public class Login extends Activity implements OnClickListener{
 			//
 			// TODO: If Settings has multiple levels, Up should navigate up
 			// that hierarchy.
-	//		NavUtils.navigateUpFromSameTask(this);
+
+			//NavUtils.navigateUpFromSameTask(this);
+
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -497,4 +500,5 @@ public class Login extends Activity implements OnClickListener{
 	}
 
 	
+
 }

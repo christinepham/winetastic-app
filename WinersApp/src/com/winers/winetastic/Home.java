@@ -1,14 +1,22 @@
 package com.winers.winetastic;
 
+import com.winers.winetastic.WineSearch.AdvancedSearchAPICall;
+
 import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class Home extends AbstractActivity {
 
+	private AdvancedSearchAPICall advancedSearchAPICall;
+	private WinetasticManager manager = new WinetasticManager();
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	System.err.println("Attempting to create");
@@ -16,7 +24,10 @@ public class Home extends AbstractActivity {
         super.onCreate(savedInstanceState);
     	System.err.println("Created. Getting layout...");          
         setContentView(R.layout.activity_main);
-    	System.err.println("Got layout.");        
+    	System.err.println("Got layout.");   
+    	
+    	ImageButton homeButton = (ImageButton) findViewById(R.id.home_button);
+    	homeButton.setVisibility(View.GONE);
         
         Button search_but = (Button)findViewById(R.id.search);
         Button my_wines_but = (Button)findViewById(R.id.myWines);
@@ -42,7 +53,7 @@ public class Home extends AbstractActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(Home.this, MyWines.class);
+				Intent i = new Intent(Home.this, WineCellTabLayout.class);
 				startActivity(i);
 			}
         });
@@ -115,8 +126,9 @@ public class Home extends AbstractActivity {
         daily_vine_but.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(Home.this, DailyVine.class);
-				startActivity(i);
+				// Start AsyncTask to perform network operation (API call)
+				advancedSearchAPICall = new AdvancedSearchAPICall();
+				advancedSearchAPICall.execute();
 			}  	
         });
     }
@@ -134,6 +146,34 @@ public class Home extends AbstractActivity {
 	protected int getTitleText() {
 		// TODO Auto-generated method stub
 		return R.string.app_name;
+	}
+	
+	/**
+	 * Network operations must be performed in an AsyncTask, so that's
+	 * what this class is for.
+	 * Postcondition: upon successful search of at least one result, user
+	 *                is redirected to the search results page.
+	 */
+	class AdvancedSearchAPICall extends AsyncTask<Void, Void, String> {
+		
+		@Override
+		protected void onPreExecute() {
+			// This is where the "searching" overlay will go
+		}
+		
+		// This gets executed after onPreExecute()
+		@Override
+		protected String doInBackground(Void... arg0) {
+			return manager.getRandomWine();
+
+		}
+		
+		// This gets executed after doInBackground()
+		protected void onPostExecute(String result) {
+			Intent i = new Intent(Home.this, DailyVine.class);
+			i.putExtra("Search Query", result);
+			startActivity(i);
+		}
 	}
     
 }
