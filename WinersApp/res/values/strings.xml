@@ -21,7 +21,7 @@
     <string name="more_info">More Info</string>
 
     <!-- Home Screen -->
-    <string name="search">Browse to search</string>
+    <string name="search">Search Our MASSIVE Wine Database</string>
     <string name="go_home">Home </string>
     <string name="empty"></string>
 
@@ -40,7 +40,7 @@
     <string name="register_or">Or connect with</string>
     <string name="guest_login">Already a user? <u>Click to log in.</u></string>
 
-    <!-- Strings related to login -->
+    <!-- Strings related to login/logout -->
     <string name="title_activity_login">Returning Users</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -52,8 +52,16 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="create_account_button">Create Account</string>
-
+    <string name="logout_button">Log Out</string>
+    
+    <!-- Strings for testing purposes -->
+    <string name="cleardb">Clear Local DB</string>
+    
+    
+    <!-- Strings related to account registration -->
+	<string name="title_activity_register">New Users - Create an Account</string>
+	<string name="create_account_button">Create Account</string>
+	
     <!-- Wine Search -->
     <string name="wine_search_title"> Wine Search</string>
     <string name="search_hint">Search wine name</string>
@@ -124,9 +132,6 @@
 	
     <string name="title_activity_login_activity_fb">LoginActivityFB</string>
 
-    <string name="info_information">Information</string>
-    <string name="info_descriptors">Descriptors</string>
-    <string name="title_activity_login_activity_fb">LoginActivityFB</string>
     <string name="title_activity_wine_wish_list">Wine Wish List</string>
 
 

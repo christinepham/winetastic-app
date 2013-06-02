@@ -24,6 +24,9 @@
 		        android:layout_marginBottom="20dp"
 		        android:gravity="center"
 		        android:text="@string/search" />
+
+		    
+
 	    </RelativeLayout>
 	    
 		<TextView
@@ -90,7 +93,34 @@
 		        android:background="@drawable/addwinepng"
 		        android:orientation="horizontal" 
 	    		style="?android:attr/borderlessButtonStyle"/>
+		    
+
 	
+		</LinearLayout>
+		
+		<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" 
+		    		  android:orientation="horizontal" android:weightSum="2" android:id="@+id/LinearLayout3">
+		
+			<Button
+		        android:id="@+id/to_intro"
+		        android:layout_width="100dp"
+		        android:layout_height="wrap_content"
+		        android:gravity="center"
+		        android:layout_weight="1"
+				android:layout_marginTop = "120dp"
+		        style="?android:attr/borderlessButtonStyle"
+		        android:text="Go To Intro" />
+		
+			<Button
+		        android:id="@+id/logout"
+		        android:layout_width="100dp"
+		        android:layout_height="wrap_content"
+		        android:gravity="center"
+		        android:layout_weight="1"
+		        android:layout_marginTop = "120dp"
+		        style="?android:attr/borderlessButtonStyle"
+		        android:text="@string/logout_button" />
+		
 		</LinearLayout>
 	
 		<TextView
