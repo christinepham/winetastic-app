@@ -27,12 +27,11 @@
 
     <!-- Intro Guest Screen -->
     <string name="find_wines">Find a Wine</string>
-    <string name="guest_goto_home">Go to Home Screen</string>
-    <string name="close">X</string>
+    <string name="guest_goto_home">Home</string>
     <string name="submit">Submit</string>
     <string name="login">Login</string>
+    <string name="register">Register</string>
     <string name="facebook">Facebook</string>
-    <string name="google">Google</string>
     <string name="returning_users">Returning Users</string>
     <string name="login_with_email">Login with email</string>   
     <string name="create_account">Create an Account</string>
