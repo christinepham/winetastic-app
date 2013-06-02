@@ -14,11 +14,15 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
+import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
-public class DailyVine extends FragmentActivity {
+public class DailyVine extends AbstractFragmentActivity {
 	
 	String searchQuery;
 	String searchQueryWinery;
@@ -85,7 +89,7 @@ public class DailyVine extends FragmentActivity {
 		
 
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -99,6 +103,11 @@ public class DailyVine extends FragmentActivity {
     	startActivity(i);    	
     }
   
+    @Override
+	protected int getTitleText() {
+   		return R.string.title_activity_daily_vine;
+   	 }
+	
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	 * one of the sections/tabs/pages.
