@@ -36,6 +36,7 @@ public class WinetasticDAO {
 		String url = SNOOTH_URL + WINE_RESOURCE_ID + "?akey=" + API_KEY;
 		url += "&n=" + numResults;
 		url += "&t=wine";
+		url += "&a=1";
 		url += "&q=";
 		for (String arg : searchArgs) {
 			url += arg + "+";
@@ -59,6 +60,8 @@ public class WinetasticDAO {
 										int numResults) {
 		
 		String url = SNOOTH_URL + WINE_RESOURCE_ID + "?akey=" + API_KEY;
+		
+		url += "&a=1";
 	
 		if (searchParameters.getType() != "") {
 			url += "&q=" + searchParameters.getType();

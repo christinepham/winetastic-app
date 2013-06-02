@@ -53,6 +53,7 @@ public class ImageHelper {
 	 * @return Drawable
 	 */
 	public static Drawable loadImageFromWeb(String url) {
+		url = url.replace("\\", "");
 		new ImageHelper().new URLToDrawable().execute(url);
 		return ImageHelper.DrawableVariable.d;
 	}	

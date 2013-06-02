@@ -38,6 +38,7 @@
 	    style="@style/GuestButtonText"
 	    android:fontFamily="sans-serif"
 	    android:text="@string/register" />	
+	    
 	
 	</LinearLayout>
     

@@ -11,17 +11,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Home extends AbstractActivity {
 
 	private AdvancedSearchAPICall advancedSearchAPICall;
-	private WinetasticManager manager = new WinetasticManager();
+	private UserFunctions uF;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	System.err.println("Attempting to create");
     	System.out.println("hello");
         super.onCreate(savedInstanceState);
+        uF = new UserFunctions();
+        if (!uF.isUserLoggedIn(getApplicationContext())) {
+        	Intent i = new Intent(Home.this, Intro.class);
+			startActivity(i);
+        }
     	System.err.println("Created. Getting layout...");          
         setContentView(R.layout.activity_main);
     	System.err.println("Got layout.");   
@@ -29,6 +35,9 @@ public class Home extends AbstractActivity {
     	ImageButton homeButton = (ImageButton) findViewById(R.id.home_button);
     	homeButton.setVisibility(View.GONE);
         
+    	
+    	Button toIntro = (Button)findViewById(R.id.to_intro);
+    	Button logout = (Button)findViewById(R.id.logout);
         Button search_but = (Button)findViewById(R.id.search);
         Button my_wines_but = (Button)findViewById(R.id.myWines);
         Button cal_but = (Button)findViewById(R.id.calendar);
@@ -70,12 +79,22 @@ public class Home extends AbstractActivity {
         
         // map
 
-        map_but.setOnClickListener(new View.OnClickListener(){
+        logout.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-			//	Intent i = new Intent(Home.this, Map.class);
-			//	startActivity(i);
+				uF.logoutUser(getApplicationContext());
+				Toast.makeText(Home.this, "You have been logged out", Toast.LENGTH_LONG).show();
+				Intent i = new Intent(Home.this, Intro.class);
+				startActivity(i);
+			}
+        });
+        
+        // FOR TESTING - go to Intro page
+        toIntro.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(Home.this, Intro.class);
+				startActivity(i);
 			}
         });
         
@@ -164,7 +183,7 @@ public class Home extends AbstractActivity {
 		// This gets executed after onPreExecute()
 		@Override
 		protected String doInBackground(Void... arg0) {
-			return manager.getRandomWine();
+			return WinetasticManager.getRandomWine();
 
 		}
 		
