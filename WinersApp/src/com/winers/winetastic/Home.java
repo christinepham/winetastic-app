@@ -26,7 +26,7 @@ public class Home extends AbstractActivity {
         setContentView(R.layout.activity_main);
     	System.err.println("Got layout.");   
     	
-    	Button homeButton = (Button) findViewById(R.id.home_button);
+    	ImageButton homeButton = (ImageButton) findViewById(R.id.home_button);
     	homeButton.setVisibility(View.GONE);
         
         Button search_but = (Button)findViewById(R.id.search);

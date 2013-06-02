@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public abstract class AbstractActivity extends Activity {
@@ -27,7 +28,7 @@ public abstract class AbstractActivity extends Activity {
 	        }
 	        
 	        final TextView myTitleText = (TextView) findViewById(R.id.my_title);
-	        Button homeButton = (Button)findViewById(R.id.home_button);
+	        ImageButton homeButton = (ImageButton)findViewById(R.id.home_button);
 	        homeButton.setOnClickListener(new OnClickListener() {
 
 				@Override
