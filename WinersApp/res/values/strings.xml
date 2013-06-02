@@ -39,7 +39,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="register_or">Or connect with</string>
-    <string name="guest_login">Already a user? <u>Click to login.</u></string>
+    <string name="guest_login">Already a user? <u>Click to log in.</u></string>
 
     <!-- Strings related to login -->
     <string name="title_activity_login">Returning Users</string>
@@ -70,9 +70,6 @@
 
     <!-- Event Calendar -->
     <string name="event_calendar_title"> Event Calendar </string>
-
-    <!-- Map -->
-    <string name="map_title">Map (testing)</string>
 
     <!-- Toast to Share -->
     <string name="toast_to_share_title"> Toast to Share </string>
@@ -113,7 +110,14 @@
     <string name="info_add_wishlist">+Wishlist</string>    
     <string name="info_gotoWinery">Winery</string>
     <string name="info_information">Information</string>
-	<string name="info_descriptors">Descriptors</string>        
+	<string name="info_descriptors">Descriptors</string>
+	
+	<!-- Winery Info Page -->
+	<string name="info_winery_name">Winery Name</string>
+	<string name="info_winery_description">Description</string>
+	<string name="info_winery_goto">Visit Website</string>
+	<string name="info_winery_map">Open in Maps</string>	
+
 	
     <string name="title_activity_login_activity_fb">LoginActivityFB</string>
 
