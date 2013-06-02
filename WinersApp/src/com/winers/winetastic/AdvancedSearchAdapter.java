@@ -22,24 +22,26 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 	private ArrayList<String> 			groupItem, tempChild;
 	private ArrayList<String> 			groupText;					
 	private ArrayList<Object> 			childrenItem;
-	private ArrayList<View> 			groupViews;
+	private View[] 						groupViews2;
 	private ArrayList<ArrayList<View>> 	childViews;
 	private LayoutInflater 				minInflater;
 	private Activity 					activity;
 	private ArrayList<boolean[]> 		isSelected;
 	private boolean[] 					groupIsSelected;	
 	private WineSearchObject 			searchParameters;
+	private boolean 					groupViewsSet;
 
 	// -- Constructors -- //
 
 	public AdvancedSearchAdapter (ArrayList<String> group, ArrayList<Object> children ) {
 		groupItem = group;
 		childrenItem = children;
-		groupViews = new ArrayList<View>();
 		childViews = new ArrayList<ArrayList<View>>();
 		isSelected = new ArrayList<boolean[]>();
 		groupText = new ArrayList<String>();
+		groupViews2 = new View[groupItem.size()];
 		groupIsSelected = new boolean[groupItem.size()];
+		groupViewsSet = false;
 		for (int i=0; i<groupItem.size();i++) {
 			childViews.add(new ArrayList<View>());
 			isSelected.add(new boolean[((ArrayList<String>) children.get(i)).size()]);
@@ -108,16 +110,10 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 		convertView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// toast caused an index out of bounds error
-				// there is an error on which position certain items are getting added
-				// children are going to wrong group position in children item
-				// need to figure out why other optins are being selected when they arent
+				
 				tempChild = (ArrayList<String>) childrenItem.get(groupPosition);
 				CheckedTextView theItem = (CheckedTextView) v.findViewById(R.id.row_name);
-//				Toast.makeText(activity, ""+ groupPosition+"  "+tempChild.get(0)+"  " + tempChild.get(childPosition),
-//						Toast.LENGTH_SHORT).show();
-//				Toast.makeText(activity, "click  "+ groupPosition+"  "+ childPosition,
-//				Toast.LENGTH_SHORT).show();
+
 
 						String group = groupItem.get(groupPosition);
 
@@ -191,19 +187,19 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 		if (convertView == null) {
 			convertView = minInflater.inflate(R.layout.group_row, null);
 		}
+		
 		((CheckedTextView) convertView).setText(groupItem.get(groupPosition));
 		((CheckedTextView) convertView).setChecked(isExpanded);
-		if(groupViews.size()<groupItem.size() && !groupViews.contains(convertView))
-			groupViews.add(groupPosition, convertView);
-		
+		groupViews2[groupPosition] = convertView;
+
+		// check to update group views (recycling)
 		if(groupIsSelected[groupPosition]) {
 			((CheckedTextView) convertView).setText(groupText.get(groupPosition));
 		}
 		else {
 			((CheckedTextView) convertView).setText(groupItem.get(groupPosition));
 		}
-		
-		
+
 		
 		return convertView;
 	}
@@ -226,21 +222,29 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 
 	@SuppressWarnings("unchecked")
 	// Which warning are we suppressing here?
+	/**
+	 * 
+	 * Method to select one child item in a group.
+	 * 
+	 * @param item
+	 * @param groupPosition
+	 * @param childPosition
+	 * @return
+	 */
 	public String selectOne (CheckedTextView item, int groupPosition, int childPosition) {
-		// deselect
 		
-		CheckedTextView ct = ((CheckedTextView)groupViews.get(groupPosition));
+		// retrieve the current group view and its text
+		CheckedTextView ct = ((CheckedTextView)groupViews2[groupPosition]);
 		String text = (String) ct.getText();
-		String ind = (String) ct.getText();
-		ind += "  "+ groupPosition;
-		Toast.makeText(activity, ind, Toast.LENGTH_SHORT).show();
 		
-		
+		// -- deselect -- //
 		if ((isSelected.get(groupPosition))[childPosition]) {
+			// reset child view to unselected state
 			item.setSelected(false);
 			(isSelected.get(groupPosition))[childPosition] = false;
 			item.setBackgroundColor(item.getResources().getColor(R.color.cream));
 			
+			// reset group view to unselected state
 			if(text.indexOf("(") > 0) {
 				ct.setText(text.substring(0, text.indexOf("(")));
 				groupIsSelected[groupPosition] = false;
@@ -250,22 +254,28 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 			}
 			return "";
 		}
-		// clear the rest of selection
+		
+		// -- select -- //
+		
+		// reset all child views to unselected state
 		ArrayList<View> views = ((ArrayList<View>)childViews.get(groupPosition));
 		for(View cv : views) {
 			cv.setSelected(false);
 			cv.setBackgroundColor(cv.getResources().getColor(R.color.cream));
 		}
 
-		boolean [] tempSel =isSelected.get(groupPosition); 
+		// reset all child views selection to false
+		boolean [] tempSel = isSelected.get(groupPosition); 
 		for (int i=0; i<tempSel.length; i++) {
 			tempSel[i] = false;
 		}
 
-		
+		// set child view to selected state 
 		item.setSelected(true);
 		(isSelected.get(groupPosition))[childPosition] = true;
 		item.setBackgroundColor(Color.GREEN);
+		
+		// set group view to selected state
 		if(text.indexOf("(") > 0) { 
 			ct.setText(text.substring(0, text.indexOf("(")));
 			text = text.substring(0, text.indexOf("("));
@@ -276,6 +286,8 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 		ct.setText(text);
 		groupText.set(groupPosition, text);
 		groupIsSelected[groupPosition] = true;
+		
+		
 		return (String) item.getText();
 
 	}
@@ -323,6 +335,12 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 	}
 
 
+	/**
+	 * Method that returns a string describing 
+	 * all the selected items. 
+	 * 
+	 * @return
+	 */
 	public String getSelectedItems () {
 		String s = "";
 		s += " Color " + searchParameters.getColor() + "\n";
@@ -333,6 +351,10 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 		return s;
 	}
 
+	
+	/**
+	 * Method that clears all the selections.
+	 */
 	public void clear () {
 		// UNCOMMENT THE FOLLOWING FOR DEBUGGING PURPOSES
 		// Toast.makeText(activity, "CLEAR", Toast.LENGTH_SHORT).show();
@@ -348,26 +370,19 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 			ind += i + "  ";
 			groupIsSelected[i] = false;
 			groupText.set(i, groupItem.get(i));
-			((CheckedTextView)groupViews.get(i)).setText(groupItem.get(i));
+			((CheckedTextView)groupViews2[i]).setText(groupItem.get(i));
 
 		}
 		Toast.makeText(activity, ind, Toast.LENGTH_SHORT).show();
-		((CheckedTextView)groupViews.get(0)).setText(groupItem.get(0));
+		((CheckedTextView)groupViews2[0]).setText(groupItem.get(0));
 		setSelectionsFalse();
 		// clear all the selections
 		searchParameters.clear();
 	}
 
-	public void tempClear () {
-		// UNCOMMENT THE FOLLOWING FOR DEBUGGING PURPOSES
-		//Toast.makeText(activity, "TEMP CLEAR", Toast.LENGTH_SHORT).show();
-		for (ArrayList<View> children : childViews) {
-			for(View view : children) {
-				((CheckedTextView) view).setBackgroundColor(view.getResources().getColor(R.color.cream));
-			}
-		}		
-	}
-
+	/**
+	 * Method that sets selections to false.
+	 */
 	private void setSelectionsFalse () {
 
 
@@ -377,10 +392,7 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 				grps[i] = false;
 			}
 		}
-//		for(int i=0;i<groupIsSelected.length;i++) {
-//			groupIsSelected[i] = false;
-//			groupText.set(i, groupItem.get(i));
-//		}
+
 
 		/* 
 		 * UNCOMMENT THE FOLLOWING FOR DEBUGGING PURPOSES
@@ -393,6 +405,8 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 		Toast.makeText(activity, "CLear " + colorss, Toast.LENGTH_SHORT).show();
 		*/
 	}
+	
+
 
 
 
