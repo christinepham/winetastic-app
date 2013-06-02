@@ -1,17 +1,17 @@
 package com.winers.winetastic;
 
-import com.winers.winetastic.WineSearch.AdvancedSearchAPICall;
+import java.util.List;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 public class Home extends AbstractActivity {
 
@@ -174,7 +174,14 @@ public class Home extends AbstractActivity {
 	 *                is redirected to the search results page.
 	 */
 	class AdvancedSearchAPICall extends AsyncTask<Void, Void, String> {
+		private String wineryResponse;
+		private String wineResponse;
 		
+		String searchQuery;
+	    Gson gson;
+	    APISnoothResponse snoothResponse;
+	    List<APISnoothResponseWineArray> wineAPIResponse;
+	    
 		@Override
 		protected void onPreExecute() {
 			// This is where the "searching" overlay will go
@@ -183,14 +190,19 @@ public class Home extends AbstractActivity {
 		// This gets executed after onPreExecute()
 		@Override
 		protected String doInBackground(Void... arg0) {
-			return WinetasticManager.getRandomWine();
-
+			wineResponse = WinetasticManager.getRandomWine();
+			gson = new Gson();
+		    snoothResponse = gson.fromJson(wineResponse, APISnoothResponse.class);
+		    wineAPIResponse = (List<APISnoothResponseWineArray>) snoothResponse.wineResults;
+			wineryResponse = WinetasticManager.getWineryDetails(wineAPIResponse.get(0).wineryID);
+			return "";
 		}
 		
 		// This gets executed after doInBackground()
 		protected void onPostExecute(String result) {
 			Intent i = new Intent(Home.this, DailyVine.class);
-			i.putExtra("Search Query", result);
+			i.putExtra("Search Query", wineResponse);
+			i.putExtra("Winery", wineryResponse);
 			startActivity(i);
 		}
 	}

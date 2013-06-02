@@ -22,7 +22,7 @@ public class WinetasticManager {
 	
 	// Call DAO layer's getRandomWine
 	public static String getRandomWine() {
-		return dao.getRandomWine();
+		return WinetasticManager.dao.getRandomWine();
 	}
 	
 	// Call DAO layer's getWineryDetails

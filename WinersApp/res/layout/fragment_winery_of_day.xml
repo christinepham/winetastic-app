@@ -21,7 +21,7 @@
             android:layout_toRightOf="@id/imageView2" >
             
 			<TableLayout
-			    android:id="@+id/info_module_statistics"
+			    android:id="@+id/info_module_winery_statistics"
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:paddingTop="@dimen/default_padding"

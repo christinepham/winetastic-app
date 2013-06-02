@@ -20,14 +20,17 @@ import com.google.gson.Gson;
 
 public class DailyVine extends FragmentActivity {
 	
-	String searchQuery; 
+	String searchQuery;
+	String searchQueryWinery;
 	
-    //Convert back to POJO
     Gson gson;
     APISnoothResponse snoothResponse;
+    APISnoothResponseWinery snoothResponseWinery;
     List<APISnoothResponseWineArray> wineAPIResponse;
     List<APISnoothResponseWineArray> wineAPIResponsePass;
+    APISnoothResponseWineryDetails wineryAPIResponse;
     String wineArraySerialized;
+    String wineryArraySerialized;
     
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -50,14 +53,26 @@ public class DailyVine extends FragmentActivity {
 		setContentView(R.layout.activity_daily_vine);
 		
 		searchQuery = (String) getIntent().getExtras().get("Search Query");
+		searchQueryWinery = (String) getIntent().getExtras().get("Winery");
+		System.err.println("searchQueryWinery = " + searchQueryWinery);
 		
-	    //Convert back to POJO
+	    //Convert wine search query back to POJO
 	    gson = new Gson();
 	    snoothResponse = gson.fromJson(searchQuery, APISnoothResponse.class);
 	    wineAPIResponse = (List<APISnoothResponseWineArray>) snoothResponse.wineResults;
 	    wineAPIResponsePass = snoothResponse.wineResults;	
     	wineArraySerialized = gson.toJson(wineAPIResponsePass.get(0));
-	    
+    	System.err.println("MADE IT");
+    	
+    	
+    	//Convert winery search query back to POJO
+	    snoothResponseWinery = gson.fromJson(searchQueryWinery, APISnoothResponseWinery.class);
+	    wineryAPIResponse = (APISnoothResponseWineryDetails) snoothResponseWinery.wineryDetails;
+    	wineryArraySerialized = gson.toJson(wineryAPIResponse);
+
+    	System.err.println("MADE IT AGAIN");
+    	
+    	
 		// Create the adapter that will return a fragment for each of the two
 		// primary sections of the app.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
@@ -100,6 +115,11 @@ public class DailyVine extends FragmentActivity {
 			
 			Fragment fragment = new Fragment();
 			Bundle args = new Bundle();  
+			
+			//Pass winery of the day details to "From the Vine" Fragment
+			args.putString("random_winery_name", wineryAPIResponse.name);
+			
+			//Pass wine of the day details to "To the Cellar" Fragment
 			args.putString("random_wine_name", wineAPIResponse.get(0).name);
 			args.putString("random_wine_price", wineAPIResponse.get(0).price);
 			args.putString("random_wine_region", wineAPIResponse.get(0).region);
