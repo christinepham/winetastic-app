@@ -17,7 +17,6 @@ import com.google.gson.Gson;
 
 public class Home extends AbstractActivity {
 
-	private AdvancedSearchAPICall advancedSearchAPICall;
 	private UserFunctions uF;
 	
     @Override
@@ -63,8 +62,8 @@ public class Home extends AbstractActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(Home.this, WineCellTabLayout.class);
-				startActivity(i);
+				new MyWinesAPICall().execute();
+				
 			}
         });
 
@@ -156,8 +155,7 @@ public class Home extends AbstractActivity {
 			@Override
 			public void onClick(View v) {
 				// Start AsyncTask to perform network operation (API call)
-				advancedSearchAPICall = new AdvancedSearchAPICall();
-				advancedSearchAPICall.execute();
+				new DailyVineAPICall().execute();
 			}  	
         });
     }
@@ -183,7 +181,7 @@ public class Home extends AbstractActivity {
 	 * Postcondition: upon successful search of at least one result, user
 	 *                is redirected to the search results page.
 	 */
-	class AdvancedSearchAPICall extends AsyncTask<Void, Void, String> {
+	class DailyVineAPICall extends AsyncTask<Void, Void, String> {
 		private String wineryResponse;
 		private String wineResponse;
 		
@@ -213,6 +211,36 @@ public class Home extends AbstractActivity {
 			Intent i = new Intent(Home.this, DailyVine.class);
 			i.putExtra("Search Query", wineResponse);
 			i.putExtra("Winery", wineryResponse);
+			startActivity(i);
+		}
+	}
+	
+	class MyWinesAPICall extends AsyncTask<Void, Void, String> {
+
+		private String email;
+		
+		String searchQuery;
+	    Gson gson;
+	    APISnoothResponse snoothResponse;
+	    List<APISnoothResponseWineArray> wineAPIResponse;
+	    
+		@Override
+		protected void onPreExecute() {
+			email = new DatabaseHandler(getApplicationContext()).getUserDetails().get("email");
+		}
+		
+		// This gets executed after onPreExecute()
+		@Override
+		protected String doInBackground(Void... arg0) {
+			String myWinesResponse = WinetasticManager.returnMyWines(email);
+			System.err.println("MyWines API response: " + myWinesResponse);
+			return myWinesResponse;
+		}
+		
+		// This gets executed after doInBackground()
+		protected void onPostExecute(String result) {
+			Intent i = new Intent(Home.this, WineCellTabLayout.class);
+			i.putExtra("MyWines Query", result);
 			startActivity(i);
 		}
 	}

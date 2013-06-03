@@ -10,6 +10,8 @@ import android.widget.TabHost.TabSpec;
 
 public class WineCellTabLayout extends AbstractActivity {
 	
+	private String myWinesQuery;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +19,10 @@ public class WineCellTabLayout extends AbstractActivity {
          
         TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
         //TabHost tabHost = getTabHost();
+        
+        myWinesQuery = (String) getIntent().getExtras().get("MyWines Query");
+		
+		System.err.println("MY WINES QUERY FROM INSIDE WINECELL: " + myWinesQuery);
         
         
         LocalActivityManager mLocalActivityManager = new LocalActivityManager(this, false);
@@ -29,12 +35,14 @@ public class WineCellTabLayout extends AbstractActivity {
         // setting Title and Icon for the Tab
         myWinesTab.setIndicator("Wine Collection");//, getResources().getDrawable(R.drawable.wines));
         Intent myWinesIntent = new Intent(this, MyWines.class);
+        myWinesIntent.putExtra("MyWines Query", myWinesQuery);
         myWinesTab.setContent(myWinesIntent);
          
         // Tab for Wishlist 
         TabSpec wishListTab = tabHost.newTabSpec("Wish List");        
         wishListTab.setIndicator("Wish List");//, getResources().getDrawable(R.drawable.wishlist));
         Intent wishListIntenet = new Intent(this, WineWishList.class);
+        wishListIntenet.putExtra("MyWines Query", myWinesQuery);
         wishListTab.setContent(wishListIntenet);
          
         // Adding all TabSpec to TabHost

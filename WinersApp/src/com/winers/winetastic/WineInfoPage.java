@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -27,6 +28,7 @@ public class WineInfoPage extends InfoPage {
 	
 	private	APISnoothResponseWineArray 	info;
 	private WineSearchObject			searchObject;
+	private DatabaseHandler db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,10 @@ public class WineInfoPage extends InfoPage {
         // Set layout
         setContentView(R.layout.activity_info_wine);
         
+        // DB test
+        //db = new DatabaseHandler(getApplicationContext());
+        //Toast.makeText(WineInfoPage.this, "User email: " + db.getUserDetails().get("email"), Toast.LENGTH_SHORT).show();
+        
         // Get wine detail and descriptor table elements
         this.statsTable = (TableLayout) findViewById(R.id.info_module_statistics);
        
@@ -56,6 +62,25 @@ public class WineInfoPage extends InfoPage {
         // Set image
         ImageView img = (ImageView) findViewById(R.id.info_pic);        
         ImageLoader.loadFromWeb(info.image, img);
+        
+        Button addToWishlistButton = (Button) findViewById(R.id.info_button_add_wishlist);
+        Button addToCellarButton = (Button) findViewById(R.id.info_button_add_cellar);
+        
+        addToWishlistButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				new AddToWishlist().execute();
+			}
+		});	
+        
+        addToCellarButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				new AddToCellar().execute();
+			}
+		});	
         	
         
         // Set rating
@@ -99,6 +124,36 @@ public class WineInfoPage extends InfoPage {
     public void viewWineryInfo(View v) {
     	System.err.println("Winery clicked.");
     	new WineryIntentTask().execute();
+    }
+    
+    private class AddToWishlist extends AsyncTask<Void, Void, String> {
+    	@Override
+		protected String doInBackground(Void... arg0) {
+			System.err.println("Adding wine to wishlist.");
+			db = new DatabaseHandler(getApplicationContext());
+			String email = db.getUserDetails().get("email");
+	    	WinetasticManager.addWineToWishlist(email, info.code);	
+	    	return "";
+		}
+    	
+    	protected void onPostExecute(String result) {
+    		Toast.makeText(WineInfoPage.this, info.name + " has been added to your wishlist", Toast.LENGTH_SHORT).show();
+    	}
+    }
+    
+    private class AddToCellar extends AsyncTask<Void, Void, String> {
+    	@Override
+		protected String doInBackground(Void... arg0) {
+			System.err.println("Adding wine to cellar.");
+			db = new DatabaseHandler(getApplicationContext());
+			String email = db.getUserDetails().get("email");
+	    	WinetasticManager.addWineToCellar(email, info.code);	
+	    	return "";
+		}
+    	
+    	protected void onPostExecute(String result) {
+    		Toast.makeText(WineInfoPage.this, info.name + " has been added to your cellar", Toast.LENGTH_SHORT).show();
+    	}
     }
     
 	private class WineryIntentTask extends AsyncTask<Void, Void, String> {

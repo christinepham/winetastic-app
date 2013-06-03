@@ -5,4 +5,11 @@ public class APISnoothResponseMetaData {
 	public String status;
 	public String errmsg;
 	public String returned;
+	
+	public APISnoothResponseMetaData() {
+		results = "";
+		status = "";
+		errmsg = "";
+		returned = "";
+	}
 }

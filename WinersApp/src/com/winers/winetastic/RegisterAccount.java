@@ -81,13 +81,19 @@ public class RegisterAccount extends AbstractActivity {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			//Log.d("Button", "Register");
-			if (!error) json = userFunction.registerUser(email, password);
+			if (!error) {
+				WinetasticManager.createSnoothAccount(email);
+				json = userFunction.registerUser(email, password);
+				
+			}
+			
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(final Boolean success) {
 			if (!error) {
+				System.err.println("Created account with email address: " + email);
 				try {
 					if (json.getString(KEY_SUCCESS) != null) {
 						registerErrorMsg.setText("");

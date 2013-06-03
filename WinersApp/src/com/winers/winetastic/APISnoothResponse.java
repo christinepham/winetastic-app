@@ -50,6 +50,24 @@ class APISnoothResponseWineArray {
 	public String wineryID;
 	public String winery;
 	
+	public APISnoothResponseWineArray() {
+		 region = "";	
+		 snoothRank = "";	
+		 numMerchants = "";
+		 vintage = "";
+		 link = "";
+		 image = "";
+		 available = "";
+		 code = "";
+		 type = "";
+		 varietal = "";
+		 price = "";
+		 numReviews = "";
+		 name = "";		
+		 wineryID = "";
+		 winery = "";
+	}
+	
 	
 }
 

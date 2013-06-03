@@ -48,4 +48,23 @@ class APISnoothResponseWineryDetails {
     public String lng;
     public String image;
     public String description;
+    
+    public APISnoothResponseWineryDetails() {
+    	id = "";
+        name = "";
+        numWines = "";
+        address = "";
+        city = "";
+        state = "";
+        zip = "";
+        country = "";
+        phone = "";
+        url = "";
+        email = "";
+        closed = "";
+        lat = "";
+        lng = "";
+        image = "";
+        description = "";
+    }
 }

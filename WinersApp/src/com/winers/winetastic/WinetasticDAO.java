@@ -1,9 +1,11 @@
 package com.winers.winetastic;
 
+import java.security.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Random;
 import org.apache.http.HttpEntity;
@@ -21,6 +23,10 @@ public class WinetasticDAO {
 	private final String SNOOTH_URL = "http://api.snooth.com";
 	private final String WINE_RESOURCE_ID = "/wines/";
 	private final String WINERY_RESOURCE_ID = "/winery/";
+	private final String MY_WINES_RESOURCE_ID = "/my-wines/";
+	private final String RATE_WINE_RESOURCE_ID = "/rate/";
+	private final String CREATE_ACCOUNT_RESOURCE_ID = "/create-account/";
+	private final String RANDOM_STRING = "k8d9j5h8g4u7tr4";
 	private final int API_RETVAL_LENGTH_FOR_ERROR = 120;
 	
 	
@@ -120,6 +126,63 @@ public class WinetasticDAO {
 		return callSnoothAPIWineSearch(url);
 	}
 	
+	public void addWineToWishlist(String email, String wineID) {
+		String url = SNOOTH_URL + RATE_WINE_RESOURCE_ID + "?akey=" + API_KEY;
+		url += "&u=" + RANDOM_STRING + email;
+		url += "&p=" + RANDOM_STRING;
+		url += "&id=" + wineID;
+		url += "&w=1";
+		
+		retrieveStream(url);
+	}
+	
+	public void addWineToCellar(String email, String wineID) {
+		String url = SNOOTH_URL + RATE_WINE_RESOURCE_ID + "?akey=" + API_KEY;
+		url += "&u=" + RANDOM_STRING + email;
+		url += "&p=" + RANDOM_STRING;
+		url += "&id=" + wineID;
+		url += "&c=1";
+		
+		retrieveStream(url);
+	}
+	
+	public void createSnoothAccount(String email) {
+		String url = SNOOTH_URL + CREATE_ACCOUNT_RESOURCE_ID + "?akey=" + API_KEY;
+		String newEmail = RANDOM_STRING + email;
+		url += "&e=" + newEmail;
+		url += "&p=" + RANDOM_STRING;
+		
+		MessageDigest m;
+		String hashtext = new String();
+		try {
+			m = MessageDigest.getInstance("MD5");
+			m.reset();
+			m.update(newEmail.getBytes());
+			byte[] digest = m.digest();
+			BigInteger bigInt = new BigInteger(1,digest);
+			hashtext = bigInt.toString(16);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		
+		
+		hashtext = hashtext.substring(0,19);
+		System.err.println("sn = " + hashtext);
+		url += "&s=" + hashtext;
+		System.err.println("Created snooth account using the following URL:");
+		System.err.println(url);
+		InputStream source = retrieveStream(url);
+		Reader reader = new InputStreamReader(source);
+	}
+	
+	
+	public String returnMyWines(String email) {
+		String url = SNOOTH_URL + MY_WINES_RESOURCE_ID + "?akey=" + API_KEY;
+		url += "&u=" + RANDOM_STRING + email;
+		url += "&p=" + RANDOM_STRING;
+		return callSnoothAPIMyWines(url);
+	}
+	
 	/**
 	 * getRandomWine returns a JSON string containing a single random wine
 	 */
@@ -161,6 +224,20 @@ public class WinetasticDAO {
 		return (searchResultString.length() > API_RETVAL_LENGTH_FOR_ERROR);
 	}
 	
+	private String callSnoothAPIMyWines(String url){
+		// For converting to and from JSON/Java objects
+		Gson gson = new Gson();
+		// Make API call
+		InputStream source = retrieveStream(url);  
+		//System.err.println("callSnoothAPI: " + url);
+        Reader reader = new InputStreamReader(source);
+	    
+        // Convert JSON object to Java object
+        APISnoothResponseMyWines snoothResponse = gson.fromJson(reader, APISnoothResponseMyWines.class);
+        
+        // Return JSON array
+        return gson.toJson(snoothResponse);
+	}
 	
 	private String callSnoothAPIWineSearch(String url) {
 		
