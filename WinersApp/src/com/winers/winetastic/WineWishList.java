@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -16,6 +17,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class WineWishList extends Activity {
 
 	private ArrayList<ArrayList<String>> wines;
+	private boolean removeMode;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +71,19 @@ public class WineWishList extends Activity {
 		getMenuInflater().inflate(R.menu.wine_wish_list, menu);
 		return true;
 	}
-
+	
+	public void toggleRemove(View v) {
+		removeMode = !removeMode;
+		
+		if(removeMode) {
+			v.setBackgroundColor(getResources().getColor(R.color.red));
+			((Button) v).setText(getResources().getString(R.string.removeModeTrue));
+			
+		} else {
+			v.setBackgroundColor(getResources().getColor(R.color.charcoal));
+			((Button) v).setText(getResources().getString(R.string.removeModeFalse));			
+		}
+	}	
 	
 	protected int getTitleText() {
 		// TODO Auto-generated method stub

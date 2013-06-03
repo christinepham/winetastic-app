@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
+import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,15 +14,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
 
 public class MyWines extends ListActivity {
 
 	private ArrayList<ArrayList<String>> wines;
+	private boolean removeMode = false;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_search_results);
+		setContentView(R.layout.activity_my_wines);
 		
 //        //Convert back to POJO
 //        final Gson gson = new Gson();
@@ -41,7 +44,6 @@ public class MyWines extends ListActivity {
 			public void onItemClick(AdapterView<?> av, View v, int pos,
 					long id) {			
 
-
 				Intent i = new Intent(MyWines.this, WineInfoPage.class);
 
 				//List<APISnoothResponseWineArray> wineAPIResponse = snoothResponse.wineResults;	
@@ -51,7 +53,6 @@ public class MyWines extends ListActivity {
 				startActivity(i);
 			}
 		});
-
 
 	}
 
@@ -65,6 +66,19 @@ public class MyWines extends ListActivity {
 	protected int getTitleText() {
 		// TODO Auto-generated method stub
 		return R.string.my_wines_title;
+	}
+	
+	public void toggleRemove(View v) {
+		removeMode = !removeMode;
+		
+		if(removeMode) {
+			v.setBackgroundColor(getResources().getColor(R.color.red));
+			((Button) v).setText(getResources().getString(R.string.removeModeTrue));
+			
+		} else {
+			v.setBackgroundColor(getResources().getColor(R.color.charcoal));
+			((Button) v).setText(getResources().getString(R.string.removeModeFalse));			
+		}
 	}
 	
 	

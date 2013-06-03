@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -57,12 +58,29 @@ public class InfoPage extends AbstractActivity {
     		}
     		
     		// Set contents of text, make black, change width
+    		Linkify.addLinks(text, Linkify.ALL);
     		text.setText(cols[i], TextView.BufferType.NORMAL);
     		text.setTextColor(getResources().getColor(R.color.black));
    		
     		r.addView(text);
     	}    	
     	((TableLayout)parent).addView(r);
+    }
+    
+    protected String parseString(String s, int maxLineLength, boolean breakWords) {
+    	System.err.println(s);
+    	if(s.length() < maxLineLength) return s;
+    	for(int i=0; i<s.length(); i++) {
+    		if(i % maxLineLength == 0) {
+    			int last = i;
+    			while(i >= 0 && s.charAt(i) != ' ')  i--;
+				s = s.substring(0,i+1)  
+						+ System.getProperty("line.separator")
+						+ s.substring(i+1);
+    			i = last + 3;
+    		}
+    	}
+    	return s;
     }
 
 	@Override

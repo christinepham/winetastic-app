@@ -30,7 +30,8 @@ public class WineryInfoPage extends InfoPage {
         	info = obj.wineryDetails;
         }        
         
-        setContentView(R.layout.activity_info_winery);     
+        setContentView(R.layout.activity_info_winery);  
+        statsTable = (TableLayout) findViewById(R.id.info_winery_module_statistics);        
         
         // Set name
         TextView namev = (TextView) findViewById(R.id.info_winery_name);
@@ -46,29 +47,31 @@ public class WineryInfoPage extends InfoPage {
         TextView address3 = (TextView) findViewById(R.id.info_winery_address3);         
         
         address1.setText(info.address, TextView.BufferType.NORMAL);        
-	    address2.setText(info.city + ", " + info.state + ", info.zip");   
-        if(!info.country.equals("US")) {
-        	if(!(info.zip.equals(""))) address3.setText(info.zip);
-        	else address3.setText("");
+	    address2.setText(info.city + ", " + info.state + " " + info.zip);   
+        if(!info.country.isEmpty()) {
+        	if(!(info.zip.isEmpty())) 
+        		address3.setText(info.zip);
+        	else 
+        		address3.setText("");
         } else {
         	if(!(info.country.equals(""))) address3.setText(info.country);
         	else address3.setText("");
         }
         
         // Set description
-//        TableLayout descTable = (TableLayout) findViewById(R.id.info_winery_module_desc);
-//        if(info.description != null && !(info.description.equals(""))) {
-//        	addRow(descTable, Html.fromHtml(info.description).toString());
-//        } else {
-//        	addRow(descTable, "No information available.");
-//        }
+        TableLayout descTable = (TableLayout) findViewById(R.id.info_winery_module_desc);
+        if(info.description == null || info.description.isEmpty()) {
+        	addRow(descTable, "No information available.");
+        } else {
+        	String about = parseString(Html.fromHtml(info.description).toString(), 40, true);
+        	addRow(descTable, about);        	
+        }
         
         // Populate table
-//        if(!(info.type.equals("")))	 	addRow(statsTable, "Type", info.type);        
-//        if(!(info.varietal.equals(""))) addRow(statsTable, "Varietal", info.varietal);        
-//        if(!(info.price.equals(""))) 	addRow(statsTable, "Price", "$" + info.price);  
-//        if(!(info.vintage.equals(""))) 	addRow(statsTable, "Vintage", info.vintage);    
-//        if(info.winery != null)		 	addRow(statsTable, "Winery", info.winery);        
+        int closed = Integer.valueOf((info.closed));
+        if(closed != 0)					addRow(statsTable, "This winery is closed."); 
+        if(!(info.phone.isEmpty()))	 	addRow(statsTable, "Number", info.phone);    
+        if(!(info.email.isEmpty()))	 	addRow(statsTable, "Email", info.email);  
 	}
 	
     @Override
@@ -76,6 +79,14 @@ public class WineryInfoPage extends InfoPage {
         //getMenuInflater().inflate(R.menu.activity_info_winery, menu);
         return true;
     }
+    
+    public void openURL(View v) {
+    	if(info.url != null && !(info.url.isEmpty())) {
+	    	Intent i = new Intent(Intent.ACTION_VIEW);
+	    	i.setData(Uri.parse(info.url));
+	    	startActivity(i);      
+    	}
+    }    
     
     public void openInMaps(View v) {
     	String mapname = info.name;
