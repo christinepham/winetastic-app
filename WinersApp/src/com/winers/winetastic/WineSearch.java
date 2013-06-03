@@ -94,8 +94,6 @@ implements OnChildClickListener {
 					combinedSearchAPICALL.execute();
 				}		
 			}	
-			
-			
 		});
 
 		Button reset = (Button) findViewById(R.id.reset);
