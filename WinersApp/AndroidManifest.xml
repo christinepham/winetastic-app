@@ -17,6 +17,7 @@
         android:label="@string/app_name"
         android:theme="@style/WineTheme" >
         <activity
+		 android:configChanges="keyboardHidden|orientation|screenSize"
             android:name="com.winers.winetastic.Intro"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.NoTitleBar" >
@@ -27,6 +28,7 @@
             </intent-filter>
         </activity>
         <activity
+		 android:configChanges="keyboardHidden|orientation|screenSize"
             android:name="com.winers.winetastic.Home"
             android:label="@string/go_home"
             android:parentActivityName="com.winers.winetastic.Intro" >
@@ -35,10 +37,12 @@
                 android:value="com.winers.winetastic.Activity.winetasticMainActivity" />
         </activity>
         <activity
+		 android:configChanges="keyboardHidden|orientation|screenSize"
             android:name="com.winers.winetastic.DailyVine"
             android:label="@string/title_activity_daily_vine" >
         </activity>
         <activity
+		 android:configChanges="keyboardHidden|orientation|screenSize"
             android:name="com.winers.winetastic.WineSearch"
             android:label="@string/find_wines"
             android:parentActivityName="com.winers.winetastic.Intro" >
@@ -47,6 +51,7 @@
                 android:value="com.winers.winetastic.Activity.winetasticMainActivity" />
         </activity>
         <activity
+		 android:configChanges="keyboardHidden|orientation|screenSize"
             android:name="com.winers.winetastic.EventCalendar"
 
             android:label="@string/title_activity_event_calendar" >
@@ -62,6 +67,7 @@
             -->
         </activity>
         <activity
+		 android:configChanges="keyboardHidden|orientation|screenSize"
             android:name="com.winers.winetastic.MyWines"
             android:label="@string/title_activity_my_wines" >
 
@@ -78,6 +84,7 @@
             -->
         </activity>
         <activity
+		 android:configChanges="keyboardHidden|orientation|screenSize"
             android:name="com.winers.winetastic.Map"
             android:label="@string/title_activity_map" >
 
@@ -95,6 +102,7 @@
             -->
         </activity>
         <activity
+		 android:configChanges="keyboardHidden|orientation|screenSize"
             android:name="com.winers.winetastic.defunct.ToastToShare"
             android:label="@string/title_activity_toast_to_share" >
 
@@ -112,6 +120,7 @@
             -->
         </activity>
         <activity
+		 android:configChanges="keyboardHidden|orientation|screenSize"
             android:name="com.winers.winetastic.AddWine"
             android:label="@string/title_activity_add_wine" >
 
@@ -129,6 +138,7 @@
             -->
         </activity>
         <activity
+		 android:configChanges="keyboardHidden|orientation|screenSize"
             android:name="com.winers.winetastic.defunct.Settings"
             android:label="@string/title_activity_settings" >
 
@@ -146,6 +156,7 @@
             -->
         </activity>
         <activity
+		 android:configChanges="keyboardHidden|orientation|screenSize"
             android:name="com.winers.winetastic.defunct.WineAppSettings"
             android:label="@string/title_activity_wine_app_settings" >
 
@@ -163,6 +174,7 @@
             -->
         </activity>
         <activity
+		 android:configChanges="keyboardHidden|orientation|screenSize"
             android:name="com.winers.winetastic.Login"
             android:label="@string/title_activity_login"
             android:parentActivityName="com.winers.winetastic.AbstractActivity"
@@ -172,6 +184,7 @@
                 android:value="com.winers.winetastic.Activities.AbstractActivity" />
         </activity>
         <activity
+		 android:configChanges="keyboardHidden|orientation|screenSize"
             android:name="com.winers.winetastic.RegisterAccount"
             android:label="@string/title_activity_register"
             android:parentActivityName="com.winers.winetastic.AbstractActivity"
@@ -181,7 +194,8 @@
                 android:value="com.winers.winetastic.Activities.AbstractActivity" />
         </activity>
         
-        <activity android:name="com.winers.winetastic.SearchActivity" >
+        <activity
+		 android:configChanges="keyboardHidden|orientation|screenSize" android:name="com.winers.winetastic.SearchActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -191,22 +205,31 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
+		 android:configChanges="keyboardHidden|orientation|screenSize"
             android:name="com.winers.winetastic.SearchResults"
             android:label="@string/title_activity_search_results" >
         </activity>
         <activity
+		 android:configChanges="keyboardHidden|orientation|screenSize"
             android:name="com.winers.winetastic.WineCellTabLayout"
             android:label="@string/my_wines_title" >
         </activity>
         <activity
+		 android:configChanges="keyboardHidden|orientation|screenSize"
             android:name="com.winers.winetastic.WineWishList"
             android:label="@string/wish_list_title" >
         </activity>
         
         <activity
+		 android:configChanges="keyboardHidden|orientation|screenSize"
             android:name="com.winers.winetastic.WineInfoPage"
             android:label="@string/title_activity_wine_info_page" >
         </activity>
+        <activity
+		 android:configChanges="keyboardHidden|orientation|screenSize"
+            android:name="com.winers.winetastic.WineryInfoPage"
+            android:label="@string/title_activity_winery_info_page" >
+        </activity>        
         
     </application>
 </manifest>
