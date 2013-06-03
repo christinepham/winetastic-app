@@ -26,7 +26,8 @@ public class MyWines extends ListActivity {
 	private String wineNameToRemove;
 	private DatabaseHandler db;
 	private boolean removeMode = false;
-
+	private int adapterClearPosition;
+	SearchResultsListAdapter adapter;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class MyWines extends ListActivity {
         wines = new ArrayList<ArrayList<String>>();
 
         insertWines(winesAPIResponse);
-		SearchResultsListAdapter adapter = new SearchResultsListAdapter(this, wines);
+		adapter = new SearchResultsListAdapter(this, wines);
 		getListView().setAdapter(adapter);
 		getListView().setOnItemClickListener(new OnItemClickListener() {
 
@@ -58,7 +59,7 @@ public class MyWines extends ListActivity {
 			public void onItemClick(AdapterView<?> av, View v, int pos,
 					long id) {			
 				
-				
+				adapterClearPosition = pos;
 				// HOLY SHIT HERE WE GO
 				
 				List<APISnoothResponseWineArray> wineArrayForInfoPage = new ArrayList<APISnoothResponseWineArray>();
@@ -95,11 +96,17 @@ public class MyWines extends ListActivity {
 				else { // REMOVE MODE
 					wineCodeToRemove = wineArrayForInfoPage.get(pos).code;
 					wineNameToRemove = wineArrayForInfoPage.get(pos).name;
+					adapterClearPosition = pos;
 					new RemoveFromCellar().execute();
 				}
 			}
 		});
 
+	}
+	
+	private void clearItemFromAdapter(int position) {
+		adapter.clear(position);
+		adapter.notifyDataSetChanged();
 	}
 
 	@Override
@@ -126,9 +133,11 @@ public class MyWines extends ListActivity {
 			((Button) v).setText(getResources().getString(R.string.removeModeFalse));	
 			
 			// REFRESH PAGE
+			/*
 			Intent i = new Intent(MyWines.this, Home.class);
 			i.putExtra("mywines_reload", "true");
 			startActivity(i);
+			*/
 		}
 	}
 	
@@ -157,11 +166,17 @@ public class MyWines extends ListActivity {
 			String email = db.getUserDetails().get("email");
 	    	WinetasticManager.removeWineFromCellar(email, wineCodeToRemove);
 	    	System.err.println("Wine code to remove: " + wineCodeToRemove);
+	    	
+	    	// Figure out how to remove the wine from the list
+	    	
+	    	
+	    	
 	    	return "";
 		}
     	
     	protected void onPostExecute(String result) {
-    		Toast.makeText(MyWines.this, wineNameToRemove + " has been removed from your cellar", Toast.LENGTH_SHORT).show();
+    		clearItemFromAdapter(adapterClearPosition);
+    		Toast.makeText(MyWines.this, wineNameToRemove + " has been removed from your cellar", Toast.LENGTH_SHORT).show();    		
     	}
     }
 }

@@ -33,12 +33,14 @@ public class Home extends AbstractActivity {
         }
         
         // This tests to see if MyWines sent us back here to refresh.
+        /*
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
         	if (extras.getString("mywines_reload").equals("true")) {
         		new MyWinesAPICall().execute();
         	}
         }
+        */
         
     	System.err.println("Created. Getting layout...");          
         setContentView(R.layout.activity_main);
