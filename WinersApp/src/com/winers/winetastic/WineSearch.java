@@ -32,9 +32,11 @@ implements OnChildClickListener {
 	private AdvancedSearchAPICall advancedSearchAPICall;
 
 	private QuickSearchAPICall quickSearchAPICall;
+	private CombinedSearchAPICall combinedSearchAPICALL;
 	private ArrayList<String> stringArgs = new ArrayList<String>();
 	
 	private String quickSearchResults;
+
 
 
 	@Override
@@ -65,16 +67,40 @@ implements OnChildClickListener {
 		
 		Button search = (Button) findViewById(R.id.search);
 		search.setOnClickListener(new OnClickListener(){
+		 // set to true if nothing in quick search
 
 			@Override
 			public void onClick(View v) {
 				// Start AsyncTask to perform network operation (API call)
+
+				SearchView searchVal = (SearchView) findViewById(R.id.search_bar);
+				if(searchVal.getQuery().toString() == ""){
+					// if there is nothing in quick search field
+					advancedSearchAPICall = new AdvancedSearchAPICall();
+					advancedSearchAPICall.execute();
+				}else{
+					stringArgs.clear();
+			    	String name = searchVal.getQuery().toString();
+			    	// gray out the advanced search options
+			    	
+			    	Toast.makeText(getApplicationContext(), "searching for "+ name, 0).show();
+			    	String[] splitted = name.split(" ");
+			    	for(String split : splitted){
+			    		stringArgs.add(split); // fill array list 
+			    	}
+			    	//Toast.makeText(getApplicationContext(), "filled array list", 0).show();
+			        combinedSearchAPICALL = new CombinedSearchAPICall();
+					combinedSearchAPICALL.execute();
+				}
+
 				System.err.println("Clicked. Making API Call.");
 				advancedSearchAPICall = new AdvancedSearchAPICall();
 				System.err.println("Done. Executing AsyncTask.");
 				advancedSearchAPICall.execute();
 				System.err.println("Okey-dokey.");				
 			}	
+			
+			
 		});
 		
 		Button reset = (Button) findViewById(R.id.reset);
@@ -90,7 +116,7 @@ implements OnChildClickListener {
 		final SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() { 
 		    @Override 
 		    public boolean onQueryTextChange(String newText) { 
-		        // Do something 
+		    	
 		        return true; 
 		    } 
 
@@ -205,6 +231,40 @@ implements OnChildClickListener {
 		return true;
 	}
 	
+	/**
+	 * Network operations must be performed in an AsyncTask, so that's
+	 * what this class is for.
+	 * Postcondition: upon successful search of at least one result, user
+	 *                is redirected to the search results page.
+	 */
+	class CombinedSearchAPICall extends AsyncTask<Void, Void, String> {
+		
+		@Override
+		protected void onPreExecute() {
+			// This is where the "searching" overlay will go
+		}
+		
+		// This gets executed after onPreExecute()
+		@Override
+		protected String doInBackground(Void... arg0) {
+			WineSearchObject sP = searchAdapter.getSearchParameters();
+			return WinetasticManager.performCombinedSearch(sP, stringArgs, 20);
+
+		}
+		
+		// This gets executed after doInBackground()
+		protected void onPostExecute(String result) {
+			if (WinetasticManager.hasSearchResults(result)) {
+				// Search has results. Send to SearchResult page
+				Intent i = new Intent(WineSearch.this, SearchResults.class);
+				i.putExtra("Search Query", result);
+				startActivity(i);
+			} else {
+				// No search results. Notify user to search again.
+				Toast.makeText(WineSearch.this, "No matches were found. Please try your search again.", Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
 
 	/**
 	 * Network operations must be performed in an AsyncTask, so that's
@@ -225,7 +285,6 @@ implements OnChildClickListener {
 			WineSearchObject sP = searchAdapter.getSearchParameters();
 			System.err.println("Doing advanced search...");
 			return WinetasticManager.performAdvancedSearch(sP, 20);
-
 		}
 		
 		// This gets executed after doInBackground()

@@ -1,3 +1,4 @@
+
 package com.winers.winetastic;
 
 import java.util.ArrayList;
@@ -12,6 +13,10 @@ public class WinetasticManager {
 	public static String performQuickSearch(ArrayList<String> searchArgs,
 			int numResults) {
 		return WinetasticManager.dao.performQuickSearch(searchArgs, numResults);
+	}
+	
+	public static String performCombinedSearch(WineSearchObject searchParameters, ArrayList<String> searchArgs, int numResults){
+		return WinetasticManager.dao.performCombinedSearch(searchParameters, searchArgs, numResults);
 	}
 	
 	// Call DAO layer's performAdvancedSearch

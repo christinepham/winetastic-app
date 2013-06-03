@@ -79,9 +79,43 @@ public class WinetasticDAO {
 			url += "&s=price+desc";
 			
 		}
-		url += "&a=0";
 		url += "&t=wine";
 
+		
+		return callSnoothAPIWineSearch(url);
+	}
+	
+	public String performCombinedSearch(WineSearchObject searchParameters, 
+								ArrayList<String> searchArgs, int numResults){
+		String url = SNOOTH_URL + WINE_RESOURCE_ID + "?akey=" + API_KEY;
+		
+		url += "&a=1";
+	
+		if (searchParameters.getType() != "") {
+			url += "&q=" + searchParameters.getType() + "+";
+			if (searchParameters.getAccent() != "")
+				url += searchParameters.getAccent() + "+";
+		}
+		else if (searchParameters.getAccent() != "")
+			url += "&q=" + searchParameters.getAccent() + "+";
+		else{
+			url += "&q=";
+		}
+		for (String arg : searchArgs) {
+			url += arg + "+";
+		}
+		
+		// take off last "+"
+		url = url.substring(0, (url.length()-1));
+		
+		url += "&n=" + numResults;
+		if (searchParameters.getColor() != "") 
+			url += "&color=" + searchParameters.getColor();
+		if (searchParameters.getPrice() != "") {
+			url += searchParameters.parsePriceString();
+			url += "&s=price+asc";
+		}
+		url += "&t=wine";
 		
 		return callSnoothAPIWineSearch(url);
 	}

@@ -104,7 +104,8 @@ public class Home extends AbstractActivity {
 			}
         });
         
-
+    
+        
 //        map_but.setOnClickListener(new View.OnClickListener(){
 //			@Override
 //			public void onClick(View v) {

@@ -3,10 +3,10 @@
     package="com.winers.winetastic"
     android:versionCode="1"
     android:versionName="1.0" >
-
+	
     <uses-sdk
         android:minSdkVersion="13"
-        android:targetSdkVersion="17" />
+        android:targetSdkVersion="16" />
 
     <uses-permission android:name="android.permission.INTERNET" >
     </uses-permission>
@@ -230,6 +230,6 @@
             android:name="com.winers.winetastic.WineryInfoPage"
             android:label="@string/title_activity_winery_info_page" >
         </activity>        
-        
     </application>
+    
 </manifest>
