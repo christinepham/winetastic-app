@@ -38,13 +38,6 @@
                     android:paddingTop="100dp"
                     android:scaleType="centerCrop" />
 
-                <LinearLayout
-                    android:id="@+id/info_section"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/imageView2"
-                    android:orientation="vertical" >
-
                     <TableLayout
                         android:id="@+id/info_module_wod_statistics"
                         android:layout_width="match_parent"
@@ -53,7 +46,8 @@
                         android:paddingLeft="18dp"
                         android:paddingRight="18dp"
                         android:paddingTop="@dimen/default_padding"
-                        android:shrinkColumns="0" >
+                        android:shrinkColumns="*" 
+                    	android:layout_toRightOf="@id/imageView2">
 
                         <TextView
                             android:id="@+id/info_module_wod_statistics_title"
@@ -64,7 +58,6 @@
                             android:text="@string/info_information"
                             android:textColor="@color/white" />
                     </TableLayout>
-                </LinearLayout>
             </RelativeLayout>
         </ScrollView>
 
