@@ -34,7 +34,7 @@
             android:paddingLeft="18dp"
             android:paddingRight="18dp"
             android:paddingTop="@dimen/default_padding" 
-            android:shrinkColumns="0" >
+            android:shrinkColumns="*" >
 
             <TextView
                 android:id="@+id/info_module_statistics_title"
@@ -56,7 +56,7 @@
         android:paddingRight="18dp"
         android:paddingTop="@dimen/default_padding" 
         android:layout_below="@id/info_module_winery_visit" 
-        android:shrinkColumns="0" >
+        android:shrinkColumns="*" >
 
 	        <TextView
 	            android:id="@+id/info_module_descriptors_title"

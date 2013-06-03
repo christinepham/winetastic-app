@@ -137,5 +137,6 @@
 
     <string name="title_activity_wine_wish_list">Wine Wish List</string>
 
+    <string name="title_activity_calendar">Event Calendar</string>
 
 </resources>

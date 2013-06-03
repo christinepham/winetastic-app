@@ -14,7 +14,7 @@ import android.widget.CalendarView.OnDateChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class EventCalendar extends Activity {
+public class EventCalendar extends AbstractActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +115,14 @@ public class EventCalendar extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+
+
+
+	@Override
+	protected int getTitleText() {
+		// TODO Auto-generated method stub
+		return R.string.title_activity_calendar;
 	}
 	
 	
