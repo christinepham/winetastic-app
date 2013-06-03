@@ -58,8 +58,8 @@ public class InfoPage extends AbstractActivity {
     		}
     		
     		// Set contents of text, make black, change width
-    		Linkify.addLinks(text, Linkify.ALL);
     		text.setText(cols[i], TextView.BufferType.NORMAL);
+    		Linkify.addLinks(text, Linkify.ALL);
     		text.setTextColor(getResources().getColor(R.color.black));
    		
     		r.addView(text);

@@ -74,7 +74,7 @@
 		        android:layout_marginLeft="2dp"
 		        android:layout_marginRight="2dp"
 		        android:layout_marginTop="2dp"
-
+				android:background="@drawable/mapw"
 		        android:orientation="horizontal"/>
 		        <!--android:background="@drawable/mapw" -->	
 		    <Button
