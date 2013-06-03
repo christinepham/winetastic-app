@@ -22,7 +22,6 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
-
 /**
  * Starts the Daily Vine for the random winery/wine of the day.
  * 
