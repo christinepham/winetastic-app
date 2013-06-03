@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.text.util.Linkify;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ public class WineryOfDay extends Fragment {
         // Get wine detail table elements
         statsTable = (TableLayout) rootView.findViewById(R.id.info_module_winery_visit);
         descTable = (TableLayout) rootView.findViewById(R.id.info_module_winery_vineyard);
-        
+        descTable.setShrinkAllColumns(true);
         // Populate table
         if(getArguments().getString("random_winery_name","random_winery_name") != null) 
         	addRow(statsTable, "Winery Name", getArguments().getString("random_winery_name","random_winery_name"));
@@ -46,11 +47,33 @@ public class WineryOfDay extends Fragment {
         if(getArguments().getString("random_winery_name","random_winery_name") != null) 
         	addRow(statsTable, "Phone", getArguments().getString("random_winery_phone","random_winery_phone"));
         
-        if(getArguments().getString("random_winery_name","random_winery_name") != null) 
-        	addRow(descTable, Html.fromHtml("Description").toString(), getArguments().getString("random_winery_desc","random_winery_desc"));
+        if(getArguments().getString("random_winery_name","random_winery_name") == null || 
+        		getArguments().getString("random_winery_name","random_winery_name").isEmpty()) {
+        	addRow(descTable, "No information available.");
+        } else {
+        	String about = parseString(Html.fromHtml(getArguments().getString("random_winery_desc","random_winery_desc")).toString(), 40, true);
+        	addRow(descTable, about);
+        }
+        
+        System.err.println("Description is:\n"+getArguments().getString("random_winery_desc","random_winery_desc"));
         return rootView;
     }
     
+    protected String parseString(String s, int maxLineLength, boolean breakWords) {
+    	System.err.println(s);
+    	if(s.length() < maxLineLength) return s;
+    	for(int i=0; i<s.length(); i++) {
+    		if(i % maxLineLength == 0) {
+    			int last = i;
+    			while(i >= 0 && s.charAt(i) != ' ')  i--;
+				s = s.substring(0,i+1)  
+						+ System.getProperty("line.separator")
+						+ s.substring(i+1);
+    			i = last + 3;
+    		}
+    	}
+    	return s;
+    }
     /**
      * Attaches a row to a TableLayout.
      * 

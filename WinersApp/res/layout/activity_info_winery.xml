@@ -76,7 +76,8 @@
 		        android:background="@drawable/info_nav_border"	
 		        android:layout_width="140dp"
 		        android:layout_height="40dp"                        
-		        android:text="@string/info_winery_goto" />	 
+		        android:text="@string/info_winery_goto"
+		        android:onClick="openURL" />	 
 		        
 		    <Button
 		        android:id="@+id/info_winery_maps"
@@ -125,6 +126,7 @@
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:paddingTop="@dimen/default_padding"
+		    android:shrinkColumns="0"
 		    android:paddingLeft="18dp"
 			android:paddingRight="18dp"		    	    
 		    android:orientation="vertical" >
@@ -136,8 +138,7 @@
 			    android:layout_height="wrap_content"
 		    	android:textColor="@color/white"				    
 			    android:orientation="vertical"
-		    	android:text="@string/info_title" />
-
+		    	android:text="@string/about" />
 	
 		</TableLayout>		
 		</LinearLayout>

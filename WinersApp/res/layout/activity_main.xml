@@ -72,8 +72,8 @@
 		        android:layout_marginLeft="2dp"
 		        android:layout_marginRight="2dp"
 		        android:layout_marginTop="2dp"
-		        android:orientation="horizontal" />
-		        <!--  android:background="@drawable/calandarw"	-->
+		        android:orientation="horizontal" 
+		        android:background="@drawable/winesearch" />
 		    <Button
 		        android:id="@+id/myWines"
 		        android:layout_width="0dp"
@@ -102,11 +102,11 @@
 		        android:layout_marginLeft="2dp"
 		        android:layout_marginRight="2dp"
 		        android:layout_marginTop="2dp"
-		        android:background="@drawable/mapw" 
+
 		        android:orientation="horizontal"/>
-	
+		        <!--android:background="@drawable/mapw" -->	
 		    <Button
-		        android:id="@+id/addWine"
+		        android:id="@+id/calendarView1"
 		        android:layout_width="0dp"
 		        android:layout_height="150dp"
 		        android:layout_weight="1"
@@ -114,7 +114,7 @@
 		        android:layout_marginLeft="2dp"
 		        android:layout_marginRight="2dp"
 		        android:layout_marginTop="2dp"
-		        android:background="@drawable/addwine"
+		        android:background="@drawable/calandarw"
 		        android:orientation="horizontal" 
 	    		style="?android:attr/borderlessButtonStyle"/>
 	

@@ -1,19 +1,23 @@
 package com.winers.winetastic;
 
+import com.google.gson.Gson;
+
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Displays information about the random wine of the day.
@@ -24,15 +28,26 @@ import android.widget.TextView;
 public class WineOfDay extends Fragment {	
 	
 	private TableLayout					statsTable;
+	private	APISnoothResponseWineArray 	info;
+	private DatabaseHandler db;
 	
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Get wine details from caller
+    	Gson gson = new Gson();
+    	this.info = gson.fromJson(getArguments().getString("wine_data"), APISnoothResponseWineArray.class);
+    }
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = (View) inflater.inflate(R.layout.fragment_wine_of_day, container, false);
         
-		Button b = (Button) rootView.findViewById(R.id.info_button_more_info);
+		Button moreInfoButton = (Button) rootView.findViewById(R.id.info_button_more_info);
 		
-		b.setOnClickListener(new View.OnClickListener(){
+		moreInfoButton.setOnClickListener(new View.OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
@@ -42,6 +57,25 @@ public class WineOfDay extends Fragment {
 			}  	
 	    });
 	        
+        Button addToWishlistButton = (Button) rootView.findViewById(R.id.info_button_add_wishlist);
+        Button addToCellarButton = (Button) rootView.findViewById(R.id.info_button_add_cellar);
+        Button buyButton = (Button) rootView.findViewById(R.id.info_button_purchase);
+        
+        addToWishlistButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				new AddToWishlist().execute();
+			}
+		});	
+        
+        addToCellarButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				new AddToCellar().execute();
+			}
+		});	
         
         // Get wine detail table elements
         statsTable = (TableLayout) rootView.findViewById(R.id.info_module_wod_statistics);
@@ -102,6 +136,54 @@ public class WineOfDay extends Fragment {
     		r.addView(text);
     	}    	
     	((TableLayout)parent).addView(r);
+    }
+    
+    private class AddToWishlist extends AsyncTask<Void, Void, String> {
+    	private boolean hasWine = false;
+    	@Override
+		protected String doInBackground(Void... arg0) {
+			System.err.println("Adding wine to wishlist.");
+			db = new DatabaseHandler(getActivity());
+			String email = db.getUserDetails().get("email");
+			if (WinetasticManager.isWineInWishlist(email, info.code)) {
+				hasWine = true;
+			} else {
+				WinetasticManager.addWineToWishlist(email, info.code);	
+			}
+	    	return "";
+		}
+    	
+    	protected void onPostExecute(String result) {
+    		if (hasWine) {
+    			Toast.makeText(getActivity(), info.name + " is already in your Wishlist", Toast.LENGTH_SHORT).show();
+    		} else {
+    			Toast.makeText(getActivity(), info.name + " has been added to your Wishlist", Toast.LENGTH_SHORT).show();
+    		}
+    	}
+    }
+    
+    private class AddToCellar extends AsyncTask<Void, Void, String> {
+    	private boolean hasWine = false;
+    	@Override
+		protected String doInBackground(Void... arg0) {
+			System.err.println("Adding wine to cellar.");
+			db = new DatabaseHandler(getActivity());
+			String email = db.getUserDetails().get("email");
+			if (WinetasticManager.isWineInCellar(email, info.code)) {
+				hasWine = true;
+			} else {
+				WinetasticManager.addWineToCellar(email, info.code);	
+			}
+	    	return "";
+		}
+    	
+    	protected void onPostExecute(String result) {
+    		if (hasWine) {
+    			Toast.makeText(getActivity(), info.name + " is already in your Cellar", Toast.LENGTH_SHORT).show();
+    		} else {
+    			Toast.makeText(getActivity(), info.name + " has been added to your Cellar", Toast.LENGTH_SHORT).show();
+    		}
+    	}
     }
 
 }

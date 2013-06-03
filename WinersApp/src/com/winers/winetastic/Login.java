@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -79,6 +80,9 @@ public class Login extends AbstractActivity implements OnClickListener {
 				
 		fbButton = (ImageView)findViewById(R.id.login_fb_icon);
 		fbButton.setOnClickListener(this);
+		
+		ImageButton logoutButton = (ImageButton) findViewById(R.id.logout_button);
+		logoutButton.setVisibility(View.GONE);
 
 		updateButtonImage();
 	
@@ -204,7 +208,10 @@ public class Login extends AbstractActivity implements OnClickListener {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			//Log.d("Button", "Login");
-			if (!error) json = userFunction.loginUser(email, password);
+			if (!error) {
+				WinetasticManager.createSnoothAccount(email);
+				json = userFunction.loginUser(email, password);
+			}
 			return null;
 		}
 
@@ -307,6 +314,7 @@ public class Login extends AbstractActivity implements OnClickListener {
 		return R.string.title_activity_login;
 	}
 
+	
 	
 
 }

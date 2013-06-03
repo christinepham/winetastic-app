@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView;
@@ -20,6 +24,7 @@ import com.google.gson.Gson;
 public class SearchResults extends AbstractActivity {
 	private ArrayList<ArrayList<String>> wines;
 	private String searchQuery;
+	private WineSearchObject sP;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,6 +32,7 @@ public class SearchResults extends AbstractActivity {
 
         setContentView(R.layout.activity_search_results);
         searchQuery = (String) getIntent().getExtras().get("Search Query");
+        sP = (WineSearchObject) getIntent().getExtras().get("WineSearchObject");
         
         //Convert back to POJO
         final Gson gson = new Gson();
@@ -53,6 +59,16 @@ public class SearchResults extends AbstractActivity {
 				startActivity(i);
 			}
         });
+        
+        Button searchMore = (Button) findViewById(R.id.search_more);
+        searchMore.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				
+				new MoarSearchAPICall().execute();
+			}
+		});	
     }
 
 //        setContentView(R.layout.activity_search_results);
@@ -107,5 +123,48 @@ public class SearchResults extends AbstractActivity {
 		// TODO Auto-generated method stub
 		return R.string.title_activity_search_results;
 	}
-    
+	
+	/**
+	 * Network operations must be performed in an AsyncTask, so that's
+	 * what this class is for.
+	 * Postcondition: upon successful search of at least one result, user
+	 *                is redirected to the search results page.
+	 */
+	class MoarSearchAPICall extends AsyncTask<Void, Void, String> {
+		
+		ProgressDialog dialog;
+		
+		
+		@Override
+		protected void onPreExecute() {
+			// This is where the "searching" overlay will go
+			super.onPreExecute();
+			dialog = ProgressDialog.show(SearchResults.this, "","Loading...");
+		}
+		
+		// This gets executed after onPreExecute()
+		@Override
+		protected String doInBackground(Void... arg0) {
+			sP.firstResult += 20;
+			return WinetasticManager.performCombinedSearch(sP, 20);
+
+		}
+		
+		// This gets executed after doInBackground()
+		@Override
+		protected void onPostExecute(String result) {
+			if(dialog.isShowing())
+				dialog.dismiss();
+			if (WinetasticManager.hasSearchResults(result)) {
+				// Search has results. Send to SearchResult page
+				Intent i = new Intent(SearchResults.this, SearchResults.class);
+				i.putExtra("Search Query", result);
+				i.putExtra("WineSearchObject", sP);
+				startActivity(i);
+			} else {
+				// No search results. Notify user to search again.
+				Toast.makeText(SearchResults.this, "No more results were found. Please start your search over.", Toast.LENGTH_LONG).show();
+			}
+		}
+	}
 }

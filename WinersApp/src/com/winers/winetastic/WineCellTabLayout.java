@@ -10,6 +10,8 @@ import android.widget.TabHost.TabSpec;
 
 public class WineCellTabLayout extends AbstractActivity {
 	
+	private String myWinesQuery;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,23 +20,30 @@ public class WineCellTabLayout extends AbstractActivity {
         TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
         //TabHost tabHost = getTabHost();
         
+        myWinesQuery = (String) getIntent().getExtras().get("MyWines Query");
+		
+		//System.err.println("MY WINES QUERY FROM INSIDE WINECELL: " + myWinesQuery);
+        
         
         LocalActivityManager mLocalActivityManager = new LocalActivityManager(this, false);
         mLocalActivityManager.dispatchCreate(savedInstanceState);
         tabHost.setup(mLocalActivityManager);
-        Toast.makeText(this, "tabhost: "+ tabHost, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "tabhost: "+ tabHost, Toast.LENGTH_SHORT).show();
         
         // Tab for MyWines
         TabSpec myWinesTab = tabHost.newTabSpec("My Wines");
         // setting Title and Icon for the Tab
         myWinesTab.setIndicator("Wine Collection");//, getResources().getDrawable(R.drawable.wines));
         Intent myWinesIntent = new Intent(this, MyWines.class);
+        myWinesIntent.putExtra("MyWines Query", myWinesQuery);
         myWinesTab.setContent(myWinesIntent);
          
         // Tab for Wishlist 
         TabSpec wishListTab = tabHost.newTabSpec("Wish List");        
         wishListTab.setIndicator("Wish List");//, getResources().getDrawable(R.drawable.wishlist));
+        
         Intent wishListIntenet = new Intent(this, WineWishList.class);
+        wishListIntenet.putExtra("MyWines Query", myWinesQuery);
         wishListTab.setContent(wishListIntenet);
          
         // Adding all TabSpec to TabHost
@@ -48,6 +57,8 @@ public class WineCellTabLayout extends AbstractActivity {
 		// TODO Auto-generated method stub
 		return R.string.my_wines_title;
 	}	
+	
+	
 	
 
 }

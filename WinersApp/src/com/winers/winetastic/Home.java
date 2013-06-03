@@ -19,9 +19,9 @@ import com.google.gson.Gson;
 
 public class Home extends AbstractActivity {
 
-	private AdvancedSearchAPICall advancedSearchAPICall;
 	private UserFunctions uF;
-	FunFact random;
+	private FunFact random;
+
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,17 @@ public class Home extends AbstractActivity {
         	Intent i = new Intent(Home.this, Intro.class);
 			startActivity(i);
         }
+        
+        // This tests to see if MyWines sent us back here to refresh.
+        /*
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+        	if (extras.getString("mywines_reload").equals("true")) {
+        		new MyWinesAPICall().execute();
+        	}
+        }
+        */
+        
     	System.err.println("Created. Getting layout...");          
         setContentView(R.layout.activity_main);
     	System.err.println("Got layout.");   
@@ -49,10 +60,10 @@ public class Home extends AbstractActivity {
     	//Button logout = (Button)findViewById(R.id.logout);
     	Button search_but = (Button)findViewById(R.id.search);
         Button my_wines_but = (Button)findViewById(R.id.myWines);
-       // Button cal_but = (Button)findViewById(R.id.calendar);
+        Button cal_but = (Button)findViewById(R.id.calendarView1);
         Button map_but = (Button)findViewById(R.id.map);
  //       Button toast_but = (Button)findViewById(R.id.toast);
-        Button add_but = (Button)findViewById(R.id.addWine);
+        //Button add_but = (Button)findViewById(R.id.addWine);
  //       Button settings_but = (Button)findViewById(R.id.settingsw);
         ImageButton daily_vine_but = (ImageButton)findViewById(R.id.dailyVineButton);
         
@@ -70,15 +81,14 @@ public class Home extends AbstractActivity {
         my_wines_but.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				//Toast.makeText(getApplicationContext(), random.randomFact(), 30000).show();
 				Intent i = new Intent(Home.this, WineCellTabLayout.class);
 				startActivity(i);
+				new MyWinesAPICall().execute();
 			}
         });
 
         // event calendar 
-        /*
+        
         cal_but.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -87,7 +97,7 @@ public class Home extends AbstractActivity {
 				startActivity(i);
 			}
         });
-        */
+        
         // map
         map_but.setOnClickListener(new View.OnClickListener(){
 			@Override
@@ -146,14 +156,14 @@ public class Home extends AbstractActivity {
         });*/
        
         // add a wine
-        add_but.setOnClickListener(new View.OnClickListener(){
+        /*add_but.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent i = new Intent(Home.this, AddWine.class);
 				startActivity(i);
 			}
-        });
+        });*/
         
         // settings
         /*
@@ -171,8 +181,7 @@ public class Home extends AbstractActivity {
 			@Override
 			public void onClick(View v) {
 				// Start AsyncTask to perform network operation (API call)
-				advancedSearchAPICall = new AdvancedSearchAPICall();
-				advancedSearchAPICall.execute();
+				new DailyVineAPICall().execute();
 			}  	
         });
     }
@@ -198,7 +207,7 @@ public class Home extends AbstractActivity {
 	 * Postcondition: upon successful search of at least one result, user
 	 *                is redirected to the search results page.
 	 */
-	class AdvancedSearchAPICall extends AsyncTask<Void, Void, String> {
+	class DailyVineAPICall extends AsyncTask<Void, Void, String> {
 		private String wineryResponse;
 		private String wineResponse;
 		
@@ -229,6 +238,44 @@ public class Home extends AbstractActivity {
 			i.putExtra("Search Query", wineResponse);
 			i.putExtra("Winery", wineryResponse);
 			startActivity(i);
+		}
+	}
+	
+	class MyWinesAPICall extends AsyncTask<Void, Void, String> {
+
+		private String email;
+		
+		String searchQuery;
+	    Gson gson;
+	    APISnoothResponse snoothResponse;
+	    List<APISnoothResponseWineArray> wineAPIResponse;
+	    
+		@Override
+		protected void onPreExecute() {
+			email = new DatabaseHandler(getApplicationContext()).getUserDetails().get("email");
+		}
+		
+		// This gets executed after onPreExecute()
+		@Override
+		protected String doInBackground(Void... arg0) {
+			String myWinesResponse = WinetasticManager.returnMyWines(email);
+			System.err.println("MyWines API response: " + myWinesResponse);
+			return myWinesResponse;
+		}
+		
+		// This gets executed after doInBackground()
+		protected void onPostExecute(String result) {
+			final Gson gson = new Gson();
+	        final APISnoothResponseMyWines myWinesResponse = gson.fromJson(result, APISnoothResponseMyWines.class);
+	        final APISnoothResponseMetaData meta = myWinesResponse.metaResults;
+	        if (meta.results.equals("") || meta.results.equals("0")) {
+	        	Toast.makeText(Home.this, "You must add a wine through search results before you can access My Wines", Toast.LENGTH_LONG).show();
+	        }
+	        else {
+				Intent i = new Intent(Home.this, WineCellTabLayout.class);
+				i.putExtra("MyWines Query", result);
+				startActivity(i);
+	        }
 		}
 	}
     

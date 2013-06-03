@@ -27,11 +27,7 @@
  	    android:scaleType="fitStart"
  	    android:src="@drawable/winetastic_logo" />
  	
-	<Button
-	    android:id="@+id/guest_home_button"
-	    style="@style/GuestButtonText"
-	    android:fontFamily="sans-serif"
-	    android:text="@string/guest_goto_home" />
+
 	
 	<Button
 	    android:id="@+id/guest_register_button"
