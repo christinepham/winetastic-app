@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
-public class DailyVine extends AbstractFragmentActivity {
+public class DailyVine extends FragmentActivity {
 	
 	String searchQuery;
 	String searchQueryWinery;
@@ -51,7 +51,6 @@ public class DailyVine extends AbstractFragmentActivity {
 	 */
 	ViewPager mViewPager;
 
-	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_daily_vine);
@@ -103,8 +102,7 @@ public class DailyVine extends AbstractFragmentActivity {
     	startActivity(i);    	
     }
   
-    @Override
-	protected int getTitleText() {
+    protected int getTitleText() {
    		return R.string.title_activity_daily_vine;
    	 }
 	

@@ -21,7 +21,7 @@
         android:orientation="vertical" 
         android:focusable="true" 
         android:focusableInTouchMode="true">
-
+<!--  
         <TextView
             android:id="@+id/quick_search_divider"
             android:layout_width="match_parent"
@@ -29,7 +29,7 @@
             android:background="@color/charcoal"
             android:gravity="center_vertical"
             android:text="@string/quick_search"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white" />-->
 
         <SearchView
             android:id="@+id/search_bar"
@@ -62,7 +62,7 @@
         android:clickable="true"
         android:orientation="vertical"
         android:visibility="visible" >
-
+<!--  
         <TextView
             android:id="@+id/advanced_search_divider"
             android:layout_width="match_parent"
@@ -70,7 +70,7 @@
             android:background="@color/charcoal"
             android:gravity="center_vertical"
             android:text="@string/advanced_search"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white" />-->
     </LinearLayout>
 
     <!-- Expandable List and buttons -->
