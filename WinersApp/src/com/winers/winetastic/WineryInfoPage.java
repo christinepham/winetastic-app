@@ -36,16 +36,18 @@ public class WineryInfoPage extends InfoPage {
         ImageView img = (ImageView) findViewById(R.id.info_winery_pic);        
         ImageLoader.loadFromWeb(info.image, img);	
         
-        // Set address
-        TextView address1 = (TextView) findViewById(R.id.info_winery_address1);
-        address1.setText(info.address, TextView.BufferType.NORMAL);
+        // Set address: If info.state exists, the winery is in the US
+        TextView address1 = (TextView) findViewById(R.id.info_winery_address1);        
+        TextView address2 = (TextView) findViewById(R.id.info_winery_address2);         
+        TextView address3 = (TextView) findViewById(R.id.info_winery_address3);         
         
-        TextView address2 = (TextView) findViewById(R.id.info_winery_address2); 
-        address2.setText(info.city + ", " + info.state);
-        
-        TextView address3 = (TextView) findViewById(R.id.info_winery_address3); 
-        address3.setText(info.country);        
-        
+        address1.setText(info.address, TextView.BufferType.NORMAL);        
+	    address2.setText(info.city + ", " + info.state + ", info.zip");   
+        if(!info.country.equals("US")) {
+        	if(!(info.zip.equals(""))) address3.setText(info.zip);
+        } else {
+        	if(!(info.country.equals(""))) address3.setText(info.country);
+        }
         
         // Set description
 //        TableLayout descTable = (TableLayout) findViewById(R.id.info_winery_module_desc);
