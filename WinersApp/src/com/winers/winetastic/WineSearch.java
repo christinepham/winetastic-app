@@ -74,7 +74,7 @@ implements OnChildClickListener {
 				// Start AsyncTask to perform network operation (API call)
 
 				SearchView searchVal = (SearchView) findViewById(R.id.search_bar);
-				if(searchVal.getQuery().toString() == ""){
+				if(searchVal.getQuery().toString().equals("")){
 					// if there is nothing in quick search field
 					advancedSearchAPICall = new AdvancedSearchAPICall();
 					advancedSearchAPICall.execute();
@@ -117,7 +117,6 @@ implements OnChildClickListener {
 		final SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() { 
 		    @Override 
 		    public boolean onQueryTextChange(String newText) { 
-		    	
 		        return true; 
 		    } 
 
