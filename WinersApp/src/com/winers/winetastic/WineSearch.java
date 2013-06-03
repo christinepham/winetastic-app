@@ -75,7 +75,7 @@ implements OnChildClickListener {
 				// Start AsyncTask to perform network operation (API call)
 
 				SearchView searchVal = (SearchView) findViewById(R.id.search_bar);
-				if(searchVal.getQuery().toString() == ""){
+				if(searchVal.getQuery().toString().equals("")){
 					// if there is nothing in quick search field
 					advancedSearchAPICall = new AdvancedSearchAPICall();
 					advancedSearchAPICall.execute();
@@ -92,16 +92,9 @@ implements OnChildClickListener {
 			    	//Toast.makeText(getApplicationContext(), "filled array list", 0).show();
 			        combinedSearchAPICALL = new CombinedSearchAPICall();
 					combinedSearchAPICALL.execute();
-				}
+				}		
+			}	
 
-				System.err.println("Clicked. Making API Call.");
-				//advancedSearchAPICall = new AdvancedSearchAPICall();
-				System.err.println("Done. Executing AsyncTask.");
-				//advancedSearchAPICall.execute();
-				System.err.println("Okey-dokey.");				
-}	
-			
-			
 		});
 
 		Button reset = (Button) findViewById(R.id.reset);
@@ -118,7 +111,6 @@ implements OnChildClickListener {
 
 		    @Override 
 		    public boolean onQueryTextChange(String newText) { 
-		    	
 		        return true; 
 		    } 
 
@@ -242,9 +234,13 @@ implements OnChildClickListener {
 	 */
 	class CombinedSearchAPICall extends AsyncTask<Void, Void, String> {
 		
+		ProgressDialog dialog;
+		
 		@Override
 		protected void onPreExecute() {
 			// This is where the "searching" overlay will go
+			super.onPreExecute();
+			dialog = ProgressDialog.show(WineSearch.this, "","Loading...");
 		}
 		
 		// This gets executed after onPreExecute()
@@ -256,7 +252,10 @@ implements OnChildClickListener {
 		}
 		
 		// This gets executed after doInBackground()
+		@Override
 		protected void onPostExecute(String result) {
+			if(dialog.isShowing())
+				dialog.dismiss();
 			if (WinetasticManager.hasSearchResults(result)) {
 				// Search has results. Send to SearchResult page
 				Intent i = new Intent(WineSearch.this, SearchResults.class);

@@ -109,4 +109,9 @@
 	    <item name="android:orientation">vertical</item>   	    
 	</style>	
 
+	<!-- Calendar Page Style -->
+	
+	 <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog">
+        <item name = "android:textColor">@color/cream</item>
+    </style>
 </resources>

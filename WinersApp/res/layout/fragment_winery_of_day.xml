@@ -14,52 +14,62 @@
         android:scaleType="matrix"
         android:src="@drawable/grapes" />
 
-            <LinearLayout
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+        android:id="@+id/RelativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/imageView2"
+        android:orientation="vertical" >
+
+        <TableLayout
+            android:id="@+id/info_module_winery_visit"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" 
-            android:layout_toRightOf="@id/imageView2" >
-            
-			<TableLayout
-			    android:id="@+id/info_module_winery_statistics"
-			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content"
-			    android:paddingTop="@dimen/default_padding"
-			    android:paddingLeft="18dp"
-				android:paddingRight="18dp"		    	    
-			    android:orientation="vertical" >
-			    
-			    <TextView
-			        android:id="@+id/info_module_statistics_title"
-			        android:background="@drawable/module_titlebar"
-				    android:layout_width="match_parent"
-				    android:layout_height="wrap_content"
-			    	android:textColor="@color/white"				    
-				    android:orientation="vertical"
-			    	android:text="@string/info_visit" />
-		
-			</TableLayout>
-			
-			<TableLayout
-			    android:id="@+id/info_module_descriptors"
-			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content"
-			    android:paddingTop="@dimen/default_padding"	    
-			    android:paddingLeft="18dp"
-				android:paddingRight="18dp"		    
-			    android:orientation="vertical" >
-			    
-			    <TextView
-			        android:id="@+id/info_module_descriptors_title"
-			        android:background="@drawable/module_titlebar"
-				    android:layout_width="match_parent"
-				    android:layout_height="wrap_content"
-			    	android:textColor="@color/white"				    
-				    android:orientation="vertical"
-			    	android:text="@string/info_vineyard" />	 
-				
-			</TableLayout>
-					
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            android:paddingTop="@dimen/default_padding" 
+            android:shrinkColumns="0" >
+
+            <TextView
+                android:id="@+id/info_module_statistics_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/module_titlebar"
+                android:orientation="vertical"
+                android:text="@string/info_visit"
+                android:textColor="@color/white" 
+                android:autoLink="phone"/>
+        </TableLayout>
+        
+        <TableLayout
+        android:id="@+id/info_module_winery_vineyard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:paddingTop="@dimen/default_padding" 
+        android:layout_below="@id/info_module_winery_visit" 
+        android:shrinkColumns="0" >
+
+	        <TextView
+	            android:id="@+id/info_module_descriptors_title"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:background="@drawable/module_titlebar"
+	            android:orientation="vertical"
+	            android:text="@string/info_vineyard"
+	            android:textColor="@color/white" />
+   		</TableLayout>
+   		
+    </RelativeLayout>
+
+    </ScrollView>
 
 </LinearLayout>

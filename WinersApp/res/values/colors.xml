@@ -17,5 +17,6 @@
     <color name="transparent">#00000000</color>
     <color name="burgandy">#4C050B</color>
     <color name="charcoal">#424243</color>
+    <color name="red_trans">#aa890039</color>
 
 </resources>

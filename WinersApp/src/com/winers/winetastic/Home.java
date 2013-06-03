@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,17 +19,19 @@ import com.google.gson.Gson;
 public class Home extends AbstractActivity {
 
 	private UserFunctions uF;
+
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	System.err.println("Attempting to create");
     	System.out.println("hello");
         super.onCreate(savedInstanceState);
-        uF = new UserFunctions();
+        //uF = new UserFunctions();
         if (!uF.isUserLoggedIn(getApplicationContext())) {
         	Intent i = new Intent(Home.this, Intro.class);
 			startActivity(i);
         }
+        
     	System.err.println("Created. Getting layout...");          
         setContentView(R.layout.activity_main);
     	System.err.println("Got layout.");   
@@ -36,14 +39,14 @@ public class Home extends AbstractActivity {
     	ImageButton homeButton = (ImageButton) findViewById(R.id.home_button);
     	homeButton.setVisibility(View.GONE);
         
-    	Button toIntro = (Button)findViewById(R.id.to_intro);
-    	Button logout = (Button)findViewById(R.id.logout);
+    	//Button toIntro = (Button)findViewById(R.id.to_intro);
+    	//Button logout = (Button)findViewById(R.id.logout);
     	Button search_but = (Button)findViewById(R.id.search);
         Button my_wines_but = (Button)findViewById(R.id.myWines);
-       // Button cal_but = (Button)findViewById(R.id.calendar);
+        Button cal_but = (Button)findViewById(R.id.calendarView1);
         Button map_but = (Button)findViewById(R.id.map);
  //       Button toast_but = (Button)findViewById(R.id.toast);
-        Button add_but = (Button)findViewById(R.id.addWine);
+        //Button add_but = (Button)findViewById(R.id.addWine);
  //       Button settings_but = (Button)findViewById(R.id.settingsw);
         ImageButton daily_vine_but = (ImageButton)findViewById(R.id.dailyVineButton);
         
@@ -68,7 +71,7 @@ public class Home extends AbstractActivity {
         });
 
         // event calendar 
-        /*
+        
         cal_but.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -77,16 +80,23 @@ public class Home extends AbstractActivity {
 				startActivity(i);
 			}
         });
-        */
+        
         // map
         map_but.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(Home.this, Map.class);
-				startActivity(i);
+		
+				String url = "http://google.com/maps?q=wineries"; 
+	        	Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+	            startActivity(i); // Go go go!
 			}
         });
         
+        /** Will add logout to the top banner so user has choice to logout at any time
+         * 
+         */
+        
+        /*
         logout.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -104,7 +114,7 @@ public class Home extends AbstractActivity {
 				Intent i = new Intent(Home.this, Intro.class);
 				startActivity(i);
 			}
-        });
+        });*/
         
     
         
@@ -130,14 +140,14 @@ public class Home extends AbstractActivity {
         });*/
        
         // add a wine
-        add_but.setOnClickListener(new View.OnClickListener(){
+        /*add_but.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent i = new Intent(Home.this, AddWine.class);
 				startActivity(i);
 			}
-        });
+        });*/
         
         // settings
         /*
