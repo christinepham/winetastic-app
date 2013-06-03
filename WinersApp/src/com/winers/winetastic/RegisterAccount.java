@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +44,8 @@ public class RegisterAccount extends AbstractActivity {
 		inputPassword = (EditText) findViewById(R.id.register_password);
 		btnRegister = (Button) findViewById(R.id.register_submit);
 		registerErrorMsg = (TextView) findViewById(R.id.register_error);
-		
+		ImageButton logoutButton = (ImageButton) findViewById(R.id.logout_button);
+		logoutButton.setVisibility(View.GONE);
 		// Register Button Click event
 		btnRegister.setOnClickListener(new View.OnClickListener() {			
 			public void onClick(View view) {

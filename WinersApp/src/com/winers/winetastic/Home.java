@@ -19,18 +19,19 @@ import com.google.gson.Gson;
 public class Home extends AbstractActivity {
 
 	private AdvancedSearchAPICall advancedSearchAPICall;
-	private UserFunctions uF;
+	//private UserFunctions uF;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	System.err.println("Attempting to create");
     	System.out.println("hello");
         super.onCreate(savedInstanceState);
-        uF = new UserFunctions();
+        //uF = new UserFunctions();
         if (!uF.isUserLoggedIn(getApplicationContext())) {
         	Intent i = new Intent(Home.this, Intro.class);
 			startActivity(i);
         }
+        
     	System.err.println("Created. Getting layout...");          
         setContentView(R.layout.activity_main);
     	System.err.println("Got layout.");   
