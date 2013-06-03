@@ -94,9 +94,9 @@ implements OnChildClickListener {
 				}
 
 				System.err.println("Clicked. Making API Call.");
-				advancedSearchAPICall = new AdvancedSearchAPICall();
+				//advancedSearchAPICall = new AdvancedSearchAPICall();
 				System.err.println("Done. Executing AsyncTask.");
-				advancedSearchAPICall.execute();
+				//advancedSearchAPICall.execute();
 				System.err.println("Okey-dokey.");				
 }	
 			

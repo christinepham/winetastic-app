@@ -83,24 +83,21 @@
 
             -->
         </activity>
-        <activity
+        
+         <activity
 		 android:configChanges="keyboardHidden|orientation|screenSize"
             android:name="com.winers.winetastic.Map"
-            android:label="@string/title_activity_map" >
-
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-
-
-
-
-            -->
+            android:label="@string/title_activity_map" 
+            android:parentActivityName="com.winers.winetastic.AbstractActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.winers.winetastic.Activities.AbstractActivity" />
         </activity>
+
+		 
+
+
         <activity
 		 android:configChanges="keyboardHidden|orientation|screenSize"
             android:name="com.winers.winetastic.defunct.ToastToShare"
