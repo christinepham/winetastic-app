@@ -37,8 +37,8 @@ public class Home extends AbstractActivity {
     	ImageButton homeButton = (ImageButton) findViewById(R.id.home_button);
     	homeButton.setVisibility(View.GONE);
         
-    	Button toIntro = (Button)findViewById(R.id.to_intro);
-    	Button logout = (Button)findViewById(R.id.logout);
+    	//Button toIntro = (Button)findViewById(R.id.to_intro);
+    	//Button logout = (Button)findViewById(R.id.logout);
     	Button search_but = (Button)findViewById(R.id.search);
         Button my_wines_but = (Button)findViewById(R.id.myWines);
        // Button cal_but = (Button)findViewById(R.id.calendar);
@@ -88,6 +88,11 @@ public class Home extends AbstractActivity {
 			}
         });
         
+        /** Will add logout to the top banner so user has choice to logout at any time
+         * 
+         */
+        
+        /*
         logout.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -105,7 +110,7 @@ public class Home extends AbstractActivity {
 				Intent i = new Intent(Home.this, Intro.class);
 				startActivity(i);
 			}
-        });
+        });*/
         
     
         

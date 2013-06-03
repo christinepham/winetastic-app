@@ -75,7 +75,7 @@ implements OnChildClickListener {
 				// Start AsyncTask to perform network operation (API call)
 
 				SearchView searchVal = (SearchView) findViewById(R.id.search_bar);
-				if(searchVal.getQuery().toString() == ""){
+				if(searchVal.getQuery().toString().equals("")){
 					// if there is nothing in quick search field
 					advancedSearchAPICall = new AdvancedSearchAPICall();
 					advancedSearchAPICall.execute();
@@ -92,16 +92,8 @@ implements OnChildClickListener {
 			    	//Toast.makeText(getApplicationContext(), "filled array list", 0).show();
 			        combinedSearchAPICALL = new CombinedSearchAPICall();
 					combinedSearchAPICALL.execute();
-				}
-
-				System.err.println("Clicked. Making API Call.");
-				//advancedSearchAPICall = new AdvancedSearchAPICall();
-				System.err.println("Done. Executing AsyncTask.");
-				//advancedSearchAPICall.execute();
-				System.err.println("Okey-dokey.");				
-}	
-			
-			
+				}		
+			}	
 		});
 
 		Button reset = (Button) findViewById(R.id.reset);
@@ -118,7 +110,6 @@ implements OnChildClickListener {
 
 		    @Override 
 		    public boolean onQueryTextChange(String newText) { 
-		    	
 		        return true; 
 		    } 
 
