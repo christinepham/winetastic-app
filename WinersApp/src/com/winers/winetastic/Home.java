@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -83,8 +84,10 @@ public class Home extends AbstractActivity {
         map_but.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(Home.this, Map.class);
-				startActivity(i);
+		
+				String url = "http://google.com/maps?q=wineries"; 
+	        	Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+	            startActivity(i); // Go go go!
 			}
         });
         
