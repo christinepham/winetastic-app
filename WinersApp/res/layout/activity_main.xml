@@ -10,7 +10,7 @@
 	    android:id="@+id/searchAndName"
 	    android:orientation="vertical" 
 	    android:weightSum="2">
-	    
+	    <!--  
 		<RelativeLayout 
 		    android:layout_width="match_parent" 
 		    android:layout_height="wrap_content" >
@@ -24,7 +24,7 @@
 		        android:layout_marginBottom="20dp"
 		        android:gravity="center"
 		        android:text="@string/search" />
-	    </RelativeLayout>
+	    </RelativeLayout>-->
 	    
 		<TextView
 		    android:layout_width="match_parent"
@@ -35,7 +35,7 @@
 		<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" 
 		    		  android:orientation="horizontal" android:weightSum="2" android:id="@+id/LinearLayout1">
 	    <Button
-	        android:id="@+id/calendar"
+	        android:id="@+id/search"
 	        android:layout_width="0dp"
 	        android:layout_weight="1"
 	        android:layout_height="150dp"
@@ -44,7 +44,6 @@
 	        android:layout_marginLeft="2dp"
 	        android:layout_marginRight="2dp"
 	        android:layout_marginTop="2dp"
-
 	        android:orientation="horizontal" />
 	        <!--  android:background="@drawable/calandarw"	-->
 	    <Button
@@ -92,9 +91,15 @@
 	    		style="?android:attr/borderlessButtonStyle"/>
 	
 		</LinearLayout>
-		
-		<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" 
-		    		  android:orientation="horizontal" android:weightSum="2" android:id="@+id/LinearLayout3">
+		<TextView
+		    android:layout_weight="1"
+		    android:layout_height="match_parent"
+		    android:layout_width="match_parent"
+		    android:text="@string/empty" />
+	
+	</LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" 
+		    	  android:orientation="horizontal" android:weightSum="2" android:id="@+id/LinearLayout3">
 		
 			<Button
 		        android:id="@+id/to_intro"
@@ -116,15 +121,9 @@
 		        style="?android:attr/borderlessButtonStyle"
 		        android:text="@string/logout_button" />
 		
-		</LinearLayout>
-	
-		<TextView
-		    android:layout_weight="1"
-		    android:layout_height="match_parent"
-		    android:layout_width="match_parent"
-		    android:text="@string/empty" />
-	
 	</LinearLayout>
+	
+		
 
 	<ImageButton
 	    android:id="@+id/dailyVineButton"

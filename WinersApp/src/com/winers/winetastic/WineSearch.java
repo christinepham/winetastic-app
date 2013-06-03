@@ -72,7 +72,7 @@ implements OnChildClickListener {
 			@Override
 			public void onClick(View v) {
 				// Start AsyncTask to perform network operation (API call)
-<<<<<<< HEAD
+
 				SearchView searchVal = (SearchView) findViewById(R.id.search_bar);
 				if(searchVal.getQuery().toString() == ""){
 					// if there is nothing in quick search field
@@ -92,13 +92,13 @@ implements OnChildClickListener {
 			        combinedSearchAPICALL = new CombinedSearchAPICall();
 					combinedSearchAPICALL.execute();
 				}
-=======
+
 				System.err.println("Clicked. Making API Call.");
 				advancedSearchAPICall = new AdvancedSearchAPICall();
 				System.err.println("Done. Executing AsyncTask.");
 				advancedSearchAPICall.execute();
 				System.err.println("Okey-dokey.");				
->>>>>>> 356b1bb8130d3deb426ad4c0e2826cac762465c6
+
 			}	
 			
 			

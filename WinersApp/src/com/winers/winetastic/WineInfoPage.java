@@ -112,7 +112,7 @@ public class WineInfoPage extends InfoPage {
 		// This gets executed after doInBackground()
 		protected void onPostExecute(String result) {		
 			if (result != null) {
-		    	Intent i = new Intent(WineInfoPage.this, WineryInfoPage.class);
+		    	Intent i = new Intent(WineInfoPage.this, WineInfoPage.class);
 		    	i.putExtra("winery_data", result);
 		    	startActivity(i);
 			} else {

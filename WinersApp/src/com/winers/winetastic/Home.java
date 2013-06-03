@@ -1,6 +1,7 @@
 package com.winers.winetastic;
 
 import java.util.List;
+import java.util.Map;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -37,9 +38,9 @@ public class Home extends AbstractActivity {
         
     	Button toIntro = (Button)findViewById(R.id.to_intro);
     	Button logout = (Button)findViewById(R.id.logout);
-        Button search_but = (Button)findViewById(R.id.search);
+    	Button search_but = (Button)findViewById(R.id.search);
         Button my_wines_but = (Button)findViewById(R.id.myWines);
-        Button cal_but = (Button)findViewById(R.id.calendar);
+       // Button cal_but = (Button)findViewById(R.id.calendar);
         Button map_but = (Button)findViewById(R.id.map);
  //       Button toast_but = (Button)findViewById(R.id.toast);
         Button add_but = (Button)findViewById(R.id.addWine);
@@ -67,6 +68,7 @@ public class Home extends AbstractActivity {
         });
 
         // event calendar 
+        /*
         cal_but.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -75,7 +77,7 @@ public class Home extends AbstractActivity {
 				startActivity(i);
 			}
         });
-        
+        */
         // map
         map_but.setOnClickListener(new View.OnClickListener(){
 			@Override
