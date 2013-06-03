@@ -3,6 +3,7 @@ package com.winers.winetastic;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -55,6 +56,7 @@ public class WineInfoPage extends InfoPage {
         // Set image
         ImageView img = (ImageView) findViewById(R.id.info_pic);        
         ImageLoader.loadFromWeb(info.image, img);
+        	
         
         // Set rating
         try {
@@ -72,7 +74,6 @@ public class WineInfoPage extends InfoPage {
         if(!(info.vintage.equals(""))) 	addRow(statsTable, "Vintage", info.vintage);    
         if(info.winery != null)		 	addRow(statsTable, "Winery", info.winery);
         
-        
         // TODO: Search similar wines
         searchObject = new WineSearchObject();
         searchObject.setColor(info.type);
@@ -80,14 +81,45 @@ public class WineInfoPage extends InfoPage {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.activity_wine_info_page, menu);
+        //getMenuInflater().inflate(R.menu.activity_info_wine, menu);
         return true;
     }
     
-    public void openInBrowser(View v) {
+    public void openWinePrices(View v) {
     	Intent i = new Intent(Intent.ACTION_VIEW);
     	i.setData(Uri.parse(info.link + "/#aprices"));
     	startActivity(i);    	
     }
+    
+	/**
+	 * Gets APISnoothResponseWinery object and passes to a new WineryInfoPage activity.
+	 * Postcondition: Opens winery intent or displays error message if none found.
+	 */    
+    
+    public void viewWineryInfo(View v) {
+    	System.err.println("Winery clicked.");
+    	new WineryIntentTask().execute();
+    }
+    
+	private class WineryIntentTask extends AsyncTask<Void, Void, String> {
+		
+		@Override
+		protected String doInBackground(Void... arg0) {
+			System.err.println("Getting winery details.");
+	    	return WinetasticManager.getWineryDetails(info.wineryID);	
+		}
+		
+		// This gets executed after doInBackground()
+		protected void onPostExecute(String result) {		
+			if (result != null) {
+		    	Intent i = new Intent(WineInfoPage.this, WineryInfoPage.class);
+		    	i.putExtra("winery_data", result);
+		    	startActivity(i);
+			} else {
+				// No winery in database.
+				Toast.makeText(WineInfoPage.this, "No winery associated with this wine.", Toast.LENGTH_SHORT).show();
+			}
+		}
+	}    
 }
 

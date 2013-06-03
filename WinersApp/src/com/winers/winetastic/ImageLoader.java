@@ -8,51 +8,44 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ImageView;
 
+/**
+ * Loads images from a URL in the background.
+ * Calls setImageDrawable, so may not work is src is set.
+ * 
+ * Don't instantiate directly; call loadFromWeb.
+ * 
+ * @author victoria
+ *
+ */
+
 public class ImageLoader {
 	
-	private ImageLoader() { }
-
-	/* Helper classes for loadImageFromWeb
-	 * 		 
-	 * 		:(
-	 * 
-	 */
+	public ImageView v;
+	public String url;
 	
-	private class URLWrapper {
-		String s;
-		View v;
-		
-		public URLWrapper(String s, View v) {
-			this.s = s;
-			this.v = v;
-		}
+	private ImageLoader() { }
+	
+	private ImageLoader (ImageView v, String url) {
+		this.v = v;
+		this.url = url;
 	}
 
-	private class URLToDrawable extends AsyncTask<Void, Void, Void> {
-		URLWrapper wrapper;
+	private static class URLToDrawable extends AsyncTask<ImageLoader, Void, ImageView> {
 		Drawable d;
 		
-		public URLToDrawable(URLWrapper wrapper) {
-			this.wrapper = wrapper;
-		}
-		
-		protected Void doInBackground(Void ... args) {
-		    try {
-		        InputStream is = (InputStream) new URL(wrapper.s).getContent();
+		protected ImageView doInBackground(ImageLoader ... args) {
+		    try {		    	
+		        InputStream is = (InputStream) new URL(args[0].url).getContent();
 		        d = Drawable.createFromStream(is, "image");
+		        return args[0].v;
 		    } catch (Exception e) {
 		    }
 		    return null;
 		}
 		
 		@Override
-		protected void onPostExecute(Void arg) {
-			try {
-				((ImageView)(wrapper.v)).setImageDrawable(d);	
-			} catch(ClassCastException e) {
-				System.err.println(e.getMessage());
-				System.err.println("Attempted to cast View to ImageView.");
-			}
+		protected void onPostExecute(ImageView v) {		
+			v.setImageDrawable(d);			
 		}
 	}
 	
@@ -61,9 +54,8 @@ public class ImageLoader {
 	 * @param url 
 	 * @return Drawable
 	 */
-	public static void loadFromWeb(String url, View v) {
-		ImageLoader ih = new ImageLoader();
-		ih.new URLToDrawable(ih.new URLWrapper(url, v)).execute();
+	public static void loadFromWeb(String url, ImageView v) {
+		ImageLoader il = new ImageLoader(v, url);
+		new URLToDrawable().execute(il);
 	}		
-	
 }

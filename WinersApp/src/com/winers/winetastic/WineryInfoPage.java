@@ -45,8 +45,10 @@ public class WineryInfoPage extends InfoPage {
 	    address2.setText(info.city + ", " + info.state + ", info.zip");   
         if(!info.country.equals("US")) {
         	if(!(info.zip.equals(""))) address3.setText(info.zip);
+        	else address3.setText("");
         } else {
         	if(!(info.country.equals(""))) address3.setText(info.country);
+        	else address3.setText("");
         }
         
         // Set description

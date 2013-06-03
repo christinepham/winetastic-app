@@ -35,7 +35,6 @@ public class Home extends AbstractActivity {
     	ImageButton homeButton = (ImageButton) findViewById(R.id.home_button);
     	homeButton.setVisibility(View.GONE);
         
-    	
     	Button toIntro = (Button)findViewById(R.id.to_intro);
     	Button logout = (Button)findViewById(R.id.logout);
         Button search_but = (Button)findViewById(R.id.search);

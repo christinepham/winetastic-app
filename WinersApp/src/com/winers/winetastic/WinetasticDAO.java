@@ -160,7 +160,6 @@ private String callSnoothAPIWinerySearch(String url) {
         return gson.toJson(snoothResponseWinery);
 	}
 	
-	
 	private InputStream retrieveStream(String url) {
     	
     	DefaultHttpClient client = new DefaultHttpClient(); 

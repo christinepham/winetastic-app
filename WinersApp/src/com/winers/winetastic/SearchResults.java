@@ -31,19 +31,18 @@ public class SearchResults extends AbstractActivity {
         //Convert back to POJO
         final Gson gson = new Gson();
         final APISnoothResponse snoothResponse = gson.fromJson(searchQuery, APISnoothResponse.class);
-        final List<APISnoothResponseWineArray> wineAPIResponse = snoothResponse.wineResults;
+        final List<APISnoothResponseWineArray> wineAPIResponse = snoothResponse.wineResults;      
         
         wines = new ArrayList<ArrayList<String>>();
         insertWines(wineAPIResponse);
         final SearchResultsListAdapter adapter = new SearchResultsListAdapter(this, wines);
         ListView lv = (ListView) findViewById(android.R.id.list);
-        lv.setAdapter(adapter);
+        lv.setAdapter(adapter);      
         lv.setOnItemClickListener(new OnItemClickListener() {
-
+        	
 			@Override
 			public void onItemClick(AdapterView<?> av, View v, int pos,
 					long id) {			
-
 				
 				Intent i = new Intent(SearchResults.this, WineInfoPage.class);
 				

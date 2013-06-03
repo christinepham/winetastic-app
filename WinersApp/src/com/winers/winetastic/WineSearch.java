@@ -69,8 +69,11 @@ implements OnChildClickListener {
 			@Override
 			public void onClick(View v) {
 				// Start AsyncTask to perform network operation (API call)
+				System.err.println("Clicked. Making API Call.");
 				advancedSearchAPICall = new AdvancedSearchAPICall();
+				System.err.println("Done. Executing AsyncTask.");
 				advancedSearchAPICall.execute();
+				System.err.println("Okey-dokey.");				
 			}	
 		});
 		
@@ -220,6 +223,7 @@ implements OnChildClickListener {
 		@Override
 		protected String doInBackground(Void... arg0) {
 			WineSearchObject sP = searchAdapter.getSearchParameters();
+			System.err.println("Doing advanced search...");
 			return WinetasticManager.performAdvancedSearch(sP, 20);
 
 		}
@@ -227,9 +231,11 @@ implements OnChildClickListener {
 		// This gets executed after doInBackground()
 		protected void onPostExecute(String result) {
 			if (WinetasticManager.hasSearchResults(result)) {
+				System.err.println("Result returned and non-null.");
 				// Search has results. Send to SearchResult page
 				Intent i = new Intent(WineSearch.this, SearchResults.class);
 				i.putExtra("Search Query", result);
+				System.err.println("Starting activity.");
 				startActivity(i);
 			} else {
 				// No search results. Notify user to search again.

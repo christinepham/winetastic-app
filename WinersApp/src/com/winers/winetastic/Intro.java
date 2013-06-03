@@ -67,7 +67,7 @@ public class Intro extends Activity {
         // Click event: Go to the Home Screen
         home.setOnClickListener(new View.OnClickListener(){
     		@Override
-    		public void onClick(View v) {
+    		public void onClick(View v) {   			
     			if (!uF.isUserLoggedIn(getApplicationContext())) {
     				Toast.makeText(Intro.this, "You must be logged in to go to the Home screen", Toast.LENGTH_LONG).show();
     			}
@@ -179,7 +179,7 @@ public class Intro extends Activity {
     /* Controls background rotation. 
      * Author: Victoria Do
      */
-    private void changeBackground() { 	
+    private void changeBackground() { 	   	
     	RelativeLayout layout = (RelativeLayout) findViewById(R.id.intro_layout);
     	TransitionDrawable td = (TransitionDrawable) layout.getBackground().getCurrent();
     	if(currentFrame == 0) {
