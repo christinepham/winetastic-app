@@ -92,14 +92,8 @@ implements OnChildClickListener {
 			    	//Toast.makeText(getApplicationContext(), "filled array list", 0).show();
 			        combinedSearchAPICALL = new CombinedSearchAPICall();
 					combinedSearchAPICALL.execute();
-				}
-
-				System.err.println("Clicked. Making API Call.");
-				advancedSearchAPICall = new AdvancedSearchAPICall();
-				System.err.println("Done. Executing AsyncTask.");
-				advancedSearchAPICall.execute();
-				System.err.println("Okey-dokey.");				
-}	
+				}		
+			}	
 			
 			
 		});
