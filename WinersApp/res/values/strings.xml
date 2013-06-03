@@ -56,7 +56,7 @@
     
     <!-- Strings for testing purposes -->
     <string name="cleardb">Clear Local DB</string>
-    
+    <string name="placeholder">placeholder</string>
     
     <!-- Strings related to account registration -->
 	<string name="title_activity_register">New Users - Create an Account</string>
@@ -70,7 +70,8 @@
     <string name="quick_search">Quick Search</string>
     <string name="advanced_search">Advanced Search</string>
     <string name="searching">One moment while we find the best matches for your query..</string>
-
+	<string name="see_more">See More</string>
+    
     <!-- My Wines -->
     <string name="my_wines_title"> My Wines </string>
     <string name="wish_list_title"> Wish List </string>
@@ -113,7 +114,6 @@
     <string name="info_title">Information</string>
     <string name="info_name">Wine name</string>
     <string name="info_buy">Buy Wine</string>
-
     <string name="info_region">Wine region</string>    
 
     <string name="info_color">Color</string>
@@ -124,6 +124,7 @@
 	<string name="info_descriptors">Descriptors</string>
 	
 	<!-- Winery Info Page -->
+	<string name="title_activity_winery_info_page">Winery</string>	
 	<string name="info_winery_name">Winery Name</string>
 	<string name="info_winery_description">Description</string>
 	<string name="info_winery_goto">Visit Website</string>

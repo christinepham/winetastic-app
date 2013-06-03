@@ -4,5 +4,4 @@
 	android:layout_height="wrap_content"
 	android:background="@drawable/module_row"
 	android:textColor="@color/black">
-
 </TableRow>

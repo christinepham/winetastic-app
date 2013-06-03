@@ -17,8 +17,6 @@ import com.google.gson.annotations.SerializedName;
  */
 public class APISnoothResponseWinery {
 	
-
-
 	@SerializedName("winery")
 	public APISnoothResponseWineryDetails wineryDetails;
 	
@@ -26,7 +24,6 @@ public class APISnoothResponseWinery {
 	@SerializedName("meta")
 	public APISnoothResponseMetaData metaResults; 
 	
-
 }
 
 /*

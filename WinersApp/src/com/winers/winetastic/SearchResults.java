@@ -12,8 +12,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-//import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -27,24 +27,22 @@ public class SearchResults extends AbstractActivity {
 
         setContentView(R.layout.activity_search_results);
         searchQuery = (String) getIntent().getExtras().get("Search Query");
-        //Toast.makeText(this, searchQuery, Toast.LENGTH_SHORT).show();
         
         //Convert back to POJO
         final Gson gson = new Gson();
         final APISnoothResponse snoothResponse = gson.fromJson(searchQuery, APISnoothResponse.class);
-        final List<APISnoothResponseWineArray> wineAPIResponse = snoothResponse.wineResults;
+        final List<APISnoothResponseWineArray> wineAPIResponse = snoothResponse.wineResults;      
         
         wines = new ArrayList<ArrayList<String>>();
         insertWines(wineAPIResponse);
         final SearchResultsListAdapter adapter = new SearchResultsListAdapter(this, wines);
         ListView lv = (ListView) findViewById(android.R.id.list);
-        lv.setAdapter(adapter);
+        lv.setAdapter(adapter);      
         lv.setOnItemClickListener(new OnItemClickListener() {
-
+        	
 			@Override
 			public void onItemClick(AdapterView<?> av, View v, int pos,
 					long id) {			
-
 				
 				Intent i = new Intent(SearchResults.this, WineInfoPage.class);
 				
@@ -78,7 +76,7 @@ public class SearchResults extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-    //    getMenuInflater().inflate(R.menu.activity_search_results, menu);
+        getMenuInflater().inflate(R.menu.activity_search_results, menu);
         return true;
     }
     

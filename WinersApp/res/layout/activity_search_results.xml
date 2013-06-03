@@ -5,10 +5,20 @@
     android:orientation="vertical" 
     android:visibility="visible"
     >
-
+    
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+        android:layout_height="0dip"
+		android:layout_weight="1"/>
+    
+    <Button
+        android:id="@+id/search_more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ButtonText"
+        android:background="@drawable/btn_winered"
+        android:text="@string/see_more"
+        android:gravity="center" />    
+    
 </LinearLayout>

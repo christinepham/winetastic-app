@@ -33,7 +33,7 @@ import com.facebook.android.FacebookError;
  * Activity which displays a login screen to the user, offering registration as
  * well.z
  */
-public class Login extends Activity implements OnClickListener{
+public class Login extends AbstractActivity implements OnClickListener {
 	
 	/*
      * Facebook stuff
@@ -299,6 +299,12 @@ public class Login extends Activity implements OnClickListener{
 			});
 		}
 		
+	}
+
+
+	@Override
+	protected int getTitleText() {
+		return R.string.title_activity_login;
 	}
 
 	

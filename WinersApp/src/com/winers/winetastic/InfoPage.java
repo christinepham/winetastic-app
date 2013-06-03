@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -58,7 +59,7 @@ public class InfoPage extends AbstractActivity {
     		// Set contents of text, make black, change width
     		text.setText(cols[i], TextView.BufferType.NORMAL);
     		text.setTextColor(getResources().getColor(R.color.black));
-    		
+   		
     		r.addView(text);
     	}    	
     	((TableLayout)parent).addView(r);

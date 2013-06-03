@@ -23,18 +23,17 @@ public class WineOfDay extends Fragment {
 
         View rootView = (View) inflater.inflate(R.layout.fragment_wine_of_day, container, false);
         
-		//View v = (View) rootView.findViewById(R.layout.fragment_wine_of_day);
 		Button b = (Button) rootView.findViewById(R.id.info_button_more_info);
 		
-		 b.setOnClickListener(new View.OnClickListener(){
+		b.setOnClickListener(new View.OnClickListener(){
 
-				@Override
-				public void onClick(View v) {
-					Intent i = new Intent(getActivity().getBaseContext(), WineInfoPage.class);
-					i.putExtra("wine_data", getArguments().getString("wine_data", "wineArraySerialized"));
-					startActivity(i);
-				}  	
-	        });
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getActivity().getBaseContext(), WineInfoPage.class);
+				i.putExtra("wine_data", getArguments().getString("wine_data", "wineArraySerialized"));
+				startActivity(i);
+			}  	
+	    });
 	        
         
         // Get wine detail table elements

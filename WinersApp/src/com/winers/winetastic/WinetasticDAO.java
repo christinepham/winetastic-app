@@ -44,7 +44,7 @@ public class WinetasticDAO {
 		
 		// take off last "+"
 		url = url.substring(0, (url.length()-1));
-        return callSnoothAPI(url);
+        return callSnoothAPIWineSearch(url);
 	}
 	
 	
@@ -82,7 +82,7 @@ public class WinetasticDAO {
 		url += "&t=wine";
 
 		
-		return callSnoothAPI(url);
+		return callSnoothAPIWineSearch(url);
 	}
 	
 	public String performCombinedSearch(WineSearchObject searchParameters, 
@@ -117,7 +117,7 @@ public class WinetasticDAO {
 		}
 		url += "&t=wine";
 		
-		return callSnoothAPI(url);
+		return callSnoothAPIWineSearch(url);
 	}
 	
 	/**
@@ -133,7 +133,7 @@ public class WinetasticDAO {
 		url += "&f=" + randomInt;
 		
 		System.err.println("getRandomWine: " + url);
-		return callSnoothAPI(url);
+		return callSnoothAPIWineSearch(url);
 	}
 	
 	/**
@@ -145,7 +145,10 @@ public class WinetasticDAO {
 	public String getWineryDetails(String wineryID) {
 		String url = SNOOTH_URL + WINERY_RESOURCE_ID + "?akey=" + API_KEY;
 		url += "&id=" + wineryID;
-		return callSnoothAPI(url);
+		
+		System.err.println("url: "+ url);
+		System.err.println("callSnoothAPI(url) = " + callSnoothAPIWinerySearch(url));
+		return callSnoothAPIWinerySearch(url);
 	}
 
 	/**
@@ -159,13 +162,13 @@ public class WinetasticDAO {
 	}
 	
 	
-	private String callSnoothAPI(String url) {
+	private String callSnoothAPIWineSearch(String url) {
 		
 		// For converting to and from JSON/Java objects
 		Gson gson = new Gson();
 		// Make API call
 		InputStream source = retrieveStream(url);  
-		System.err.println("callSnoothAPI: " + url);
+		//System.err.println("callSnoothAPI: " + url);
         Reader reader = new InputStreamReader(source);
 	    
         // Convert JSON object to Java object
@@ -175,6 +178,21 @@ public class WinetasticDAO {
         return gson.toJson(snoothResponse);
 	}
 	
+private String callSnoothAPIWinerySearch(String url) {
+		
+		// For converting to and from JSON/Java objects
+		Gson gson = new Gson();
+		// Make API call
+		InputStream source = retrieveStream(url);  
+		//System.err.println("callSnoothAPI: " + url);
+        Reader reader = new InputStreamReader(source);
+	    
+        // Convert JSON object to Java object
+        APISnoothResponseWinery snoothResponseWinery = gson.fromJson(reader, APISnoothResponseWinery.class);
+        
+        // Return JSON array
+        return gson.toJson(snoothResponseWinery);
+	}
 	
 	private InputStream retrieveStream(String url) {
     	

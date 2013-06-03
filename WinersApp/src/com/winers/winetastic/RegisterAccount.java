@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class RegisterAccount extends Activity {
+public class RegisterAccount extends AbstractActivity {
 	Button btnRegister;
 	Button btnLinkToLogin;
 	EditText inputFullName;
@@ -120,6 +120,11 @@ public class RegisterAccount extends Activity {
 				}
 			}
 		}
+	}
+
+	@Override
+	protected int getTitleText() {
+		return R.string.title_activity_register;
 	}
 
 }
