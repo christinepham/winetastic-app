@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import android.app.ExpandableListActivity;
 import android.app.LocalActivityManager;
+import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -34,7 +35,7 @@ implements OnChildClickListener {
 	private QuickSearchAPICall quickSearchAPICall;
 	private CombinedSearchAPICall combinedSearchAPICALL;
 	private ArrayList<String> stringArgs = new ArrayList<String>();
-	
+
 	private String quickSearchResults;
 
 
@@ -44,16 +45,16 @@ implements OnChildClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.wine_search);
 
-		
+
 		ExpandableListView searchOptions = (ExpandableListView) findViewById(android.R.id.list);
-//		LocalActivityManager mLocalActivityManager = new LocalActivityManager(this, false);
-//        mLocalActivityManager.dispatchCreate(savedInstanceState);
-//        searchOptions.setup();
+		//		LocalActivityManager mLocalActivityManager = new LocalActivityManager(this, false);
+		//        mLocalActivityManager.dispatchCreate(savedInstanceState);
+		//        searchOptions.setup();
 		//ExpandableListView searchOptions = getExpandableListView();
 		searchOptions.setDividerHeight(2);
 		searchOptions.setGroupIndicator(null);
 		searchOptions.setClickable(true);
-		
+
 		setGroups();
 		setChildren();
 
@@ -64,7 +65,7 @@ implements OnChildClickListener {
 		searchAdapter.initializeSelections();
 		searchOptions.setAdapter(searchAdapter);
 		searchOptions.setOnChildClickListener(this);
-		
+
 		Button search = (Button) findViewById(R.id.search);
 		search.setOnClickListener(new OnClickListener(){
 		 // set to true if nothing in quick search
@@ -98,12 +99,11 @@ implements OnChildClickListener {
 				System.err.println("Done. Executing AsyncTask.");
 				advancedSearchAPICall.execute();
 				System.err.println("Okey-dokey.");				
-
-			}	
+}	
 			
 			
 		});
-		
+
 		Button reset = (Button) findViewById(R.id.reset);
 		reset.setOnClickListener(new OnClickListener() {
 
@@ -112,9 +112,10 @@ implements OnChildClickListener {
 				searchAdapter.clear();
 			}
 		});	
-		
+
 		SearchView quickSearch = (SearchView) findViewById(R.id.search_bar);
 		final SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() { 
+
 		    @Override 
 		    public boolean onQueryTextChange(String newText) { 
 		        return true; 
@@ -135,12 +136,12 @@ implements OnChildClickListener {
 		    	//Toast.makeText(getApplicationContext(), "filled array list", 0).show();
 		        quickSearchAPICall = new QuickSearchAPICall();
 				quickSearchAPICall.execute();
-		        return true; 
-		    } 
+				return true; 
+			} 
 		};
-		
+
 		quickSearch.setOnQueryTextListener(queryTextListener); 
-		
+
 	}
 
 
@@ -230,6 +231,7 @@ implements OnChildClickListener {
 		Toast.makeText(WineSearch.this, "Clicked On Child", Toast.LENGTH_SHORT).show();
 		return true;
 	}
+
 	
 	/**
 	 * Network operations must be performed in an AsyncTask, so that's
@@ -266,6 +268,9 @@ implements OnChildClickListener {
 		}
 	}
 
+
+
+
 	/**
 	 * Network operations must be performed in an AsyncTask, so that's
 	 * what this class is for.
@@ -273,12 +278,16 @@ implements OnChildClickListener {
 	 *                is redirected to the search results page.
 	 */
 	class AdvancedSearchAPICall extends AsyncTask<Void, Void, String> {
-		
+
+		Context context;
+		ProgressDialog dialog;
 		@Override
 		protected void onPreExecute() {
 			// This is where the "searching" overlay will go
+			super.onPreExecute();
+			dialog = ProgressDialog.show(WineSearch.this, "","Loading...");
 		}
-		
+
 		// This gets executed after onPreExecute()
 		@Override
 		protected String doInBackground(Void... arg0) {
@@ -286,9 +295,14 @@ implements OnChildClickListener {
 			System.err.println("Doing advanced search...");
 			return WinetasticManager.performAdvancedSearch(sP, 20);
 		}
-		
+
 		// This gets executed after doInBackground()
+		@Override
 		protected void onPostExecute(String result) {
+			super.onPostExecute(result); 
+			//Toast.makeText(WineSearch.this, "DONE", Toast.LENGTH_SHORT).show();
+			if(dialog.isShowing())
+						dialog.dismiss();
 			if (WinetasticManager.hasSearchResults(result)) {
 				System.err.println("Result returned and non-null.");
 				// Search has results. Send to SearchResult page
@@ -302,7 +316,7 @@ implements OnChildClickListener {
 			}
 		}
 	}
-	
+
 	/**
 	 * Network operations must be performed in an AsyncTask, so that's
 	 * what this class is for.
@@ -310,19 +324,28 @@ implements OnChildClickListener {
 	 *                is redirected to the search results page.
 	 */
 	class QuickSearchAPICall extends AsyncTask<Void, Void, String> {
+
+		
+		ProgressDialog dialog;
 		
 		@Override
 		protected void onPreExecute() {
 			// This is where the "searching" overlay will go
+			super.onPreExecute();
+			dialog = ProgressDialog.show(WineSearch.this, "","Loading...");
 		}
-		
+
 		// This gets executed after onPreExecute()
+		@Override
 		protected String doInBackground(Void... arg0) {
 			return WinetasticManager.performQuickSearch(stringArgs, 10);
 		}
-		
+
 		// This gets executed after doInBackground()
+		@Override
 		protected void onPostExecute(String result) {
+			if(dialog.isShowing())
+				dialog.dismiss();
 			if (WinetasticManager.hasSearchResults(result)) {
 				// Search has results. Send to SearchResult page
 				Intent i = new Intent(WineSearch.this, SearchResults.class);
