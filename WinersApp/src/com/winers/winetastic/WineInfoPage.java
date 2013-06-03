@@ -144,32 +144,50 @@ public class WineInfoPage extends InfoPage {
     }
     
     private class AddToWishlist extends AsyncTask<Void, Void, String> {
+    	private boolean hasWine = false;
     	@Override
 		protected String doInBackground(Void... arg0) {
 			System.err.println("Adding wine to wishlist.");
 			db = new DatabaseHandler(getApplicationContext());
 			String email = db.getUserDetails().get("email");
-	    	WinetasticManager.addWineToWishlist(email, info.code);	
+			if (WinetasticManager.isWineInWishlist(email, info.code)) {
+				hasWine = true;
+			} else {
+				WinetasticManager.addWineToWishlist(email, info.code);	
+			}
 	    	return "";
 		}
     	
     	protected void onPostExecute(String result) {
-    		Toast.makeText(WineInfoPage.this, info.name + " has been added to your wishlist", Toast.LENGTH_SHORT).show();
+    		if (hasWine) {
+    			Toast.makeText(WineInfoPage.this, info.name + " is already in your Wishlist", Toast.LENGTH_SHORT).show();
+    		} else {
+    			Toast.makeText(WineInfoPage.this, info.name + " has been added to your Wishlist", Toast.LENGTH_SHORT).show();
+    		}
     	}
     }
     
     private class AddToCellar extends AsyncTask<Void, Void, String> {
+    	private boolean hasWine = false;
     	@Override
 		protected String doInBackground(Void... arg0) {
 			System.err.println("Adding wine to cellar.");
 			db = new DatabaseHandler(getApplicationContext());
 			String email = db.getUserDetails().get("email");
-	    	WinetasticManager.addWineToCellar(email, info.code);	
+			if (WinetasticManager.isWineInCellar(email, info.code)) {
+				hasWine = true;
+			} else {
+				WinetasticManager.addWineToCellar(email, info.code);	
+			}
 	    	return "";
 		}
     	
     	protected void onPostExecute(String result) {
-    		Toast.makeText(WineInfoPage.this, info.name + " has been added to your cellar", Toast.LENGTH_SHORT).show();
+    		if (hasWine) {
+    			Toast.makeText(WineInfoPage.this, info.name + " is already in your Cellar", Toast.LENGTH_SHORT).show();
+    		} else {
+    			Toast.makeText(WineInfoPage.this, info.name + " has been added to your Cellar", Toast.LENGTH_SHORT).show();
+    		}
     	}
     }
     

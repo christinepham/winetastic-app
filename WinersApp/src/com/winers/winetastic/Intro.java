@@ -38,19 +38,18 @@ public class Intro extends Activity {
          * Uncomment the following to automatically take logged in user to
          * Home screen when app starts
          *
-        
+         */
         if (uF.isUserLoggedIn(getApplicationContext())) {
         	Intent i = new Intent(Intro.this, Home.class);
 			startActivity(i);
         }
-        */
+        
         
         setContentView(R.layout.activity_intro);
         
         
         
         // Views   
-        Button home = (Button)findViewById(R.id.guest_home_button);  
         Button register = (Button)findViewById(R.id.guest_register_button);
         browse = (ImageView)findViewById(R.id.guest_find_wines); 	        
         
@@ -64,20 +63,6 @@ public class Intro extends Activity {
     		}
         });  
         
-        // Click event: Go to the Home Screen
-        home.setOnClickListener(new View.OnClickListener(){
-    		@Override
-    		public void onClick(View v) {   			
-    			if (!uF.isUserLoggedIn(getApplicationContext())) {
-    				Toast.makeText(Intro.this, "You must be logged in to go to the Home screen", Toast.LENGTH_LONG).show();
-    			}
-    			else {
-	        		System.err.println("Detected click for HOME.");    			
-	    			Intent i = new Intent(Intro.this, Home.class);
-	    			startActivity(i);
-    			}
-    		}
-        });       
         
      // Click event: Go to the Home Screen
         register.setOnClickListener(new View.OnClickListener(){

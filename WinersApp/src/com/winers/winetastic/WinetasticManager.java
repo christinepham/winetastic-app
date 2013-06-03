@@ -43,6 +43,14 @@ public class WinetasticManager {
 		WinetasticManager.dao.removeWineFromCellar(email, wineID);
 	}
 	
+	public static boolean isWineInCellar(String email, String wineID) {
+		return WinetasticManager.dao.isWineInCellar(email, wineID);
+	}
+	
+	public static boolean isWineInWishlist(String email, String wineID) {
+		return WinetasticManager.dao.isWineInWishlist(email, wineID);
+	}
+	
 	// Call DAO layer's performAdvancedSearch
 	public static String performAdvancedSearch(WineSearchObject searchParameters,
 			int numResults) {

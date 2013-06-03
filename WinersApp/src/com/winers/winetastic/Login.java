@@ -211,8 +211,6 @@ public class Login extends AbstractActivity implements OnClickListener {
 			if (!error) {
 				WinetasticManager.createSnoothAccount(email);
 				json = userFunction.loginUser(email, password);
-				
-				
 			}
 			return null;
 		}
@@ -220,7 +218,6 @@ public class Login extends AbstractActivity implements OnClickListener {
 		@Override
 		protected void onPostExecute(final Boolean result) {
 			if (!error){
-				Toast.makeText(Login.this, "Created snooth account for email: " + email, Toast.LENGTH_SHORT).show();
 			try {
 				if (json.getString(KEY_SUCCESS) != null) {
 					loginErrorMsg.setText("");
