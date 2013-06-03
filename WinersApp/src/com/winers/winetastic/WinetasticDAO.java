@@ -92,36 +92,60 @@ public class WinetasticDAO {
 	}
 	
 	public String performCombinedSearch(WineSearchObject searchParameters, 
-								ArrayList<String> searchArgs, int numResults){
+								 int numResults){
 		String url = SNOOTH_URL + WINE_RESOURCE_ID + "?akey=" + API_KEY;
+		
+		boolean addedPlus = false;
 		
 		url += "&a=1";
 	
-		if (searchParameters.getType() != "") {
+		if (!searchParameters.getType().equals("") && searchParameters.getType() != null) {
+			System.err.println("Printed from type");
 			url += "&q=" + searchParameters.getType() + "+";
-			if (searchParameters.getAccent() != "")
+			addedPlus = true;
+			if (!searchParameters.getAccent().equals("") && searchParameters.getAccent() != null)
+			{
+				System.err.println("Printed from accent with type");
 				url += searchParameters.getAccent() + "+";
+				addedPlus = true;
+			}
 		}
-		else if (searchParameters.getAccent() != "")
+		else if (!searchParameters.getAccent().equals("") && searchParameters.getAccent() != null)
+		{
+			System.err.println("Printed from accent only");
 			url += "&q=" + searchParameters.getAccent() + "+";
+			addedPlus = true;
+		}
 		else{
-			url += "&q=";
+			if (searchParameters.stringList.size() > 0){
+				if (!searchParameters.stringList.get(0).equals("")) {
+					url += "&q=";
+				}
+			}
 		}
-		for (String arg : searchArgs) {
+		for (String arg : searchParameters.stringList) {
+			System.err.println("Adding searchList parameter to search URL");
 			url += arg + "+";
+			addedPlus = true;
 		}
+		
+		System.err.println("Size of stringList: " + searchParameters.stringList.size());
 		
 		// take off last "+"
-		url = url.substring(0, (url.length()-1));
+		if (addedPlus)
+			url = url.substring(0, (url.length()-1));
 		
 		url += "&n=" + numResults;
-		if (searchParameters.getColor() != "") 
+		if (!searchParameters.getColor().equals("")) 
 			url += "&color=" + searchParameters.getColor();
-		if (searchParameters.getPrice() != "") {
+		if (!searchParameters.getPrice().equals("")) {
 			url += searchParameters.parsePriceString();
 			url += "&s=price+asc";
 		}
 		url += "&t=wine";
+		url += "&f=" + searchParameters.firstResult;
+		
+		System.err.println("Searching with URL: " + url);
 		
 		return callSnoothAPIWineSearch(url);
 	}

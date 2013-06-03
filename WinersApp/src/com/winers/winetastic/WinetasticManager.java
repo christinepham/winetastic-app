@@ -15,8 +15,8 @@ public class WinetasticManager {
 		return WinetasticManager.dao.performQuickSearch(searchArgs, numResults);
 	}
 	
-	public static String performCombinedSearch(WineSearchObject searchParameters, ArrayList<String> searchArgs, int numResults){
-		return WinetasticManager.dao.performCombinedSearch(searchParameters, searchArgs, numResults);
+	public static String performCombinedSearch(WineSearchObject searchParameters, int numResults){
+		return WinetasticManager.dao.performCombinedSearch(searchParameters, numResults);
 	}
 	
 	public static void createSnoothAccount(String email) {

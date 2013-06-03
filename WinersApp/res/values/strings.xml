@@ -70,7 +70,7 @@
     <string name="quick_search">Quick Search</string>
     <string name="advanced_search">Advanced Search</string>
     <string name="searching">One moment while we find the best matches for your query..</string>
-	<string name="see_more">See More</string>
+	<string name="see_more">Show Next 20 Results</string>
     
     <!-- My Wines -->
     <string name="my_wines_title"> My Wines </string>
