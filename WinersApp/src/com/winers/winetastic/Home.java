@@ -32,6 +32,14 @@ public class Home extends AbstractActivity {
 			startActivity(i);
         }
         
+        // This tests to see if MyWines sent us back here to refresh.
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+        	if (extras.getString("mywines_reload").equals("true")) {
+        		new MyWinesAPICall().execute();
+        	}
+        }
+        
     	System.err.println("Created. Getting layout...");          
         setContentView(R.layout.activity_main);
     	System.err.println("Got layout.");   
@@ -249,9 +257,17 @@ public class Home extends AbstractActivity {
 		
 		// This gets executed after doInBackground()
 		protected void onPostExecute(String result) {
-			Intent i = new Intent(Home.this, WineCellTabLayout.class);
-			i.putExtra("MyWines Query", result);
-			startActivity(i);
+			final Gson gson = new Gson();
+	        final APISnoothResponseMyWines myWinesResponse = gson.fromJson(result, APISnoothResponseMyWines.class);
+	        final APISnoothResponseMetaData meta = myWinesResponse.metaResults;
+	        if (meta.results.equals("") || meta.results.equals("0")) {
+	        	Toast.makeText(Home.this, "You must add a wine through search results before you can access My Wines", Toast.LENGTH_LONG).show();
+	        }
+	        else {
+				Intent i = new Intent(Home.this, WineCellTabLayout.class);
+				i.putExtra("MyWines Query", result);
+				startActivity(i);
+	        }
 		}
 	}
     

@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
+
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -15,13 +17,17 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class WineWishList extends Activity {
 
 	private String myWinesQuery;
+	private String wineCodeToRemove;
+	private String wineNameToRemove;
 	private ArrayList<ArrayList<String>> wines;
 	private boolean removeMode;
+	private DatabaseHandler db;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +50,13 @@ public class WineWishList extends Activity {
 		
 		myWinesQuery = (String) getIntent().getExtras().get("MyWines Query");
 		
-		System.err.println("MY WINES QUERY FROM INSIDE MY WIIIIIINESL: " + myWinesQuery);
 		
 		final Gson gson = new Gson();
         final APISnoothResponseMyWines myWinesResponse = gson.fromJson(myWinesQuery, APISnoothResponseMyWines.class);
         final List<APISnoothResponseMyWineArray> winesAPIResponse = myWinesResponse.myWineResults;
 
         wines = new ArrayList<ArrayList<String>>();
-        // TODO: 
-        // will have to populate from the database using users wine 
+
         insertWines(winesAPIResponse);
 		SearchResultsListAdapter adapter = new SearchResultsListAdapter(this, wines);
 		ListView lv = (ListView) findViewById(android.R.id.list);
@@ -64,14 +68,13 @@ public class WineWishList extends Activity {
 					long id) {			
 
 
-				Intent i = new Intent(WineWishList.this, WineInfoPage.class);
-
-// HOLY SHIT HERE WE GO
+				// HOLY SHIT HERE WE GO
 				
 				List<APISnoothResponseWineArray> wineArrayForInfoPage = new ArrayList<APISnoothResponseWineArray>();
-				APISnoothResponseWineArray tempArray = new APISnoothResponseWineArray();
+				APISnoothResponseWineArray tempArray;
 				for (APISnoothResponseMyWineArray wineZZZ : winesAPIResponse) {
 		    		if (wineZZZ.wishlist.equals("1")) {
+		    			tempArray = new APISnoothResponseWineArray();
 		    			tempArray.code = wineZZZ.code;
 		    			tempArray.image = wineZZZ.image;
 		    			tempArray.link = wineZZZ.link;
@@ -86,14 +89,23 @@ public class WineWishList extends Activity {
 		    			wineArrayForInfoPage.add(tempArray);
 		    		}
 		    	}
-				String wineArraySerialized = gson.toJson(wineArrayForInfoPage.get(pos));
-				
-
-				//List<APISnoothResponseWineArray> wineAPIResponse = snoothResponse.wineResults;	
-				//String wineArraySerialized = gson.toJson(wineAPIResponse.get(pos));
-
-				i.putExtra("wine_data", wineArraySerialized);
-				startActivity(i);
+					
+				if (removeMode == false) {
+					Intent i = new Intent(WineWishList.this, WineInfoPage.class);
+					String wineArraySerialized = gson.toJson(wineArrayForInfoPage.get(pos));
+					
+	
+					//List<APISnoothResponseWineArray> wineAPIResponse = snoothResponse.wineResults;	
+					//String wineArraySerialized = gson.toJson(wineAPIResponse.get(pos));
+	
+					i.putExtra("wine_data", wineArraySerialized);
+					startActivity(i);
+				}
+				else { // REMOVE MODE
+					wineCodeToRemove = wineArrayForInfoPage.get(pos).code;
+					wineNameToRemove = wineArrayForInfoPage.get(pos).name;
+					new RemoveFromWishlist().execute();
+				}
 			}
 		});
 
@@ -117,6 +129,11 @@ public class WineWishList extends Activity {
 		} else {
 			v.setBackgroundColor(getResources().getColor(R.color.charcoal));
 			((Button) v).setText(getResources().getString(R.string.removeModeFalse));			
+			
+			// REFRESH PAGE
+			Intent i = new Intent(WineWishList.this, Home.class);
+			i.putExtra("mywines_reload", "true");
+			startActivity(i);
 		}
 	}	
 	
@@ -139,6 +156,22 @@ public class WineWishList extends Activity {
 	    		temp.add(wineZZZ.image);
 		    	wines.add(temp);
     		}
+    	}
+    }
+	
+	private class RemoveFromWishlist extends AsyncTask<Void, Void, String> {
+    	@Override
+		protected String doInBackground(Void... arg0) {
+			System.err.println("Adding wine to cellar.");
+			db = new DatabaseHandler(getApplicationContext());
+			String email = db.getUserDetails().get("email");
+	    	WinetasticManager.removeWineFromWishlist(email, wineCodeToRemove);
+	    	//System.err.println("Wine code to remove: " + wineCodeToRemove);
+	    	return "";
+		}
+    	
+    	protected void onPostExecute(String result) {
+    		Toast.makeText(WineWishList.this, wineNameToRemove + " has been removed from your wishlist", Toast.LENGTH_SHORT).show();
     	}
     }
     

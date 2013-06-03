@@ -75,7 +75,7 @@
     <!-- My Wines -->
     <string name="my_wines_title"> My Wines </string>
     <string name="wish_list_title"> Wish List </string>
-	<string name="removeModeTrue">Done removing wines.</string>
+	<string name="removeModeTrue">Done removing wines</string>
 	<string name="removeModeFalse">Remove wines</string>   
 
     <!-- Event Calendar -->

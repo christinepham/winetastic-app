@@ -122,7 +122,8 @@ public class WineInfoPage extends InfoPage {
     }
     
     /* 
-     * Not sure what this method is for. I added a listener for the Buy button up above.
+     * WineInfoPage was crashing when I clicked the Buy button so I created a listener for it
+     * 6/3/13 - 2:45am
      * -Jack
      */
     public void openWinePrices(View v) {

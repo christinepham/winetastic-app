@@ -22,13 +22,13 @@ public class WineCellTabLayout extends AbstractActivity {
         
         myWinesQuery = (String) getIntent().getExtras().get("MyWines Query");
 		
-		System.err.println("MY WINES QUERY FROM INSIDE WINECELL: " + myWinesQuery);
+		//System.err.println("MY WINES QUERY FROM INSIDE WINECELL: " + myWinesQuery);
         
         
         LocalActivityManager mLocalActivityManager = new LocalActivityManager(this, false);
         mLocalActivityManager.dispatchCreate(savedInstanceState);
         tabHost.setup(mLocalActivityManager);
-        Toast.makeText(this, "tabhost: "+ tabHost, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "tabhost: "+ tabHost, Toast.LENGTH_SHORT).show();
         
         // Tab for MyWines
         TabSpec myWinesTab = tabHost.newTabSpec("My Wines");
@@ -41,6 +41,7 @@ public class WineCellTabLayout extends AbstractActivity {
         // Tab for Wishlist 
         TabSpec wishListTab = tabHost.newTabSpec("Wish List");        
         wishListTab.setIndicator("Wish List");//, getResources().getDrawable(R.drawable.wishlist));
+        
         Intent wishListIntenet = new Intent(this, WineWishList.class);
         wishListIntenet.putExtra("MyWines Query", myWinesQuery);
         wishListTab.setContent(wishListIntenet);
@@ -56,6 +57,8 @@ public class WineCellTabLayout extends AbstractActivity {
 		// TODO Auto-generated method stub
 		return R.string.my_wines_title;
 	}	
+	
+	
 	
 
 }

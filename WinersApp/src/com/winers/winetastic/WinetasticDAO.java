@@ -141,8 +141,29 @@ public class WinetasticDAO {
 		url += "&u=" + RANDOM_STRING + email;
 		url += "&p=" + RANDOM_STRING;
 		url += "&id=" + wineID;
-		url += "&c=1";
+		url += "&c=2";
 		
+		retrieveStream(url);
+	}
+	
+	public void removeWineFromWishlist(String email, String wineID) {
+		String url = SNOOTH_URL + RATE_WINE_RESOURCE_ID + "?akey=" + API_KEY;
+		url += "&u=" + RANDOM_STRING + email;
+		url += "&p=" + RANDOM_STRING;
+		url += "&id=" + wineID;
+		url += "&w=0";
+		
+		retrieveStream(url);
+	}
+	
+	public void removeWineFromCellar(String email, String wineID) {
+		String url = SNOOTH_URL + RATE_WINE_RESOURCE_ID + "?akey=" + API_KEY;
+		url += "&u=" + RANDOM_STRING + email;
+		url += "&p=" + RANDOM_STRING;
+		url += "&id=" + wineID;
+		url += "&c=1";
+		System.err.println("URL TO REMOVE WINE: ");
+		System.err.println(url);
 		retrieveStream(url);
 	}
 	
