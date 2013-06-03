@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,12 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+/**
+ * Displays information about the random wine of the day.
+ * 
+ * @author Helena
+ *
+ */
 public class WineOfDay extends Fragment {	
 	
 	private TableLayout					statsTable;
@@ -47,11 +54,11 @@ public class WineOfDay extends Fragment {
         
         // Populate table
         if(getArguments().getString("random_wine_name","random_wine_name") != null) 
-        	addRow(statsTable, "Name", getArguments().getString("random_wine_name","random_wine_name"));    
+        	addRow(statsTable, Html.fromHtml("Name").toString(), getArguments().getString("random_wine_name","random_wine_name"));    
         if(getArguments().getString("random_wine_price","random_wine_price") != null) 
         	addRow(statsTable, "Price", getArguments().getString("random_wine_price","random_wine_price"));    
         if(getArguments().getString("random_wine_price","random_wine_price") != null) 
-        	addRow(statsTable, "Region", getArguments().getString("random_wine_region","random_wine_region"));    
+        	addRow(statsTable, Html.fromHtml("Region").toString(), getArguments().getString("random_wine_region","random_wine_region"));    
         if(getArguments().getString("random_wine_price","random_wine_price") != null) 
         	addRow(statsTable, "Varietal", getArguments().getString("random_wine_varietal","random_wine_varietal"));    
         if(getArguments().getString("random_wine_price","random_wine_price") != null) 
@@ -67,6 +74,8 @@ public class WineOfDay extends Fragment {
      * 
      * @param parent  the TableLayout view to attach the row to
      * @param cols    text to be added to the row
+     * 
+     * @author Victoria
      */
     protected void addRow(View parent, String ... cols) {
     	// Get width of parent view

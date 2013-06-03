@@ -22,7 +22,14 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
-public class DailyVine extends FragmentActivity {
+
+/**
+ * Starts the Daily Vine for the random winery/wine of the day.
+ * 
+ * @author Helena
+ *
+ */
+public class DailyVine extends AbstractFragmentActivity {
 	
 	String searchQuery;
 	String searchQueryWinery;
@@ -65,16 +72,11 @@ public class DailyVine extends FragmentActivity {
 	    wineAPIResponse = (List<APISnoothResponseWineArray>) snoothResponse.wineResults;
 	    wineAPIResponsePass = snoothResponse.wineResults;	
     	wineArraySerialized = gson.toJson(wineAPIResponsePass.get(0));
-    	System.err.println("MADE IT");
-    	
     	
     	//Convert winery search query back to POJO
 	    snoothResponseWinery = gson.fromJson(searchQueryWinery, APISnoothResponseWinery.class);
 	    wineryAPIResponse = (APISnoothResponseWineryDetails) snoothResponseWinery.wineryDetails;
     	wineryArraySerialized = gson.toJson(wineryAPIResponse);
-
-    	System.err.println("MADE IT AGAIN");
-    	
     	
 		// Create the adapter that will return a fragment for each of the two
 		// primary sections of the app.
@@ -125,6 +127,13 @@ public class DailyVine extends FragmentActivity {
 			
 			//Pass winery of the day details to "From the Vine" Fragment
 			args.putString("random_winery_name", wineryAPIResponse.name);
+			args.putString("random_winery_address", wineryAPIResponse.address);
+			args.putString("random_winery_city", wineryAPIResponse.city);
+			args.putString("random_winery_state", wineryAPIResponse.state);
+			args.putString("random_winery_zip", wineryAPIResponse.zip);
+			args.putString("random_winery_country", wineryAPIResponse.country);
+			args.putString("random_winery_phone", wineryAPIResponse.phone);
+			args.putString("random_winery_desc", wineryAPIResponse.description);
 			
 			//Pass wine of the day details to "To the Cellar" Fragment
 			args.putString("random_wine_name", wineAPIResponse.get(0).name);

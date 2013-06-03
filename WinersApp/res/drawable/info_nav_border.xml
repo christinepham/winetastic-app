@@ -5,5 +5,8 @@
 		    android:width="1dp"
 		    android:color="#78002d"
 		/>
+		<solid
+		    android:color="@color/transparent" />
+		    
 	</shape></item>	
 </selector>

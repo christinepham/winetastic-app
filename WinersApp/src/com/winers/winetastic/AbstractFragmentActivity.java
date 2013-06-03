@@ -13,9 +13,9 @@ public abstract class AbstractFragmentActivity extends FragmentActivity {
 
 	 @Override
 	 protected void onCreate(Bundle savedInstanceState) {
-	  System.err.println("(AbstractActivity) onCreate() called");
+//	  System.err.println("(FragmentAbstractActivity) onCreate() called");
 	  super.onCreate(savedInstanceState);
-	  System.err.println("AbstractActivity: super.onCreate successful.");	  
+//	  System.err.println("FragmentAbstractActivity: super.onCreate successful.");	  
 	  //check if customTitlebar is supported.
 	  final boolean customTitleSupported = requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);        
 	  setContentView(R.layout.mycustomtitle);
@@ -36,14 +36,14 @@ public abstract class AbstractFragmentActivity extends FragmentActivity {
 				}
 	        	
 	        });
-	        System.err.println("Before" + getTitleText() + "===========");
+//	        System.err.println("Before" + getTitleText() + "===========");
 	        if ( myTitleText != null ) {
-	        	System.err.println("Makes it here" + getTitleText() + "===========");
+//	        	System.err.println("Makes it here" + getTitleText() + "===========");
 	        	myTitleText.setText(getText(getTitleText()));
 	        }
 	       
 	        
-	  System.err.println("Exiting AbstractActivity onCreate method" + getTitleText() + "<-----");
+//	  System.err.println("Exiting AbstractActivity onCreate method" + getTitleText() + "<-----");
 	 }
 	 
 	 /**
