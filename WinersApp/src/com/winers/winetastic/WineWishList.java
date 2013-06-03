@@ -28,6 +28,8 @@ public class WineWishList extends Activity {
 	private ArrayList<ArrayList<String>> wines;
 	private boolean removeMode;
 	private DatabaseHandler db;
+	SearchResultsListAdapter adapter;
+	private int adapterClearPosition;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,7 @@ public class WineWishList extends Activity {
         wines = new ArrayList<ArrayList<String>>();
 
         insertWines(winesAPIResponse);
-		SearchResultsListAdapter adapter = new SearchResultsListAdapter(this, wines);
+		adapter = new SearchResultsListAdapter(this, wines);
 		ListView lv = (ListView) findViewById(android.R.id.list);
 		lv.setAdapter(adapter);
 		lv.setOnItemClickListener(new OnItemClickListener() {
@@ -102,6 +104,7 @@ public class WineWishList extends Activity {
 					startActivity(i);
 				}
 				else { // REMOVE MODE
+					adapterClearPosition = pos;
 					wineCodeToRemove = wineArrayForInfoPage.get(pos).code;
 					wineNameToRemove = wineArrayForInfoPage.get(pos).name;
 					new RemoveFromWishlist().execute();
@@ -110,6 +113,11 @@ public class WineWishList extends Activity {
 		});
 
 	 
+	}
+	
+	private void clearItemFromAdapter(int position) {
+		adapter.clear(position);
+		adapter.notifyDataSetChanged();
 	}
 
 	@Override
@@ -131,9 +139,11 @@ public class WineWishList extends Activity {
 			((Button) v).setText(getResources().getString(R.string.removeModeFalse));			
 			
 			// REFRESH PAGE
+			/*
 			Intent i = new Intent(WineWishList.this, Home.class);
 			i.putExtra("mywines_reload", "true");
 			startActivity(i);
+			*/
 		}
 	}	
 	
@@ -171,6 +181,7 @@ public class WineWishList extends Activity {
 		}
     	
     	protected void onPostExecute(String result) {
+    		clearItemFromAdapter(adapterClearPosition);
     		Toast.makeText(WineWishList.this, wineNameToRemove + " has been removed from your wishlist", Toast.LENGTH_SHORT).show();
     	}
     }

@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SearchResultsListAdapter extends BaseAdapter{
+public class SearchResultsListAdapter extends BaseAdapter {
 
 	// -- Fields -- //
 	private Activity activity;
@@ -38,6 +38,10 @@ public class SearchResultsListAdapter extends BaseAdapter{
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return wines.size();
+	}
+	
+	public void clear(int position) {
+		wines.remove(position);
 	}
 
 	/**
