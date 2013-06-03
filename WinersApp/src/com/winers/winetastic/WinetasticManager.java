@@ -15,8 +15,32 @@ public class WinetasticManager {
 		return WinetasticManager.dao.performQuickSearch(searchArgs, numResults);
 	}
 	
-	public static String performCombinedSearch(WineSearchObject searchParameters, ArrayList<String> searchArgs, int numResults){
-		return WinetasticManager.dao.performCombinedSearch(searchParameters, searchArgs, numResults);
+	public static String performCombinedSearch(WineSearchObject searchParameters, int numResults){
+		return WinetasticManager.dao.performCombinedSearch(searchParameters, numResults);
+	}
+	
+	public static void createSnoothAccount(String email) {
+		WinetasticManager.dao.createSnoothAccount(email);
+	}
+	
+	public static String returnMyWines(String email) {
+		return WinetasticManager.dao.returnMyWines(email);
+	}
+	
+	public static void addWineToWishlist(String email, String wineID){
+		WinetasticManager.dao.addWineToWishlist(email, wineID);
+	}
+	
+	public static void addWineToCellar(String email, String wineID){
+		WinetasticManager.dao.addWineToCellar(email, wineID);
+	}
+	
+	public static void removeWineFromWishlist(String email, String wineID){
+		WinetasticManager.dao.removeWineFromWishlist(email, wineID);
+	}
+	
+	public static void removeWineFromCellar(String email, String wineID){
+		WinetasticManager.dao.removeWineFromCellar(email, wineID);
 	}
 	
 	// Call DAO layer's performAdvancedSearch

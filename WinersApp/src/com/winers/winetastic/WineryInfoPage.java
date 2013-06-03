@@ -16,10 +16,12 @@ public class WineryInfoPage extends InfoPage {
 
 	private	APISnoothResponseWineryDetails 	info;
 	
+	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         System.err.println("WineryInfoPage: Starting intent");
+        
         
         // Get winery details from caller
         Bundle extras = getIntent().getExtras();    

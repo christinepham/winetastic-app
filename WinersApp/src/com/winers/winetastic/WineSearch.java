@@ -30,14 +30,12 @@ implements OnChildClickListener {
 	private ArrayList<String> groups = new ArrayList<String>();
 	private ArrayList<Object> children = new ArrayList<Object>();
 	private AdvancedSearchAdapter searchAdapter;
-	private AdvancedSearchAPICall advancedSearchAPICall;
+	//private AdvancedSearchAPICall advancedSearchAPICall;
 
-	private QuickSearchAPICall quickSearchAPICall;
+	//private QuickSearchAPICall quickSearchAPICall;
 	private CombinedSearchAPICall combinedSearchAPICALL;
 	private ArrayList<String> stringArgs = new ArrayList<String>();
-
-	private String quickSearchResults;
-
+	private WineSearchObject sP;
 
 
 	@Override
@@ -75,24 +73,22 @@ implements OnChildClickListener {
 				// Start AsyncTask to perform network operation (API call)
 
 				SearchView searchVal = (SearchView) findViewById(R.id.search_bar);
-				if(searchVal.getQuery().toString().equals("")){
-					// if there is nothing in quick search field
-					advancedSearchAPICall = new AdvancedSearchAPICall();
-					advancedSearchAPICall.execute();
-				}else{
-					stringArgs.clear();
+					stringArgs = new ArrayList<String>();
 			    	String name = searchVal.getQuery().toString();
 			    	// gray out the advanced search options
 			    	
-			    	Toast.makeText(getApplicationContext(), "searching for "+ name, 0).show();
-			    	String[] splitted = name.split(" ");
+			    	//Toast.makeText(getApplicationContext(), "searching for "+ name, 0).show();
+			    	String[] splitted = name.split("\\s+");
 			    	for(String split : splitted){
-			    		stringArgs.add(split); // fill array list 
+			    		if ((!split.equals(" ")) && (!split.equals("")))
+			    			stringArgs.add(split); // fill array list 
 			    	}
 			    	//Toast.makeText(getApplicationContext(), "filled array list", 0).show();
+			    	sP = new WineSearchObject();
+			    	sP = searchAdapter.getSearchParameters();
+					sP.stringList = stringArgs;
 			        combinedSearchAPICALL = new CombinedSearchAPICall();
-					combinedSearchAPICALL.execute();
-				}		
+					combinedSearchAPICALL.execute();	
 			}	
 
 		});
@@ -116,19 +112,23 @@ implements OnChildClickListener {
 
 		    @Override 
 		    public boolean onQueryTextSubmit(String query) { 
-		    	//Toast.makeText(getApplicationContext(), "Hitting enter", 0).show(); 
 		    	SearchView searchVal = (SearchView) findViewById(R.id.search_bar);
-		    	//  make sure to clear arrayList 
-		    	stringArgs.clear();
+				stringArgs = new ArrayList<String>();
 		    	String name = searchVal.getQuery().toString();
-		    	Toast.makeText(getApplicationContext(), "searching for "+ name, 0).show();
-		    	String[] splitted = name.split(" ");
+		    	// gray out the advanced search options
+		    	
+		    	//Toast.makeText(getApplicationContext(), "searching for "+ name, 0).show();
+		    	String[] splitted = name.split("\\s+");
 		    	for(String split : splitted){
-		    		stringArgs.add(split); // fill array list 
+		    		if ((!split.equals(" ")) && (!split.equals("")))
+		    			stringArgs.add(split); // fill array list 
 		    	}
 		    	//Toast.makeText(getApplicationContext(), "filled array list", 0).show();
-		        quickSearchAPICall = new QuickSearchAPICall();
-				quickSearchAPICall.execute();
+		    	sP = new WineSearchObject();
+		    	sP = searchAdapter.getSearchParameters();
+				sP.stringList = stringArgs;
+		        combinedSearchAPICALL = new CombinedSearchAPICall();
+				combinedSearchAPICALL.execute();	
 				return true; 
 			} 
 		};
@@ -221,7 +221,7 @@ implements OnChildClickListener {
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPos,
 			int childPos, long id) {
-		Toast.makeText(WineSearch.this, "Clicked On Child", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(WineSearch.this, "Clicked On Child", Toast.LENGTH_SHORT).show();
 		return true;
 	}
 
@@ -236,6 +236,7 @@ implements OnChildClickListener {
 		
 		ProgressDialog dialog;
 		
+		
 		@Override
 		protected void onPreExecute() {
 			// This is where the "searching" overlay will go
@@ -246,8 +247,8 @@ implements OnChildClickListener {
 		// This gets executed after onPreExecute()
 		@Override
 		protected String doInBackground(Void... arg0) {
-			WineSearchObject sP = searchAdapter.getSearchParameters();
-			return WinetasticManager.performCombinedSearch(sP, stringArgs, 20);
+			
+			return WinetasticManager.performCombinedSearch(sP, 20);
 
 		}
 		
@@ -260,101 +261,13 @@ implements OnChildClickListener {
 				// Search has results. Send to SearchResult page
 				Intent i = new Intent(WineSearch.this, SearchResults.class);
 				i.putExtra("Search Query", result);
+				i.putExtra("WineSearchObject", sP);
 				startActivity(i);
 			} else {
 				// No search results. Notify user to search again.
-				Toast.makeText(WineSearch.this, "No matches were found. Please try your search again.", Toast.LENGTH_SHORT).show();
+				Toast.makeText(WineSearch.this, "No matches were found. Please try your search again.", Toast.LENGTH_LONG).show();
 			}
 		}
 	}
 
-
-
-
-	/**
-	 * Network operations must be performed in an AsyncTask, so that's
-	 * what this class is for.
-	 * Postcondition: upon successful search of at least one result, user
-	 *                is redirected to the search results page.
-	 */
-	class AdvancedSearchAPICall extends AsyncTask<Void, Void, String> {
-
-		Context context;
-		ProgressDialog dialog;
-		@Override
-		protected void onPreExecute() {
-			// This is where the "searching" overlay will go
-			super.onPreExecute();
-			dialog = ProgressDialog.show(WineSearch.this, "","Loading...");
-		}
-
-		// This gets executed after onPreExecute()
-		@Override
-		protected String doInBackground(Void... arg0) {
-			WineSearchObject sP = searchAdapter.getSearchParameters();
-			System.err.println("Doing advanced search...");
-			return WinetasticManager.performAdvancedSearch(sP, 20);
-		}
-
-		// This gets executed after doInBackground()
-		@Override
-		protected void onPostExecute(String result) {
-			super.onPostExecute(result); 
-			//Toast.makeText(WineSearch.this, "DONE", Toast.LENGTH_SHORT).show();
-			if(dialog.isShowing())
-						dialog.dismiss();
-			if (WinetasticManager.hasSearchResults(result)) {
-				System.err.println("Result returned and non-null.");
-				// Search has results. Send to SearchResult page
-				Intent i = new Intent(WineSearch.this, SearchResults.class);
-				i.putExtra("Search Query", result);
-				System.err.println("Starting activity.");
-				startActivity(i);
-			} else {
-				// No search results. Notify user to search again.
-				Toast.makeText(WineSearch.this, "No matches were found. Please try your search again.", Toast.LENGTH_SHORT).show();
-			}
-		}
-	}
-
-	/**
-	 * Network operations must be performed in an AsyncTask, so that's
-	 * what this class is for.
-	 * Postcondition: upon successful search of at least one result, user
-	 *                is redirected to the search results page.
-	 */
-	class QuickSearchAPICall extends AsyncTask<Void, Void, String> {
-
-		
-		ProgressDialog dialog;
-		
-		@Override
-		protected void onPreExecute() {
-			// This is where the "searching" overlay will go
-			super.onPreExecute();
-			dialog = ProgressDialog.show(WineSearch.this, "","Loading...");
-		}
-
-		// This gets executed after onPreExecute()
-		@Override
-		protected String doInBackground(Void... arg0) {
-			return WinetasticManager.performQuickSearch(stringArgs, 10);
-		}
-
-		// This gets executed after doInBackground()
-		@Override
-		protected void onPostExecute(String result) {
-			if(dialog.isShowing())
-				dialog.dismiss();
-			if (WinetasticManager.hasSearchResults(result)) {
-				// Search has results. Send to SearchResult page
-				Intent i = new Intent(WineSearch.this, SearchResults.class);
-				i.putExtra("Search Query", result);
-				startActivity(i);
-			} else {
-				// No search results. Notify user to search again.
-				Toast.makeText(WineSearch.this, "No matches were found. Please try your search again.", Toast.LENGTH_SHORT).show();
-			}
-		}
-	}
 }

@@ -83,7 +83,7 @@ public class SearchResultsListAdapter extends BaseAdapter{
 		
         // Set image
 
-        //ImageLoader.loadFromWeb(descriptions.get(3), img);
+        ImageLoader.loadFromWeb(descriptions.get(3), img);
 
 
 		return vi;

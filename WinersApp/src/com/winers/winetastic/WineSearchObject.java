@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.Serializable;
 import java.net.URL;
 import java.nio.charset.Charset;
 
@@ -24,27 +25,24 @@ import com.google.gson.Gson;
  * 
  */
 
-public class WineSearchObject {
+public class WineSearchObject implements Serializable {
 	private String 				color;
 	private String 				price;
 	private String 				type;
 	private String 				accent;
-	private ArrayList<String> 	stringList;
+	public int					firstResult;
+	public ArrayList<String> 	stringList;
 	
 	public WineSearchObject () {
 		color = "";
 		price = "";
 		type = "";		
 		accent = "";
+		firstResult = 1;
+		stringList = new ArrayList<String>();
 	}
 	
-	public String getStringList(ArrayList<String> stringList){
-		String string = "";
-		for(String str : stringList){
-			string += str + "+";
-		}
-		return string;
-	}
+	
 	
 	public void setColor(String color) {
 		this.color = color;
@@ -72,9 +70,10 @@ public class WineSearchObject {
 	
 	public String parsePriceString() {
 		String retVal = new String();
-		if (price == "Less than $15/bottle") retVal = "&xp=15";
-		else if (price == "$15 - $50/bottle") retVal = "&mp=15.01&xp=50";
-		else if (price == "$50 - $150/bottle") retVal = "&mp=50.01&xp=150";
+		if (price.equals("")) retVal = "";
+		else if (price.equals("Less than $15/bottle")) retVal = "&xp=15";
+		else if (price.equals("$15 - $50/bottle")) retVal = "&mp=15.01&xp=50";
+		else if (price.equals("$50 - $150/bottle")) retVal = "&mp=50.01&xp=150";
 		else retVal = "&mp=150.01";
 		return retVal;
 	}

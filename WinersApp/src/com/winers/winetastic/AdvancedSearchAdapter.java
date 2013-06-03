@@ -373,7 +373,7 @@ public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 			((CheckedTextView)groupViews2[i]).setText(groupItem.get(i));
 
 		}
-		Toast.makeText(activity, ind, Toast.LENGTH_SHORT).show();
+		//Toast.makeText(activity, ind, Toast.LENGTH_SHORT).show();
 		((CheckedTextView)groupViews2[0]).setText(groupItem.get(0));
 		setSelectionsFalse();
 		// clear all the selections
