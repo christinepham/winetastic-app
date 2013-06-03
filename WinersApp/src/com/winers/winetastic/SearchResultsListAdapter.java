@@ -82,7 +82,9 @@ public class SearchResultsListAdapter extends BaseAdapter{
 		price.setText("$" + descriptions.get(2));
 		
         // Set image
+
         //ImageLoader.loadFromWeb(descriptions.get(3), img);
+
 
 		return vi;
 	}
