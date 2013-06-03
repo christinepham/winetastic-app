@@ -29,12 +29,21 @@ public class WineSearchObject {
 	private String 				price;
 	private String 				type;
 	private String 				accent;
+	private ArrayList<String> 	stringList;
 	
 	public WineSearchObject () {
 		color = "";
 		price = "";
 		type = "";		
 		accent = "";
+	}
+	
+	public String getStringList(ArrayList<String> stringList){
+		String string = "";
+		for(String str : stringList){
+			string += str + "+";
+		}
+		return string;
 	}
 	
 	public void setColor(String color) {
