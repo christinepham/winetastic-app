@@ -44,9 +44,9 @@
 	        android:layout_marginLeft="2dp"
 	        android:layout_marginRight="2dp"
 	        android:layout_marginTop="2dp"
-	        android:background="@drawable/calandarw"
+
 	        android:orientation="horizontal" />
-	
+	        <!--  android:background="@drawable/calandarw"	-->
 	    <Button
 	        android:id="@+id/myWines"
 	        android:layout_width="0dp"

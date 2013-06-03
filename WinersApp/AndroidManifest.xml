@@ -180,6 +180,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.winers.winetastic.Activities.AbstractActivity" />
         </activity>
+        
         <activity android:name="com.winers.winetastic.SearchActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />

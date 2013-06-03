@@ -78,7 +78,14 @@ public class Home extends AbstractActivity {
         });
         
         // map
-
+        map_but.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(Home.this, Map.class);
+				startActivity(i);
+			}
+        });
+        
         logout.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
