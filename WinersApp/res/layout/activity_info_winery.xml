@@ -85,7 +85,7 @@
 		        android:layout_width="140dp"
 		        android:layout_height="40dp"
 		        android:text="@string/info_winery_map"
-		        android:onClick="openInBrowser" />
+		        android:onClick="openInMaps" />
 	    </LinearLayout>
 	        
 

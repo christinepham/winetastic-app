@@ -99,8 +99,7 @@ implements OnChildClickListener {
 				System.err.println("Done. Executing AsyncTask.");
 				advancedSearchAPICall.execute();
 				System.err.println("Okey-dokey.");				
-
-			}	
+}	
 			
 			
 		});
