@@ -32,6 +32,7 @@ public class ImageLoader {
 
 	private static class URLToDrawable extends AsyncTask<ImageLoader, Void, ImageView> {
 		Drawable d;
+		boolean error = false;
 		
 		protected ImageView doInBackground(ImageLoader ... args) {
 		    try {		    	
@@ -39,13 +40,16 @@ public class ImageLoader {
 		        d = Drawable.createFromStream(is, "image");
 		        return args[0].v;
 		    } catch (Exception e) {
+		    	error = true;
 		    }
 		    return null;
 		}
 		
 		@Override
 		protected void onPostExecute(ImageView v) {		
-			v.setImageDrawable(d);			
+			if (!error) {
+				v.setImageDrawable(d);
+			}
 		}
 	}
 	

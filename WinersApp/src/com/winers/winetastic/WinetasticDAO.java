@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -148,6 +149,60 @@ public class WinetasticDAO {
 		System.err.println("Searching with URL: " + url);
 		
 		return callSnoothAPIWineSearch(url);
+	}
+	
+	public boolean isWineInWishlist(String email, String wineID) {
+		String url = SNOOTH_URL + MY_WINES_RESOURCE_ID + "?akey=" + API_KEY;
+		url += "&u=" + RANDOM_STRING + email;
+		url += "&p=" + RANDOM_STRING;
+		Gson gson = new Gson();
+		InputStream source = retrieveStream(url);  
+        Reader reader = new InputStreamReader(source);
+        APISnoothResponseMyWines snoothResponse = gson.fromJson(reader, APISnoothResponseMyWines.class);
+        boolean wineFound = false;
+        List<APISnoothResponseMyWineArray> wineArray = snoothResponse.myWineResults;
+        if (wineArray == null) return false;
+        APISnoothResponseMyWineArray wineComparator = new APISnoothResponseMyWineArray();
+        for (APISnoothResponseMyWineArray wine : wineArray) {
+        	if (wine.code.equals(wineID)) {
+        		wineFound = true;
+        		wineComparator = wine;
+        		break;
+        	}
+        }
+        if (wineFound) {
+        	if (wineComparator.wishlist.equals("1")) {
+        		return true;
+        	}
+        }
+        return false;
+	}
+	
+	public boolean isWineInCellar(String email, String wineID) {
+		String url = SNOOTH_URL + MY_WINES_RESOURCE_ID + "?akey=" + API_KEY;
+		url += "&u=" + RANDOM_STRING + email;
+		url += "&p=" + RANDOM_STRING;
+		Gson gson = new Gson();
+		InputStream source = retrieveStream(url);  
+        Reader reader = new InputStreamReader(source);
+        APISnoothResponseMyWines snoothResponse = gson.fromJson(reader, APISnoothResponseMyWines.class);
+        boolean wineFound = false;
+        List<APISnoothResponseMyWineArray> wineArray = snoothResponse.myWineResults;
+        if (wineArray == null) return false;
+        APISnoothResponseMyWineArray wineComparator = new APISnoothResponseMyWineArray();
+        for (APISnoothResponseMyWineArray wine : wineArray) {
+        	if (wine.code.equals(wineID)) {
+        		wineFound = true;
+        		wineComparator = wine;
+        		break;
+        	}
+        }
+        if (wineFound) {
+        	if (wineComparator.cellared.equals("2")) {
+        		return true;
+        	}
+        }
+        return false;
 	}
 	
 	public void addWineToWishlist(String email, String wineID) {
