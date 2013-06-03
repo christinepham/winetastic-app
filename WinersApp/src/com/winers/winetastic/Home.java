@@ -26,7 +26,7 @@ public class Home extends AbstractActivity {
     	System.err.println("Attempting to create");
     	System.out.println("hello");
         super.onCreate(savedInstanceState);
-        //uF = new UserFunctions();
+        uF = new UserFunctions();
         if (!uF.isUserLoggedIn(getApplicationContext())) {
         	Intent i = new Intent(Home.this, Intro.class);
 			startActivity(i);

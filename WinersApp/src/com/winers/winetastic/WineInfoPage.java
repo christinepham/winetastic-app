@@ -65,6 +65,7 @@ public class WineInfoPage extends InfoPage {
         
         Button addToWishlistButton = (Button) findViewById(R.id.info_button_add_wishlist);
         Button addToCellarButton = (Button) findViewById(R.id.info_button_add_cellar);
+        Button buyButton = (Button) findViewById(R.id.info_button_purchase);
         
         addToWishlistButton.setOnClickListener(new OnClickListener() {
 
@@ -79,6 +80,16 @@ public class WineInfoPage extends InfoPage {
 			@Override
 			public void onClick(View v) {
 				new AddToCellar().execute();
+			}
+		});	
+        
+        
+        buyButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(Intent.ACTION_VIEW);
+		    	i.setData(Uri.parse(info.link + "/#aprices"));	
+		    	startActivity(i);  
 			}
 		});	
         	
@@ -110,9 +121,15 @@ public class WineInfoPage extends InfoPage {
         return true;
     }
     
+    /* 
+     * Not sure what this method is for. I added a listener for the Buy button up above.
+     * -Jack
+     */
     public void openWinePrices(View v) {
     	Intent i = new Intent(Intent.ACTION_VIEW);
     	i.setData(Uri.parse(info.link + "/#aprices"));
+    	
+    	
     	startActivity(i);    	
     }
     
