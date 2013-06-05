@@ -4,6 +4,7 @@ package com.winers.winetastic;
 import java.util.List;
 import java.util.Map;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -12,15 +13,16 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.TextView; 
+
 
 import com.google.gson.Gson;
 
 public class Home extends AbstractActivity {
 
 	private UserFunctions uF;
-	private FunFact random;
+	FunFact random; 
 
 	
     @Override
@@ -28,30 +30,21 @@ public class Home extends AbstractActivity {
     	System.err.println("Attempting to create");
     	System.out.println("hello");
         super.onCreate(savedInstanceState);
-        
         uF = new UserFunctions();
         if (!uF.isUserLoggedIn(getApplicationContext())) {
         	Intent i = new Intent(Home.this, Intro.class);
 			startActivity(i);
         }
         
-        // This tests to see if MyWines sent us back here to refresh.
-        /*
-        Bundle extras = getIntent().getExtras();
-        if(extras != null) {
-        	if (extras.getString("mywines_reload").equals("true")) {
-        		new MyWinesAPICall().execute();
-        	}
-        }
-        */
+        
         
     	System.err.println("Created. Getting layout...");          
         setContentView(R.layout.activity_main);
     	System.err.println("Got layout.");   
     	
-    	random = new FunFact();
-        TextView text = (TextView) findViewById(R.id.randButton);
-        text.setText("\tFun Fact: "+random.randomFact() + "\t\n ");
+    	random = new FunFact(); 
+    	TextView text = (TextView) findViewById(R.id.randButton); 
+    	text.setText("\tFun Fact: "+random.randomFact() + "\t\n "); 
     	
     	ImageButton homeButton = (ImageButton) findViewById(R.id.home_button);
     	homeButton.setVisibility(View.GONE);
@@ -81,9 +74,9 @@ public class Home extends AbstractActivity {
         my_wines_but.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(Home.this, WineCellTabLayout.class);
-				startActivity(i);
+				// TODO Auto-generated method stub
 				new MyWinesAPICall().execute();
+				
 			}
         });
 
@@ -102,6 +95,7 @@ public class Home extends AbstractActivity {
         map_but.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
+		
 				String url = "http://google.com/maps?q=wineries"; 
 	        	Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 	            startActivity(i); // Go go go!
@@ -210,6 +204,7 @@ public class Home extends AbstractActivity {
 	class DailyVineAPICall extends AsyncTask<Void, Void, String> {
 		private String wineryResponse;
 		private String wineResponse;
+		ProgressDialog dialog;
 		
 		String searchQuery;
 	    Gson gson;
@@ -219,6 +214,8 @@ public class Home extends AbstractActivity {
 		@Override
 		protected void onPreExecute() {
 			// This is where the "searching" overlay will go
+			super.onPreExecute();
+			dialog = ProgressDialog.show(Home.this, "","Loading...");
 		}
 		
 		// This gets executed after onPreExecute()
@@ -234,6 +231,8 @@ public class Home extends AbstractActivity {
 		
 		// This gets executed after doInBackground()
 		protected void onPostExecute(String result) {
+			if(dialog.isShowing())
+				dialog.dismiss();
 			Intent i = new Intent(Home.this, DailyVine.class);
 			i.putExtra("Search Query", wineResponse);
 			i.putExtra("Winery", wineryResponse);
@@ -244,6 +243,7 @@ public class Home extends AbstractActivity {
 	class MyWinesAPICall extends AsyncTask<Void, Void, String> {
 
 		private String email;
+		ProgressDialog dialog;
 		
 		String searchQuery;
 	    Gson gson;
@@ -252,7 +252,10 @@ public class Home extends AbstractActivity {
 	    
 		@Override
 		protected void onPreExecute() {
+			
 			email = new DatabaseHandler(getApplicationContext()).getUserDetails().get("email");
+			super.onPreExecute();
+			dialog = ProgressDialog.show(Home.this, "","Loading...");
 		}
 		
 		// This gets executed after onPreExecute()
@@ -265,6 +268,8 @@ public class Home extends AbstractActivity {
 		
 		// This gets executed after doInBackground()
 		protected void onPostExecute(String result) {
+			if(dialog.isShowing())
+				dialog.dismiss();
 			final Gson gson = new Gson();
 	        final APISnoothResponseMyWines myWinesResponse = gson.fromJson(result, APISnoothResponseMyWines.class);
 	        final APISnoothResponseMetaData meta = myWinesResponse.metaResults;

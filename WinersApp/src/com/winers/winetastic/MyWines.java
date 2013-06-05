@@ -38,7 +38,7 @@ public class MyWines extends ListActivity {
 //        final Gson gson = new Gson();
 //        final APISnoothResponse snoothResponse = gson.fromJson(searchQuery, APISnoothResponse.class);
 //        final List<APISnoothResponseWineArray> wineAPIResponse = snoothResponse.wineResults;
-        
+        System.err.println("Got this far");
 		
 		myWinesQuery = (String) getIntent().getExtras().get("MyWines Query");
 		
