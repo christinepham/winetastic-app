@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.winers.winetastic.R;
+import com.winers.winetastic.model.manager.UserFunctions;
 public class Intro extends Activity {
 	
 	private UserFunctions uF;

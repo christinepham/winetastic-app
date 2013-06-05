@@ -3,6 +3,10 @@ package com.winers.winetastic;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.winers.winetastic.model.manager.DatabaseHandler;
+import com.winers.winetastic.model.manager.UserFunctions;
+import com.winers.winetastic.model.manager.WinetasticManager;
+
 import java.util.regex.*;
 
 import android.app.Activity;

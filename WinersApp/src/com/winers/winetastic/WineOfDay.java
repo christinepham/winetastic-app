@@ -1,6 +1,10 @@
 package com.winers.winetastic;
 
 import com.google.gson.Gson;
+import com.winers.winetastic.model.data.APISnoothResponseWineArray;
+import com.winers.winetastic.model.manager.DatabaseHandler;
+import com.winers.winetastic.model.manager.ImageLoader;
+import com.winers.winetastic.model.manager.WinetasticManager;
 
 import android.app.ProgressDialog;
 import android.content.Intent;

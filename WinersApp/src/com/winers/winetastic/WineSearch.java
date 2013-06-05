@@ -3,6 +3,10 @@ package com.winers.winetastic;
 
 import java.util.ArrayList;
 
+import com.winers.winetastic.controller.AdvancedSearchController;
+import com.winers.winetastic.model.data.WineSearchObject;
+import com.winers.winetastic.model.manager.WinetasticManager;
+
 import android.app.ExpandableListActivity;
 import android.app.LocalActivityManager;
 import android.app.ProgressDialog;
@@ -29,7 +33,7 @@ implements OnChildClickListener {
 
 	private ArrayList<String> groups = new ArrayList<String>();
 	private ArrayList<Object> children = new ArrayList<Object>();
-	private AdvancedSearchAdapter searchAdapter;
+	private AdvancedSearchController searchAdapter;
 	//private AdvancedSearchAPICall advancedSearchAPICall;
 
 	//private QuickSearchAPICall quickSearchAPICall;
@@ -56,7 +60,7 @@ implements OnChildClickListener {
 		setGroups();
 		setChildren();
 
-		searchAdapter = new AdvancedSearchAdapter(groups, children);
+		searchAdapter = new AdvancedSearchController(groups, children);
 		searchAdapter.setInflater(
 				(LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE),
 				this);

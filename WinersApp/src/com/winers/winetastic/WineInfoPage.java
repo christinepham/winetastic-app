@@ -17,7 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.winers.winetastic.defunct.ImageHelper;
+import com.winers.winetastic.model.data.APISnoothResponseWineArray;
+import com.winers.winetastic.model.data.WineSearchObject;
+import com.winers.winetastic.model.manager.DatabaseHandler;
+import com.winers.winetastic.model.manager.ImageLoader;
+import com.winers.winetastic.model.manager.UserFunctions;
+import com.winers.winetastic.model.manager.WinetasticManager;
 
 /**
  * Displays statistics and descriptors for a specific wine. 

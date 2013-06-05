@@ -1,6 +1,9 @@
 package com.winers.winetastic;
 
 import com.google.gson.Gson;
+import com.winers.winetastic.model.data.APISnoothResponseWinery;
+import com.winers.winetastic.model.data.APISnoothResponseWineryDetails;
+import com.winers.winetastic.model.manager.ImageLoader;
 
 import android.content.Intent;
 import android.net.Uri;

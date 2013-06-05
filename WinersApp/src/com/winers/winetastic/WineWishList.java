@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.winers.winetastic.controller.SearchResultsController;
+import com.winers.winetastic.model.data.APISnoothResponseMyWineArray;
+import com.winers.winetastic.model.data.APISnoothResponseMyWines;
+import com.winers.winetastic.model.data.APISnoothResponseWineArray;
+import com.winers.winetastic.model.manager.DatabaseHandler;
+import com.winers.winetastic.model.manager.WinetasticManager;
 
 
 import android.os.AsyncTask;
@@ -28,7 +34,7 @@ public class WineWishList extends Activity {
 	private ArrayList<ArrayList<String>> wines;
 	private boolean removeMode;
 	private DatabaseHandler db;
-	SearchResultsListAdapter adapter;
+	SearchResultsController adapter;
 	private int adapterClearPosition;
 	
 	@Override
@@ -60,7 +66,7 @@ public class WineWishList extends Activity {
         wines = new ArrayList<ArrayList<String>>();
 
         insertWines(winesAPIResponse);
-		adapter = new SearchResultsListAdapter(this, wines);
+		adapter = new SearchResultsController(this, wines);
 		ListView lv = (ListView) findViewById(android.R.id.list);
 		lv.setAdapter(adapter);
 		lv.setOnItemClickListener(new OnItemClickListener() {

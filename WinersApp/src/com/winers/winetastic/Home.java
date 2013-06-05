@@ -22,6 +22,14 @@ import android.widget.TextView;
 
 
 import com.google.gson.Gson;
+import com.winers.winetastic.model.data.APISnoothResponse;
+import com.winers.winetastic.model.data.APISnoothResponseMetaData;
+import com.winers.winetastic.model.data.APISnoothResponseMyWines;
+import com.winers.winetastic.model.data.APISnoothResponseWineArray;
+import com.winers.winetastic.model.data.FunFact;
+import com.winers.winetastic.model.manager.DatabaseHandler;
+import com.winers.winetastic.model.manager.UserFunctions;
+import com.winers.winetastic.model.manager.WinetasticManager;
 
 public class Home extends AbstractActivity {
 
