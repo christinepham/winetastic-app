@@ -57,7 +57,8 @@ public class InfoPage extends AbstractActivity {
     		text.setText(cols[i], TextView.BufferType.NORMAL);
     		Linkify.addLinks(text, Linkify.ALL);
     		text.setTextColor(getResources().getColor(R.color.black));
-   		
+    		Linkify.addLinks(text, Linkify.ALL);   		
+    		
     		r.addView(text);
     	}    	
     	((TableLayout)parent).addView(r);
@@ -78,7 +79,7 @@ public class InfoPage extends AbstractActivity {
     	}
     	return s;
     }
-
+    
 	@Override
 	protected int getTitleText() {
 		return R.string.info_title;

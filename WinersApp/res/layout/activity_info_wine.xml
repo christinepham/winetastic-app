@@ -131,6 +131,16 @@
 		    	android:text="@string/info_information" />
 	
 		</TableLayout>
+		
+		<Button 
+		    android:id="@+id/info_see_similar"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/see_similar_wines"
+		    android:background="@drawable/btn_winered"
+		    android:layout_margin="@dimen/default_padding"
+		    style="@style/ButtonText"
+		    android:onClick="searchSimilar" />
 		</LinearLayout>
 	</ScrollView>
 

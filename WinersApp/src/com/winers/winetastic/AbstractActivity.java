@@ -12,6 +12,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public abstract class AbstractActivity extends Activity {
 
@@ -58,7 +59,7 @@ public abstract class AbstractActivity extends Activity {
 				@Override
 				public void onClick(View v) {
 					uF.logoutUser(getApplicationContext());
-					//Toast.makeText(AbstractActivity.this, "You have been logged out", Toast.LENGTH_LONG).show();
+					Toast.makeText(AbstractActivity.this, "You have been logged out.", Toast.LENGTH_LONG).show();
 					Intent i = new Intent(AbstractActivity.this, Intro.class);
 					startActivity(i);
 					

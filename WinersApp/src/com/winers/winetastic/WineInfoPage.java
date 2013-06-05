@@ -1,5 +1,7 @@
 package com.winers.winetastic;
 
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,10 +17,8 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.winers.winetastic.model.data.APISnoothResponseWineArray;
 import com.winers.winetastic.model.data.WineSearchObject;
-import com.winers.winetastic.model.manager.DatabaseHandler;
 import com.winers.winetastic.model.manager.ImageLoader;
 import com.winers.winetastic.model.manager.NetworkTaskManager;
-
 /**
  * Displays statistics and descriptors for a specific wine. 
  * 
@@ -108,11 +108,18 @@ public class WineInfoPage extends InfoPage {
         if(!(info.varietal.equals(""))) addRow(statsTable, "Varietal", info.varietal);        
         if(!(info.price.equals(""))) 	addRow(statsTable, "Price", "$" + info.price);  
         if(!(info.vintage.equals(""))) 	addRow(statsTable, "Vintage", info.vintage);    
-        if(info.winery != null)		 	addRow(statsTable, "Winery", info.winery);
+        if(info.winery != null && !(info.winery.isEmpty()))		 	
+        	addRow(statsTable, "Winery", info.winery);
         
         // TODO: Search similar wines
         searchObject = new WineSearchObject();
-        searchObject.setColor(info.type);
+                
+        
+//        String queryColor = parseColor(info.type);
+//        
+//        if(!(queryColor.isEmpty()))  searchObject.setType(queryColor);
+//        if(!(info.varietal.isEmpty()))  searchObject.setType(parseWineType(info.varietal));
+        
     }
 
     @Override
@@ -133,6 +140,31 @@ public class WineInfoPage extends InfoPage {
     	
     	startActivity(i);    	
     }
+    
+    public void searchSimilar(View v) {
+		ArrayList<String> stringArgs = new ArrayList<String>();
+		stringArgs.add(parseColor(info.type));
+    	
+    	String varietal = info.varietal;
+		varietal = varietal.trim().replace(";", "");
+		
+		String[] splitted = varietal.split("\\s+");
+    	for(String split : splitted){
+    		if ((!split.equals(" ")) && (!split.equals(""))) {
+    			if(split.matches("^[a-zA-Z]+$"))
+    				stringArgs.add(split); // fill array list 
+    		}
+    	}
+    	//Toast.makeText(getApplicationContext(), "filled array list", 0).show();
+    	searchObject.stringList = stringArgs;
+    	System.err.println("stringList size: " + stringArgs.get(0));
+		NetworkTaskManager.doCombinedSearch(WineInfoPage.this, searchObject);
+    } 
+	
+	private String parseColor(String s) {
+		if(s.isEmpty()) return "";
+		return (s.split(" "))[0];
+	}
     
 	/**
 	 * Gets APISnoothResponseWinery object and passes to a new WineryInfoPage activity.

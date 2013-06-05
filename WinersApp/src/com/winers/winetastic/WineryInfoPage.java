@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class WineryInfoPage extends InfoPage {
 
@@ -46,13 +47,20 @@ public class WineryInfoPage extends InfoPage {
         ImageView img = (ImageView) findViewById(R.id.info_winery_pic);        
         ImageLoader.loadFromWeb(info.image, img);	
         
-        // Set address: If info.state exists, the winery is in the US
+        // Get address layout elements
         TextView address1 = (TextView) findViewById(R.id.info_winery_address1);        
         TextView address2 = (TextView) findViewById(R.id.info_winery_address2);         
         TextView address3 = (TextView) findViewById(R.id.info_winery_address3);         
         
-        address1.setText(info.address, TextView.BufferType.NORMAL);        
-	    address2.setText(info.city + ", " + info.state + " " + info.zip);   
+        // First address line
+        address1.setText(info.address, TextView.BufferType.NORMAL);
+        
+        // Second address line
+        String addr2 = info.city;
+        if(!(addr2.isEmpty()))  addr2 += ", ";
+	    address2.setText(addr2 + info.state);   
+	    
+	    // Third address line
         if(!info.country.isEmpty()) {
         	if(!(info.zip.isEmpty())) 
         		address3.setText(info.zip);
@@ -90,14 +98,16 @@ public class WineryInfoPage extends InfoPage {
 	    	Intent i = new Intent(Intent.ACTION_VIEW);
 	    	i.setData(Uri.parse(info.url));
 	    	startActivity(i);      
+    	} else {
+    		Toast.makeText(WineryInfoPage.this, "Sorry, no website available.", Toast.LENGTH_SHORT).show();
     	}
     }    
     
     public void openInMaps(View v) {
-    	String mapname = info.name;
-    	String mapcountry = info.country;
-    	String mapcity = info.city;
-        String url = "http://google.com/maps?q=" + mapname + "+" + mapcity + "+" + mapcountry;
+        String url = "http://google.com/maps?q=" 
+        		+ info.name + "+"
+        		+ info.address + "+" 
+        		+ info.country;
         Intent i = new Intent(Intent.ACTION_VIEW); // Create a new intent - stating you want to 'view something'
         i.setData(Uri.parse(url));  // Add the url data (allowing android to realise you want to open the browser)
         startActivity(i); // Go go go!    	

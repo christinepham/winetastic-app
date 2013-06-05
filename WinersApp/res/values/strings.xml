@@ -115,7 +115,8 @@
     <string name="info_title">Information</string>
     <string name="info_name">Wine name</string>
     <string name="info_buy">Buy Wine</string>
-    <string name="info_region">Wine region</string>    
+    <string name="info_region">Wine region</string>   
+    <string name="see_similar_wines">See Similar Wines</string> 
 
     <string name="info_color">Color</string>
     <string name="info_add_cellar">+Cellar</string>
