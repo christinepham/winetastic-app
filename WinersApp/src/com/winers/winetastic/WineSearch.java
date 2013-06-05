@@ -3,19 +3,9 @@ package com.winers.winetastic;
 
 import java.util.ArrayList;
 
-import com.winers.winetastic.controller.AdvancedSearchController;
-import com.winers.winetastic.model.data.WineSearchObject;
-import com.winers.winetastic.model.manager.WinetasticManager;
-
-import android.app.ExpandableListActivity;
-import android.app.LocalActivityManager;
-import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -25,7 +15,10 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.SearchView;
-import android.widget.Toast;
+
+import com.winers.winetastic.controller.AdvancedSearchController;
+import com.winers.winetastic.model.data.WineSearchObject;
+import com.winers.winetastic.model.manager.NetworkTaskManager;
 
 
 public class WineSearch extends AbstractActivity
@@ -36,11 +29,8 @@ implements OnChildClickListener {
 	private AdvancedSearchController searchAdapter;
 	//private AdvancedSearchAPICall advancedSearchAPICall;
 
-	//private QuickSearchAPICall quickSearchAPICall;
-	private CombinedSearchAPICall combinedSearchAPICALL;
 	private ArrayList<String> stringArgs = new ArrayList<String>();
 	private WineSearchObject sP;
-
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -69,9 +59,9 @@ implements OnChildClickListener {
 		searchOptions.setOnChildClickListener(this);
 
 		Button search = (Button) findViewById(R.id.search);
+						
 		search.setOnClickListener(new OnClickListener(){
 		 // set to true if nothing in quick search
-
 			@Override
 			public void onClick(View v) {
 				// Start AsyncTask to perform network operation (API call)
@@ -90,9 +80,8 @@ implements OnChildClickListener {
 			    	//Toast.makeText(getApplicationContext(), "filled array list", 0).show();
 			    	sP = new WineSearchObject();
 			    	sP = searchAdapter.getSearchParameters();
-					sP.stringList = stringArgs;
-			        combinedSearchAPICALL = new CombinedSearchAPICall();
-					combinedSearchAPICALL.execute();	
+					sP.stringList = stringArgs;	
+					NetworkTaskManager.doCombinedSearch(WineSearch.this, sP);
 			}	
 
 		});
@@ -131,8 +120,8 @@ implements OnChildClickListener {
 		    	sP = new WineSearchObject();
 		    	sP = searchAdapter.getSearchParameters();
 				sP.stringList = stringArgs;
-		        combinedSearchAPICALL = new CombinedSearchAPICall();
-				combinedSearchAPICALL.execute();	
+				
+				NetworkTaskManager.doCombinedSearch(WineSearch.this, sP);
 				return true; 
 			} 
 		};
@@ -227,51 +216,6 @@ implements OnChildClickListener {
 			int childPos, long id) {
 		//Toast.makeText(WineSearch.this, "Clicked On Child", Toast.LENGTH_SHORT).show();
 		return true;
-	}
-
-	
-	/**
-	 * Network operations must be performed in an AsyncTask, so that's
-	 * what this class is for.
-	 * Postcondition: upon successful search of at least one result, user
-	 *                is redirected to the search results page.
-	 */
-	class CombinedSearchAPICall extends AsyncTask<Void, Void, String> {
-		
-		ProgressDialog dialog;
-		
-		
-		@Override
-		protected void onPreExecute() {
-			// This is where the "searching" overlay will go
-			super.onPreExecute();
-			dialog = ProgressDialog.show(WineSearch.this, "","Loading...");
-		}
-		
-		// This gets executed after onPreExecute()
-		@Override
-		protected String doInBackground(Void... arg0) {
-			
-			return WinetasticManager.performCombinedSearch(sP, 20);
-
-		}
-		
-		// This gets executed after doInBackground()
-		@Override
-		protected void onPostExecute(String result) {
-			if(dialog.isShowing())
-				dialog.dismiss();
-			if (WinetasticManager.hasSearchResults(result)) {
-				// Search has results. Send to SearchResult page
-				Intent i = new Intent(WineSearch.this, SearchResults.class);
-				i.putExtra("Search Query", result);
-				i.putExtra("WineSearchObject", sP);
-				startActivity(i);
-			} else {
-				// No search results. Notify user to search again.
-				Toast.makeText(WineSearch.this, "No matches were found. Please try your search again.", Toast.LENGTH_LONG).show();
-			}
-		}
 	}
 
 }

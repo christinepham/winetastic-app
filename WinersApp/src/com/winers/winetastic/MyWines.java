@@ -3,34 +3,28 @@ package com.winers.winetastic;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.ListActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.Toast;
+
 import com.google.gson.Gson;
 import com.winers.winetastic.controller.SearchResultsController;
 import com.winers.winetastic.model.data.APISnoothResponseMyWineArray;
 import com.winers.winetastic.model.data.APISnoothResponseMyWines;
 import com.winers.winetastic.model.data.APISnoothResponseWineArray;
-import com.winers.winetastic.model.manager.DatabaseHandler;
-import com.winers.winetastic.model.manager.WinetasticManager;
-
-import android.annotation.SuppressLint;
-import android.app.ListActivity;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.LinearLayout;
+import com.winers.winetastic.model.manager.NetworkTaskManager;
 
 public class MyWines extends ListActivity {
 
 	private ArrayList<ArrayList<String>> wines;
 	private String myWinesQuery;
 	private String wineCodeToRemove;
-	private String wineNameToRemove;
-	private DatabaseHandler db;
 	private boolean removeMode = false;
 	private int adapterClearPosition;
 	SearchResultsController adapter;
@@ -101,9 +95,12 @@ public class MyWines extends ListActivity {
 				}
 				else { // REMOVE MODE
 					wineCodeToRemove = wineArrayForInfoPage.get(pos).code;
-					wineNameToRemove = wineArrayForInfoPage.get(pos).name;
+					String wineNameToRemove = wineArrayForInfoPage.get(pos).name;
 					adapterClearPosition = pos;
-					new RemoveFromCellar().execute();
+					
+					NetworkTaskManager.removeFromCellar(MyWines.this, wineCodeToRemove);
+					clearItemFromAdapter(adapterClearPosition);
+					Toast.makeText(MyWines.this, wineNameToRemove + " has been removed from your cellar", Toast.LENGTH_SHORT).show();  					
 				}
 			}
 		});
@@ -161,28 +158,6 @@ public class MyWines extends ListActivity {
 	    		temp.add(wineZZZ.image);
 		    	wines.add(temp);
     		}
-    	}
-    }
-    
-    private class RemoveFromCellar extends AsyncTask<Void, Void, String> {
-    	@Override
-		protected String doInBackground(Void... arg0) {
-			System.err.println("Adding wine to cellar.");
-			db = new DatabaseHandler(getApplicationContext());
-			String email = db.getUserDetails().get("email");
-	    	WinetasticManager.removeWineFromCellar(email, wineCodeToRemove);
-	    	System.err.println("Wine code to remove: " + wineCodeToRemove);
-	    	
-	    	// Figure out how to remove the wine from the list
-	    	
-	    	
-	    	
-	    	return "";
-		}
-    	
-    	protected void onPostExecute(String result) {
-    		clearItemFromAdapter(adapterClearPosition);
-    		Toast.makeText(MyWines.this, wineNameToRemove + " has been removed from your cellar", Toast.LENGTH_SHORT).show();    		
     	}
     }
 }

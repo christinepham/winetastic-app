@@ -1,14 +1,10 @@
 package com.winers.winetastic;
 
-import com.winers.winetastic.R;
-import android.app.Activity;
-import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.util.Linkify;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;

@@ -9,8 +9,6 @@ import java.net.MalformedURLException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -180,8 +178,7 @@ public class Login extends AbstractActivity implements OnClickListener {
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
 	}
-	
-	
+		
 	/**
 	 * Represents an asynchronous login/registration task used to authenticate
 	 * the user.

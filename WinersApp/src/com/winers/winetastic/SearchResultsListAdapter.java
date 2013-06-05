@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.winers.winetastic.R;
-import com.winers.winetastic.defunct.ImageHelper;
+import com.winers.winetastic.model.manager.ImageLoader;
 
 import android.app.Activity;
 import android.content.Context;

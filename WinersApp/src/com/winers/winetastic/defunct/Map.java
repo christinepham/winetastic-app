@@ -1,20 +1,12 @@
-package com.winers.winetastic;
+package com.winers.winetastic.defunct;
 
 import com.winers.winetastic.AbstractActivity;
-import com.winers.winetastic.Home;
 import com.winers.winetastic.R;
-import com.winers.winetastic.R.id;
-import com.winers.winetastic.R.layout;
-import com.winers.winetastic.R.menu;
 import com.winers.winetastic.R.string;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.View;
-import android.widget.Button;
 
 public class Map extends AbstractActivity {
 
@@ -26,11 +18,6 @@ public class Map extends AbstractActivity {
     }
   
         protected void sendToGoogleMaps() {
-        	/** You could have this at the top of the class as a constant, 
-        	 *	 or pass it in as a method variable, 
-        	 *	 if you wish to send to multiple websites
-        	 */
-        	//String url = "http://google.com/maps?q=wineries"; 
         	String url ="http://google.com";
         	if (!url.startsWith("https://") && !url.startsWith("http://")){
         	    url = "http://" + url;

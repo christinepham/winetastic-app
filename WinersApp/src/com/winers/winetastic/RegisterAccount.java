@@ -1,15 +1,11 @@
 package com.winers.winetastic;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.winers.winetastic.model.manager.DatabaseHandler;
-import com.winers.winetastic.model.manager.UserFunctions;
-import com.winers.winetastic.model.manager.WinetasticManager;
-
-import java.util.regex.*;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,6 +15,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.winers.winetastic.model.manager.DatabaseHandler;
+import com.winers.winetastic.model.manager.UserFunctions;
+import com.winers.winetastic.model.manager.WinetasticManager;
 
 public class RegisterAccount extends AbstractActivity {
 	Button btnRegister;

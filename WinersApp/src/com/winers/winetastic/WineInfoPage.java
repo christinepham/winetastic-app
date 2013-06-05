@@ -1,10 +1,7 @@
 package com.winers.winetastic;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -14,15 +11,13 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TableLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.winers.winetastic.model.data.APISnoothResponseWineArray;
 import com.winers.winetastic.model.data.WineSearchObject;
 import com.winers.winetastic.model.manager.DatabaseHandler;
 import com.winers.winetastic.model.manager.ImageLoader;
-import com.winers.winetastic.model.manager.UserFunctions;
-import com.winers.winetastic.model.manager.WinetasticManager;
+import com.winers.winetastic.model.manager.NetworkTaskManager;
 
 /**
  * Displays statistics and descriptors for a specific wine. 
@@ -34,7 +29,6 @@ public class WineInfoPage extends InfoPage {
 	
 	private	APISnoothResponseWineArray 	info;
 	private WineSearchObject			searchObject;
-	private DatabaseHandler db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,7 +71,7 @@ public class WineInfoPage extends InfoPage {
 
 			@Override
 			public void onClick(View v) {
-				new AddToWishlist().execute();
+				NetworkTaskManager.addToWishlist(WineInfoPage.this, info.name, info.code);
 			}
 		});	
         
@@ -85,7 +79,7 @@ public class WineInfoPage extends InfoPage {
 
 			@Override
 			public void onClick(View v) {
-				new AddToCellar().execute();
+				NetworkTaskManager.addToCellar(WineInfoPage.this, info.name, info.code);
 			}
 		});	
         
@@ -146,131 +140,7 @@ public class WineInfoPage extends InfoPage {
 	 */    
     
     public void viewWineryInfo(View v) {
-    	new WineryIntentTask().execute();
+    	NetworkTaskManager.startWineryIntent(WineInfoPage.this, info.winery);
     }
-    
-    private class AddToWishlist extends AsyncTask<Void, Void, String> {
-    	private boolean hasWine = false;
-    	ProgressDialog dialog;
-    	boolean isGuest;
-    	
-    	@Override
-		protected void onPreExecute() {
-			// This is where the "searching" overlay will go
-			super.onPreExecute();
-			dialog = ProgressDialog.show(WineInfoPage.this, "","Loading...");
-		}
-    	
-    	@Override
-		protected String doInBackground(Void... arg0) {
-			System.err.println("Adding wine to wishlist.");
-			UserFunctions uf = new UserFunctions();
-			if (!uf.isUserLoggedIn(getApplicationContext())) {
-				isGuest = true;
-			}
-				else {
-				db = new DatabaseHandler(getApplicationContext());
-				String email = db.getUserDetails().get("email");
-				if (WinetasticManager.isWineInWishlist(email, info.code)) {
-					hasWine = true;
-				} else {
-					WinetasticManager.addWineToWishlist(email, info.code);	
-				}
-			}
-	    	return "";
-		}
-    	
-    	protected void onPostExecute(String result) {
-    		if(dialog.isShowing())
-				dialog.dismiss();
-    		if (isGuest) {
-    			Toast.makeText(getApplicationContext(), "You must be logged in to use this feature", Toast.LENGTH_SHORT).show();
-    		} else {
-	    		if (hasWine) {
-	    			Toast.makeText(WineInfoPage.this, info.name + " is already in your Wishlist", Toast.LENGTH_SHORT).show();
-	    		} else {
-	    			Toast.makeText(WineInfoPage.this, info.name + " has been added to your Wishlist", Toast.LENGTH_SHORT).show();
-	    		}
-    		}
-    	}
-    }
-    
-    private class AddToCellar extends AsyncTask<Void, Void, String> {
-    	private boolean hasWine = false;
-    	ProgressDialog dialog;
-    	boolean isGuest = false;
-    	
-    	@Override
-		protected void onPreExecute() {
-			// This is where the "searching" overlay will go
-			super.onPreExecute();
-			dialog = ProgressDialog.show(WineInfoPage.this, "","Loading...");
-		}
-    	
-    	@Override
-		protected String doInBackground(Void... arg0) {
-			System.err.println("Adding wine to cellar.");
-			UserFunctions uf = new UserFunctions();
-			if (!uf.isUserLoggedIn(getApplicationContext())) {
-				isGuest = true;
-			}
-				else {
-				db = new DatabaseHandler(getApplicationContext());
-				String email = db.getUserDetails().get("email");
-				if (WinetasticManager.isWineInCellar(email, info.code)) {
-					hasWine = true;
-				} else {
-					WinetasticManager.addWineToCellar(email, info.code);	
-				}
-			}
-	    	return "";
-		}
-    	
-    	protected void onPostExecute(String result) {
-    		if(dialog.isShowing())
-				dialog.dismiss();
-    		if (isGuest) {
-    			Toast.makeText(getApplicationContext(), "You must be logged in to use this feature", Toast.LENGTH_SHORT).show();
-    		} else {
-	    		if (hasWine) {
-	    			Toast.makeText(WineInfoPage.this, info.name + " is already in your Cellar", Toast.LENGTH_SHORT).show();
-	    		} else {
-	    			Toast.makeText(WineInfoPage.this, info.name + " has been added to your Cellar", Toast.LENGTH_SHORT).show();
-	    		}
-    		}
-    	}
-    }
-    
-	private class WineryIntentTask extends AsyncTask<Void, Void, String> {
-		
-		ProgressDialog dialog;
-		
-		@Override
-		protected void onPreExecute() {
-			// This is where the "searching" overlay will go
-			super.onPreExecute();
-			dialog = ProgressDialog.show(WineInfoPage.this, "","Loading...");
-		}
-		
-		@Override
-		protected String doInBackground(Void... arg0) {
-			System.err.println("Getting winery details.");
-	    	return WinetasticManager.getWineryDetails(info.wineryID);	
-		}
-		
-		// This gets executed after doInBackground()
-		protected void onPostExecute(String result) {	
-			if(dialog.isShowing())
-				dialog.dismiss();
-			if (result != null) {
-		    	Intent i = new Intent(WineInfoPage.this, WineryInfoPage.class);
-		    	i.putExtra("winery_data", result);
-		    	startActivity(i);
-			} else {
-				// No winery in database.
-				Toast.makeText(WineInfoPage.this, "No winery associated with this wine.", Toast.LENGTH_SHORT).show();
-			}
-		}
-	}    
 }
 

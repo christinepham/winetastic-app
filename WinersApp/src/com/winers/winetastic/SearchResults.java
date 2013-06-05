@@ -24,6 +24,7 @@ import com.winers.winetastic.controller.SearchResultsController;
 import com.winers.winetastic.model.data.APISnoothResponse;
 import com.winers.winetastic.model.data.APISnoothResponseWineArray;
 import com.winers.winetastic.model.data.WineSearchObject;
+import com.winers.winetastic.model.manager.NetworkTaskManager;
 import com.winers.winetastic.model.manager.WinetasticManager;
 
 
@@ -71,31 +72,11 @@ public class SearchResults extends AbstractActivity {
 
 			@Override
 			public void onClick(View v) {
-				
-				new MoarSearchAPICall().execute();
+				NetworkTaskManager.searchMore(SearchResults.this, sP);
 			}
 		});	
     }
-
-//        setContentView(R.layout.activity_search_results);
-//        searchQuery = (String) getIntent().getExtras().get("Search Query");
-//        Toast.makeText(this, searchQuery, Toast.LENGTH_SHORT).show();
-//        
-//        wines = new HashMap<String, ArrayList<String>>();
-//        insertWines();
-//        SearchResultsListAdapter adapter = new SearchResultsListAdapter(this, wines);
-////        ListView list = (ListView) findViewById(R.id.list)
-//        getListView().setAdapter(adapter);
-//        getListView().setOnItemClickListener(new OnItemClickListener() {
-
-			
-//			public void onItemClick(AdapterView<?> av, View v, int pos,
-//					long id) {
-//				// TODO Auto-generated method stub
-//				Intent i = new Intent(SearchResults.this, WineInfoPage.class);
-//				startActivity(i);
-//			}
-
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_search_results, menu);
@@ -130,47 +111,4 @@ public class SearchResults extends AbstractActivity {
 		return R.string.title_activity_search_results;
 	}
 	
-	/**
-	 * Network operations must be performed in an AsyncTask, so that's
-	 * what this class is for.
-	 * Postcondition: upon successful search of at least one result, user
-	 *                is redirected to the search results page.
-	 */
-	class MoarSearchAPICall extends AsyncTask<Void, Void, String> {
-		
-		ProgressDialog dialog;
-		
-		
-		@Override
-		protected void onPreExecute() {
-			// This is where the "searching" overlay will go
-			super.onPreExecute();
-			dialog = ProgressDialog.show(SearchResults.this, "","Loading...");
-		}
-		
-		// This gets executed after onPreExecute()
-		@Override
-		protected String doInBackground(Void... arg0) {
-			sP.firstResult += 20;
-			return WinetasticManager.performCombinedSearch(sP, 20);
-
-		}
-		
-		// This gets executed after doInBackground()
-		@Override
-		protected void onPostExecute(String result) {
-			if(dialog.isShowing())
-				dialog.dismiss();
-			if (WinetasticManager.hasSearchResults(result)) {
-				// Search has results. Send to SearchResult page
-				Intent i = new Intent(SearchResults.this, SearchResults.class);
-				i.putExtra("Search Query", result);
-				i.putExtra("WineSearchObject", sP);
-				startActivity(i);
-			} else {
-				// No search results. Notify user to search again.
-				Toast.makeText(SearchResults.this, "No more results were found. Please start your search over.", Toast.LENGTH_LONG).show();
-			}
-		}
-	}
 }

@@ -1,9 +1,6 @@
 package com.winers.winetastic;
 
-import java.io.IOException;
 import java.util.ArrayList;
-
-import org.json.JSONException;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -13,7 +10,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckedTextView;
-import android.widget.Toast;
+
+import com.winers.winetastic.model.data.WineSearchObject;
 
 public class AdvancedSearchAdapter extends BaseExpandableListAdapter {
 

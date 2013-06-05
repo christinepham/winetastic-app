@@ -64,7 +64,6 @@ public class WineOfDay extends Fragment {
 	        
         Button addToWishlistButton = (Button) rootView.findViewById(R.id.info_button_add_wishlist);
         Button addToCellarButton = (Button) rootView.findViewById(R.id.info_button_add_cellar);
-        Button buyButton = (Button) rootView.findViewById(R.id.info_button_purchase);
         
         addToWishlistButton.setOnClickListener(new OnClickListener() {
 

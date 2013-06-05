@@ -90,7 +90,7 @@
         
          <activity
 		 android:configChanges="keyboardHidden|orientation|screenSize"
-            android:name="com.winers.winetastic.Map"
+            android:name="com.winers.winetastic.defunct.Map"
             android:label="@string/title_activity_map" 
             android:parentActivityName="com.winers.winetastic.AbstractActivity"
             android:windowSoftInputMode="adjustResize|stateVisible" >

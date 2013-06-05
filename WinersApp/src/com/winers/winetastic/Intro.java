@@ -9,18 +9,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.winers.winetastic.R;
 import com.winers.winetastic.model.manager.UserFunctions;
 public class Intro extends Activity {
 	
@@ -80,28 +74,6 @@ public class Intro extends Activity {
     		}
         });
         
-    /*    
-        // Click event: Go to info screen layout
-        Button info = (Button)findViewById(R.id.guest_info_button);         
-        info.setOnClickListener(new View.OnClickListener(){
-    		@Override
-    		public void onClick(View v) { 			
-    			Intent i = new Intent(Intro.this, InfoPage.class);
-    			startActivity(i);
-    		}
-        });     
-        */    
-        
-//        // Go to maps
-//        Button map = (Button)findViewById(R.id.guest_map);
-//        map.setOnClickListener(new View.OnClickListener() {
-//        	@Override
-//        	public void onClick(View v) {
-//        		Intent i = new Intent(Intro.this, Map.class);
-//        		startActivity(i);
-//        	}
-//        });
-        
         // Rotates background every x seconds 
         new Thread(new Runnable() {
             @Override
@@ -122,16 +94,6 @@ public class Intro extends Activity {
             }
         }).start();        
     }
-    
-    @Override
-    public void onWindowFocusChanged (boolean hasFocus) {
-    	super.onWindowFocusChanged(hasFocus);
-    	
-        // Set display size
-//        ImageHelper.setDisplaySize(this);
-//        System.out.println("Scaling... " + browse.getWidth());        
-//        ImageHelper.scaleToScreenWidth(browse);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -148,14 +110,12 @@ public class Intro extends Activity {
     
     
     public void showLogin(View view) { 	
-    	System.out.println("SHOW LOGIN");
-    	// Instantiate PopupWindow containing the login layout.
     	Intent intent = new Intent();
     	intent.setClass(this, Login.class);
     	startActivity(intent);
     }
     
- // Tests for internet connectivity
+    // Tests for internet connectivity
  	public boolean isOnline() {
  	    ConnectivityManager cm =
  	        (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -165,19 +125,6 @@ public class Intro extends Activity {
  	    }
  	    return false;
  	}
- 	
-    
-
-    public void gotoMap(View view) {
-    //	Intent i = new Intent(Intro.this, Map.class);
-	//	startActivity(i);    	
-    }
-
-//    public void gotoMap(View view) {
-//    	Intent i = new Intent(Intro.this, Map.class);
-//		startActivity(i);    	
-//    }
-
     
     /* Controls background rotation. 
      * Author: Victoria Do
