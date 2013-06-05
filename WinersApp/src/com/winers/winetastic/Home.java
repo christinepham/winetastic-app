@@ -4,8 +4,12 @@ package com.winers.winetastic;
 import java.util.List;
 import java.util.Map;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -41,6 +45,10 @@ public class Home extends AbstractActivity {
     	System.err.println("Created. Getting layout...");          
         setContentView(R.layout.activity_main);
     	System.err.println("Got layout.");   
+    	
+    	 if (!isOnline()) {
+             new AlertDialog.Builder(this).setTitle("Internet Connection Required").setMessage("You must have an active internet connection to use this app. Please connect to the internet before pressing OK.").setPositiveButton("OK", null).show();  
+     	}
     	
     	random = new FunFact(); 
     	TextView text = (TextView) findViewById(R.id.randButton); 
@@ -193,6 +201,17 @@ public class Home extends AbstractActivity {
 	protected int getTitleText() {
 		// TODO Auto-generated method stub
 		return R.string.app_name;
+	}
+	
+	// Tests for internet connectivity
+	public boolean isOnline() {
+	    ConnectivityManager cm =
+	        (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+	    if (netInfo != null && netInfo.isConnected()) {
+	        return true;
+	    }
+	    return false;
 	}
 	
 	/**

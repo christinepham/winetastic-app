@@ -15,6 +15,7 @@ import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -30,6 +31,7 @@ public class WinetasticDAO {
 	private final String RANDOM_STRING = "k8d9j5h8g4u7tr4";
 	private final int API_RETVAL_LENGTH_FOR_ERROR = 120;
 	
+
 	
 	/**
 	 * performSearch takes two parameters and returns a JSON string

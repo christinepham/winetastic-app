@@ -1,9 +1,12 @@
 package com.winers.winetastic;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.TransitionDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
@@ -47,7 +50,9 @@ public class Intro extends Activity {
         
         setContentView(R.layout.activity_intro);
         
-        
+        if (!isOnline()) {
+            new AlertDialog.Builder(this).setTitle("Internet Connection Required").setMessage("You must have an active internet connection to use this app. Please connect to the internet before pressing OK.").setPositiveButton("OK", null).show();  
+    	}
         
         // Views   
         Button register = (Button)findViewById(R.id.guest_register_button);
@@ -148,6 +153,18 @@ public class Intro extends Activity {
     	intent.setClass(this, Login.class);
     	startActivity(intent);
     }
+    
+ // Tests for internet connectivity
+ 	public boolean isOnline() {
+ 	    ConnectivityManager cm =
+ 	        (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+ 	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+ 	    if (netInfo != null && netInfo.isConnected()) {
+ 	        return true;
+ 	    }
+ 	    return false;
+ 	}
+ 	
     
 
     public void gotoMap(View view) {
