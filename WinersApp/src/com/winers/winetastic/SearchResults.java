@@ -20,6 +20,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.google.gson.Gson;
+import com.winers.winetastic.controller.SearchResultsController;
+import com.winers.winetastic.model.data.APISnoothResponse;
+import com.winers.winetastic.model.data.APISnoothResponseWineArray;
+import com.winers.winetastic.model.data.WineSearchObject;
+import com.winers.winetastic.model.manager.WinetasticManager;
+
 
 public class SearchResults extends AbstractActivity {
 	private ArrayList<ArrayList<String>> wines;
@@ -41,7 +47,7 @@ public class SearchResults extends AbstractActivity {
         
         wines = new ArrayList<ArrayList<String>>();
         insertWines(wineAPIResponse);
-        final SearchResultsListAdapter adapter = new SearchResultsListAdapter(this, wines);
+        final SearchResultsController adapter = new SearchResultsController(this, wines);
         ListView lv = (ListView) findViewById(android.R.id.list);
         lv.setAdapter(adapter);      
         lv.setOnItemClickListener(new OnItemClickListener() {

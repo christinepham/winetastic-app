@@ -29,6 +29,9 @@ import com.facebook.android.DialogError;
 import com.facebook.android.Facebook;
 import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
+import com.winers.winetastic.model.manager.DatabaseHandler;
+import com.winers.winetastic.model.manager.UserFunctions;
+import com.winers.winetastic.model.manager.WinetasticManager;
 
 /**
  * Activity which displays a login screen to the user, offering registration as

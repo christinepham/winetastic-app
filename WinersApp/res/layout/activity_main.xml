@@ -2,6 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+    
+	
 	
 	<LinearLayout 
 	    android:layout_width="match_parent"
@@ -10,10 +12,28 @@
 	    android:id="@+id/searchAndName"
 	    android:orientation="vertical" 
 	    android:weightSum="2">
+	    <RelativeLayout
+	        android:layout_width="match_parent" 
+		    android:layout_height="wrap_content">
+	    	<TextView
+			    android:id="@+id/randButton"
+			    android:textStyle="italic"
+			    android:layout_marginTop="10dp"
+			    android:textColor="@color/white"
+			   	android:layout_alignParentRight="true"
+			    android:layout_marginLeft="50dp"
+			    android:layout_marginRight="20dp"
+			    android:background="@drawable/fun_fact_rounded"
+			    android:layout_width="wrap_content"
+			    android:text="@string/empty"
+			    android:textSize="12sp"
+			    android:layout_height="wrap_content" 
+			    android:paddingRight="10dp"
+	    		android:paddingLeft="10dp"/>
+	    </RelativeLayout>
 	    <!--  
 		<RelativeLayout 
-		    android:layout_width="match_parent" 
-		    android:layout_height="wrap_content" >
+		     >
 	
 		    <Button
 		        android:id="@+id/search"
@@ -26,11 +46,19 @@
 		        android:text="@string/search" />
 	    </RelativeLayout>-->
 	    
-		<TextView
+		<TextView 
 		    android:layout_width="match_parent"
 		    android:layout_height="match_parent"
 		    android:layout_weight="1"
-		    android:text="@string/empty" />
+		    android:text="@string/empty"
+		    android:textSize="12sp" />
+		<!-- 
+		    android:id="@+id/randButton"
+		    android:layout_marginTop="10dp"
+		    android:layout_centerHorizontal="true"
+		    android:background="@color/transparent"
+		    android:textColor="@color/black"
+		    android:layout_marginRight="50dp" -->
 	    
 		<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" 
 		    		  android:orientation="horizontal" android:weightSum="2" android:id="@+id/LinearLayout1">
@@ -44,8 +72,8 @@
 		        android:layout_marginLeft="2dp"
 		        android:layout_marginRight="2dp"
 		        android:layout_marginTop="2dp"
-		        android:orientation="horizontal" />
-		        <!--  android:background="@drawable/calandarw"	-->
+		        android:orientation="horizontal" 
+		        android:background="@drawable/winesearch" />
 		    <Button
 		        android:id="@+id/myWines"
 		        android:layout_width="0dp"
@@ -74,9 +102,9 @@
 		        android:layout_marginLeft="2dp"
 		        android:layout_marginRight="2dp"
 		        android:layout_marginTop="2dp"
-		        android:background="@drawable/mapw" 
+				android:background="@drawable/mapw"
 		        android:orientation="horizontal"/>
-	
+		        <!--android:background="@drawable/mapw" -->	
 		    <Button
 		        android:id="@+id/calendarView1"
 		        android:layout_width="0dp"
@@ -92,7 +120,6 @@
 	
 		</LinearLayout>
 		<TextView
-		    android:id="@+id/emptyTxtBottom"
 		    android:layout_weight="1"
 		    android:layout_height="match_parent"
 		    android:layout_width="match_parent"

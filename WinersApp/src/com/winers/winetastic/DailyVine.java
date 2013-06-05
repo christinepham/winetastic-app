@@ -21,6 +21,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.winers.winetastic.model.data.APISnoothResponse;
+import com.winers.winetastic.model.data.APISnoothResponseWineArray;
+import com.winers.winetastic.model.data.APISnoothResponseWinery;
+import com.winers.winetastic.model.data.APISnoothResponseWineryDetails;
 
 /**
  * Starts the Daily Vine for the random winery/wine of the day.

@@ -1,7 +1,12 @@
 package com.winers.winetastic;
 
 import com.google.gson.Gson;
+import com.winers.winetastic.model.data.APISnoothResponseWineArray;
+import com.winers.winetastic.model.manager.DatabaseHandler;
+import com.winers.winetastic.model.manager.ImageLoader;
+import com.winers.winetastic.model.manager.WinetasticManager;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -132,7 +137,8 @@ public class WineOfDay extends Fragment {
     		// Set contents of text, make black, change width
     		text.setText(cols[i], TextView.BufferType.NORMAL);
     		text.setTextColor(getResources().getColor(R.color.black));
-    		
+    		text.setWidth(140);
+
     		r.addView(text);
     	}    	
     	((TableLayout)parent).addView(r);
@@ -140,6 +146,15 @@ public class WineOfDay extends Fragment {
     
     private class AddToWishlist extends AsyncTask<Void, Void, String> {
     	private boolean hasWine = false;
+    	ProgressDialog dialog;
+    	
+    	@Override
+		protected void onPreExecute() {
+			// This is where the "searching" overlay will go
+			super.onPreExecute();
+			dialog = ProgressDialog.show(getActivity(), "","Loading...");
+		}
+    	
     	@Override
 		protected String doInBackground(Void... arg0) {
 			System.err.println("Adding wine to wishlist.");
@@ -154,6 +169,8 @@ public class WineOfDay extends Fragment {
 		}
     	
     	protected void onPostExecute(String result) {
+    		if(dialog.isShowing())
+				dialog.dismiss();
     		if (hasWine) {
     			Toast.makeText(getActivity(), info.name + " is already in your Wishlist", Toast.LENGTH_SHORT).show();
     		} else {
@@ -164,9 +181,19 @@ public class WineOfDay extends Fragment {
     
     private class AddToCellar extends AsyncTask<Void, Void, String> {
     	private boolean hasWine = false;
+    	ProgressDialog dialog;
+    	
+    	@Override
+		protected void onPreExecute() {
+			// This is where the "searching" overlay will go
+			super.onPreExecute();
+			dialog = ProgressDialog.show(getActivity(), "","Loading...");
+		}
+    	
     	@Override
 		protected String doInBackground(Void... arg0) {
 			System.err.println("Adding wine to cellar.");
+
 			db = new DatabaseHandler(getActivity());
 			String email = db.getUserDetails().get("email");
 			if (WinetasticManager.isWineInCellar(email, info.code)) {
@@ -174,10 +201,13 @@ public class WineOfDay extends Fragment {
 			} else {
 				WinetasticManager.addWineToCellar(email, info.code);	
 			}
+	
 	    	return "";
 		}
     	
     	protected void onPostExecute(String result) {
+    		if(dialog.isShowing())
+				dialog.dismiss();
     		if (hasWine) {
     			Toast.makeText(getActivity(), info.name + " is already in your Cellar", Toast.LENGTH_SHORT).show();
     		} else {

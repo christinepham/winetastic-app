@@ -4,7 +4,12 @@ package com.winers.winetastic;
 import java.util.List;
 import java.util.Map;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,12 +18,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import android.widget.TextView; 
+
 
 import com.google.gson.Gson;
+import com.winers.winetastic.model.data.APISnoothResponse;
+import com.winers.winetastic.model.data.APISnoothResponseMetaData;
+import com.winers.winetastic.model.data.APISnoothResponseMyWines;
+import com.winers.winetastic.model.data.APISnoothResponseWineArray;
+import com.winers.winetastic.model.data.FunFact;
+import com.winers.winetastic.model.manager.DatabaseHandler;
+import com.winers.winetastic.model.manager.UserFunctions;
+import com.winers.winetastic.model.manager.WinetasticManager;
 
 public class Home extends AbstractActivity {
 
 	private UserFunctions uF;
+	FunFact random; 
 
 	
     @Override
@@ -32,19 +48,19 @@ public class Home extends AbstractActivity {
 			startActivity(i);
         }
         
-        // This tests to see if MyWines sent us back here to refresh.
-        /*
-        Bundle extras = getIntent().getExtras();
-        if(extras != null) {
-        	if (extras.getString("mywines_reload").equals("true")) {
-        		new MyWinesAPICall().execute();
-        	}
-        }
-        */
+        
         
     	System.err.println("Created. Getting layout...");          
         setContentView(R.layout.activity_main);
     	System.err.println("Got layout.");   
+    	
+    	 if (!isOnline()) {
+             new AlertDialog.Builder(this).setTitle("Internet Connection Required").setMessage("You must have an active internet connection to use this app. Please connect to the internet before pressing OK.").setPositiveButton("OK", null).show();  
+     	}
+    	
+    	random = new FunFact(); 
+    	TextView text = (TextView) findViewById(R.id.randButton); 
+    	text.setText("\tFun Fact: "+random.randomFact() + "\t\n "); 
     	
     	ImageButton homeButton = (ImageButton) findViewById(R.id.home_button);
     	homeButton.setVisibility(View.GONE);
@@ -195,6 +211,17 @@ public class Home extends AbstractActivity {
 		return R.string.app_name;
 	}
 	
+	// Tests for internet connectivity
+	public boolean isOnline() {
+	    ConnectivityManager cm =
+	        (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+	    if (netInfo != null && netInfo.isConnected()) {
+	        return true;
+	    }
+	    return false;
+	}
+	
 	/**
 	 * Network operations must be performed in an AsyncTask, so that's
 	 * what this class is for.
@@ -204,6 +231,7 @@ public class Home extends AbstractActivity {
 	class DailyVineAPICall extends AsyncTask<Void, Void, String> {
 		private String wineryResponse;
 		private String wineResponse;
+		ProgressDialog dialog;
 		
 		String searchQuery;
 	    Gson gson;
@@ -213,6 +241,8 @@ public class Home extends AbstractActivity {
 		@Override
 		protected void onPreExecute() {
 			// This is where the "searching" overlay will go
+			super.onPreExecute();
+			dialog = ProgressDialog.show(Home.this, "","Loading...");
 		}
 		
 		// This gets executed after onPreExecute()
@@ -228,6 +258,8 @@ public class Home extends AbstractActivity {
 		
 		// This gets executed after doInBackground()
 		protected void onPostExecute(String result) {
+			if(dialog.isShowing())
+				dialog.dismiss();
 			Intent i = new Intent(Home.this, DailyVine.class);
 			i.putExtra("Search Query", wineResponse);
 			i.putExtra("Winery", wineryResponse);
@@ -238,6 +270,7 @@ public class Home extends AbstractActivity {
 	class MyWinesAPICall extends AsyncTask<Void, Void, String> {
 
 		private String email;
+		ProgressDialog dialog;
 		
 		String searchQuery;
 	    Gson gson;
@@ -246,7 +279,10 @@ public class Home extends AbstractActivity {
 	    
 		@Override
 		protected void onPreExecute() {
+			
 			email = new DatabaseHandler(getApplicationContext()).getUserDetails().get("email");
+			super.onPreExecute();
+			dialog = ProgressDialog.show(Home.this, "","Loading...");
 		}
 		
 		// This gets executed after onPreExecute()
@@ -259,6 +295,8 @@ public class Home extends AbstractActivity {
 		
 		// This gets executed after doInBackground()
 		protected void onPostExecute(String result) {
+			if(dialog.isShowing())
+				dialog.dismiss();
 			final Gson gson = new Gson();
 	        final APISnoothResponseMyWines myWinesResponse = gson.fromJson(result, APISnoothResponseMyWines.class);
 	        final APISnoothResponseMetaData meta = myWinesResponse.metaResults;

@@ -1,6 +1,7 @@
 package com.winers.winetastic;
 
 import com.winers.winetastic.R;
+import com.winers.winetastic.model.manager.UserFunctions;
 
 import android.app.Activity;
 import android.content.Intent;

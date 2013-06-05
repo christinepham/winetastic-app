@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.winers.winetastic.controller.SearchResultsController;
+import com.winers.winetastic.model.data.APISnoothResponseMyWineArray;
+import com.winers.winetastic.model.data.APISnoothResponseMyWines;
+import com.winers.winetastic.model.data.APISnoothResponseWineArray;
+import com.winers.winetastic.model.manager.DatabaseHandler;
+import com.winers.winetastic.model.manager.WinetasticManager;
 
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
@@ -27,7 +33,7 @@ public class MyWines extends ListActivity {
 	private DatabaseHandler db;
 	private boolean removeMode = false;
 	private int adapterClearPosition;
-	SearchResultsListAdapter adapter;
+	SearchResultsController adapter;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +44,7 @@ public class MyWines extends ListActivity {
 //        final Gson gson = new Gson();
 //        final APISnoothResponse snoothResponse = gson.fromJson(searchQuery, APISnoothResponse.class);
 //        final List<APISnoothResponseWineArray> wineAPIResponse = snoothResponse.wineResults;
-        
+        System.err.println("Got this far");
 		
 		myWinesQuery = (String) getIntent().getExtras().get("MyWines Query");
 		
@@ -51,7 +57,7 @@ public class MyWines extends ListActivity {
         wines = new ArrayList<ArrayList<String>>();
 
         insertWines(winesAPIResponse);
-		adapter = new SearchResultsListAdapter(this, wines);
+		adapter = new SearchResultsController(this, wines);
 		getListView().setAdapter(adapter);
 		getListView().setOnItemClickListener(new OnItemClickListener() {
 

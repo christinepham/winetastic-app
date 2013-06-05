@@ -1,4 +1,4 @@
-package com.winers.winetastic;
+package com.winers.winetastic.model.data;
 
 import java.security.*;
 import java.io.IOException;

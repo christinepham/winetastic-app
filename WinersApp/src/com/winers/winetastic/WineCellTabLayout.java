@@ -19,7 +19,7 @@ public class WineCellTabLayout extends AbstractActivity {
          
         TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
         //TabHost tabHost = getTabHost();
-        
+        System.err.println("testing");
         myWinesQuery = (String) getIntent().getExtras().get("MyWines Query");
 		
 		//System.err.println("MY WINES QUERY FROM INSIDE WINECELL: " + myWinesQuery);
