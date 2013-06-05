@@ -133,6 +133,7 @@ public class WineOfDay extends Fragment {
     		text.setText(cols[i], TextView.BufferType.NORMAL);
     		text.setTextColor(getResources().getColor(R.color.black));
     		text.setWidth(140);
+
     		r.addView(text);
     	}    	
     	((TableLayout)parent).addView(r);

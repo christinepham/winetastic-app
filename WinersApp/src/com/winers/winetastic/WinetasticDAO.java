@@ -293,6 +293,7 @@ public class WinetasticDAO {
 		
 		String url = SNOOTH_URL + WINE_RESOURCE_ID + "?akey=" + API_KEY;
 		url += "&n=1";
+		url += "&a=1";
 		url += "&f=" + randomInt;
 		
 		System.err.println("getRandomWine: " + url);

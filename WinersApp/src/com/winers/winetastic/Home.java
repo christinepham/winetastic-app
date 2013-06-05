@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -19,6 +20,7 @@ import com.google.gson.Gson;
 public class Home extends AbstractActivity {
 
 	private UserFunctions uF;
+	private FunFact random;
 
 	
     @Override
@@ -26,6 +28,7 @@ public class Home extends AbstractActivity {
     	System.err.println("Attempting to create");
     	System.out.println("hello");
         super.onCreate(savedInstanceState);
+        
         uF = new UserFunctions();
         if (!uF.isUserLoggedIn(getApplicationContext())) {
         	Intent i = new Intent(Home.this, Intro.class);
@@ -45,6 +48,10 @@ public class Home extends AbstractActivity {
     	System.err.println("Created. Getting layout...");          
         setContentView(R.layout.activity_main);
     	System.err.println("Got layout.");   
+    	
+    	random = new FunFact();
+        TextView text = (TextView) findViewById(R.id.randButton);
+        text.setText("\tFun Fact: "+random.randomFact() + "\t\n ");
     	
     	ImageButton homeButton = (ImageButton) findViewById(R.id.home_button);
     	homeButton.setVisibility(View.GONE);
@@ -74,9 +81,9 @@ public class Home extends AbstractActivity {
         my_wines_but.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				Intent i = new Intent(Home.this, WineCellTabLayout.class);
+				startActivity(i);
 				new MyWinesAPICall().execute();
-				
 			}
         });
 
@@ -95,7 +102,6 @@ public class Home extends AbstractActivity {
         map_but.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-		
 				String url = "http://google.com/maps?q=wineries"; 
 	        	Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 	            startActivity(i); // Go go go!
