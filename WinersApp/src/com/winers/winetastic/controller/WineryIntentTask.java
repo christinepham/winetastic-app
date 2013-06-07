@@ -11,7 +11,7 @@ import com.winers.winetastic.model.manager.WinetasticManager;
 
 public class WineryIntentTask extends AsyncTask<String, Void, String> {
 	
-	ProgressDialog dialog;
+	//ProgressDialog dialog;
 	Context context;
 	
 	public WineryIntentTask(Context context) {
@@ -22,7 +22,7 @@ public class WineryIntentTask extends AsyncTask<String, Void, String> {
 	protected void onPreExecute() {
 		// This is where the "searching" overlay will go
 		super.onPreExecute();
-		dialog = ProgressDialog.show(context, "","Loading...");
+		//dialog = ProgressDialog.show(context, "","Loading...");
 	}
 	
 	@Override
@@ -31,9 +31,10 @@ public class WineryIntentTask extends AsyncTask<String, Void, String> {
 	}
 	
 	// This gets executed after doInBackground()
+	@Override
 	protected void onPostExecute(String result) {	
-		if(dialog.isShowing())
-			dialog.dismiss();
+		//if(dialog.isShowing())
+		//	dialog.dismiss();
 		if (result != null) {
 	    	Intent i = new Intent(context, WineryInfoPage.class);
 	    	i.putExtra("winery_data", result);

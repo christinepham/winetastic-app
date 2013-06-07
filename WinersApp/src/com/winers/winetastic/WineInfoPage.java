@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.winers.winetastic.model.data.APISnoothResponseWineArray;
@@ -157,8 +158,12 @@ public class WineInfoPage extends InfoPage {
     	}
     	//Toast.makeText(getApplicationContext(), "filled array list", 0).show();
     	searchObject.stringList = stringArgs;
-    	System.err.println("stringList size: " + stringArgs.get(0));
-		NetworkTaskManager.doCombinedSearch(WineInfoPage.this, searchObject);
+    	
+    	if(stringArgs.size() == 0) {
+    		Toast.makeText(WineInfoPage.this, "Not enough information to search.", Toast.LENGTH_SHORT).show();
+    	} else {
+    		NetworkTaskManager.doCombinedSearch(WineInfoPage.this, searchObject);
+    	}
     } 
 	
 	private String parseColor(String s) {
@@ -172,7 +177,7 @@ public class WineInfoPage extends InfoPage {
 	 */    
     
     public void viewWineryInfo(View v) {
-    	NetworkTaskManager.startWineryIntent(WineInfoPage.this, info.winery);
+    	NetworkTaskManager.startWineryIntent(WineInfoPage.this, info.wineryID);
     }
 }
 
