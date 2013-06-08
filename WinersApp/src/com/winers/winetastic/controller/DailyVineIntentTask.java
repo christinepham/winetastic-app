@@ -5,7 +5,10 @@ import java.util.List;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.winers.winetastic.DailyVine;
@@ -23,6 +26,7 @@ public class DailyVineIntentTask extends AsyncTask<Void, Void, String> {
 	private String wineryResponse;
 	private String wineResponse;
 	private ProgressDialog dialog;
+	private boolean isOnline;
 	
 	private Context context;
     private Gson gson;
@@ -32,6 +36,7 @@ public class DailyVineIntentTask extends AsyncTask<Void, Void, String> {
     public DailyVineIntentTask(Context context) {
     	this.context = context;
     }
+    
     
 	@Override
 	protected void onPreExecute() {
@@ -43,11 +48,16 @@ public class DailyVineIntentTask extends AsyncTask<Void, Void, String> {
 	// This gets executed after onPreExecute()
 	@Override
 	protected String doInBackground(Void... arg0) {
-		wineResponse = WinetasticManager.getRandomWine();
-		gson = new Gson();
-	    snoothResponse = gson.fromJson(wineResponse, APISnoothResponse.class);
-	    wineAPIResponse = (List<APISnoothResponseWineArray>) snoothResponse.wineResults;
-		wineryResponse = WinetasticManager.getWineryDetails(wineAPIResponse.get(0).wineryID);
+		if (!SystemManager.isOnline(context)) {
+			isOnline = false;
+		} else {
+			isOnline = true;
+			wineResponse = WinetasticManager.getRandomWine();
+			gson = new Gson();
+		    snoothResponse = gson.fromJson(wineResponse, APISnoothResponse.class);
+		    wineAPIResponse = (List<APISnoothResponseWineArray>) snoothResponse.wineResults;
+			wineryResponse = WinetasticManager.getWineryDetails(wineAPIResponse.get(0).wineryID);
+		}
 		return "";
 	}
 	
@@ -55,9 +65,13 @@ public class DailyVineIntentTask extends AsyncTask<Void, Void, String> {
 	protected void onPostExecute(String result) {
 		if(dialog.isShowing())
 			dialog.dismiss();
-		Intent i = new Intent(context, DailyVine.class);
-		i.putExtra("Search Query", wineResponse);
-		i.putExtra("Winery", wineryResponse);
-		context.startActivity(i);
+		if (!isOnline) {
+			Toast.makeText(context.getApplicationContext(), "You must be connected to the Internet to use this feature", Toast.LENGTH_SHORT).show();
+		} else {
+			Intent i = new Intent(context, DailyVine.class);
+			i.putExtra("Search Query", wineResponse);
+			i.putExtra("Winery", wineryResponse);
+			context.startActivity(i);
+		}
 	}
 }

@@ -17,15 +17,19 @@ import com.winers.winetastic.model.manager.WinetasticManager;
  *                is redirected to the search results page.
  */
 
+
+
 public class CombinedSearchTask extends AsyncTask<WineSearchObject, Void, String> {
 	
-	ProgressDialog dialog;
-	Context context;
-	WineSearchObject sP;
+	private ProgressDialog dialog;
+	private Context context;
+	private WineSearchObject sP;
+	private boolean isOnline;
 	
 	public CombinedSearchTask(Context context) {
 		this.context = context;
 	}
+	
 	
 	@Override
 	protected void onPreExecute() {
@@ -37,8 +41,15 @@ public class CombinedSearchTask extends AsyncTask<WineSearchObject, Void, String
 	// This gets executed after onPreExecute()
 	@Override
 	protected String doInBackground(WineSearchObject ... searchObjects) {
-		this.sP = searchObjects[0];
-		return WinetasticManager.performCombinedSearch(sP, 20);
+		String rv = "";
+		if (!SystemManager.isOnline(context)) {
+			isOnline = false;
+		} else {
+			isOnline = true;
+			this.sP = searchObjects[0];
+			rv = WinetasticManager.performCombinedSearch(sP, 20);
+		}
+		return rv;
 	}
 	
 	// This gets executed after doInBackground()
@@ -46,15 +57,19 @@ public class CombinedSearchTask extends AsyncTask<WineSearchObject, Void, String
 	protected void onPostExecute(String result) {
 		if(dialog.isShowing())
 			dialog.dismiss();
-		if (WinetasticManager.hasSearchResults(result)) {
-			// Search has results. Send to SearchResult page
-			Intent i = new Intent(context, SearchResults.class);
-			i.putExtra("Search Query", result);
-			i.putExtra("WineSearchObject", sP);
-			context.startActivity(i);
+		if (!isOnline) {
+			Toast.makeText(context.getApplicationContext(), "You must be connected to the Internet to use this feature", Toast.LENGTH_SHORT).show();
 		} else {
-			// No search results. Notify user to search again.
-			Toast.makeText(context, "No matches were found. Please try your search again.", Toast.LENGTH_LONG).show();
+			if (WinetasticManager.hasSearchResults(result)) {
+				// Search has results. Send to SearchResult page
+				Intent i = new Intent(context, SearchResults.class);
+				i.putExtra("Search Query", result);
+				i.putExtra("WineSearchObject", sP);
+				context.startActivity(i);
+			} else {
+				// No search results. Notify user to search again.
+				Toast.makeText(context, "No matches were found. Please try your search again.", Toast.LENGTH_LONG).show();
+			}
 		}
 	}
 }	

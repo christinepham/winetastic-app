@@ -13,6 +13,7 @@ public class AddToCellarTask extends AsyncTask<Void, Void, String> {
 	private boolean hasWine = false;
 	private ProgressDialog dialog;
 	private boolean isGuest = false;
+	private boolean isOnline;
 	private Context context;
 	private DatabaseHandler db;
 	
@@ -24,6 +25,7 @@ public class AddToCellarTask extends AsyncTask<Void, Void, String> {
 		this.code = code;
 	}
 	
+	
 	@Override
 	protected void onPreExecute() {
 		// This is where the "searching" overlay will go
@@ -33,18 +35,22 @@ public class AddToCellarTask extends AsyncTask<Void, Void, String> {
 	
 	@Override
 	protected String doInBackground(Void ... args) {
-		System.err.println("Adding wine to cellar.");
-		UserFunctions uf = new UserFunctions();
-		if (!uf.isUserLoggedIn(context.getApplicationContext())) {
-			isGuest = true;
-		}
-			else {
-			db = new DatabaseHandler(context.getApplicationContext());
-			String email = db.getUserDetails().get("email");
-			if (WinetasticManager.isWineInCellar(email, code)) {
-				hasWine = true;
-			} else {
-				WinetasticManager.addWineToCellar(email, code);	
+		if (!SystemManager.isOnline(context)) {
+			isOnline = false;
+		} else {
+			isOnline = true;
+			UserFunctions uf = new UserFunctions();
+			if (!uf.isUserLoggedIn(context.getApplicationContext())) {
+				isGuest = true;
+			}
+				else {
+				db = new DatabaseHandler(context.getApplicationContext());
+				String email = db.getUserDetails().get("email");
+				if (WinetasticManager.isWineInCellar(email, code)) {
+					hasWine = true;
+				} else {
+					WinetasticManager.addWineToCellar(email, code);	
+				}
 			}
 		}
     	return "";
@@ -53,14 +59,18 @@ public class AddToCellarTask extends AsyncTask<Void, Void, String> {
 	protected void onPostExecute(String result) {
 		if(dialog.isShowing())
 			dialog.dismiss();
-		if (isGuest) {
-			Toast.makeText(context.getApplicationContext(), "You must be logged in to use this feature", Toast.LENGTH_SHORT).show();
+		if (!isOnline) {
+			Toast.makeText(context.getApplicationContext(), "You must be connected to the Internet to use this feature", Toast.LENGTH_SHORT).show();
 		} else {
-    		if (hasWine) {
-    			Toast.makeText(context, name + " is already in your Cellar", Toast.LENGTH_SHORT).show();
-    		} else {
-    			Toast.makeText(context, name + " has been added to your Cellar", Toast.LENGTH_SHORT).show();
-    		}
+			if (isGuest) {
+				Toast.makeText(context.getApplicationContext(), "You must be logged in to use this feature", Toast.LENGTH_SHORT).show();
+			} else {
+	    		if (hasWine) {
+	    			Toast.makeText(context, name + " is already in your Cellar", Toast.LENGTH_SHORT).show();
+	    		} else {
+	    			Toast.makeText(context, name + " has been added to your Cellar", Toast.LENGTH_SHORT).show();
+	    		}
+			}
 		}
 	}
 }

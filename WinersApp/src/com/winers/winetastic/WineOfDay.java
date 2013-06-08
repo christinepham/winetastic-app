@@ -4,12 +4,10 @@ import com.google.gson.Gson;
 import com.winers.winetastic.model.data.APISnoothResponseWineArray;
 import com.winers.winetastic.model.manager.DatabaseHandler;
 import com.winers.winetastic.model.manager.ImageLoader;
-import com.winers.winetastic.model.manager.WinetasticManager;
+import com.winers.winetastic.model.manager.NetworkTaskManager;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -22,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Displays information about the random wine of the day.
@@ -34,7 +31,6 @@ public class WineOfDay extends Fragment {
 	
 	private TableLayout					statsTable;
 	private	APISnoothResponseWineArray 	info;
-	private DatabaseHandler db;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,7 +65,7 @@ public class WineOfDay extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				new AddToWishlist().execute();
+				NetworkTaskManager.addToWishlist(getActivity(), info.name, info.code);
 			}
 		});	
         
@@ -77,7 +73,7 @@ public class WineOfDay extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				new AddToCellar().execute();
+				NetworkTaskManager.addToCellar(getActivity(), info.name, info.code);
 			}
 		});	
         
@@ -141,78 +137,6 @@ public class WineOfDay extends Fragment {
     		r.addView(text);
     	}    	
     	((TableLayout)parent).addView(r);
-    }
-    
-    private class AddToWishlist extends AsyncTask<Void, Void, String> {
-    	private boolean hasWine = false;
-    	ProgressDialog dialog;
-    	
-    	@Override
-		protected void onPreExecute() {
-			// This is where the "searching" overlay will go
-			super.onPreExecute();
-			dialog = ProgressDialog.show(getActivity(), "","Loading...");
-		}
-    	
-    	@Override
-		protected String doInBackground(Void... arg0) {
-			System.err.println("Adding wine to wishlist.");
-			db = new DatabaseHandler(getActivity());
-			String email = db.getUserDetails().get("email");
-			if (WinetasticManager.isWineInWishlist(email, info.code)) {
-				hasWine = true;
-			} else {
-				WinetasticManager.addWineToWishlist(email, info.code);	
-			}
-	    	return "";
-		}
-    	
-    	protected void onPostExecute(String result) {
-    		if(dialog.isShowing())
-				dialog.dismiss();
-    		if (hasWine) {
-    			Toast.makeText(getActivity(), info.name + " is already in your Wishlist", Toast.LENGTH_SHORT).show();
-    		} else {
-    			Toast.makeText(getActivity(), info.name + " has been added to your Wishlist", Toast.LENGTH_SHORT).show();
-    		}
-    	}
-    }
-    
-    private class AddToCellar extends AsyncTask<Void, Void, String> {
-    	private boolean hasWine = false;
-    	ProgressDialog dialog;
-    	
-    	@Override
-		protected void onPreExecute() {
-			// This is where the "searching" overlay will go
-			super.onPreExecute();
-			dialog = ProgressDialog.show(getActivity(), "","Loading...");
-		}
-    	
-    	@Override
-		protected String doInBackground(Void... arg0) {
-			System.err.println("Adding wine to cellar.");
-
-			db = new DatabaseHandler(getActivity());
-			String email = db.getUserDetails().get("email");
-			if (WinetasticManager.isWineInCellar(email, info.code)) {
-				hasWine = true;
-			} else {
-				WinetasticManager.addWineToCellar(email, info.code);	
-			}
-	
-	    	return "";
-		}
-    	
-    	protected void onPostExecute(String result) {
-    		if(dialog.isShowing())
-				dialog.dismiss();
-    		if (hasWine) {
-    			Toast.makeText(getActivity(), info.name + " is already in your Cellar", Toast.LENGTH_SHORT).show();
-    		} else {
-    			Toast.makeText(getActivity(), info.name + " has been added to your Cellar", Toast.LENGTH_SHORT).show();
-    		}
-    	}
     }
 
 }

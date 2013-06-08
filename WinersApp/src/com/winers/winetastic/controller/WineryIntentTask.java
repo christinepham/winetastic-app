@@ -3,6 +3,8 @@ package com.winers.winetastic.controller;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -13,10 +15,12 @@ public class WineryIntentTask extends AsyncTask<String, Void, String> {
 	
 	ProgressDialog dialog;
 	Context context;
+	private boolean isOnline;
 	
 	public WineryIntentTask(Context context) {
 		this.context = context;
 	}
+	
 	
 	@Override
 	protected void onPreExecute() {
@@ -27,20 +31,31 @@ public class WineryIntentTask extends AsyncTask<String, Void, String> {
 	
 	@Override
 	protected String doInBackground(String ... winery) {
-    	return WinetasticManager.getWineryDetails(winery[0]);	
+		String rv = "";
+		if (!SystemManager.isOnline(context)) {
+			isOnline = false;
+		} else {
+			isOnline = true;
+			rv = WinetasticManager.getWineryDetails(winery[0]);
+		}
+		return rv;
 	}
 	
 	// This gets executed after doInBackground()
 	protected void onPostExecute(String result) {	
 		if(dialog.isShowing())
 			dialog.dismiss();
-		if (result != null) {
-	    	Intent i = new Intent(context, WineryInfoPage.class);
-	    	i.putExtra("winery_data", result);
-	    	context.startActivity(i);
+		if (!isOnline) {
+			Toast.makeText(context.getApplicationContext(), "You must be connected to the Internet to use this feature", Toast.LENGTH_SHORT).show();
 		} else {
-			// No winery in database.
-			Toast.makeText(context, "No winery associated with this wine.", Toast.LENGTH_SHORT).show();
+			if (result != null) {
+		    	Intent i = new Intent(context, WineryInfoPage.class);
+		    	i.putExtra("winery_data", result);
+		    	context.startActivity(i);
+			} else {
+				// No winery in database.
+				Toast.makeText(context, "No winery associated with this wine.", Toast.LENGTH_SHORT).show();
+			}
 		}
 	}
 }    

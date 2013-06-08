@@ -3,6 +3,8 @@ package com.winers.winetastic.controller;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ public class MyWinesIntentTask extends AsyncTask<Void, Void, String> {
 	private ProgressDialog dialog;
     private Gson gson;
     private Context context;
+    private boolean isOnline;
     
     public MyWinesIntentTask(Context c) {
     	this.context = c;
@@ -35,25 +38,39 @@ public class MyWinesIntentTask extends AsyncTask<Void, Void, String> {
 	// This gets executed after onPreExecute()
 	@Override
 	protected String doInBackground(Void... arg0) {
-		String myWinesResponse = WinetasticManager.returnMyWines(email);
-		System.err.println("MyWines API response: " + myWinesResponse);
+		String myWinesResponse = "";
+		if (!SystemManager.isOnline(context)) {
+			isOnline = false;
+		} else {
+			isOnline = true;
+			myWinesResponse = WinetasticManager.returnMyWines(email);
+		}
 		return myWinesResponse;
+		
 	}
 	
 	// This gets executed after doInBackground()
 	protected void onPostExecute(String result) {
 		if(dialog.isShowing())
 			dialog.dismiss();
-		gson = new Gson();
-		final APISnoothResponseMyWines myWinesResponse = gson.fromJson(result, APISnoothResponseMyWines.class);
-		final APISnoothResponseMetaData meta = myWinesResponse.metaResults;
-        if (meta.results.equals("") || meta.results.equals("0")) {
-        	Toast.makeText(context, "You must add a wine through search results before you can access My Wines", Toast.LENGTH_LONG).show();
-        }
-        else {
-			Intent i = new Intent(context, WineCellTabLayout.class);
-			i.putExtra("MyWines Query", result);
-			context.startActivity(i);
-        }
+		if (!isOnline) {
+			Toast.makeText(context.getApplicationContext(), "You must be connected to the Internet to use this feature", Toast.LENGTH_SHORT).show();
+		} else {
+			if (!result.equals("")) {
+				gson = new Gson();
+				final APISnoothResponseMyWines myWinesResponse = gson.fromJson(result, APISnoothResponseMyWines.class);
+				final APISnoothResponseMetaData meta = myWinesResponse.metaResults;
+		        if (meta.results.equals("") || meta.results.equals("0")) {
+		        	Toast.makeText(context, "You must add a wine through search results before you can access My Wines", Toast.LENGTH_LONG).show();
+		        }
+		        else {
+					Intent i = new Intent(context, WineCellTabLayout.class);
+					i.putExtra("MyWines Query", result);
+					context.startActivity(i);
+		        }
+			} else {
+				Toast.makeText(context, "You must be conected to the Internet to access My Wines", Toast.LENGTH_LONG).show();
+			}
+		}
 	}
 }

@@ -13,7 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.winers.winetastic.controller.SystemManager;
 import com.winers.winetastic.model.data.FunFact;
 import com.winers.winetastic.model.manager.NetworkTaskManager;
 import com.winers.winetastic.model.manager.UserFunctions;
@@ -93,10 +95,13 @@ public class Home extends AbstractActivity {
         map_but.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-		
-				String url = "http://google.com/maps?q=wineries"; 
-	        	Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-	            startActivity(i); // Go go go!
+				if (!SystemManager.isOnline(getApplicationContext())) {
+					Toast.makeText(getApplicationContext(), "You must be connected to the Internet to use this feature", Toast.LENGTH_SHORT).show();
+				} else {
+					String url = "http://google.com/maps?q=wineries"; 
+		        	Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+		            startActivity(i); // Go go go!
+				}
 			}
         });
         

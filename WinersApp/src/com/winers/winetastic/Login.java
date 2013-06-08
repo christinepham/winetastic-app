@@ -3,8 +3,6 @@
 
 package com.winers.winetastic;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,22 +16,18 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.android.DialogError;
 import com.facebook.android.Facebook;
-import com.facebook.android.Facebook.DialogListener;
-import com.facebook.android.FacebookError;
+import com.winers.winetastic.controller.SystemManager;
 import com.winers.winetastic.model.manager.DatabaseHandler;
 import com.winers.winetastic.model.manager.UserFunctions;
 import com.winers.winetastic.model.manager.WinetasticManager;
 
 /**
- * Activity which displays a login screen to the user, offering registration as
- * well.z
+ * Activity which displays a login screen to the user.
  */
 public class Login extends AbstractActivity implements OnClickListener {
 	
@@ -69,13 +63,15 @@ public class Login extends AbstractActivity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		System.out.println("Creating login");
  	
 		setContentView(R.layout.activity_login);
 		
 		// for DB stuff
-        uF = new UserFunctions();
+        //uF = new UserFunctions();
 		
+        /*
+         * FB Stuff
+         *
 		String app_id = getString(R.string.app_id);
 		fb = new Facebook(app_id);
 				
@@ -86,6 +82,8 @@ public class Login extends AbstractActivity implements OnClickListener {
 		logoutButton.setVisibility(View.GONE);
 
 		updateButtonImage();
+		
+		*/
 	
 		// Import assets for email login
 		inputEmail = (EditText) findViewById(R.id.login_email);
@@ -104,8 +102,116 @@ public class Login extends AbstractActivity implements OnClickListener {
 		
 		
 	}
-
 	
+
+
+	 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		getMenuInflater().inflate(R.menu.login, menu);
+		return true;
+	}
+	
+	public void onClick(View v) {
+		
+	}
+		
+	/**
+	 * Represents an asynchronous login/registration task used to authenticate
+	 * the user.
+	 */
+	public class LoginNetworkTasks extends AsyncTask<Void, Void, Boolean> {
+		
+		String email = inputEmail.getText().toString();
+		String password = inputPassword.getText().toString();
+		UserFunctions userFunction = new UserFunctions();
+		private boolean isOnline;
+		JSONObject json;
+		boolean error = false;
+		
+		@Override
+		protected void onPreExecute() {
+			loginErrorMsg.setText("");
+			if (!SystemManager.isOnline(getApplicationContext())) {
+				isOnline = false;
+				} else {
+				isOnline = true;
+				if (email.length() < 1) {
+					loginErrorMsg.setText("Please enter an email address");
+					error = true;
+				}
+				else if (password.length() < 1) {
+					loginErrorMsg.setText("Please enter a password");
+					error = true;
+				}
+			}
+		}
+		
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			if (isOnline) {
+				if (!error) {
+					WinetasticManager.createSnoothAccount(email);
+					json = userFunction.loginUser(email, password);
+				}
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(final Boolean result) {
+			if (!isOnline) {
+				Toast.makeText(getApplicationContext(), "You must be connected to the Internet to use this feature", Toast.LENGTH_SHORT).show();
+			} else {
+			if (!error){
+				try {
+					if (json.getString(KEY_SUCCESS) != null) {
+						loginErrorMsg.setText("");
+						String res = json.getString(KEY_SUCCESS); 
+						if(Integer.parseInt(res) == 1){
+							
+							// user successfully logged in
+							// Store user details in SQLite Database
+							DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+							JSONObject json_user = json.getJSONObject("user");
+							
+							// Clear all previous data in database
+							userFunction.logoutUser(getApplicationContext());
+							db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));						
+							
+							System.err.println("User logged in");
+							
+							Intent homeScreen = new Intent(getApplicationContext(), Home.class);
+							
+							// Close all views before launching Home activity
+							homeScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							startActivity(homeScreen);
+							
+							// Close Login Screen
+							finish();
+						}else{
+							// Error in login
+							loginErrorMsg.setText("Invalid email address or password. Please try again.");
+						}
+					}
+				} catch (JSONException e) {
+					System.err.println("JSON error");
+					e.printStackTrace();
+				}
+				}
+			}
+		}
+
+	}
+	
+	
+
+	/*
+	 * Old FB code
+	 *
+	 *
+	 *
 	@Override
 	public void onClick(View v) {
 		if(fb.isSessionValid()){
@@ -151,8 +257,9 @@ public class Login extends AbstractActivity implements OnClickListener {
 				}
 			});
 		}	
-	}
-	
+	} 
+	 
+	 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 	  super.onActivityResult(requestCode, resultCode, data);
@@ -170,94 +277,6 @@ public class Login extends AbstractActivity implements OnClickListener {
 		 }
 		
 	}
-
-	 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
-		getMenuInflater().inflate(R.menu.login, menu);
-		return true;
-	}
-		
-	/**
-	 * Represents an asynchronous login/registration task used to authenticate
-	 * the user.
-	 */
-	public class LoginNetworkTasks extends AsyncTask<Void, Void, Boolean> {
-		
-		String email = inputEmail.getText().toString();
-		String password = inputPassword.getText().toString();
-		UserFunctions userFunction = new UserFunctions();
-		JSONObject json;
-		boolean error = false;
-		
-		@Override
-		protected void onPreExecute() {
-			loginErrorMsg.setText("");
-			if (email.length() < 1) {
-				loginErrorMsg.setText("Please enter an email address");
-				error = true;
-			}
-			else if (password.length() < 1) {
-				loginErrorMsg.setText("Please enter a password");
-				error = true;
-			}
-			
-		}
-		
-		@Override
-		protected Boolean doInBackground(Void... params) {
-			//Log.d("Button", "Login");
-			if (!error) {
-				WinetasticManager.createSnoothAccount(email);
-				json = userFunction.loginUser(email, password);
-			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(final Boolean result) {
-			if (!error){
-			try {
-				if (json.getString(KEY_SUCCESS) != null) {
-					loginErrorMsg.setText("");
-					String res = json.getString(KEY_SUCCESS); 
-					if(Integer.parseInt(res) == 1){
-						
-						// user successfully logged in
-						// Store user details in SQLite Database
-						DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-						JSONObject json_user = json.getJSONObject("user");
-						
-						// Clear all previous data in database
-						userFunction.logoutUser(getApplicationContext());
-						db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));						
-						
-						System.err.println("User logged in");
-						
-						Intent homeScreen = new Intent(getApplicationContext(), Home.class);
-						
-						// Close all views before launching Home activity
-						homeScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						startActivity(homeScreen);
-						
-						// Close Login Screen
-						finish();
-					}else{
-						// Error in login
-						loginErrorMsg.setText("Invalid email address or password. Please try again.");
-					}
-				}
-			} catch (JSONException e) {
-				System.err.println("JSON error");
-				e.printStackTrace();
-			}
-			}
-		}
-
-	}
-
-
 	public void loginToFacebook(View v) {
 		
 		System.out.println("herkeer");
@@ -307,6 +326,7 @@ public class Login extends AbstractActivity implements OnClickListener {
 		}
 		
 	}
+	*/
 
 
 	@Override

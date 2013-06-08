@@ -12,8 +12,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.winers.winetastic.controller.SystemManager;
 import com.winers.winetastic.model.data.APISnoothResponse;
 import com.winers.winetastic.model.data.APISnoothResponseWineArray;
 import com.winers.winetastic.model.data.APISnoothResponseWinery;
@@ -95,9 +97,13 @@ public class DailyVine extends AbstractFragmentActivity {
 	}
 
     public void openInBrowser(View v) {
-    	Intent i = new Intent(Intent.ACTION_VIEW);
-    	i.setData(Uri.parse(wineAPIResponse.get(0).link + "/#aprices"));
-    	startActivity(i);    	
+    	if (!SystemManager.isOnline(getApplicationContext())) {
+    		Toast.makeText(getApplicationContext(), "You must be connected to the Internet to use this feature", Toast.LENGTH_SHORT).show();
+    	} else {
+	    	Intent i = new Intent(Intent.ACTION_VIEW);
+	    	i.setData(Uri.parse(wineAPIResponse.get(0).link + "#aprices"));
+	    	startActivity(i);    	
+    	}
     }
   
     protected int getTitleText() {
