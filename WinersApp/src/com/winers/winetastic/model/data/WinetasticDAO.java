@@ -274,7 +274,7 @@ public class WinetasticDAO {
 		System.err.println("Created snooth account using the following URL:");
 		System.err.println(url);
 		InputStream source = retrieveStream(url);
-		Reader reader = new InputStreamReader(source);
+		//Reader reader = new InputStreamReader(source);
 	}
 	
 	

@@ -18,8 +18,8 @@ import android.widget.Toast;
 
 import com.winers.winetastic.controller.SystemManager;
 import com.winers.winetastic.model.manager.DatabaseHandler;
+import com.winers.winetastic.model.manager.LoginManager;
 import com.winers.winetastic.model.manager.UserFunctions;
-import com.winers.winetastic.model.manager.WinetasticManager;
 
 public class RegisterAccount extends AbstractActivity {
 	Button btnRegister;
@@ -95,7 +95,7 @@ public class RegisterAccount extends AbstractActivity {
 		protected Boolean doInBackground(Void... params) {
 			if (isOnline) {
 				if (!error) {
-					WinetasticManager.createSnoothAccount(email);
+					LoginManager.createSnoothAccount(email);
 					json = userFunction.registerUser(email, password);
 					
 				}

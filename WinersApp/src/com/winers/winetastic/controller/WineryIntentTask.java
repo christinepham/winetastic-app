@@ -3,8 +3,6 @@ package com.winers.winetastic.controller;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -26,7 +24,7 @@ public class WineryIntentTask extends AsyncTask<String, Void, String> {
 	protected void onPreExecute() {
 		// This is where the "searching" overlay will go
 		super.onPreExecute();
-		dialog = ProgressDialog.show(context, "","Loading...");
+		//dialog = ProgressDialog.show(context, "","Loading...");
 	}
 	
 	@Override
@@ -42,6 +40,7 @@ public class WineryIntentTask extends AsyncTask<String, Void, String> {
 	}
 	
 	// This gets executed after doInBackground()
+	@Override
 	protected void onPostExecute(String result) {	
 		if(dialog.isShowing())
 			dialog.dismiss();
