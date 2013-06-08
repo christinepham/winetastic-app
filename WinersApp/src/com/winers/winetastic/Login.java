@@ -27,9 +27,10 @@ import com.facebook.android.DialogError;
 import com.facebook.android.Facebook;
 import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
+import com.winers.winetastic.controller.LoginController;
 import com.winers.winetastic.model.manager.DatabaseHandler;
+import com.winers.winetastic.model.manager.LoginManager;
 import com.winers.winetastic.model.manager.UserFunctions;
-import com.winers.winetastic.model.manager.WinetasticManager;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -55,16 +56,6 @@ public class Login extends AbstractActivity implements OnClickListener {
 	EditText inputEmail;
 	EditText inputPassword;
 	TextView loginErrorMsg;
-	LoginNetworkTasks networkTask;
-	
-	/*
-     * JSON response node names
-     */
-	private static String KEY_SUCCESS = "success";
-	private static String KEY_UID = "uid";
-	private static String KEY_NAME = "name";
-	private static String KEY_EMAIL = "email";
-	private static String KEY_CREATED_AT = "created_at";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -97,8 +88,10 @@ public class Login extends AbstractActivity implements OnClickListener {
 		btnLogin.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View view) {
-				networkTask = new LoginNetworkTasks();
-				networkTask.execute();
+				String email = inputEmail.getText().toString();
+				String password = inputPassword.getText().toString();				
+				
+				LoginManager.attemptLogin(Login.this, email, password, loginErrorMsg);
 			}
 		});
 		
@@ -106,6 +99,7 @@ public class Login extends AbstractActivity implements OnClickListener {
 	}
 
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onClick(View v) {
 		if(fb.isSessionValid()){
@@ -179,85 +173,7 @@ public class Login extends AbstractActivity implements OnClickListener {
 		return true;
 	}
 		
-	/**
-	 * Represents an asynchronous login/registration task used to authenticate
-	 * the user.
-	 */
-	public class LoginNetworkTasks extends AsyncTask<Void, Void, Boolean> {
-		
-		String email = inputEmail.getText().toString();
-		String password = inputPassword.getText().toString();
-		UserFunctions userFunction = new UserFunctions();
-		JSONObject json;
-		boolean error = false;
-		
-		@Override
-		protected void onPreExecute() {
-			loginErrorMsg.setText("");
-			if (email.length() < 1) {
-				loginErrorMsg.setText("Please enter an email address");
-				error = true;
-			}
-			else if (password.length() < 1) {
-				loginErrorMsg.setText("Please enter a password");
-				error = true;
-			}
-			
-		}
-		
-		@Override
-		protected Boolean doInBackground(Void... params) {
-			//Log.d("Button", "Login");
-			if (!error) {
-				WinetasticManager.createSnoothAccount(email);
-				json = userFunction.loginUser(email, password);
-			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(final Boolean result) {
-			if (!error){
-			try {
-				if (json.getString(KEY_SUCCESS) != null) {
-					loginErrorMsg.setText("");
-					String res = json.getString(KEY_SUCCESS); 
-					if(Integer.parseInt(res) == 1){
-						
-						// user successfully logged in
-						// Store user details in SQLite Database
-						DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-						JSONObject json_user = json.getJSONObject("user");
-						
-						// Clear all previous data in database
-						userFunction.logoutUser(getApplicationContext());
-						db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));						
-						
-						System.err.println("User logged in");
-						
-						Intent homeScreen = new Intent(getApplicationContext(), Home.class);
-						
-						// Close all views before launching Home activity
-						homeScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						startActivity(homeScreen);
-						
-						// Close Login Screen
-						finish();
-					}else{
-						// Error in login
-						loginErrorMsg.setText("Invalid email address or password. Please try again.");
-					}
-				}
-			} catch (JSONException e) {
-				System.err.println("JSON error");
-				e.printStackTrace();
-			}
-			}
-		}
-
-	}
-
-
+	@SuppressWarnings("deprecation")
 	public void loginToFacebook(View v) {
 		
 		System.out.println("herkeer");
@@ -286,7 +202,6 @@ public class Login extends AbstractActivity implements OnClickListener {
 				public void onError(DialogError e) {
 					// TODO Auto-generated method stub
 					Toast.makeText(Login.this, "onCancel", Toast.LENGTH_SHORT).show();
-
 					
 				}
 				

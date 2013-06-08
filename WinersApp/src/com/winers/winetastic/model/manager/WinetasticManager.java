@@ -8,7 +8,7 @@ import com.winers.winetastic.model.data.WinetasticDAO;
 
 public class WinetasticManager {
 	
-	private static WinetasticDAO dao = new WinetasticDAO();
+	static WinetasticDAO dao = new WinetasticDAO();
 	
 	WinetasticManager() { }
 	
@@ -20,10 +20,6 @@ public class WinetasticManager {
 	
 	public static String performCombinedSearch(WineSearchObject searchParameters, int numResults){
 		return WinetasticManager.dao.performCombinedSearch(searchParameters, numResults);
-	}
-	
-	public static void createSnoothAccount(String email) {
-		WinetasticManager.dao.createSnoothAccount(email);
 	}
 	
 	public static String returnMyWines(String email) {
