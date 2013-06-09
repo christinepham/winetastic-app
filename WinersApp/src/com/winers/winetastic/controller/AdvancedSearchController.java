@@ -124,7 +124,7 @@ public class AdvancedSearchController extends BaseExpandableListAdapter {
 						String group = groupItem.get(groupPosition);
 
 						// Color group
-						if (group.equals("Color")) {
+						if (group.equals("Type")) {
 							//Toast.makeText(activity, tempChild.get(childPosition), Toast.LENGTH_SHORT).show();
 
 							selectColor(theItem, groupPosition, childPosition);
@@ -135,7 +135,7 @@ public class AdvancedSearchController extends BaseExpandableListAdapter {
 							selectPrice(theItem, groupPosition, childPosition);
 						}
 						// Type group
-						else if(group.equals("Type")) {
+						else if(group.equals("Varietal")) {
 							//Toast.makeText(activity, tempChild.get(childPosition), Toast.LENGTH_SHORT).show();
 							selectType(theItem, groupPosition, childPosition);
 						}

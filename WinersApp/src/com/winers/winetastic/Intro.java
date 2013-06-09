@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.winers.winetastic.model.manager.UserFunctions;
+import com.winers.winetastic.view.LoginView;
+import com.winers.winetastic.view.RegisterAccountView;
 public class Intro extends Activity {
 	
 	private UserFunctions uF;
@@ -69,7 +71,7 @@ public class Intro extends Activity {
     		@Override
     		public void onClick(View v) {
         		System.err.println("Detected click for REGISTER.");    			
-    			Intent i = new Intent(Intro.this, RegisterAccount.class);
+    			Intent i = new Intent(Intro.this, RegisterAccountView.class);
     			startActivity(i);
     		}
         });
@@ -111,7 +113,7 @@ public class Intro extends Activity {
     
     public void showLogin(View view) { 	
     	Intent intent = new Intent();
-    	intent.setClass(this, Login.class);
+    	intent.setClass(this, LoginView.class);
     	startActivity(intent);
     }
     

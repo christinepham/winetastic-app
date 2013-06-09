@@ -27,7 +27,6 @@ implements OnChildClickListener {
 	private ArrayList<String> groups = new ArrayList<String>();
 	private ArrayList<Object> children = new ArrayList<Object>();
 	private AdvancedSearchController searchAdapter;
-	//private AdvancedSearchAPICall advancedSearchAPICall;
 
 	private ArrayList<String> stringArgs = new ArrayList<String>();
 	private WineSearchObject sP;
@@ -159,7 +158,7 @@ implements OnChildClickListener {
 	public void setChildren () {
 		ArrayList<String> tempChild = new ArrayList<String>();
 
-		// Color group
+		// Type group
 		tempChild.add("Red");
 		tempChild.add("Rose");
 		tempChild.add("White");
@@ -173,7 +172,7 @@ implements OnChildClickListener {
 		tempChild.add("Over $150/bottle");
 		children.add(tempChild);
 
-		// Type group
+		// Varietal group
 		tempChild = new ArrayList<String>();
 		tempChild.add("Cabernet Sauvignon");
 		tempChild.add("Champagne");

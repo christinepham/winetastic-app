@@ -1,11 +1,9 @@
 package com.winers.winetastic.model.data;
 
-import java.security.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,14 +18,13 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
-public class WinetasticDAO {
+public class SystemDAO {
 	private final String API_KEY = "7sft6abh56pjc52byts04mq9vpok18ufzksn5r4g92amybdy";
 	private final String SNOOTH_URL = "http://api.snooth.com";
 	private final String WINE_RESOURCE_ID = "/wines/";
 	private final String WINERY_RESOURCE_ID = "/winery/";
 	private final String MY_WINES_RESOURCE_ID = "/my-wines/";
 	private final String RATE_WINE_RESOURCE_ID = "/rate/";
-	private final String CREATE_ACCOUNT_RESOURCE_ID = "/create-account/";
 	private final String RANDOM_STRING = "k8d9j5h8g4u7tr4";
 	private final int API_RETVAL_LENGTH_FOR_ERROR = 120;
 	
@@ -252,35 +249,6 @@ public class WinetasticDAO {
 		System.err.println("URL TO REMOVE WINE: ");
 		System.err.println(url);
 		retrieveStream(url);
-	}
-	
-	public void createSnoothAccount(String email) {
-		String url = SNOOTH_URL + CREATE_ACCOUNT_RESOURCE_ID + "?akey=" + API_KEY;
-		String newEmail = RANDOM_STRING + email;
-		url += "&e=" + newEmail;
-		url += "&p=" + RANDOM_STRING;
-		
-		MessageDigest m;
-		String hashtext = new String();
-		try {
-			m = MessageDigest.getInstance("MD5");
-			m.reset();
-			m.update(newEmail.getBytes());
-			byte[] digest = m.digest();
-			BigInteger bigInt = new BigInteger(1,digest);
-			hashtext = bigInt.toString(16);
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		
-		
-		hashtext = hashtext.substring(0,19);
-		System.err.println("sn = " + hashtext);
-		url += "&s=" + hashtext;
-		System.err.println("Created snooth account using the following URL:");
-		System.err.println(url);
-		retrieveStream(url);
-		//Reader reader = new InputStreamReader(source);
 	}
 	
 	

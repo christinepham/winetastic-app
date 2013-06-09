@@ -4,11 +4,11 @@ package com.winers.winetastic.model.manager;
 import java.util.ArrayList;
 
 import com.winers.winetastic.model.data.WineSearchObject;
-import com.winers.winetastic.model.data.WinetasticDAO;
+import com.winers.winetastic.model.data.SystemDAO;
 
 public class WinetasticManager {
 	
-	static WinetasticDAO dao = new WinetasticDAO();
+	static SystemDAO dao = new SystemDAO();
 	
 	WinetasticManager() { }
 	

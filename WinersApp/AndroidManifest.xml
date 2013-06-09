@@ -176,7 +176,7 @@
         </activity>
         <activity
 		 android:configChanges="keyboardHidden|orientation|screenSize"
-            android:name="com.winers.winetastic.Login"
+            android:name="com.winers.winetastic.view.LoginView"
             android:label="@string/title_activity_login"
             android:parentActivityName="com.winers.winetastic.AbstractActivity"
             android:windowSoftInputMode="adjustResize|stateVisible" >
@@ -186,7 +186,7 @@
         </activity>
         <activity
 		 android:configChanges="keyboardHidden|orientation|screenSize"
-            android:name="com.winers.winetastic.RegisterAccount"
+            android:name="com.winers.winetastic.view.RegisterAccountView"
             android:label="@string/title_activity_register"
             android:parentActivityName="com.winers.winetastic.AbstractActivity"
             android:windowSoftInputMode="adjustResize|stateVisible" >

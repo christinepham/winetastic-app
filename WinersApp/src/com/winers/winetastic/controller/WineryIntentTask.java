@@ -25,30 +25,31 @@ public class WineryIntentTask extends AsyncTask<String, Void, String> {
 	protected void onPreExecute() {
 		// This is where the "searching" overlay will go
 		super.onPreExecute();
-		//dialog = ProgressDialog.show(context, "","Loading...");
+		dialog = ProgressDialog.show(context, "","Loading...");
 	}
 	
 	@Override
 	protected String doInBackground(String ... winery) {
 		String rv = "";
+		System.err.println("Begin doInBackground()");
 		if (!SystemManager.isOnline(context)) {
 			isOnline = false;
 		} else {
 			isOnline = true;
 			rv = WinetasticManager.getWineryDetails(winery[0]);
 		}
+		System.err.println("End doInBackground()");
 		return rv;
 	}
 	
 	// This gets executed after doInBackground()
 	@Override
 	protected void onPostExecute(String result) {	
-		if(dialog.isShowing())
-			dialog.dismiss();
+		if(dialog.isShowing()) dialog.dismiss();
 		if (!isOnline) {
 			Toast.makeText(context.getApplicationContext(), "You must be connected to the Internet to use this feature", Toast.LENGTH_SHORT).show();
 		} else {
-			if (result != null) {
+			if ((result != null) && (result.length() > 70)) {
 		    	Intent i = new Intent(context, WineryInfoPage.class);
 		    	i.putExtra("winery_data", result);
 		    	context.startActivity(i);
