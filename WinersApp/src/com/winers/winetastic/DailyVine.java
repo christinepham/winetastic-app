@@ -15,11 +15,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.winers.winetastic.controller.SystemManager;
 import com.winers.winetastic.model.data.APISnoothResponse;
 import com.winers.winetastic.model.data.APISnoothResponseWineArray;
 import com.winers.winetastic.model.data.APISnoothResponseWinery;
 import com.winers.winetastic.model.data.APISnoothResponseWineryDetails;
+import com.winers.winetastic.model.manager.SystemManager;
 
 /**
  * Starts the Daily Vine for the random winery/wine of the day.

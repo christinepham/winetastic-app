@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.winers.winetastic.model.manager.DatabaseHandler;
+import com.winers.winetastic.model.manager.SystemManager;
 import com.winers.winetastic.model.manager.WinetasticManager;
 
 public class RemoveFromCellarTask extends AsyncTask<String, Void, Void> {

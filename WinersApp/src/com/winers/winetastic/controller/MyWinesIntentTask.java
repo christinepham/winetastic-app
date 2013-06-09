@@ -13,6 +13,7 @@ import com.winers.winetastic.WineCellTabLayout;
 import com.winers.winetastic.model.data.APISnoothResponseMetaData;
 import com.winers.winetastic.model.data.APISnoothResponseMyWines;
 import com.winers.winetastic.model.manager.DatabaseHandler;
+import com.winers.winetastic.model.manager.SystemManager;
 import com.winers.winetastic.model.manager.WinetasticManager;
 
 public class MyWinesIntentTask extends AsyncTask<Void, Void, String> {

@@ -150,9 +150,9 @@ implements OnChildClickListener {
 
 
 	public void setGroups () {
-		groups.add("Color");
-		groups.add("Price");
 		groups.add("Type");
+		groups.add("Price");
+		groups.add("Varietal");
 		groups.add("Accent");
 	}
 

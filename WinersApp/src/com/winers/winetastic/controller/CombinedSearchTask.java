@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.winers.winetastic.SearchResults;
 import com.winers.winetastic.model.data.WineSearchObject;
+import com.winers.winetastic.model.manager.SystemManager;
 import com.winers.winetastic.model.manager.WinetasticManager;
 
 /**
@@ -57,7 +58,10 @@ public class CombinedSearchTask extends AsyncTask<WineSearchObject, Void, String
 	protected void onPostExecute(String result) {
 		if(dialog.isShowing())
 			dialog.dismiss();
-		if (!isOnline) {
+		if (result.equals("")) {
+			Toast.makeText(context.getApplicationContext(), "Our online wine database is currently unavailable. Please try again later.", Toast.LENGTH_SHORT).show();
+		} 
+		else if (!isOnline) {
 			Toast.makeText(context.getApplicationContext(), "You must be connected to the Internet to use this feature", Toast.LENGTH_SHORT).show();
 		} else {
 			if (WinetasticManager.hasSearchResults(result)) {

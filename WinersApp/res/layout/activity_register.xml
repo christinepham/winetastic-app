@@ -37,7 +37,6 @@
         android:layout_below="@+id/register_password"
         android:textSize="12sp"
         android:textStyle="bold"/>
-        />
     
     <Button
         android:id="@+id/register_submit"

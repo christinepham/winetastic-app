@@ -15,7 +15,6 @@ import com.winers.winetastic.model.manager.LoginManager;
  */
 public class Login extends AbstractActivity implements OnClickListener {
 	
-	
     /*
      * Stuff for login with email/password
      */
@@ -46,8 +45,6 @@ public class Login extends AbstractActivity implements OnClickListener {
 				LoginManager.attemptLogin(Login.this, email, password, loginErrorMsg);
 			}
 		});
-		
-		
 	}
 	
 	@Override
@@ -65,5 +62,4 @@ public class Login extends AbstractActivity implements OnClickListener {
 	protected int getTitleText() {
 		return R.string.title_activity_login;
 	}
-
 }

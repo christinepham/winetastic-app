@@ -15,9 +15,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.winers.winetastic.controller.SystemManager;
 import com.winers.winetastic.model.data.FunFact;
 import com.winers.winetastic.model.manager.NetworkTaskManager;
+import com.winers.winetastic.model.manager.SystemManager;
 import com.winers.winetastic.model.manager.UserFunctions;
 
 public class Home extends AbstractActivity {

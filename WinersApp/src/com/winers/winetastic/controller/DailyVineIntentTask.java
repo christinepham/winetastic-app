@@ -5,8 +5,6 @@ import java.util.List;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -14,6 +12,7 @@ import com.google.gson.Gson;
 import com.winers.winetastic.DailyVine;
 import com.winers.winetastic.model.data.APISnoothResponse;
 import com.winers.winetastic.model.data.APISnoothResponseWineArray;
+import com.winers.winetastic.model.manager.SystemManager;
 import com.winers.winetastic.model.manager.WinetasticManager;
 
 /**
@@ -27,7 +26,7 @@ public class DailyVineIntentTask extends AsyncTask<Void, Void, String> {
 	private String wineResponse;
 	private ProgressDialog dialog;
 	private boolean isOnline;
-	
+	private boolean snoothDown;
 	private Context context;
     private Gson gson;
     private APISnoothResponse snoothResponse;
@@ -53,10 +52,16 @@ public class DailyVineIntentTask extends AsyncTask<Void, Void, String> {
 		} else {
 			isOnline = true;
 			wineResponse = WinetasticManager.getRandomWine();
-			gson = new Gson();
-		    snoothResponse = gson.fromJson(wineResponse, APISnoothResponse.class);
-		    wineAPIResponse = (List<APISnoothResponseWineArray>) snoothResponse.wineResults;
-			wineryResponse = WinetasticManager.getWineryDetails(wineAPIResponse.get(0).wineryID);
+			if (!wineResponse.equals("")) { // Check for empty response from Snooth
+				snoothDown = false;
+				gson = new Gson();
+			    snoothResponse = gson.fromJson(wineResponse, APISnoothResponse.class);
+			    wineAPIResponse = (List<APISnoothResponseWineArray>) snoothResponse.wineResults;
+				wineryResponse = WinetasticManager.getWineryDetails(wineAPIResponse.get(0).wineryID);
+			}
+			else {
+				snoothDown = true;
+			}
 		}
 		return "";
 	}
@@ -65,7 +70,10 @@ public class DailyVineIntentTask extends AsyncTask<Void, Void, String> {
 	protected void onPostExecute(String result) {
 		if(dialog.isShowing())
 			dialog.dismiss();
-		if (!isOnline) {
+		if (snoothDown) {
+			Toast.makeText(context.getApplicationContext(), "Our online wine database is currently unavailable. Please try again later.", Toast.LENGTH_SHORT).show();
+		}
+		else if (!isOnline) {
 			Toast.makeText(context.getApplicationContext(), "You must be connected to the Internet to use this feature", Toast.LENGTH_SHORT).show();
 		} else {
 			Intent i = new Intent(context, DailyVine.class);

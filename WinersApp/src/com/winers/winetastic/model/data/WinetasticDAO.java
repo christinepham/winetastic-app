@@ -132,8 +132,6 @@ public class WinetasticDAO {
 			addedPlus = true;
 		}
 		
-		System.err.println("Size of stringList: " + searchParameters.stringList.size());
-		
 		// take off last "+"
 		if (addedPlus)
 			url = url.substring(0, (url.length()-1));
@@ -159,25 +157,29 @@ public class WinetasticDAO {
 		url += "&p=" + RANDOM_STRING;
 		Gson gson = new Gson();
 		InputStream source = retrieveStream(url);  
-        Reader reader = new InputStreamReader(source);
-        APISnoothResponseMyWines snoothResponse = gson.fromJson(reader, APISnoothResponseMyWines.class);
-        boolean wineFound = false;
-        List<APISnoothResponseMyWineArray> wineArray = snoothResponse.myWineResults;
-        if (wineArray == null) return false;
-        APISnoothResponseMyWineArray wineComparator = new APISnoothResponseMyWineArray();
-        for (APISnoothResponseMyWineArray wine : wineArray) {
-        	if (wine.code.equals(wineID)) {
-        		wineFound = true;
-        		wineComparator = wine;
-        		break;
-        	}
-        }
-        if (wineFound) {
-        	if (wineComparator.wishlist.equals("1")) {
-        		return true;
-        	}
-        }
-        return false;
+		if (source != null) {
+	        Reader reader = new InputStreamReader(source);
+	        APISnoothResponseMyWines snoothResponse = gson.fromJson(reader, APISnoothResponseMyWines.class);
+	        boolean wineFound = false;
+	        List<APISnoothResponseMyWineArray> wineArray = snoothResponse.myWineResults;
+	        if (wineArray == null) return false;
+	        APISnoothResponseMyWineArray wineComparator = new APISnoothResponseMyWineArray();
+	        for (APISnoothResponseMyWineArray wine : wineArray) {
+	        	if (wine.code.equals(wineID)) {
+	        		wineFound = true;
+	        		wineComparator = wine;
+	        		break;
+	        	}
+	        }
+	        if (wineFound) {
+	        	if (wineComparator.wishlist.equals("1")) {
+	        		return true;
+	        	}
+	        }
+	    return false;
+		} else {
+			return false;
+		}
 	}
 	
 	public boolean isWineInCellar(String email, String wineID) {
@@ -186,25 +188,29 @@ public class WinetasticDAO {
 		url += "&p=" + RANDOM_STRING;
 		Gson gson = new Gson();
 		InputStream source = retrieveStream(url);  
-        Reader reader = new InputStreamReader(source);
-        APISnoothResponseMyWines snoothResponse = gson.fromJson(reader, APISnoothResponseMyWines.class);
-        boolean wineFound = false;
-        List<APISnoothResponseMyWineArray> wineArray = snoothResponse.myWineResults;
-        if (wineArray == null) return false;
-        APISnoothResponseMyWineArray wineComparator = new APISnoothResponseMyWineArray();
-        for (APISnoothResponseMyWineArray wine : wineArray) {
-        	if (wine.code.equals(wineID)) {
-        		wineFound = true;
-        		wineComparator = wine;
-        		break;
-        	}
-        }
-        if (wineFound) {
-        	if (wineComparator.cellared.equals("2")) {
-        		return true;
-        	}
-        }
-        return false;
+		if (source != null){
+	        Reader reader = new InputStreamReader(source);
+	        APISnoothResponseMyWines snoothResponse = gson.fromJson(reader, APISnoothResponseMyWines.class);
+	        boolean wineFound = false;
+	        List<APISnoothResponseMyWineArray> wineArray = snoothResponse.myWineResults;
+	        if (wineArray == null) return false;
+	        APISnoothResponseMyWineArray wineComparator = new APISnoothResponseMyWineArray();
+	        for (APISnoothResponseMyWineArray wine : wineArray) {
+	        	if (wine.code.equals(wineID)) {
+	        		wineFound = true;
+	        		wineComparator = wine;
+	        		break;
+	        	}
+	        }
+	        if (wineFound) {
+	        	if (wineComparator.cellared.equals("2")) {
+	        		return true;
+	        	}
+	        }
+	        return false;
+		}else {
+			return false; // The method returns false if Snooth is down
+		}
 	}
 	
 	public void addWineToWishlist(String email, String wineID) {
@@ -273,7 +279,7 @@ public class WinetasticDAO {
 		url += "&s=" + hashtext;
 		System.err.println("Created snooth account using the following URL:");
 		System.err.println(url);
-		InputStream source = retrieveStream(url);
+		retrieveStream(url);
 		//Reader reader = new InputStreamReader(source);
 	}
 	
@@ -331,15 +337,21 @@ public class WinetasticDAO {
 		// For converting to and from JSON/Java objects
 		Gson gson = new Gson();
 		// Make API call
-		InputStream source = retrieveStream(url);  
-		//System.err.println("callSnoothAPI: " + url);
-        Reader reader = new InputStreamReader(source);
-	    
-        // Convert JSON object to Java object
-        APISnoothResponseMyWines snoothResponse = gson.fromJson(reader, APISnoothResponseMyWines.class);
-        
-        // Return JSON array
-        return gson.toJson(snoothResponse);
+		InputStream source = retrieveStream(url);
+		
+		if (source != null) {
+			//System.err.println("callSnoothAPI: " + url);
+	        Reader reader = new InputStreamReader(source);
+		    
+	        // Convert JSON object to Java object
+	        APISnoothResponseMyWines snoothResponse = gson.fromJson(reader, APISnoothResponseMyWines.class);
+	        
+	        // Return JSON array
+	        return gson.toJson(snoothResponse);
+		} else {
+			return "";
+		}
+		
 	}
 	
 	private String callSnoothAPIWineSearch(String url) {
@@ -348,14 +360,19 @@ public class WinetasticDAO {
 		Gson gson = new Gson();
 		// Make API call
 		InputStream source = retrieveStream(url);  
-		//System.err.println("callSnoothAPI: " + url);
-        Reader reader = new InputStreamReader(source);
-	    
-        // Convert JSON object to Java object
-        APISnoothResponse snoothResponse = gson.fromJson(reader, APISnoothResponse.class);
+		
+		if (source != null) {
+			//System.err.println("callSnoothAPI: " + url);
+	        Reader reader = new InputStreamReader(source);
+		    
+	        // Convert JSON object to Java object
+	        APISnoothResponse snoothResponse = gson.fromJson(reader, APISnoothResponse.class);
+	        
+	        // Return JSON array
+	        return gson.toJson(snoothResponse);
         
-        // Return JSON array
-        return gson.toJson(snoothResponse);
+			} else 
+		return "";
 	}
 	
 private String callSnoothAPIWinerySearch(String url) {
@@ -365,13 +382,17 @@ private String callSnoothAPIWinerySearch(String url) {
 		// Make API call
 		InputStream source = retrieveStream(url);  
 		//System.err.println("callSnoothAPI: " + url);
-        Reader reader = new InputStreamReader(source);
-	    
-        // Convert JSON object to Java object
-        APISnoothResponseWinery snoothResponseWinery = gson.fromJson(reader, APISnoothResponseWinery.class);
-        
-        // Return JSON array
-        return gson.toJson(snoothResponseWinery);
+		if (source != null) {
+	        Reader reader = new InputStreamReader(source);
+		    
+	        // Convert JSON object to Java object
+	        APISnoothResponseWinery snoothResponseWinery = gson.fromJson(reader, APISnoothResponseWinery.class);
+	        
+	        // Return JSON array
+	        return gson.toJson(snoothResponseWinery);
+		} else {
+			return "";
+		}
 	}
 	
 	private InputStream retrieveStream(String url) {

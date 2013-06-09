@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.winers.winetastic.WineryInfoPage;
+import com.winers.winetastic.model.manager.SystemManager;
 import com.winers.winetastic.model.manager.WinetasticManager;
 
 public class WineryIntentTask extends AsyncTask<String, Void, String> {

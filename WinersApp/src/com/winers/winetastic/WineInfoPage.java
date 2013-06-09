@@ -16,11 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.winers.winetastic.controller.SystemManager;
 import com.winers.winetastic.model.data.APISnoothResponseWineArray;
 import com.winers.winetastic.model.data.WineSearchObject;
 import com.winers.winetastic.model.manager.ImageLoader;
 import com.winers.winetastic.model.manager.NetworkTaskManager;
+import com.winers.winetastic.model.manager.SystemManager;
 /**
  * Displays statistics and descriptors for a specific wine. 
  * 

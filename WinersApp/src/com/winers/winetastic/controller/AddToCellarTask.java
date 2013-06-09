@@ -6,6 +6,7 @@ import android.widget.Toast;
 import android.content.Context;
 
 import com.winers.winetastic.model.manager.DatabaseHandler;
+import com.winers.winetastic.model.manager.SystemManager;
 import com.winers.winetastic.model.manager.UserFunctions;
 import com.winers.winetastic.model.manager.WinetasticManager;
 

@@ -16,9 +16,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.winers.winetastic.controller.SystemManager;
 import com.winers.winetastic.model.manager.DatabaseHandler;
 import com.winers.winetastic.model.manager.LoginManager;
+import com.winers.winetastic.model.manager.SystemManager;
 import com.winers.winetastic.model.manager.UserFunctions;
 
 public class RegisterAccount extends AbstractActivity {

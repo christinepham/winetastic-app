@@ -1,4 +1,4 @@
-package com.winers.winetastic.controller;
+package com.winers.winetastic.model.manager;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

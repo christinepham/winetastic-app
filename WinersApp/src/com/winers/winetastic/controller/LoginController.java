@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.winers.winetastic.Home;
 import com.winers.winetastic.model.manager.DatabaseHandler;
 import com.winers.winetastic.model.manager.LoginManager;
+import com.winers.winetastic.model.manager.SystemManager;
 import com.winers.winetastic.model.manager.UserFunctions;
 
 /**
@@ -95,7 +96,6 @@ public class LoginController {
 			if (!isOnline) {
 				Toast.makeText(context, "You must be connected to the internet to use this feature", Toast.LENGTH_SHORT).show();
 			} else {
-				System.err.println("Made it into onPostExecute");
 				try {
 					if (json.getString(LoginController.KEY_SUCCESS) != null) {
 						errorMsg.setText("");
