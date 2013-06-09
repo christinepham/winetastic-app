@@ -14,6 +14,11 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.winers.winetastic.R;
+import com.winers.winetastic.R.color;
+import com.winers.winetastic.R.layout;
+import com.winers.winetastic.R.menu;
+import com.winers.winetastic.R.string;
 import com.winers.winetastic.controller.SearchResultsController;
 import com.winers.winetastic.model.data.APISnoothResponseMyWineArray;
 import com.winers.winetastic.model.data.APISnoothResponseMyWines;

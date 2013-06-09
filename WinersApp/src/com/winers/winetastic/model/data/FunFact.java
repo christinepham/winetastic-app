@@ -3,9 +3,6 @@ package com.winers.winetastic.model.data;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.Menu;
 
 public class FunFact{
 	ArrayList<String> facts;

@@ -32,6 +32,7 @@ public class WineSearchObject implements Serializable {
 	private String 				accent;
 	public int					firstResult;
 	public ArrayList<String> 	stringList;
+	static final long 			serialVersionUID = 927482;
 	
 	public WineSearchObject () {
 		color = "";

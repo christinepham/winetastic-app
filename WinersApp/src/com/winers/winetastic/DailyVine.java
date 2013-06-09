@@ -15,6 +15,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.winers.winetastic.R;
+import com.winers.winetastic.R.id;
+import com.winers.winetastic.R.layout;
+import com.winers.winetastic.R.menu;
+import com.winers.winetastic.R.string;
 import com.winers.winetastic.model.data.APISnoothResponse;
 import com.winers.winetastic.model.data.APISnoothResponseWineArray;
 import com.winers.winetastic.model.data.APISnoothResponseWinery;

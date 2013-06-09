@@ -15,6 +15,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.winers.winetastic.R;
+import com.winers.winetastic.R.id;
+import com.winers.winetastic.R.layout;
+import com.winers.winetastic.R.menu;
+import com.winers.winetastic.R.string;
 import com.winers.winetastic.model.data.FunFact;
 import com.winers.winetastic.model.manager.NetworkTaskManager;
 import com.winers.winetastic.model.manager.SystemManager;

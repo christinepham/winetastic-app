@@ -3,10 +3,8 @@ package com.winers.winetastic;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.ListActivity;
-import android.app.ProgressDialog;
+
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -15,17 +13,18 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.google.gson.Gson;
+import com.winers.winetastic.R;
+import com.winers.winetastic.R.id;
+import com.winers.winetastic.R.layout;
+import com.winers.winetastic.R.menu;
+import com.winers.winetastic.R.string;
 import com.winers.winetastic.controller.SearchResultsController;
 import com.winers.winetastic.model.data.APISnoothResponse;
 import com.winers.winetastic.model.data.APISnoothResponseWineArray;
 import com.winers.winetastic.model.data.WineSearchObject;
 import com.winers.winetastic.model.manager.NetworkTaskManager;
-import com.winers.winetastic.model.manager.WinetasticManager;
 
 
 public class SearchResults extends AbstractActivity {

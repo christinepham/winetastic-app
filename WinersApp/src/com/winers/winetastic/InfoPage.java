@@ -1,5 +1,6 @@
 package com.winers.winetastic;
 
+
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.util.Linkify;

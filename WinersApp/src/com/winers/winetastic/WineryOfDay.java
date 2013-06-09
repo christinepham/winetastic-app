@@ -1,11 +1,15 @@
 package com.winers.winetastic;
 
+import com.winers.winetastic.R;
+import com.winers.winetastic.R.color;
+import com.winers.winetastic.R.id;
+import com.winers.winetastic.R.layout;
+
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.text.util.Linkify;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,7 +87,6 @@ public class WineryOfDay extends Fragment {
      */
     protected void addRow(View parent, String ... cols) {
     	// Get width of parent view
-    	int width = parent.getLayoutParams().width;
     	
     	// Create a table row
     	TableRow r = (TableRow) getActivity().getLayoutInflater().inflate(R.layout.info_row, null);

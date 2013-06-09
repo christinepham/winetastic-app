@@ -16,6 +16,10 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.SearchView;
 
+import com.winers.winetastic.R;
+import com.winers.winetastic.R.id;
+import com.winers.winetastic.R.layout;
+import com.winers.winetastic.R.string;
 import com.winers.winetastic.controller.AdvancedSearchController;
 import com.winers.winetastic.model.data.WineSearchObject;
 import com.winers.winetastic.model.manager.NetworkTaskManager;

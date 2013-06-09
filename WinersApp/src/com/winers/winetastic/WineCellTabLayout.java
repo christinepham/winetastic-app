@@ -1,11 +1,14 @@
 package com.winers.winetastic;
 
+
+import com.winers.winetastic.R;
+import com.winers.winetastic.R.layout;
+import com.winers.winetastic.R.string;
+
 import android.app.LocalActivityManager;
-import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TabHost;
-import android.widget.Toast;
 import android.widget.TabHost.TabSpec;
 
 public class WineCellTabLayout extends AbstractActivity {

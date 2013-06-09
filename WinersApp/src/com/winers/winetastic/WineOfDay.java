@@ -1,8 +1,11 @@
 package com.winers.winetastic;
 
 import com.google.gson.Gson;
+import com.winers.winetastic.R;
+import com.winers.winetastic.R.color;
+import com.winers.winetastic.R.id;
+import com.winers.winetastic.R.layout;
 import com.winers.winetastic.model.data.APISnoothResponseWineArray;
-import com.winers.winetastic.model.manager.DatabaseHandler;
 import com.winers.winetastic.model.manager.ImageLoader;
 import com.winers.winetastic.model.manager.NetworkTaskManager;
 
@@ -113,7 +116,6 @@ public class WineOfDay extends Fragment {
      */
     protected void addRow(View parent, String ... cols) {
     	// Get width of parent view
-    	int width = parent.getLayoutParams().width;
     	
     	// Create a table row
     	TableRow r = (TableRow) getActivity().getLayoutInflater().inflate(R.layout.info_row, null);

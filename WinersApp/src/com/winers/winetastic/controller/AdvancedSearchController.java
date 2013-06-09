@@ -1,14 +1,9 @@
 package com.winers.winetastic.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import org.json.JSONException;
 
 import com.winers.winetastic.R;
-import com.winers.winetastic.R.color;
-import com.winers.winetastic.R.id;
-import com.winers.winetastic.R.layout;
 import com.winers.winetastic.model.data.WineSearchObject;
 
 import android.app.Activity;
@@ -19,7 +14,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckedTextView;
-import android.widget.Toast;
 
 public class AdvancedSearchController extends BaseExpandableListAdapter {
 
@@ -371,9 +365,7 @@ public class AdvancedSearchController extends BaseExpandableListAdapter {
 				((CheckedTextView) view).setBackgroundColor(view.getResources().getColor(R.color.cream));
 			}
 		}
-		String ind = "";
 		for (int i=0; i<groupItem.size();i++) {
-			ind += i + "  ";
 			groupIsSelected[i] = false;
 			groupText.set(i, groupItem.get(i));
 			((CheckedTextView)groupViews2[i]).setText(groupItem.get(i));

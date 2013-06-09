@@ -5,7 +5,6 @@ import java.net.URL;
 
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.view.View;
 import android.widget.ImageView;
 
 /**

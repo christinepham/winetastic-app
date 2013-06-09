@@ -1,6 +1,9 @@
 package com.winers.winetastic;
 
 import com.google.gson.Gson;
+import com.winers.winetastic.R;
+import com.winers.winetastic.R.id;
+import com.winers.winetastic.R.layout;
 import com.winers.winetastic.model.data.APISnoothResponseWinery;
 import com.winers.winetastic.model.data.APISnoothResponseWineryDetails;
 import com.winers.winetastic.model.manager.ImageLoader;
